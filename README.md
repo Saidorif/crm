@@ -1,2 +1,2 @@
-# crm
+## INFOCRM
 CRM for education centers
