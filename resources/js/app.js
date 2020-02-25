@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+<<<<<<< HEAD
 
 window.Vue = require('vue');
 
@@ -29,4 +30,28 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+=======
+import Vue from 'vue'
+import Vuesax from 'vuesax'
+
+import 'vuesax/dist/vuesax.css' //Vuesax styles
+import 'material-icons/iconfont/material-icons.css';
+Vue.use(Vuesax)
+
+// Router
+import router from './routes'
+
+//Vuex
+import store from "./store/store"
+
+import Master from './components/layouts/Master'
+
+const app = new Vue({
+    el: '#app',
+    router,
+    components:{
+      Master,
+    },
+	store,
+>>>>>>> 06b8b8b37b48df41382f690e69745de54a0fd9b9
 });
