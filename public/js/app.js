@@ -10201,16 +10201,6 @@ exports.push([module.i, ".vs-row{clear:both;-ms-flex-flow:wrap;flex-flow:wrap}.v
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-=======
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/user/Profile.vue?vue&type=style&index=0&id=249b4910&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/user/Profile.vue?vue&type=style&index=0&id=249b4910&scoped=true&lang=css& ***!
@@ -10219,16 +10209,30 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
->>>>>>> 1d9b39bd219d4efc64e70233af8553261799d5b2
 // imports
 
 
 // module
-<<<<<<< HEAD
-exports.push([module.i, "\n.card[data-v-4221c3ad]{\n\tmargin-bottom: 0;\n\theight: 100vh;\n\twidth: 100%;\n\tborder: none;\n}\n.login-card-body[data-v-4221c3ad]{\n\tbackground-image: url('/img/loginbg.jpg');\n\tbackground-repeat: no-repeat;\n\tbackground-size: cover;\n\tbackground-position: center;\n\tposition: relative;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n}\n.login-card-body[data-v-4221c3ad]::before{\n\tcontent: '';\n\tposition: absolute;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\tleft: 0;\n\tbackground-color: rgba(0,0,0,0.8);\n\tz-index: 0;\n}\n.form_content[data-v-4221c3ad]{\n\tposition: relative;\n\tz-index: 1;\n\tbackground: #FFFFFF;\n\tbox-shadow: 5px 5px 20px rgba(0, 35, 109, 0.05);\n\twidth: 360px;\n\tpadding: 30px;\n}\n.login_title[data-v-4221c3ad]{\n\tfont-style: normal;\n\tfont-weight: 500;\n\tfont-size: 18px;\n\tline-height: 22px;\n\tcolor: #00236D;\n\ttext-align: center;\n\tmargin-bottom: 30px;\n}\n.btn-block[data-v-4221c3ad]{\n\tbackground: #00236D;\n\tborder-radius: 100px;\n\tfont-weight: 600;\n\tfont-size: 16px;\n\tline-height: 22px;\n\tdisplay: flex;\n\talign-items: center;\n\ttext-align: center;\n\tjustify-content: center;\n\tcolor: #fff;\n\tborder: none;\n\theight: 46px;\n}\n.form-control[data-v-4221c3ad]{\n\tbackground: #FFFFFF;\n\tborder: 1px solid #D4E2F5;\n\tbox-sizing: border-box;\n\tborder-radius: 5px;\n\tfont-style: normal;\n\tfont-weight: 500;\n\tfont-size: 15px;\n\tline-height: 21px;\n\tcolor: #202020;\n\theight: 40px;\n}\n.login-card-body .input-group .form-control:focus~.input-group-append .input-group-text[data-v-4221c3ad], .register-card-body .input-group .form-control:focus~.input-group-append .input-group-text[data-v-4221c3ad],\n.form-control[data-v-4221c3ad]:focus{\n\tborder-color:#00236D;\n}\n.input-group-text[data-v-4221c3ad]{\n\tborder-color: #D4E2F5;\n}\n.input-group[data-v-4221c3ad]{\n\tmargin-bottom: 30px;\n}\n", ""]);
-=======
 exports.push([module.i, "\n.isRequired[data-v-249b4910]{\n\tborder:1px solid red;\n}\n.redText[data-v-249b4910]{\n\tcolor:red;\n}\n", ""]);
->>>>>>> 1d9b39bd219d4efc64e70233af8553261799d5b2
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.card[data-v-4221c3ad]{\n\tmargin-bottom: 0;\n\theight: 100vh;\n\twidth: 100%;\n\tborder: none;\n}\n.login-card-body[data-v-4221c3ad]{\n\tbackground-image: url('/img/loginbg.jpg');\n\tbackground-repeat: no-repeat;\n\tbackground-size: cover;\n\tbackground-position: center;\n\tposition: relative;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n}\n.login-card-body[data-v-4221c3ad]::before{\n\tcontent: '';\n\tposition: absolute;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\tleft: 0;\n\tbackground-color: rgba(0,0,0,0.8);\n\tz-index: 0;\n}\n.form_content[data-v-4221c3ad]{\n\tposition: relative;\n\tz-index: 1;\n\tbackground: #FFFFFF;\n\tbox-shadow: 5px 5px 20px rgba(0, 35, 109, 0.05);\n\twidth: 360px;\n\tpadding: 30px;\n}\n.login_title[data-v-4221c3ad]{\n\tfont-style: normal;\n\tfont-weight: 500;\n\tfont-size: 18px;\n\tline-height: 22px;\n\tcolor: #00236D;\n\ttext-align: center;\n\tmargin-bottom: 30px;\n}\n.btn-block[data-v-4221c3ad]{\n\tbackground: #00236D;\n\tborder-radius: 100px;\n\tfont-weight: 600;\n\tfont-size: 16px;\n\tline-height: 22px;\n\tdisplay: flex;\n\talign-items: center;\n\ttext-align: center;\n\tjustify-content: center;\n\tcolor: #fff;\n\tborder: none;\n\theight: 46px;\n}\n.form-control[data-v-4221c3ad]{\n\tbackground: #FFFFFF;\n\tborder: 1px solid #D4E2F5;\n\tbox-sizing: border-box;\n\tborder-radius: 5px;\n\tfont-style: normal;\n\tfont-weight: 500;\n\tfont-size: 15px;\n\tline-height: 21px;\n\tcolor: #202020;\n\theight: 40px;\n}\n.login-card-body .input-group .form-control:focus~.input-group-append .input-group-text[data-v-4221c3ad], .register-card-body .input-group .form-control:focus~.input-group-append .input-group-text[data-v-4221c3ad],\n.form-control[data-v-4221c3ad]:focus{\n\tborder-color:#00236D;\n}\n.input-group-text[data-v-4221c3ad]{\n\tborder-color: #D4E2F5;\n}\n.input-group[data-v-4221c3ad]{\n\tmargin-bottom: 30px;\n}\n", ""]);
 
 // exports
 
@@ -42994,26 +42998,15 @@ try {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************************/
-=======
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/user/Profile.vue?vue&type=style&index=0&id=249b4910&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/user/Profile.vue?vue&type=style&index=0&id=249b4910&scoped=true&lang=css& ***!
   \****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
->>>>>>> 1d9b39bd219d4efc64e70233af8553261799d5b2
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-<<<<<<< HEAD
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css&");
-=======
 var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Profile.vue?vue&type=style&index=0&id=249b4910&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/user/Profile.vue?vue&type=style&index=0&id=249b4910&scoped=true&lang=css&");
->>>>>>> 1d9b39bd219d4efc64e70233af8553261799d5b2
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -43027,11 +43020,37 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-<<<<<<< HEAD
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-=======
 var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
->>>>>>> 1d9b39bd219d4efc64e70233af8553261799d5b2
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/Login.vue?vue&type=style&index=0&id=4221c3ad&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
