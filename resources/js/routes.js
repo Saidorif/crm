@@ -8,7 +8,8 @@ import store from "./store/store";
 
 // Dashboard component
 import Dashboard from './components/admin/Dashboard'
-import Master from './components/layouts/Master'
+import Admin from './components/admin/layouts/Admin'
+import Login from './components/auth/Login'
 
 // NotFound
 import NotFound from './components/NotFound/NotFound'
@@ -21,8 +22,9 @@ const router = new Router({
 		{
 			path:'/crm',
 			name:'crm',
+			redirect:'/crm/dashboard',
 			components:{
-				default:Master,
+				default:Admin,
 			},
 			children:[
 				{
@@ -30,6 +32,20 @@ const router = new Router({
 					component:Dashboard,
 				},
 			]
+		},
+		{
+			path:'/',
+			name:'login',
+			components:{
+				default:Login,
+			},
+		},
+		{
+			path:'*',
+			name:'notfound',
+			components:{
+				default:NotFound,
+			},
 		}
 	]
 });

@@ -2,19 +2,19 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // ability 
-// import storage from "./storage"
-// import {abilityPlugin, ability as appAbility} from './ability'
+import storage from "./storage"
+import {abilityPlugin, ability as appAbility} from './ability'
 import router from "./../routes"
 
 // user service
-// import {UserService} from "../services/user.service";
+import {UserService} from "../services/user.service";
 // modules
-// import {user} from "./user.module"
+import {user} from "./user.module"
 
-// import { TokenService } from './../services/storage.service'
+import { TokenService } from './../services/storage.service'
 
 Vue.use(Vuex)
-// export const ability = appAbility
+export const ability = appAbility
 
 const store = new Vuex.Store(
 	{
@@ -23,7 +23,7 @@ const store = new Vuex.Store(
 			// 	storedKeys:['token','rules'],
 			// 	destroyOn:['logoutSuccess']
 			// }),
-			// abilityPlugin
+			abilityPlugin
 		],
 		modules:{
 			
