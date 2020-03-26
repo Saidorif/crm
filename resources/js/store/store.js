@@ -73,8 +73,6 @@ const store = new Vuex.Store(
 				state.token = user.token;
 				state.authenticationErrorCode = false
 				state.user = user.result;
-				// state.rules = user.result.permissions;
-				// state.authenticating = false;
 			},
 			loginError(state,user){
 				state.authenticating = false
@@ -109,9 +107,6 @@ const store = new Vuex.Store(
 				UserService.logout();
 				commit('logoutSuccess');
 				router.push('/');
-			},
-			profile(){
-				
 			}
 		}
 	}

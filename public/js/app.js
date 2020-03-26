@@ -82432,8 +82432,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
       _services_storage_service__WEBPACK_IMPORTED_MODULE_9__["TokenService"].saveCurrentUser(user.result);
       state.token = user.token;
       state.authenticationErrorCode = false;
-      state.user = user.result; // state.rules = user.result.permissions;
-      // state.authenticating = false;
+      state.user = user.result;
     },
     loginError: function loginError(state, user) {
       state.authenticating = false;
@@ -82533,8 +82532,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
       _services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"].logout();
       commit('logoutSuccess');
       _routes__WEBPACK_IMPORTED_MODULE_5__["default"].push('/');
-    },
-    profile: function profile() {}
+    }
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
@@ -82639,8 +82637,8 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
