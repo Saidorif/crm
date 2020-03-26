@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Hash;
+use Validator;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -28,13 +31,29 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-
-        if ($token = $this->guard()->attempt($credentials)) {
-            return $this->respondWithToken($token);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
-
-        return response()->json(['error' => 'Unauthorized'], 401);
+        $credentials = $request->only('email', 'password');
+        $user = User::where(['email' => $credentials['email']])->first();
+        if(!$user){
+            return response()->json(['error' => true, 'message' => 'Invalid login details']);
+        }
+        if(Hash::check($credentials['password'], $user->password)){
+            $payloads = ['role' => $user->role_id];
+            $token = JWTAuth::attempt($credentials, $payloads);
+            return response()->json(['success' => true, 'token' => $token]);
+            // if($user->status == 'active'){
+            // }else{
+            //     return response()->json(['error' => true, 'message' => 'You are inactive']);
+            // }
+        }else{
+            return response()->json(['error' => true, 'message' => 'Invalid login details']);
+        }
     }
 
     /**

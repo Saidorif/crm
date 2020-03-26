@@ -5563,7 +5563,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["authenticationErrorCode"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["authenticationErrorCode", "authenticationError"])),
   mounted: function mounted() {
     return _asyncToGenerator(
     /*#__PURE__*/
@@ -5615,6 +5615,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                   _this.$router.push("/crm/dashboard");
                 } else {
+                  console.log(_this.authenticationError);
+
                   _this.$Progress.fail();
                 }
 
@@ -81034,7 +81036,6 @@ var ApiService = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenService", function() { return TokenService; });
 var TOKEN_KEY = 'access_token';
-var USER_ID_KEY = 'userId';
 var USER = 'user';
 var TokenService = {
   getToken: function getToken() {
@@ -81042,9 +81043,6 @@ var TokenService = {
   },
   saveToken: function saveToken(token) {
     localStorage.setItem(TOKEN_KEY, token);
-  },
-  saveCurrentUserId: function saveCurrentUserId(id) {
-    localStorage.setItem(USER_ID_KEY, id);
   },
   saveCurrentUser: function saveCurrentUser(user) {
     localStorage.setItem(USER, JSON.stringify(user));
@@ -81058,9 +81056,6 @@ var TokenService = {
   },
   removeToken: function removeToken() {
     localStorage.removeItem(TOKEN_KEY);
-  },
-  removeCurrentUserId: function removeCurrentUserId() {
-    localStorage.removeItem(USER_ID_KEY);
   }
 };
 
@@ -81162,7 +81157,7 @@ var UserService = {
 
             case 4:
               response = _context.sent;
-              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveToken(response.data.access_token);
+              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveToken(response.data.token);
               _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].setHeader();
               _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].mount401Interceptor();
               return _context.abrupt("return", response);
@@ -81213,7 +81208,7 @@ var UserService = {
 
             case 4:
               response = _context2.sent;
-              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveToken(response.data.access_token);
+              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveToken(response.data.token);
               _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].setHeader();
               _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].mount401Interceptor();
               return _context2.abrupt("return", response);
@@ -81623,8 +81618,8 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
