@@ -3,7 +3,7 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i class="nav-icon fas fa-box"></i>
+			    	<i data-v-956a9a24="" class="peIcon pe-7s-drawer"></i>
 				    Category 
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/category/add"><i class="fas fa-plus"></i> Add</router-link>
@@ -20,16 +20,16 @@
 				</thead>
 				<tbody>
 					<tr>
-					<th scope="row">1</th>
-					<td>sadasd</td>
-					<td>
-						<router-link tag="button" class="btn" to="/crm/category/edit/1">
-							<i class="fas fa-edit editColor"></i>
-						</router-link>
-						<button class="btn" @click="deleteCategory(1)">
-							<i class="fas fa-trash-alt trashColor"></i>
-						</button>
-					</td>
+						<td scope="row">1</td>
+						<td>sadasd</td>
+						<td>
+							<router-link tag="button" class="btn_transparent" to="/crm/category/edit/1">
+								<i class="pe_icon pe-7s-edit editColor"></i>
+							</router-link>
+							<button class="btn_transparent" @click="deleteCategory(1)">
+								<i class="pe_icon pe-7s-junk trashColor"></i>
+							</button>
+						</td>
 					</tr>
 				</tbody>
 				<!-- <pagination :limit="4" :data="getCategoryList" @pagination-change-page="getResults"></pagination> -->
@@ -65,3 +65,52 @@
 		}
 	}
 </script>
+<style scoped>
+	.table th, .table td {
+		padding: .55rem;
+		padding-top: 0.55rem;
+		padding-right: 0.55rem;
+		padding-bottom: 0.55rem;
+		padding-left: 0.55rem;
+		vertical-align: middle;
+		border-top: 1px solid #e9ecef;
+	}
+
+	.btn_transparent{
+		background:transparent;
+		border: none;
+		font-size: 24px;
+		margin-right: 5px;
+		margin-left: 5px;
+		line-height: 0;
+	}
+	.title_user{
+		color: #3f6ad8;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+
+	}
+	.card-header{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.card-header .title_user .peIcon{
+		font-size: 30px;
+		margin-right: 10px;
+	}
+	.btn.btn-primary{
+		color: #3f6ad8;
+		background: transparent;
+		border: 1px solid #3f6ad8;
+		font-size: 16px;
+		line-height: 18px;
+	}
+	.btn.btn-primary i{
+		font-size: 12px;
+	}
+	.card-header::after{
+		display: none;
+	}
+</style>
