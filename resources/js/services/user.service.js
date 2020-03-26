@@ -28,9 +28,8 @@ const UserService = {
 
 		try{
 			const response = await ApiService.customRequest(requestData);
-			TokenService.saveToken(response.data.access_token);
+			TokenService.saveToken(response.data.token);
 			ApiService.setHeader();
-
 			ApiService.mount401Interceptor();
 			return response;
 		} catch (error){
@@ -52,9 +51,8 @@ const UserService = {
 
 		try {
 			const response = await ApiService.customRequest(requestData);
-			TokenService.saveToken(response.data.access_token);
+			TokenService.saveToken(response.data.token);
 			ApiService.setHeader();
-
 			ApiService.mount401Interceptor();
 			return response;
 		} catch (error) {

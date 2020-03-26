@@ -96,9 +96,8 @@ const store = new Vuex.Store(
 				}
 			},
 			// register
-			async register({ commit,dispatch }, payload) {
+			async register({ commit,dispatch }, payload){
 				const newUser = await UserService.register(payload);
-
 				if(newUser.data.error === true){
 					await commit('registerError', newUser);
 				}

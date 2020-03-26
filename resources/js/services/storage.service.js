@@ -1,5 +1,4 @@
 const TOKEN_KEY = 'access_token'
-const USER_ID_KEY = 'userId'
 const USER = 'user'
 
 const TokenService = {
@@ -10,11 +9,6 @@ const TokenService = {
 	saveToken(token) {
 		localStorage.setItem(TOKEN_KEY, token);
 	},
-
-	saveCurrentUserId(id){
-		localStorage.setItem(USER_ID_KEY, id);
-	},
-
 	saveCurrentUser(user){
 		localStorage.setItem(USER, JSON.stringify(user));
 	},
@@ -31,10 +25,6 @@ const TokenService = {
 	removeToken() {
 		localStorage.removeItem(TOKEN_KEY);
 	},
-
-	removeCurrentUserId() {
-		localStorage.removeItem(USER_ID_KEY);
-	}
 };
 
 export {TokenService}
