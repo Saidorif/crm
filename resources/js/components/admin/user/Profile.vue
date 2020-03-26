@@ -75,18 +75,18 @@
 		computed:{
 		},
 		methods:{
-		    confirmPassword(){
-		      	if(this.form.password && this.form.passwordConfirm){
-			      	if(this.form.password != this.form.passwordConfirm){
-				        this.checkPassword = true
-			      	} else {
-				        this.checkPassword = false
-			      	}
+	    confirmPassword(){
+	      	if(this.form.password && this.form.passwordConfirm){
+		      	if(this.form.password != this.form.passwordConfirm){
+			        this.checkPassword = true
+		      	} else {
+			        this.checkPassword = false
 		      	}
-		    },
+	      	}
+	    },
 			isRequired(input){
-	      		return this.requiredInput && input === '';
-		    },
+    		return this.requiredInput && input === '';
+	    },
 			sendProfile(){
 				if (this.form.fullname && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false) {
 					console.log(this.form)
@@ -98,9 +98,6 @@
 	}
 </script>
 <style scoped>
-	.isRequired{
-		border:1px solid red;
-	}
 	.redText{
 		color:red;
 	}

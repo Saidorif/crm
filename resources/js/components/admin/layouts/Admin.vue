@@ -65,6 +65,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/category">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Category
+              </p>
+            </router-link>
+          </li>
 
         </ul>
       </nav>

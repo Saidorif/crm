@@ -26258,3 +26258,7 @@ svg:not(:root).svg-inline--fa {
   content: "\F1BA";
 }
 
+.isRequired {
+  border: 1px solid red;
+}
+
