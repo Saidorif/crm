@@ -1,16 +1,4 @@
 require('./bootstrap');
-<<<<<<< HEAD
-import Vue from 'vue'
-import Vuesax from 'vuesax'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'vuesax/dist/vuesax.css' //Vuesax styles
-import 'material-icons/iconfont/material-icons.css';
-Vue.use(Vuesax)
-Vue.use(BootstrapVue)
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-=======
 window.Vue = require('vue');
 import Vuesax from 'vuesax'
 
@@ -42,7 +30,6 @@ const toast = swal.mixin({
 });
 
 window.toast = toast;
->>>>>>> 199d9b9b15e9bde0a14c4ca813d622e7b83be105
 
 /* FOR MANAGING USER PERMISSIONS */
 import {abilitiesPlugin} from '@casl/vue'
