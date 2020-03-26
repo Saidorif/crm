@@ -6,7 +6,7 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="pe-7s-menu" style="font-size: 30px;line-height: 21px;"></i></a>
       </li>
     </ul>
 
@@ -20,20 +20,15 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar">
     <!-- Brand Logo -->
     <router-link class="brand-link" to="/crm">
-      <span class="brand-text font-weight-light">TEST</span>
+      <span class="brand-text font-weight-light">ADMIN DASHBOARD</span>
     </router-link>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          <a href="#" class="d-block">Adminstrator</a>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -42,7 +37,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <span class="peIcon pe-7s-rocket" style="font-size: 20px;"></span>
               <p>
                 Dashboard
                 <i class="right fas fa-angle-left"></i>
@@ -51,7 +46,6 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard v1</p>
                 </a>
               </li>
@@ -59,7 +53,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/profile">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="peIcon pe-7s-user"></i>
               <p>
                 Profile
               </p>
@@ -67,7 +61,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/category">
-              <i class="nav-icon fas fa-box"></i>
+              <i class="peIcon pe-7s-drawer"></i>
               <p>
                 Category
               </p>
@@ -129,5 +123,73 @@ export default {
 </script>
 
 <style scoped>
-
+  .content-wrapper{
+    background: #f1f4f6;
+    padding-top: 30px;
+  }
+  .main-sidebar{
+    background: #fff;
+  }
+  .main-header{
+    box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03), 0 0.9375rem 1.40625rem rgba(4,9,20,0.03), 0 0.25rem 0.53125rem rgba(4,9,20,0.05), 0 0.125rem 0.1875rem rgba(4,9,20,0.03);
+    background: #3f6ad8;
+    color: #fff;
+  }
+  .navbar-light .navbar-nav .nav-link{
+    color: #fff;
+    font-size: 20px;
+    line-height: initial;
+  }
+  .brand-link.open.active{
+    background: #5279dc;
+    color: #fff;
+    text-align: center;
+  }
+  .card{
+    box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03), 0 0.9375rem 1.40625rem rgba(4,9,20,0.03), 0 0.25rem 0.53125rem rgba(4,9,20,0.05), 0 0.125rem 0.1875rem rgba(4,9,20,0.03);
+  }
+  .peIcon{
+    text-align: center;
+    width: 34px;
+    height: 34px;
+    line-height: 33px;
+    font-size: 22px;
+    transition: color 300ms;
+    color: #3f6ad8;
+  }
+  .nav-sidebar .nav-item>.nav-link{
+    display: flex;
+    align-items: center;
+    transition-delay: 300ms;
+  }
+  .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    color: #3f6ad8;
+    background: #e0f3ff;
+    font-weight: bold;
+    font-weight: bold;
+  }
+  .nav-sidebar .nav-treeview{
+    transition: padding 300ms;
+    padding: .5em 0 0 2rem;
+    position: relative;
+  }
+  .nav-sidebar .nav-treeview::before{
+    content: '';
+    height: 100%;
+    opacity: 1;
+    width: 3px;
+    background: #e0f3ff;
+    position: absolute;
+    left: 32px;
+    top: 0;
+    border-radius: 15px;
+  }
+  .nav-sidebar .menu-open > .nav-link{
+    font-weight: bold;
+  }
+  .nav-sidebar .nav-link>.right, .nav-sidebar .nav-link>p>.right {
+    position: absolute;
+    right: 1rem;
+    top: 18px;
+  }
 </style>
