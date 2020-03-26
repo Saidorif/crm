@@ -41,7 +41,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -57,6 +57,15 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/profile">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Profile
+              </p>
+            </router-link>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

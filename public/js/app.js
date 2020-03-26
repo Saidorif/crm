@@ -5361,6 +5361,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
@@ -46840,7 +46849,48 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "sidebar" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("nav", { staticClass: "mt-2" }, [
+              _c(
+                "ul",
+                {
+                  staticClass: "nav nav-pills nav-sidebar flex-column",
+                  attrs: {
+                    "data-widget": "treeview",
+                    role: "menu",
+                    "data-accordion": "false"
+                  }
+                },
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/crm/profile" }
+                        },
+                        [
+                          _c("i", { staticClass: "nav-icon fas fa-user" }),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v("\n                Profile\n              ")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ]
+              )
+            ])
+          ])
         ],
         1
       ),
@@ -46860,7 +46910,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _vm._m(3)
     ])
   ])
 }
@@ -46886,53 +46936,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "sidebar" }, [
-      _c("div", { staticClass: "user-panel mt-3 pb-3 mb-3 d-flex" }, [
-        _c("div", { staticClass: "info" }, [
-          _c("a", { staticClass: "d-block", attrs: { href: "#" } }, [
-            _vm._v("Adminstrator")
-          ])
+    return _c("div", { staticClass: "user-panel mt-3 pb-3 mb-3 d-flex" }, [
+      _c("div", { staticClass: "info" }, [
+        _c("a", { staticClass: "d-block", attrs: { href: "#" } }, [
+          _vm._v("Adminstrator")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item has-treeview" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "nav-icon fas fa-tachometer-alt" }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("\n                Dashboard\n                "),
+          _c("i", { staticClass: "right fas fa-angle-left" })
         ])
       ]),
       _vm._v(" "),
-      _c("nav", { staticClass: "mt-2" }, [
-        _c(
-          "ul",
-          {
-            staticClass: "nav nav-pills nav-sidebar flex-column",
-            attrs: {
-              "data-widget": "treeview",
-              role: "menu",
-              "data-accordion": "false"
-            }
-          },
-          [
-            _c("li", { staticClass: "nav-item has-treeview" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link active", attrs: { href: "#" } },
-                [
-                  _c("i", { staticClass: "nav-icon fas fa-tachometer-alt" }),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("\n                Dashboard\n                "),
-                    _c("i", { staticClass: "right fas fa-angle-left" })
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("ul", { staticClass: "nav nav-treeview" }, [
-                _c("li", { staticClass: "nav-item" }, [
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _c("i", { staticClass: "far fa-circle nav-icon" }),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Dashboard v1")])
-                  ])
-                ])
-              ])
-            ])
-          ]
-        )
+      _c("ul", { staticClass: "nav nav-treeview" }, [
+        _c("li", { staticClass: "nav-item" }, [
+          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "far fa-circle nav-icon" }),
+            _vm._v(" "),
+            _c("p", [_vm._v("Dashboard v1")])
+          ])
+        ])
       ])
     ])
   },
