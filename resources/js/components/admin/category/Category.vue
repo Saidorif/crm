@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="nav-icon fas fa-box"></i>
-				    Category
+				    Category 
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/category/add"><i class="fas fa-plus"></i> Add</router-link>
 		  	</div>
@@ -26,13 +26,13 @@
 						<router-link tag="button" class="btn" to="/crm/category/edit/1">
 							<i class="fas fa-edit editColor"></i>
 						</router-link>
-						<button class="btn" >
+						<button class="btn" @click="deleteCategory(1)">
 							<i class="fas fa-trash-alt trashColor"></i>
 						</button>
 					</td>
 					</tr>
 				</tbody>
-				<!-- <pagination :limit="4" :data="getAllEmployees" @pagination-change-page="getResults"></pagination> -->
+				<!-- <pagination :limit="4" :data="getCategoryList" @pagination-change-page="getResults"></pagination> -->
 				</table>
 			  </div>
 		  </div>
@@ -47,10 +47,21 @@
 
 			}
 		},
+		computed:{
+			...mapGetters('category',['getCategoryList'])
+		},
 		methods:{
+			...mapActions('category',['actionCategoryList']),
 			// async getResults(page = 1){ 
-			// 	await this.getActionEmployees(page)
+			// 	await this.getCategoryList(page)
 			// },
+			deleteCategory(id){
+				console.log(id)
+			}
+		},
+		async mounted(){
+			await this.actionCategoryList()
+			console.log(this.getCategoryList)
 		}
 	}
 </script>

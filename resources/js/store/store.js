@@ -10,6 +10,7 @@ import router from "./../routes"
 import {UserService} from "../services/user.service";
 // modules
 import {user} from "./user.module"
+import {category} from "./category.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -26,7 +27,8 @@ const store = new Vuex.Store(
 			abilityPlugin
 		],
 		modules:{
-			user
+			user,
+			category
 		},
 		state:{
 			rules:[],
@@ -71,8 +73,6 @@ const store = new Vuex.Store(
 				state.token = user.token;
 				state.authenticationErrorCode = false
 				state.user = user.result;
-				// state.rules = user.result.permissions;
-				// state.authenticating = false;
 			},
 			loginError(state,user){
 				state.authenticating = false
@@ -107,9 +107,6 @@ const store = new Vuex.Store(
 				UserService.logout();
 				commit('logoutSuccess');
 				router.push('/');
-			},
-			profile(){
-				
 			}
 		}
 	}
