@@ -5563,7 +5563,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["authenticationErrorCode"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["authenticationErrorCode", "authenticationError"])),
   mounted: function mounted() {
     return _asyncToGenerator(
     /*#__PURE__*/
@@ -5615,6 +5615,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                   _this.$router.push("/crm/dashboard");
                 } else {
+                  console.log(_this.authenticationError);
+
                   _this.$Progress.fail();
                 }
 
@@ -81616,23 +81618,8 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-<<<<<<< HEAD
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 895286762ff793740a928f085528bab2b6bec207
->>>>>>> 3698b54557b85d029e5863f59f92f55fa6cde95b
-=======
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> f44d5c59f407a54f939d914a4992868f86325834
 
 
 /***/ })

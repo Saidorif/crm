@@ -53,7 +53,7 @@
 		    };
 	  	},
 	 	computed: {
-		    ...mapGetters(["authenticationErrorCode"])
+		    ...mapGetters(["authenticationErrorCode","authenticationError"])
 	  	},
 	  	async mounted(){
 	  		
@@ -73,6 +73,7 @@
 		          this.$Progress.finish();
 		          this.$router.push("/crm/dashboard");
 		        }else{
+		        	console.log(this.authenticationError)
 		          this.$Progress.fail();
 		        }
 		      }
