@@ -1,43 +1,47 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
-<<<<<<< HEAD
-
 window.Vue = require('vue');
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app',
-=======
-import Vue from 'vue'
 import Vuesax from 'vuesax'
+
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
 import 'material-icons/iconfont/material-icons.css';
 Vue.use(Vuesax)
 
+// ProgressBar
+import VueProgressBar from 'vue-progressbar';
+
+Vue.use(VueProgressBar,{
+	color: 'rgb(143,255,199)',
+	failedColor:'red',
+	height:'3px'
+});
+
+Vue.config.devtools = false
+
+// Sweetalert2
+import swal from 'sweetalert2';
+window.swal = swal;
+
+const toast = swal.mixin({
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000
+});
+
+window.toast = toast;
+
+/* FOR MANAGING USER PERMISSIONS */
+import {abilitiesPlugin} from '@casl/vue'
+import {ability} from "./store/store";
+Vue.use(abilitiesPlugin, ability);
+/* FOR MANAGING USER PERMISSIONS */
+
+// Vue pagination
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+//Fire For Listers
+window.Fire = new Vue();
 // Router
 import router from './routes'
 
@@ -46,6 +50,20 @@ import store from "./store/store"
 
 import Master from './components/layouts/Master'
 
+// Some services
+import {TokenService} from './services/storage.service'
+import ApiService from './services/api.service'
+// SET THE BASE_URL OF THE API
+ApiService.init(process.env.VUE_APP_ROOT_API);
+ApiService.mount401Interceptor();
+
+// IF TOKEN EXISTS SET HEADER
+if (TokenService.getToken()){
+	ApiService.setHeader();
+	ApiService.mount401Interceptor();
+}
+
+
 const app = new Vue({
     el: '#app',
     router,
@@ -53,5 +71,4 @@ const app = new Vue({
       Master,
     },
 	store,
->>>>>>> 06b8b8b37b48df41382f690e69745de54a0fd9b9
 });
