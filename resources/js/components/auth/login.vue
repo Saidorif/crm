@@ -1,6 +1,7 @@
 <template>
 	<div class="card">
 	    <div class="card-body login-card-body">
+			<div class="login_alert" v-if="errorMsg"><i class="fas fa-exclamation-circle mr-2"></i> Неверный логин  или пароль </div>
 			<div class="form_content">
 				<p class="login_title"> Вход в персональный кабинет</p>
 				<form @submit.enter.prevent="onSubmit">
@@ -50,6 +51,7 @@
 		        email: "",
 		        password: ""
 			  },
+			  errorMsg: null
 		    };
 	  	},
 	 	computed: {
@@ -67,18 +69,14 @@
 		        await this.authenticationErrorCode;
 		        if (!this.authenticationErrorCode){
 		          toast.fire({
-		            type: "success",
+					type: "success",
+					icon: 'success',
 		            title: "Вошли в систему!"
 		          });
 		          this.$Progress.finish();
 		          this.$router.push("/crm/dashboard");
 		        }else{
-					toast.fire({
-						icon: 'error',
-						timer: 3000,
-						type: "error",
-						title: 'Неверный логин или пароль'
-					});
+					this.errorMsg = this.authenticationError
 				  	this.$Progress.fail();
 
 		        }
@@ -103,6 +101,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 	}
 	.login-card-body::before{
 		content: '';
@@ -121,6 +120,18 @@
 		box-shadow: 5px 5px 20px rgba(0, 35, 109, 0.05);
 		width: 360px;
 		padding: 30px;
+	}
+	.login_alert{
+		width: 360px;
+		height: 40px;
+		background: transparent;
+		border: 1px solid #ff3c3c;
+		color: #ff3c3c;
+		position: relative;
+		z-index: 2;
+		margin-bottom: 30px;
+		padding: 8px 20px;
+		border-radius: 4px;
 	}
 	.login_title{
 		font-style: normal;
