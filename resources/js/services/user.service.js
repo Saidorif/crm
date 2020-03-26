@@ -28,7 +28,7 @@ const UserService = {
 
 		try{
 			const response = await ApiService.customRequest(requestData);
-			TokenService.saveToken(response.data.token);
+			TokenService.saveToken(response.data.access_token);
 			ApiService.setHeader();
 
 			ApiService.mount401Interceptor();
@@ -52,8 +52,7 @@ const UserService = {
 
 		try {
 			const response = await ApiService.customRequest(requestData);
-			TokenService.saveToken(response.data.token);
-			TokenService.saveCurrentUserId(response.data.id);
+			TokenService.saveToken(response.data.access_token);
 			ApiService.setHeader();
 
 			ApiService.mount401Interceptor();
@@ -73,13 +72,10 @@ const UserService = {
 		TokenService.removeToken();
 		TokenService.removeCurrentUser();
 		ApiService.removeHeader();
-		// TokenService.removeCurrentUserId();
-
 		// // NOTE: Again, we'll cover the 401 Interceptor a bit later.
 		ApiService.unmount401Interceptor()
 	},
-
-	profileUse(){
+	profileUser(){
 		return ApiService.get(`/api/profile`);
 	},
 };
