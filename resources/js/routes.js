@@ -9,6 +9,7 @@ import store from "./store/store";
 import Dashboard from './components/admin/Dashboard'
 import Admin from './components/admin/layouts/Admin'
 import Login from './components/auth/Login'
+import Profile from './components/admin/user/Profile'
 
 // NotFound
 import NotFound from './components/NotFound/NotFound'
@@ -30,6 +31,10 @@ const router = new Router({
 				{
 					path:'dashboard',
 					component:Dashboard,
+				},
+				{
+					path:'profile',
+					component:Profile,
 				},
 			]
 		},

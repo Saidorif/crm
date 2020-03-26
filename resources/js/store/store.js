@@ -82,7 +82,6 @@ const store = new Vuex.Store(
 		},
 		actions:{
 			async login({ commit,dispatch }, userData) {
-				// commit('loginRequest');
 				try{
 					const user = await UserService.login(userData);
 					if (user.data.error === true) {
@@ -114,6 +113,9 @@ const store = new Vuex.Store(
 					location.reload();
 				},100)
 			},
+			profile(){
+				
+			}
 		}
 	}
 )

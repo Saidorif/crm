@@ -73,13 +73,10 @@ const UserService = {
 		TokenService.removeToken();
 		TokenService.removeCurrentUser();
 		ApiService.removeHeader();
-		// TokenService.removeCurrentUserId();
-
 		// // NOTE: Again, we'll cover the 401 Interceptor a bit later.
 		ApiService.unmount401Interceptor()
 	},
-
-	profileUse(){
+	profileUser(){
 		return ApiService.get(`/api/profile`);
 	},
 };
