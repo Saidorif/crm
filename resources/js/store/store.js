@@ -56,7 +56,7 @@ const store = new Vuex.Store(
 			},
 			authenticating(state){
 				return state.authenticating
-			},
+			}
 		},
 		mutations:{
 			loginRequest(state){
@@ -78,22 +78,20 @@ const store = new Vuex.Store(
 				state.authenticating = false
 				state.authenticationErrorCode = user.data.error
 				state.authenticationError = user.data.message
-			},
+			}
 		},
 		actions:{
-			async login({ commit,dispatch }, userData) {
+			async login({ commit,dispatch }, userData){
 				try{
 					const user = await UserService.login(userData);
-					if (user.data.error === true) {
+					if(user.data.error === true){
 						await commit('loginError', user);
 					}else{
 						await commit('loginSuccess', user.data);
 						// let routeHistory = router.history.current.query.redirect
 						// router.push(routeHistory && routeHistory != '/' ? routeHistory : '/')
 					}
-				}catch(e){
-
-				}
+				}catch(e){}
 			},
 			// register
 			async register({ commit,dispatch }, payload){
@@ -102,12 +100,11 @@ const store = new Vuex.Store(
 					await commit('registerError', newUser);
 				}
 			}, 
-			// register-end
 			logout({ commit }){
 				UserService.logout();
 				commit('logoutSuccess');
 				router.push('/');
-			}
+			},
 		}
 	}
 )
