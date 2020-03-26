@@ -1,34 +1,44 @@
 require('./bootstrap');
-<<<<<<< HEAD
-import Vue from 'vue'
-import Vuesax from 'vuesax'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'vuesax/dist/vuesax.css' //Vuesax styles
-import 'material-icons/iconfont/material-icons.css';
-Vue.use(Vuesax)
-Vue.use(BootstrapVue)
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-=======
 window.Vue = require('vue');
-import Vuesax from 'vuesax'
-
-
-import 'vuesax/dist/vuesax.css' //Vuesax styles
-import 'material-icons/iconfont/material-icons.css';
-Vue.use(Vuesax)
 
 // ProgressBar
 import VueProgressBar from 'vue-progressbar';
 
 Vue.use(VueProgressBar,{
-	color: 'rgb(143,255,199)',
-	failedColor:'red',
-	height:'3px'
+  color: 'rgb(143,255,199)',
+  failedColor:'red',
+  height:'3px'
 });
 
 Vue.config.devtools = false
+
+ 
+/* FOR MANAGING USER PERMISSIONS */
+import {abilitiesPlugin} from '@casl/vue'
+import {ability} from "./store/store";
+Vue.use(abilitiesPlugin, ability);
+/* FOR MANAGING USER PERMISSIONS */
+
+
+// Vuesax
+import Vuesax from 'vuesax'
+import 'vuesax/dist/vuesax.css'
+import 'material-icons/iconfont/material-icons.css';
+Vue.use(Vuesax)
+
+
+//Fire For Listers
+window.Fire = new Vue();
+
+// Router
+import router from './routes'
+
+
+//Vuex
+import store from "./store/store"
+
+// Vue pagination
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 // Sweetalert2
 import swal from 'sweetalert2';
@@ -42,40 +52,23 @@ const toast = swal.mixin({
 });
 
 window.toast = toast;
->>>>>>> 199d9b9b15e9bde0a14c4ca813d622e7b83be105
-
-/* FOR MANAGING USER PERMISSIONS */
-import {abilitiesPlugin} from '@casl/vue'
-import {ability} from "./store/store";
-Vue.use(abilitiesPlugin, ability);
-/* FOR MANAGING USER PERMISSIONS */
-
-// Vue pagination
-Vue.component('pagination', require('laravel-vue-pagination'));
-
-//Fire For Listers
-window.Fire = new Vue();
-// Router
-import router from './routes'
-
-//Vuex
-import store from "./store/store"
 
 import Master from './components/layouts/Master'
 
 // Some services
 import {TokenService} from './services/storage.service'
 import ApiService from './services/api.service'
+
+
 // SET THE BASE_URL OF THE API
 ApiService.init(process.env.VUE_APP_ROOT_API);
 ApiService.mount401Interceptor();
 
 // IF TOKEN EXISTS SET HEADER
-if (TokenService.getToken()){
-	ApiService.setHeader();
-	ApiService.mount401Interceptor();
+if (TokenService.getToken()) {
+  ApiService.setHeader();
+  ApiService.mount401Interceptor();
 }
-
 
 const app = new Vue({
     el: '#app',
@@ -83,5 +76,5 @@ const app = new Vue({
     components:{
       Master,
     },
-	store,
+  store,
 });

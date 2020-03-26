@@ -19,15 +19,13 @@ const router = new Router({
 	routes: [
 		// public components 
 		{
-			path:'/',
+			path:'/crm',
 			name:'crm',
 			redirect:'/crm/dashboard',
 			meta:{
 				requiredAuth:true
 			},
-			components:{
-				default:Admin,
-			},
+			component:Admin,
 			children:[
 				{
 					path:'dashboard',
