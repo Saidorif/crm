@@ -5264,6 +5264,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5362,7 +5368,11 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   computed: {},
-  methods: {}
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['logout']), {
+    logoutProfile: function logoutProfile() {
+      this.logout();
+    }
+  })
 });
 
 /***/ }),
@@ -46733,7 +46743,34 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "hold-transition sidebar-mini" }, [
     _c("div", { staticClass: "wrapper" }, [
-      _vm._m(0),
+      _c(
+        "nav",
+        {
+          staticClass:
+            "main-header navbar navbar-expand navbar-white navbar-light"
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.logoutProfile($event)
+                    }
+                  }
+                },
+                [_vm._v("Logout")]
+              )
+            ])
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c(
         "aside",
@@ -46778,33 +46815,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "nav",
-      {
-        staticClass:
-          "main-header navbar navbar-expand navbar-white navbar-light"
-      },
-      [
-        _c("ul", { staticClass: "navbar-nav" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: { "data-widget": "pushmenu", href: "#" }
-              },
-              [_c("i", { staticClass: "fas fa-bars" })]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Logout")])
-          ])
-        ])
-      ]
-    )
+    return _c("ul", { staticClass: "navbar-nav" }, [
+      _c("li", { staticClass: "nav-item" }, [
+        _c(
+          "a",
+          {
+            staticClass: "nav-link",
+            attrs: { "data-widget": "pushmenu", href: "#" }
+          },
+          [_c("i", { staticClass: "fas fa-bars" })]
+        )
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -80803,22 +80825,27 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       "default": _components_NotFound_NotFound__WEBPACK_IMPORTED_MODULE_8__["default"]
     }
   }]
-}); // router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiredAuth)){
-//   	const loggedIn = TokenService.getToken();
-//     if (!loggedIn || loggedIn == 'undefined'){
-//       next({
-//         path: '/',
-//         query: { redirect: to.fullPath }
-//       })
-//     } else {
-//       	next()
-//     }
-//   } else {
-//     next() 
-//   }
-// })
+});
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (record) {
+    return record.meta.requiredAuth;
+  })) {
+    var loggedIn = _services_storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].getToken();
 
+    if (!loggedIn || loggedIn == 'undefined') {
+      next({
+        path: '/',
+        query: {
+          redirect: to.fullPath
+        }
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 /* harmony default export */ __webpack_exports__["default"] = (router);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
@@ -81073,7 +81100,7 @@ var UserService = {
 
             case 4:
               response = _context.sent;
-              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveToken(response.data.token);
+              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveToken(response.data.access_token);
               _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].setHeader();
               _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].mount401Interceptor();
               return _context.abrupt("return", response);
@@ -81124,23 +81151,22 @@ var UserService = {
 
             case 4:
               response = _context2.sent;
-              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveToken(response.data.token);
-              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveCurrentUserId(response.data.id);
+              _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveToken(response.data.access_token);
               _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].setHeader();
               _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].mount401Interceptor();
               return _context2.abrupt("return", response);
 
-            case 12:
-              _context2.prev = 12;
+            case 11:
+              _context2.prev = 11;
               _context2.t0 = _context2["catch"](1);
               throw new AuthenticationError(_context2.t0.data.status, _context2.t0.data.message);
 
-            case 15:
+            case 14:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 12]]);
+      }, _callee2, null, [[1, 11]]);
     }));
 
     function register(_x2) {
@@ -81427,12 +81453,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     logout: function logout(_ref3) {
       var commit = _ref3.commit;
       _services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"].logout();
-      commit('logoutSuccess'); // window.location = '/login';
-
+      commit('logoutSuccess');
       _routes__WEBPACK_IMPORTED_MODULE_5__["default"].push('/');
-      setTimeout(function () {
-        location.reload();
-      }, 100);
     },
     profile: function profile() {}
   }
@@ -81539,8 +81561,8 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

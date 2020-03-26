@@ -13,7 +13,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="#">Logout</a>
+        <a href="#" @click.prevent="logoutProfile">Logout</a>
       </li>
     </ul>
   </nav>
@@ -91,7 +91,6 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-
 export default {
   components: {
   },
@@ -100,13 +99,14 @@ export default {
       
     }
   },
-
   computed: {
    
   },
-
   methods: {
-    
+    ...mapActions(['logout']),
+    logoutProfile(){
+      this.logout();
+    },
   }
 };
 </script>
