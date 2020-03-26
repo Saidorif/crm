@@ -5650,6 +5650,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5710,11 +5725,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
-        fullname: '',
+        name: '',
         email: '',
         password: '',
         passwordConfirm: ''
@@ -5723,8 +5739,32 @@ __webpack_require__.r(__webpack_exports__);
       checkPassword: false
     };
   },
-  computed: {},
-  methods: {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('user', ['getProfile'])),
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.ActionProfile();
+
+            case 2:
+              _this.form = _this.getProfile;
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('user', ['ActionProfile']), {
     confirmPassword: function confirmPassword() {
       if (this.form.password && this.form.passwordConfirm) {
         if (this.form.password != this.form.passwordConfirm) {
@@ -5738,13 +5778,13 @@ __webpack_require__.r(__webpack_exports__);
       return this.requiredInput && input === '';
     },
     sendProfile: function sendProfile() {
-      if (this.form.fullname && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false) {
+      if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false) {
         console.log(this.form);
       } else {
         this.requiredInput = true;
       }
     }
-  }
+  })
 });
 
 /***/ }),
@@ -5878,7 +5918,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     title: "Вошли в систему!"
                   });
 
-                  _this.$Progress.finish();
+                  _this.$Progress.finish(); // setTimeout(()=>{
+                  // 	window.location = '/crm/dashboard';
+                  // },100)
+
 
                   _this.$router.push("/crm/dashboard");
                 } else {
@@ -47722,27 +47765,27 @@ var render = function() {
       [
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "fullname" } }, [_vm._v("Fullname")]),
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Fullname")]),
             _vm._v(" "),
             _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.fullname,
-                  expression: "form.fullname"
+                  value: _vm.form.name,
+                  expression: "form.name"
                 }
               ],
               staticClass: "form-control",
-              class: _vm.isRequired(_vm.form.fullname) ? "isRequired" : "",
-              attrs: { type: "text", id: "fullname", placeholder: "Fullname" },
-              domProps: { value: _vm.form.fullname },
+              class: _vm.isRequired(_vm.form.name) ? "isRequired" : "",
+              attrs: { type: "text", id: "name", placeholder: "Fullname" },
+              domProps: { value: _vm.form.name },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "fullname", $event.target.value)
+                  _vm.$set(_vm.form, "name", $event.target.value)
                 }
               }
             })
@@ -82589,7 +82632,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
         }, _callee2);
       }))();
     },
-    // register-end
     logout: function logout(_ref3) {
       var commit = _ref3.commit;
       _services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"].logout();
@@ -82623,11 +82665,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var state = {
-  message: null
+  message: null,
+  profile: []
 };
 var getters = {
   getMessage: function getMessage(state) {
     return state.message;
+  },
+  getProfile: function getProfile(state) {
+    return state.profile;
   }
 };
 var actions = {
@@ -82665,11 +82711,49 @@ var actions = {
         }
       }, _callee, null, [[0, 9]]);
     }))();
+  },
+  ActionProfile: function ActionProfile(_ref2) {
+    var commit = _ref2.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var sendData;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"].profileUser();
+
+            case 3:
+              sendData = _context2.sent;
+              _context2.next = 6;
+              return commit('setProfile', sendData.data.result);
+
+            case 6:
+              return _context2.abrupt("return", true);
+
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](0);
+              return _context2.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 9]]);
+    }))();
   }
 };
 var mutations = {
   setMessage: function setMessage(state, data) {
     state.message = data;
+  },
+  setProfile: function setProfile(state, data) {
+    state.profile = data;
   }
 };
 var user = {

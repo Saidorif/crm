@@ -6,14 +6,14 @@
   	<form role="form" @submit.prevent.enter="sendProfile">
       <div class="card-body">
         <div class="form-group">
-          <label for="fullname">Fullname</label>
+          <label for="name">Fullname</label>
           <input 
           	type="text" 
           	class="form-control" 
-          	id="fullname" 
-          	:class="isRequired(form.fullname) ? 'isRequired' : ''" 
+          	id="name" 
+          	:class="isRequired(form.name) ? 'isRequired' : ''" 
           	placeholder="Fullname"
-          	v-model="form.fullname"
+          	v-model="form.name"
       	>
         </div>
         <div class="form-group">
@@ -59,11 +59,12 @@
   </div>
 </template>	
 <script>
+  import { mapActions , mapGetters } from 'vuex'
 	export default{
 		data(){
 			return{
 				form:{
-					fullname:'',
+					name:'',
 					email:'',
 					password:'',
 					passwordConfirm:'',
@@ -73,8 +74,14 @@
 			}
 		},
 		computed:{
+      ...mapGetters('user',['getProfile'])
 		},
+    async mounted(){
+      await this.ActionProfile()
+      this.form = this.getProfile
+    },
 		methods:{
+      ...mapActions('user',['ActionProfile']),
 	    confirmPassword(){
 	      	if(this.form.password && this.form.passwordConfirm){
 		      	if(this.form.password != this.form.passwordConfirm){
@@ -88,7 +95,7 @@
     		return this.requiredInput && input === '';
 	    },
 			sendProfile(){
-				if (this.form.fullname && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false) {
+				if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false) {
 					console.log(this.form)
 				}else{
 					this.requiredInput = true

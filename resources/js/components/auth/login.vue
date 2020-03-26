@@ -74,6 +74,9 @@
 		            title: "Вошли в систему!"
 		          });
 		          this.$Progress.finish();
+		          // setTimeout(()=>{
+		          // 	window.location = '/crm/dashboard';
+		          // },100)
 		          this.$router.push("/crm/dashboard");
 		        }else{
 					this.errorMsg = this.authenticationError
