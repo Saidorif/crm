@@ -19,7 +19,7 @@ const router = new Router({
 	routes: [
 		// public components 
 		{
-			path:'/crm',
+			path:'/',
 			name:'crm',
 			redirect:'/crm/dashboard',
 			meta:{
