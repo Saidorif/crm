@@ -71,6 +71,8 @@
 		          });
 		          this.$Progress.finish();
 		          this.$router.push("/crm/dashboard");
+		        }else{
+		          this.$Progress.fail();
 		        }
 		      }
 		    }

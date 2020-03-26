@@ -5613,6 +5613,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this.$Progress.finish();
 
                   _this.$router.push("/crm/dashboard");
+                } else {
+                  _this.$Progress.fail();
                 }
 
               case 7:
