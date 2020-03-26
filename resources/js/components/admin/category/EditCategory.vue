@@ -9,7 +9,7 @@
 				<router-link class="btn btn-primary" to="/crm/category"><i class="fas fa-arrow-circle-left"></i> Back</router-link>
 		  	</div>
 		  	<div class="card-body">
-		  		<form @submit.prevent.enter="saveCategory" >
+		  		<form @submit.prevent.enter="saveCategory">
 					<div class="row">
 					  <div class="form-group col-md-9">
 					    <label for="categoryName">Category Name</label>

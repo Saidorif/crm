@@ -19,7 +19,7 @@ import NotFound from './components/NotFound/NotFound'
 const router = new Router({
 	mode: 'history', 
 	base: process.env.BASE_URL,
-	linkActiveClass: 'open active',
+	linkActiveClass: 'active',
 	routes: [
 		// public components 
 		{

@@ -10,6 +10,7 @@ import router from "./../routes"
 import {UserService} from "../services/user.service";
 // modules
 import {user} from "./user.module"
+import {category} from "./category.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -26,7 +27,8 @@ const store = new Vuex.Store(
 			abilityPlugin
 		],
 		modules:{
-			user
+			user,
+			category
 		},
 		state:{
 			rules:[],
