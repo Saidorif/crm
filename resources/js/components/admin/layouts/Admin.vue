@@ -23,7 +23,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <router-link class="brand-link" to="/crm">
-      <span class="brand-text font-weight-light">TEST</span>
+      <span class="brand-text font-weight-light">TEST 1</span>
     </router-link>
 
     <!-- Sidebar -->
@@ -112,5 +112,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .content-wrapper{
+    background: #f1f4f6;
+  }
 </style>

@@ -73,8 +73,14 @@
 		          this.$Progress.finish();
 		          this.$router.push("/crm/dashboard");
 		        }else{
-		        	console.log(this.authenticationError)
-		          this.$Progress.fail();
+					toast.fire({
+						icon: 'error',
+						timer: 3000,
+						type: "error",
+						title: 'Неверный логин или пароль'
+					});
+				  	this.$Progress.fail();
+
 		        }
 		      }
 		    }
