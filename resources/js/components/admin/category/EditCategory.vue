@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="nav-icon fas fa-box"></i>
-				    Add Category
+				    Edit Category
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/category"><i class="fas fa-arrow-circle-left"></i> Back</router-link>
 		  	</div>
