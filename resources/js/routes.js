@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-// import {TokenService} from './services/storage.service'
+import {TokenService} from './services/storage.service'
 // import {ability} from "./store/store";
 import store from "./store/store";
-
 
 // Dashboard component
 import Dashboard from './components/admin/Dashboard'
@@ -23,6 +22,9 @@ const router = new Router({
 			path:'/crm',
 			name:'crm',
 			redirect:'/crm/dashboard',
+			meta:{
+				requiredAuth:true
+			},
 			components:{
 				default:Admin,
 			},
@@ -51,7 +53,7 @@ const router = new Router({
 });
 
 // router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiredAuth)) {
+//   if (to.matched.some(record => record.meta.requiredAuth)){
 //   	const loggedIn = TokenService.getToken();
 //     if (!loggedIn || loggedIn == 'undefined'){
 //       next({
@@ -59,14 +61,6 @@ const router = new Router({
 //         query: { redirect: to.fullPath }
 //       })
 //     } else {
-//     	if (TokenService.getCurrentUser().role.name != 'admin') {
-// 		 	const checkPerm = to.matched.some(route => {
-// 			    return ability.can(route.meta.action, route.meta.subject)
-// 		  	})
-// 		  	if (!checkPerm) {
-// 			    return next('/notfound')
-// 		  	}
-//     	}
 //       	next()
 //     }
 //   } else {
