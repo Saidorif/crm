@@ -57,10 +57,10 @@
 						    	placeholder="Answer..."
 						    	name="is_true"
 						    	v-model="form.variants[index].is_true"
-						    	value="true"
+						    	value="1"
+						    	@change="selectAnswer(form.variants[index])"
 						    >
 						    <label :for="'is_true'+index" class="radio_style_label" >Right Answer</label>
-
 					  	</template>
 					  </div>
 					  <div class="form-group col-md-2" v-if="form.variants.length > 1">
@@ -93,7 +93,7 @@
 					category_id:'',
 					variants:[
 						{
-							title:'',is_true:'false'
+							title:'',is_true:0
 						}
 					],
 				},
@@ -113,12 +113,18 @@
 		    },
 		    checkRadioBtn(){
 				let new_arr = this.form.variants.map(item=>{
-					return item.is_true
+					return parseInt(item.is_true)
 				})
-				return new_arr.includes('true')
+				return new_arr.includes(1)
+			},
+			selectAnswer(selected){
+				this.form.variants.forEach(item=>{
+					item.is_true = 0;
+				})
+				selected.is_true = 1;
 			},
 		    addAnswer(){
-		    	let value = {title:'',is_true:'false'}
+		    	let value = {title:'',is_true:0}
 		    	let check = false
 		    	for(let key in this.form.variants){
 		    		if(this.form.variants[key].title != ''){
@@ -145,9 +151,8 @@
 			async saveQuestion(){
 				if (this.form.title != '' && this.form.category_id != '') {
 					if (this.checkRadioBtn()) {
-						console.log(this.form)
-						// await this.actionUpdateQuestion(this.form)
-						// this.$router.push("/crm/question");
+						await this.actionUpdateQuestion(this.form)
+						this.$router.push("/crm/question");
 						toast.fire({
 							type: "success",
 							icon: 'success',

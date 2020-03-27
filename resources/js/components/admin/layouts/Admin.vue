@@ -51,26 +51,35 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/category">
+              <span class="peIcon pe-7s-drawer" style="font-size: 20px;"></span>
+              <p>
+                Отделы
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/question">
               <span class="peIcon pe-7s-note" style="font-size: 20px;"></span>
               <p>
-                Questions
+                Question
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <span class="peIcon pe-7s-note2" style="font-size: 20px;"></span>
+              <p>
+                Test
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link class="nav-link" to="/crm/category">
+                <router-link class="nav-link" to="/crm/test/test-for-guest">
                   <p>
-                    Category
-                  </p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/crm/question">
-                  <p>
-                    Question
+                    For Guest
                   </p>
                 </router-link>
               </li>

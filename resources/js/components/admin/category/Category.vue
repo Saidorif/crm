@@ -62,6 +62,7 @@
 					await this.actionCategoryPag(page)
 					toast.fire({
 				    	type: 'success',
+				    	icon: 'success',
 						title: 'Категория удалено!',
 				    })
 				}
