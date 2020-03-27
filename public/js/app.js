@@ -5999,8 +5999,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6031,8 +6029,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       for (var key in this.form.variants) {
         if (this.form.variants[key].title != '') {
           check = true;
+          this.requiredInput = false;
         } else {
-          alert('error');
+          this.requiredInput = true;
+          toast.fire({
+            type: "error",
+            icon: 'error',
+            title: "Поле не может быть пустым"
+          });
           return false;
         }
       }
@@ -48088,7 +48092,7 @@ var render = function() {
             { staticClass: "brand-link", attrs: { to: "/crm" } },
             [
               _c("span", { staticClass: "brand-text font-weight-light" }, [
-                _vm._v("ADMIN DASHBOARD")
+                _vm._v("E-KADR")
               ])
             ]
           ),
@@ -48447,7 +48451,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "answer_head" }, [
+            _c("div", { staticClass: "answer_head mb-2" }, [
               _c("h3", [_vm._v("Answers")]),
               _vm._v(" "),
               _c(
@@ -48465,7 +48469,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _vm._l(_vm.form.variants, function(answer, index) {
-              return _c("div", { staticClass: "row" }, [
+              return _c("div", { staticClass: "row align-items-end" }, [
                 _c("div", { staticClass: "form-group col-md-6" }, [
                   _c("label", { attrs: { for: "categoryName" } }, [
                     _vm._v(_vm._s(index + 1) + " ) Answer Name")
@@ -48507,14 +48511,10 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "form-group col-md-2" },
+                  { staticClass: "form-group col-md-2 radio_style_block" },
                   [
                     _vm.form.variants[index].title != ""
                       ? [
-                          _c("label", { attrs: { for: "checked" } }, [
-                            _vm._v("Right Answer")
-                          ]),
-                          _vm._v(" "),
                           _c("input", {
                             directives: [
                               {
@@ -48524,10 +48524,11 @@ var render = function() {
                                 expression: "form.variants[index].checked"
                               }
                             ],
-                            staticClass: "form-control input_style",
+                            staticClass:
+                              "form-control input_style radio_style_input",
                             attrs: {
                               type: "radio",
-                              id: "checked",
+                              id: "checked" + index,
                               placeholder: "Answer...",
                               name: "checked",
                               value: "1"
@@ -48547,7 +48548,16 @@ var render = function() {
                                 )
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "radio_style_label",
+                              attrs: { for: "checked" + index }
+                            },
+                            [_vm._v("Right Answer")]
+                          )
                         ]
                       : _vm._e()
                   ],

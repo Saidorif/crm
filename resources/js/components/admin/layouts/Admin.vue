@@ -23,7 +23,7 @@
   <aside class="main-sidebar">
     <!-- Brand Logo -->
     <router-link class="brand-link" to="/crm">
-      <span class="brand-text font-weight-light">ADMIN DASHBOARD</span>
+      <span class="brand-text font-weight-light">E-KADR</span>
     </router-link>
 
     <!-- Sidebar -->
