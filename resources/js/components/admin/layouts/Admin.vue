@@ -55,7 +55,7 @@
             <router-link class="nav-link" to="/crm/category">
               <span class="peIcon pe-7s-drawer" style="font-size: 20px;"></span>
               <p>
-                Отделы
+                Управления
               </p>
             </router-link>
           </li>

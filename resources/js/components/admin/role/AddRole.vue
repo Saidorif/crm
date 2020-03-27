@@ -22,6 +22,17 @@
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>
 					  </div>
+					  <div class="form-group col-md-9">
+					    <label for="roleName">Label</label>
+					    <input 
+					    	type="text" 
+					    	class="form-control input_style" 
+					    	id="roleName" 
+					    	placeholder="Label"
+					    	v-model="form.label"
+					    	:class="isRequired(form.label) ? 'isRequired' : ''"  
+				    	>
+					  </div>
 					 
 					  <div class="form-group col-lg-3 form_btn">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
@@ -41,7 +52,8 @@
 		data(){
 			return{
 				form:{
-					name:''
+					name:'',
+					label:''
 				},
 				requiredInput:false
 			}
@@ -55,14 +67,13 @@
 	    		return this.requiredInput && input === '';
 		    },
 		    async saveRole(){
-		  //   	if (this.form.name != '' && this.form.name != null){
-				// 	await this.actionAddRole(this.form)
-				// 	await this.actionRoles()
-				// 	this.$router.push("/crm/role");
-				// 	this.requiredInput =false
-				// }else{
-				// 	this.requiredInput =true
-				// }
+		    	if (this.form.name != '' && this.form.label != ''){
+					await this.actionAddRole(this.form)
+					this.$router.push("/crm/role");
+					this.requiredInput =false
+				}else{
+					this.requiredInput =true
+				}
 		    }
 		}
 	}
