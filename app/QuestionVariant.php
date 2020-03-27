@@ -8,7 +8,7 @@ class QuestionVariant extends Model
 {
     protected $fillable = ['title', 'question_id','is_true'];
 
-    protected $hidden = ['is_true'];
+    // protected $hidden = ['is_true'];
 
     public function question()
     {
