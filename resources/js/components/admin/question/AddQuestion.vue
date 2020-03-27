@@ -19,7 +19,7 @@
 					    	id="countryName" 
 					    	v-model="form.category_id">
 					      <option value="" selected disabled>Выберите категорию</option>
-					      <!-- <option :value="category.id" v-for="(category,index) in getListCountry">{{category.name}}</option> -->
+					      <option :value="category.id" v-for="(category,index) in getCategories">{{category.name}}</option>
 					    </select>
 					  </div>
 					  <div class="form-group col-md-12">
@@ -102,11 +102,15 @@
 			}
 		},
 		computed:{
-			...mapGetters('question',['getQuestionList','getMassage'])
+			...mapGetters('question',['getQuestionList','getMassage']),
+			...mapGetters('category',['getCategories'])
+		},
+		async mounted(){
+			await this.actionCategoryList()
 		},
 		methods:{
 			...mapActions('question',['actionQuestionList','actionAddQuestion']),
-			...mapActions('question',['actionCategoryList']),
+			...mapActions('category',['actionCategoryList']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },

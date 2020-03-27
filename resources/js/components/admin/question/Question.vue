@@ -47,11 +47,10 @@
 	export default{
 		data(){
 			return{
-				
+
 			}
 		},
-		async mounted(){
-			await this.actionCategoryList()
+		mounted(){
 		},
 		computed:{
 			...mapGetters('question',['getQuestionList']),
