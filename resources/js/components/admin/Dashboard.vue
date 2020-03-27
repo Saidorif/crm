@@ -3,7 +3,7 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i class="nav-icon fa fa-dashboard"></i>
+			    	<i class="peIcon pe-7s-rocket"></i>
 				    Dashboard
 				</h4>
 		  	</div>

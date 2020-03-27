@@ -130,6 +130,25 @@
   margin-right: 10px;
 }
 
+.logout_btn {
+  color: #fff;
+  background: transparent;
+  border: 1px solid #fff;
+  font-size: 16px;
+  line-height: 20px;
+  height: 35px;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.logout_btn:hover {
+  color: #3f6ad8;
+  border: 1px solid #fff;
+  background: #fff;
+  text-decoration: none;
+}
+
+.btn.btn-primary.back_btn.active,
 .btn.btn-primary {
   color: #3f6ad8;
   background: transparent;
@@ -137,6 +156,13 @@
   font-size: 16px;
   line-height: 20px;
   height: 35px;
+}
+
+.btn.btn-primary span {
+  width: auto;
+  height: auto;
+  line-height: normal;
+  font-size: 18px;
 }
 
 .btn.btn-primary i {
@@ -263,5 +289,13 @@
 .form_btn {
   display: flex;
   align-items: flex-end;
+}
+
+.redText {
+  color: red;
+}
+
+.pe-7s-menu {
+  color: #fff;
 }
 

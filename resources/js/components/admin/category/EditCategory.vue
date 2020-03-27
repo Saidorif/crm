@@ -15,7 +15,7 @@
 					    <label for="categoryName">Category Name</label>
 					    <input 
 					    	type="text" 
-					    	class="form-control" 
+					    	class="form-control input_style" 
 					    	id="categoryName" 
 					    	placeholder="Category Name"
 					    	v-model="form.name"
