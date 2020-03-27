@@ -3,7 +3,7 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i data-v-956a9a24="" class="peIcon pe-7s-drawer"></i>
+			    	<i class="peIcon pe-7s-drawer"></i>
 				    Add Category
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/category"><i class="fas fa-arrow-circle-left"></i> Back</router-link>
@@ -51,14 +51,14 @@
 			...mapGetters('category',['getCategoryList','getMassage'])
 		},
 		methods:{
-			...mapActions('category',['actionCategoryList','actionAddCategory']),
+			...mapActions('category',['actionCategoryPag','actionAddCategory']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
 			async saveCategory(){
 				if (this.form.name != '' && this.form.name != null){
 					await this.actionAddCategory(this.form)
-					await this.actionCategoryList()
+					await this.actionCategoryPag()
 					this.$router.push("/crm/category");
 					this.requiredInput =false
 				}else{

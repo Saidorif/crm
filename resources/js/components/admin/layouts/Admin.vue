@@ -63,7 +63,15 @@
             <router-link class="nav-link" to="/crm/category">
               <i class="peIcon pe-7s-drawer"></i>
               <p>
-                Category
+                Question Category
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/question">
+              <i class="peIcon pe-7s-note"></i>
+              <p>
+                Question
               </p>
             </router-link>
           </li>

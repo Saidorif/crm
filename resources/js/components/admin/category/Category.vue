@@ -3,7 +3,7 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i data-v-956a9a24="" class="peIcon pe-7s-drawer"></i>
+			    	<i  class="peIcon pe-7s-drawer"></i>
 				    Category 
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/category/add"><i class="fas fa-plus"></i> Add</router-link>
@@ -51,15 +51,15 @@
 			...mapGetters('category',['getCategoryList'])
 		},
 		methods:{
-			...mapActions('category',['actionCategoryList','actionDeleteCategory']),
+			...mapActions('category',['actionCategoryPag','actionDeleteCategory']),
 			async getResults(page = 1){ 
-				await this.actionCategoryList(page)
+				await this.actionCategoryPag(page)
 			},
 			async deleteCategory(id){
 				if(confirm("Вы действительно хотите удалить?")){
 					let page = 1
 					await this.actionDeleteCategory(id)
-					await this.actionCategoryList(page)
+					await this.actionCategoryPag(page)
 					toast.fire({
 				    	type: 'success',
 						title: 'Категория удалено!',
@@ -68,7 +68,7 @@
 			}
 		},
 		async mounted(){
-			await this.actionCategoryList()
+			await this.actionCategoryPag()
 		}
 	}
 </script>

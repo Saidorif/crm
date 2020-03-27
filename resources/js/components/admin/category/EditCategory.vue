@@ -60,14 +60,14 @@
 			this.form = this.getCategory
 		},
 		methods:{
-			...mapActions('category',['actionCategoryList','actionEditCategory','actionUpdateCategory']),
+			...mapActions('category',['actionCategoryPag','actionEditCategory','actionUpdateCategory']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
 			async saveCategory(){
 				if (this.form.name != '' && this.form.name != null) {
 					await this.actionUpdateCategory(this.form)
-					await this.actionCategoryList()
+					await this.actionCategoryPag()
 					this.$router.push("/crm/category");
 					this.requiredInput =false
 				}else{

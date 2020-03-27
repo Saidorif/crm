@@ -20,9 +20,9 @@ const getters = {
 
 
 const actions = {
-	async actionCategoryList({commit},page){
+	async actionCategoryPag({commit},page){
 		try {
-			const categories =  await CategoryService.categoryList(page);
+			const categories =  await CategoryService.categoryPag(page);
 			await commit('setCategoryList',categories.data.result)
 			return true
 		} catch (error) {

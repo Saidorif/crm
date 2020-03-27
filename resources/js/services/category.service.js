@@ -1,7 +1,7 @@
 import ApiService from './api.service'
 
 const CategoryService = {
-	categoryList(page){
+	categoryPag(page){
 		return ApiService.get(`/api/category?page=`+ page)
 	},
 	addCategory(data){
