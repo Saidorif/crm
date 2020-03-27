@@ -5874,6 +5874,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
@@ -48105,7 +48106,32 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._m(1),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/crm/dashboard" }
+                        },
+                        [
+                          _c("span", {
+                            staticClass: "peIcon pe-7s-rocket",
+                            staticStyle: { "font-size": "20px" }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "\n                Dashboard\n              "
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "li",
@@ -48129,51 +48155,55 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
+                  _c("li", { staticClass: "nav-item has-treeview" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("ul", { staticClass: "nav nav-treeview" }, [
                       _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: "/crm/category" }
-                        },
+                        "li",
+                        { staticClass: "nav-item" },
                         [
-                          _c("i", { staticClass: "peIcon pe-7s-drawer" }),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v(
-                              "\n                Question Category\n              "
-                            )
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { to: "/crm/category" }
+                            },
+                            [
+                              _c("p", [
+                                _vm._v(
+                                  "\n                    Category\n                  "
+                                )
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
                       _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: "/crm/question" }
-                        },
+                        "li",
+                        { staticClass: "nav-item" },
                         [
-                          _c("i", { staticClass: "peIcon pe-7s-note" }),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v("\n                Question\n              ")
-                          ])
-                        ]
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { to: "/crm/question" }
+                            },
+                            [
+                              _c("p", [
+                                _vm._v(
+                                  "\n                    Question\n                  "
+                                )
+                              ])
+                            ]
+                          )
+                        ],
+                        1
                       )
-                    ],
-                    1
-                  ),
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c(
                     "li",
@@ -48250,25 +48280,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item has-treeview" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _c("span", {
-          staticClass: "peIcon pe-7s-rocket",
-          staticStyle: { "font-size": "20px" }
-        }),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("\n                Dashboard\n                "),
-          _c("i", { staticClass: "right fas fa-angle-left" })
-        ])
-      ]),
+    return _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+      _c("span", {
+        staticClass: "peIcon pe-7s-note",
+        staticStyle: { "font-size": "20px" }
+      }),
       _vm._v(" "),
-      _c("ul", { staticClass: "nav nav-treeview" }, [
-        _c("li", { staticClass: "nav-item" }, [
-          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-            _c("p", [_vm._v("Dashboard v1")])
-          ])
-        ])
+      _c("p", [
+        _vm._v("\n                Questions\n                "),
+        _c("i", { staticClass: "right fas fa-angle-left" })
       ])
     ])
   },
