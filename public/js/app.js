@@ -5958,15 +5958,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
@@ -48733,58 +48724,58 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("li", { staticClass: "nav-item has-treeview" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("ul", { staticClass: "nav nav-treeview" }, [
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
                       _c(
-                        "li",
-                        { staticClass: "nav-item" },
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/crm/category" }
+                        },
                         [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/crm/category" }
-                            },
-                            [
-                              _c("p", [
-                                _vm._v(
-                                  "\n                    Category\n                  "
-                                )
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/crm/question" }
-                            },
-                            [
-                              _c("p", [
-                                _vm._v(
-                                  "\n                    Question\n                  "
-                                )
-                              ])
-                            ]
-                          )
-                        ],
-                        1
+                          _c("span", {
+                            staticClass: "peIcon pe-7s-drawer",
+                            staticStyle: { "font-size": "20px" }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v("\n                Отделы\n              ")
+                          ])
+                        ]
                       )
-                    ])
-                  ]),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/crm/question" }
+                        },
+                        [
+                          _c("span", {
+                            staticClass: "peIcon pe-7s-note",
+                            staticStyle: { "font-size": "20px" }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v("\n                Question\n              ")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c("li", { staticClass: "nav-item has-treeview" }, [
-                    _vm._m(2),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c("ul", { staticClass: "nav nav-treeview" }, [
                       _c(
@@ -48855,7 +48846,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(3)
+      _vm._m(2)
     ])
   ])
 }
@@ -48879,22 +48870,6 @@ var staticRenderFns = [
             })
           ]
         )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-      _c("span", {
-        staticClass: "peIcon pe-7s-note",
-        staticStyle: { "font-size": "20px" }
-      }),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("\n                Questions\n                "),
-        _c("i", { staticClass: "right fas fa-angle-left" })
       ])
     ])
   },
