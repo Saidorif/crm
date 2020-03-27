@@ -6008,7 +6008,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         category_id: '',
         variants: [{
           title: '',
-          is_true: 'false'
+          is_true: 0
         }]
       },
       requiredInput: false
@@ -6021,14 +6021,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     checkRadioBtn: function checkRadioBtn() {
       var new_arr = this.form.variants.map(function (item) {
-        return item.is_true;
+        return parseInt(item.is_true);
       });
-      return new_arr.includes('true');
+      return new_arr.includes(1);
     },
     addAnswer: function addAnswer() {
       var value = {
         title: '',
-        is_true: 'false'
+        is_true: 0
       };
       var check = false;
 
@@ -6256,7 +6256,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         category_id: '',
         variants: [{
           title: '',
-          is_true: 'false'
+          is_true: 0
         }]
       },
       requiredInput: false
@@ -6269,14 +6269,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     checkRadioBtn: function checkRadioBtn() {
       var new_arr = this.form.variants.map(function (item) {
-        return item.is_true;
+        return parseInt(item.is_true);
       });
-      return new_arr.includes('true');
+      return new_arr.includes(1);
     },
     addAnswer: function addAnswer() {
       var value = {
         title: '',
-        is_true: 'false'
+        is_true: 0
       };
       var check = false;
 
@@ -48829,12 +48829,12 @@ var render = function() {
                               id: "is_true" + index,
                               placeholder: "Answer...",
                               name: "is_true",
-                              value: "true"
+                              value: "1"
                             },
                             domProps: {
                               checked: _vm._q(
                                 _vm.form.variants[index].is_true,
-                                "true"
+                                "1"
                               )
                             },
                             on: {
@@ -48842,7 +48842,7 @@ var render = function() {
                                 return _vm.$set(
                                   _vm.form.variants[index],
                                   "is_true",
-                                  "true"
+                                  "1"
                                 )
                               }
                             }
@@ -49151,12 +49151,12 @@ var render = function() {
                               id: "is_true" + index,
                               placeholder: "Answer...",
                               name: "is_true",
-                              value: "true"
+                              value: "1"
                             },
                             domProps: {
                               checked: _vm._q(
                                 _vm.form.variants[index].is_true,
-                                "true"
+                                "1"
                               )
                             },
                             on: {
@@ -49164,7 +49164,7 @@ var render = function() {
                                 return _vm.$set(
                                   _vm.form.variants[index],
                                   "is_true",
-                                  "true"
+                                  "1"
                                 )
                               }
                             }
@@ -85335,15 +85335,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\style.scss */"./resources/sass/style.scss");
-=======
 __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
->>>>>>> a4ee3b4a557246ee7159a0b503152abace901204
 
 
 /***/ })
