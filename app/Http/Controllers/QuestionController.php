@@ -32,7 +32,7 @@ class QuestionController extends Controller
             'category_id' => 'required|integer',
             'variants' => 'required|array',
             'variants.*.title' => 'required|string',
-            'variants.*.is_true' => 'required|string',
+            'variants.*.is_true' => 'required',
         ]);
 
         if($validator->fails()){
@@ -44,7 +44,7 @@ class QuestionController extends Controller
         foreach ($variants as $key => $variant) {
             $item = QuestionVariant::create([
                 'title' => $variant['title'],
-                'is_true' => $variant['is_true'] == 'true' ? 1 : 0,
+                'is_true' => (int)$variant['is_true'],
                 'question_id' => $question->id,
             ]);
         }
@@ -58,7 +58,7 @@ class QuestionController extends Controller
             'category_id' => 'required|integer',
             'variants' => 'required|array',
             'variants.*.title' => 'required|string',
-            'variants.*.is_true' => 'required|string',
+            'variants.*.is_true' => 'required',
         ]);
 
         if($validator->fails()){
@@ -80,7 +80,7 @@ class QuestionController extends Controller
         foreach ($variants as $key => $variant) {
             $item = QuestionVariant::create([
                 'title' => $variant['title'],
-                'is_true' => $variant['is_true'] == 'true' ? 1 : 0,
+                'is_true' => (int)$variant['is_true'],
                 'question_id' => $question->id,
             ]);
         }
