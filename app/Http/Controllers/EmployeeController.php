@@ -22,6 +22,17 @@ class EmployeeController extends Controller
         return response()->json(['success' => true, 'result' => $users]);
     }
 
+    public function checkemail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email',
+        ]);
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
+        }
+        return response()->json(['success' => true, 'message' => 'Email is free to use']);
+    }
+
     public function edit($id)
     {
         $user = User::where('role_id', '!=', 1)->where(['id' => $id])->first();

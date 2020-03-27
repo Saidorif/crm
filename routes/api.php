@@ -26,6 +26,7 @@ Route::group([
 
         //Employee CRUD
         Route::get('employee', 'EmployeeController@index');
+        Route::post('checkemail', 'EmployeeController@checkemail');
         Route::post('employee/store', 'EmployeeController@store');
         Route::get('employee/list', 'EmployeeController@list');
         Route::get('employee/edit/{id}', 'EmployeeController@edit');
