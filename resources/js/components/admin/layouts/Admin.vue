@@ -13,7 +13,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="#" @click.prevent="logoutProfile">Logout</a>
+        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2"></i> Logout</a>
       </li>
     </ul>
   </nav>
@@ -35,21 +35,13 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <router-link to="/crm/dashboard" class="nav-link">
               <span class="peIcon pe-7s-rocket" style="font-size: 20px;"></span>
               <p>
                 Dashboard
-                <i class="right fas fa-angle-left"></i>
               </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-            </ul>
+            </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/profile">
@@ -59,13 +51,30 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/category">
-              <i class="peIcon pe-7s-drawer"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <span class="peIcon pe-7s-note" style="font-size: 20px;"></span>
               <p>
-                Category
+                Questions
+                <i class="right fas fa-angle-left"></i>
               </p>
-            </router-link>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/category">
+                  <p>
+                    Category
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/question">
+                  <p>
+                    Question
+                  </p>
+                </router-link>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/employee">

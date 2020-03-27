@@ -15,7 +15,7 @@
 					    <label for="categoryName">Category Name</label>
 					    <input 
 					    	type="text" 
-					    	class="form-control" 
+					    	class="form-control input_style" 
 					    	id="categoryName" 
 					    	placeholder="Category Name"
 					    	v-model="form.name"
@@ -60,14 +60,14 @@
 			this.form = this.getCategory
 		},
 		methods:{
-			...mapActions('category',['actionCategoryList','actionEditCategory','actionUpdateCategory']),
+			...mapActions('category',['actionCategoryPag','actionEditCategory','actionUpdateCategory']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
 			async saveCategory(){
 				if (this.form.name != '' && this.form.name != null) {
 					await this.actionUpdateCategory(this.form)
-					await this.actionCategoryList()
+					await this.actionCategoryPag()
 					this.$router.push("/crm/category");
 					this.requiredInput =false
 				}else{

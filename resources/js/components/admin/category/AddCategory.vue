@@ -3,10 +3,10 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i class="nav-icon fas fa-box"></i>
+			    	<i class="peIcon pe-7s-drawer"></i>
 				    Add Category
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/category"><i class="fas fa-arrow-circle-left"></i> Back</router-link>
+				<router-link class="btn btn-primary back_btn" to="/crm/category"><span class="peIcon pe-7s-back"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveCategory" >
@@ -15,7 +15,7 @@
 					    <label for="categoryName">Category Name</label>
 					    <input 
 					    	type="text" 
-					    	class="form-control" 
+					    	class="form-control input_style" 
 					    	id="categoryName" 
 					    	placeholder="Category Name"
 					    	v-model="form.name"
@@ -24,7 +24,7 @@
 					  </div>
 					 
 					  <div class="form-group col-lg-3 form_btn">
-					  	<button type="submit" class="btn btn-primary">
+					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
 						</button>	
@@ -51,14 +51,14 @@
 			...mapGetters('category',['getCategoryList','getMassage'])
 		},
 		methods:{
-			...mapActions('category',['actionCategoryList','actionAddCategory']),
+			...mapActions('category',['actionCategoryPag','actionAddCategory']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
 			async saveCategory(){
 				if (this.form.name != '' && this.form.name != null){
 					await this.actionAddCategory(this.form)
-					await this.actionCategoryList()
+					await this.actionCategoryPag()
 					this.$router.push("/crm/category");
 					this.requiredInput =false
 				}else{

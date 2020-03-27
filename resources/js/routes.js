@@ -21,6 +21,11 @@ import Employee from './components/admin/employee/Employee'
 import AddEmployee from './components/admin/employee/AddEmployee'
 import EditEmployee from './components/admin/employee/EditEmployee'
 
+// Question
+import Question from './components/admin/question/Question'
+import AddQuestion from './components/admin/question/AddQuestion'
+import EditQuestion from './components/admin/question/EditQuestion'
+
 
 // NotFound
 import NotFound from './components/NotFound/NotFound'
@@ -70,6 +75,18 @@ const router = new Router({
 				{
 					path:'employee/edit/:employeeId',
 					component:EditEmployee,
+				},
+				{
+					path:'question',
+					component:Question,
+				},
+				{
+					path:'question/add',
+					component:AddQuestion,
+				},
+				{
+					path:'question/edit/:questionId',
+					component:EditQuestion,
 				},
 			]
 		},
