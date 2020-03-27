@@ -16,6 +16,9 @@
 							<th scope="col">№</th>
 							<th scope="col">Ф.И.О</th>
 							<th scope="col">Рол</th>
+							<th scope="col">Управления</th>
+							<th scope="col">Email</th>
+							<th scope="col">Phone</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
@@ -24,6 +27,9 @@
 							<td scope="row">1</td>
 							<td>Name</td>
 							<td>user</td>
+							<td>category</td>
+							<td>email@mail.ru</td>
+							<td>+99899999999</td>
 							<td>
 								<!-- <router-link tag="button" class="btn_transparent" :to='`/crm/employee/edit/${item.id}`'> -->
 								<router-link tag="button" class="btn_transparent" to='/crm/employee/edit/1'>

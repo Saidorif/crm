@@ -6317,6 +6317,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -50363,6 +50369,12 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v("user")]),
                   _vm._v(" "),
+                  _c("td", [_vm._v("category")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("email@mail.ru")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("+99899999999")]),
+                  _vm._v(" "),
                   _c(
                     "td",
                     [
@@ -50428,6 +50440,12 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Ф.И.О")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Рол")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Управления")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Phone")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Действия")])
       ])
