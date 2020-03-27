@@ -47,14 +47,14 @@
 	export default{
 		data(){
 			return{
-
+				
 			}
 		},
 		async mounted(){
-			// await this.category()
+			await this.actionCategoryList()
 		},
 		computed:{
-			...mapGetters('question',['getQuestionList'])
+			...mapGetters('question',['getQuestionList']),
 		},
 		methods:{
 			...mapActions('category',['actionCategoryList']),

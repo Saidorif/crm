@@ -2,11 +2,15 @@ import {CategoryService} from "../services/category.service";
 
 const state = {
 	categories: {},
+	categoryList: [],
 	message: [],
 	category: [],
 };
 
 const getters = {
+	getCategories(state){
+		return state.categoryList
+	},
 	getCategoryList(state){
 		return state.categories
 	},
@@ -20,10 +24,19 @@ const getters = {
 
 
 const actions = {
+	async actionCategoryList({commit},){
+		try {
+			const categories =  await CategoryService.categoryList();
+			await commit('setCategoryList',categories.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 	async actionCategoryPag({commit},page){
 		try {
 			const categories =  await CategoryService.categoryPag(page);
-			await commit('setCategoryList',categories.data.result)
+			await commit('setCategoryPag',categories.data.result)
 			return true
 		} catch (error) {
 			return false
@@ -69,6 +82,9 @@ const actions = {
 
 const mutations = {
 	setCategoryList(state, categories){
+		state.categoryList = categories
+	},
+	setCategoryPag(state, categories){
 		state.categories = categories
 	},
 	setMessage(state, message){

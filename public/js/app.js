@@ -6017,7 +6017,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList', 'getMassage'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionCategoryList']), {
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
@@ -6165,7 +6165,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {};
   },
-  mounted: function mounted() {// await this.category()
+  mounted: function mounted() {
+    var _this = this;
 
     return _asyncToGenerator(
     /*#__PURE__*/
@@ -6174,6 +6175,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              _context.next = 2;
+              return _this.actionCategoryList();
+
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -6184,7 +6189,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList'])),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionDeleteQuestion']), {
     getResults: function getResults() {
-      var _this = this;
+      var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       return _asyncToGenerator(
@@ -6195,7 +6200,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this.actionQuestionList(page);
+                return _this2.actionQuestionList(page);
 
               case 2:
               case "end":
@@ -83499,6 +83504,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api.service */ "./resources/js/services/api.service.js");
 
 var CategoryService = {
+  categoryList: function categoryList() {
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/category/list");
+  },
   categoryPag: function categoryPag(page) {
     return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/category?page=" + page);
   },
@@ -83838,10 +83846,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var state = {
   categories: {},
+  categoryList: [],
   message: [],
   category: []
 };
 var getters = {
+  getCategories: function getCategories(state) {
+    return state.categoryList;
+  },
   getCategoryList: function getCategoryList(state) {
     return state.categories;
   },
@@ -83853,7 +83865,7 @@ var getters = {
   }
 };
 var actions = {
-  actionCategoryPag: function actionCategoryPag(_ref, page) {
+  actionCategoryList: function actionCategoryList(_ref) {
     var commit = _ref.commit;
     return _asyncToGenerator(
     /*#__PURE__*/
@@ -83865,7 +83877,7 @@ var actions = {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].categoryPag(page);
+              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].categoryList();
 
             case 3:
               categories = _context.sent;
@@ -83888,7 +83900,7 @@ var actions = {
       }, _callee, null, [[0, 9]]);
     }))();
   },
-  actionAddCategory: function actionAddCategory(_ref2, payload) {
+  actionCategoryPag: function actionCategoryPag(_ref2, page) {
     var commit = _ref2.commit;
     return _asyncToGenerator(
     /*#__PURE__*/
@@ -83900,12 +83912,12 @@ var actions = {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].addCategory(payload);
+              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].categoryPag(page);
 
             case 3:
               categories = _context2.sent;
               _context2.next = 6;
-              return commit('setMessage', categories.data);
+              return commit('setCategoryPag', categories.data.result);
 
             case 6:
               return _context2.abrupt("return", true);
@@ -83923,7 +83935,7 @@ var actions = {
       }, _callee2, null, [[0, 9]]);
     }))();
   },
-  actionEditCategory: function actionEditCategory(_ref3, payload) {
+  actionAddCategory: function actionAddCategory(_ref3, payload) {
     var commit = _ref3.commit;
     return _asyncToGenerator(
     /*#__PURE__*/
@@ -83935,12 +83947,12 @@ var actions = {
             case 0:
               _context3.prev = 0;
               _context3.next = 3;
-              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].editCategory(payload);
+              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].addCategory(payload);
 
             case 3:
               categories = _context3.sent;
               _context3.next = 6;
-              return commit('setEditCategory', categories.data.result);
+              return commit('setMessage', categories.data);
 
             case 6:
               return _context3.abrupt("return", true);
@@ -83958,7 +83970,7 @@ var actions = {
       }, _callee3, null, [[0, 9]]);
     }))();
   },
-  actionUpdateCategory: function actionUpdateCategory(_ref4, payload) {
+  actionEditCategory: function actionEditCategory(_ref4, payload) {
     var commit = _ref4.commit;
     return _asyncToGenerator(
     /*#__PURE__*/
@@ -83970,7 +83982,7 @@ var actions = {
             case 0:
               _context4.prev = 0;
               _context4.next = 3;
-              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].updateCategory(payload);
+              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].editCategory(payload);
 
             case 3:
               categories = _context4.sent;
@@ -83993,7 +84005,7 @@ var actions = {
       }, _callee4, null, [[0, 9]]);
     }))();
   },
-  actionDeleteCategory: function actionDeleteCategory(_ref5, id) {
+  actionUpdateCategory: function actionUpdateCategory(_ref5, payload) {
     var commit = _ref5.commit;
     return _asyncToGenerator(
     /*#__PURE__*/
@@ -84005,7 +84017,7 @@ var actions = {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].deleteCategory(id);
+              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].updateCategory(payload);
 
             case 3:
               categories = _context5.sent;
@@ -84027,10 +84039,48 @@ var actions = {
         }
       }, _callee5, null, [[0, 9]]);
     }))();
+  },
+  actionDeleteCategory: function actionDeleteCategory(_ref6, id) {
+    var commit = _ref6.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+      var categories;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.prev = 0;
+              _context6.next = 3;
+              return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["CategoryService"].deleteCategory(id);
+
+            case 3:
+              categories = _context6.sent;
+              _context6.next = 6;
+              return commit('setEditCategory', categories.data.result);
+
+            case 6:
+              return _context6.abrupt("return", true);
+
+            case 9:
+              _context6.prev = 9;
+              _context6.t0 = _context6["catch"](0);
+              return _context6.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6, null, [[0, 9]]);
+    }))();
   }
 };
 var mutations = {
   setCategoryList: function setCategoryList(state, categories) {
+    state.categoryList = categories;
+  },
+  setCategoryPag: function setCategoryPag(state, categories) {
     state.categories = categories;
   },
   setMessage: function setMessage(state, message) {
@@ -84669,9 +84719,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })

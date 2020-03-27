@@ -106,6 +106,7 @@
 		},
 		methods:{
 			...mapActions('question',['actionQuestionList','actionAddQuestion']),
+			...mapActions('question',['actionCategoryList']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
