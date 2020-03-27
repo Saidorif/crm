@@ -5497,6 +5497,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 6:
                 toast.fire({
                   type: 'success',
+                  icon: 'success',
                   title: 'Категория удалено!'
                 });
 
@@ -6026,7 +6027,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         category_id: '',
         variants: [{
           title: '',
-          is_true: 'false'
+          is_true: 0
         }]
       },
       requiredInput: false
@@ -6037,10 +6038,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
+    checkRadioBtn: function checkRadioBtn() {
+      var new_arr = this.form.variants.map(function (item) {
+        return parseInt(item.is_true);
+      });
+      return new_arr.includes(1);
+    },
     addAnswer: function addAnswer() {
       var value = {
         title: '',
-        is_true: 'false'
+        is_true: 0
       };
       var check = false;
 
@@ -6078,23 +6085,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(_this.form.title != '' && _this.form.category_id != '')) {
-                  _context.next = 6;
+                  _context.next = 11;
                   break;
                 }
 
-                _context.next = 3;
+                if (!_this.checkRadioBtn()) {
+                  _context.next = 8;
+                  break;
+                }
+
+                _context.next = 4;
                 return _this.actionAddQuestion(_this.form);
 
-              case 3:
+              case 4:
+                toast.fire({
+                  type: "success",
+                  icon: 'success',
+                  title: "Вопрос добавлено!"
+                });
+
                 _this.$router.push("/crm/question");
 
-                _context.next = 7;
+                _context.next = 9;
                 break;
 
-              case 6:
+              case 8:
+                toast.fire({
+                  type: "error",
+                  icon: 'error',
+                  title: "Выберите правильный ответ!"
+                });
+
+              case 9:
+                _context.next = 12;
+                break;
+
+              case 11:
                 _this.requiredInput = true;
 
-              case 7:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -6241,25 +6270,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       form: {
+        id: '',
         title: '',
         category_id: '',
         variants: [{
           title: '',
-          is_true: 'false'
+          is_true: 0
         }]
       },
       requiredInput: false
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList', 'getMassage', 'getQuestion']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion', 'actionEditQuestion']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionUpdateQuestion', 'actionEditQuestion']), {
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
+    },
+    checkRadioBtn: function checkRadioBtn() {
+      var new_arr = this.form.variants.map(function (item) {
+        return parseInt(item.is_true);
+      });
+      return new_arr.includes(1);
+    },
+    selectAnswer: function selectAnswer(selected) {
+      this.form.variants.forEach(function (item) {
+        item.is_true = 0;
+      });
+      selected.is_true = 1;
     },
     addAnswer: function addAnswer() {
       var value = {
         title: '',
-        is_true: 'false'
+        is_true: 0
       };
       var check = false;
 
@@ -6297,23 +6339,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(_this.form.title != '' && _this.form.category_id != '')) {
-                  _context.next = 6;
+                  _context.next = 11;
                   break;
                 }
 
-                _context.next = 3;
-                return _this.actionAddQuestion(_this.form);
+                if (!_this.checkRadioBtn()) {
+                  _context.next = 8;
+                  break;
+                }
 
-              case 3:
+                _context.next = 4;
+                return _this.actionUpdateQuestion(_this.form);
+
+              case 4:
                 _this.$router.push("/crm/question");
 
-                _context.next = 7;
+                toast.fire({
+                  type: "success",
+                  icon: 'success',
+                  title: "Вопрос изменено!"
+                });
+                _context.next = 9;
                 break;
 
-              case 6:
+              case 8:
+                toast.fire({
+                  type: "error",
+                  icon: 'error',
+                  title: "Выберите правильный ответ!"
+                });
+
+              case 9:
+                _context.next = 12;
+                break;
+
+              case 11:
                 _this.requiredInput = true;
 
-              case 7:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -6454,7 +6517,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionDeleteQuestion']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionDeleteQuestion', 'actionDeleteQuestion']), {
     getResults: function getResults() {
       var _this2 = this;
 
@@ -6475,6 +6538,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    deleteQuestion: function deleteQuestion(id) {
+      var _this3 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var page;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!confirm("Вы действительно хотите удалить?")) {
+                  _context3.next = 7;
+                  break;
+                }
+
+                page = 1;
+                _context3.next = 4;
+                return _this3.actionDeleteQuestion(id);
+
+              case 4:
+                _context3.next = 6;
+                return _this3.actionQuestionList(page);
+
+              case 6:
+                toast.fire({
+                  type: 'success',
+                  icon: 'success',
+                  title: 'Категория удалено!'
+                });
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   })
@@ -48876,12 +48978,12 @@ var render = function() {
                               id: "is_true" + index,
                               placeholder: "Answer...",
                               name: "is_true",
-                              value: "true"
+                              value: "1"
                             },
                             domProps: {
                               checked: _vm._q(
                                 _vm.form.variants[index].is_true,
-                                "true"
+                                "1"
                               )
                             },
                             on: {
@@ -48889,7 +48991,7 @@ var render = function() {
                                 return _vm.$set(
                                   _vm.form.variants[index],
                                   "is_true",
-                                  "true"
+                                  "1"
                                 )
                               }
                             }
@@ -49198,22 +49300,29 @@ var render = function() {
                               id: "is_true" + index,
                               placeholder: "Answer...",
                               name: "is_true",
-                              value: "true"
+                              value: "1"
                             },
                             domProps: {
                               checked: _vm._q(
                                 _vm.form.variants[index].is_true,
-                                "true"
+                                "1"
                               )
                             },
                             on: {
-                              change: function($event) {
-                                return _vm.$set(
-                                  _vm.form.variants[index],
-                                  "is_true",
-                                  "true"
-                                )
-                              }
+                              change: [
+                                function($event) {
+                                  return _vm.$set(
+                                    _vm.form.variants[index],
+                                    "is_true",
+                                    "1"
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.selectAnswer(
+                                    _vm.form.variants[index]
+                                  )
+                                }
+                              ]
                             }
                           }),
                           _vm._v(" "),
@@ -49266,7 +49375,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
       _c("i", { staticClass: "peIcon pe-7s-drawer" }),
-      _vm._v("\n\t\t\t    Add Question\n\t\t\t")
+      _vm._v("\n\t\t\t    Edit Question\n\t\t\t")
     ])
   },
   function() {
@@ -49379,7 +49488,7 @@ var render = function() {
                             staticClass: "btn_transparent",
                             on: {
                               click: function($event) {
-                                return _vm.deleteQuestion(1)
+                                return _vm.deleteQuestion(item.id)
                               }
                             }
                           },

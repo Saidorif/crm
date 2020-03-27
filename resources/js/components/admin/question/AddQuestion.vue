@@ -57,7 +57,7 @@
 						    	placeholder="Answer..."
 						    	name="is_true"
 						    	v-model="form.variants[index].is_true"
-						    	value="true"
+						    	value="1"
 						    >
 						    <label :for="'is_true'+index" class="radio_style_label" >Right Answer</label>
 
@@ -92,7 +92,7 @@
 					category_id:'',
 					variants:[
 						{
-							title:'',is_true:'false'
+							title:'',is_true:0
 						}
 					],
 				},
@@ -101,7 +101,7 @@
 		},
 		computed:{
 			...mapGetters('question',['getQuestionList','getMassage']),
-			...mapGetters('category',['getCategories']),
+			...mapGetters('category',['getCategories'])		
 		},
 		methods:{
 			...mapActions('category',['actionCategoryList']),
@@ -109,8 +109,14 @@
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
+		    checkRadioBtn(){
+				let new_arr = this.form.variants.map(item=>{
+					return parseInt(item.is_true)
+				})
+				return new_arr.includes(1)
+			},
 		    addAnswer(){
-		    	let value = {title:'',is_true:'false'}
+		    	let value = {title:'',is_true:0}
 		    	let check = false
 		    	for(let key in this.form.variants){
 		    		if (this.form.variants[key].title != ''){
@@ -136,8 +142,21 @@
 		    },
 			async saveQuestion(){
 				if (this.form.title != '' && this.form.category_id != '') {
-					await this.actionAddQuestion(this.form)
-					this.$router.push("/crm/question");
+					if (this.checkRadioBtn()) {
+						await this.actionAddQuestion(this.form)
+						toast.fire({
+							type: "success",
+							icon: 'success',
+							title: "Вопрос добавлено!"
+						});
+						this.$router.push("/crm/question");
+					}else{
+						toast.fire({
+							type: "error",
+							icon: 'error',
+							title: "Выберите правильный ответ!"
+						});
+					}
 				}else{
 					this.requiredInput = true
 				}
