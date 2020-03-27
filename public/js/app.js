@@ -47350,7 +47350,7 @@ var render = function() {
                       expression: "form.name"
                     }
                   ],
-                  staticClass: "form-control",
+                  staticClass: "form-control input_style",
                   class: _vm.isRequired(_vm.form.name) ? "isRequired" : "",
                   attrs: {
                     type: "text",
@@ -47383,7 +47383,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
-      _c("i", { staticClass: "nav-icon fas fa-box" }),
+      _c("i", {
+        staticClass: "peIcon pe-7s-drawer",
+        attrs: { "data-v-956a9a24": "" }
+      }),
       _vm._v("\n\t\t\t    Add Category\n\t\t\t")
     ])
   },
@@ -47394,7 +47397,10 @@ var staticRenderFns = [
     return _c("div", { staticClass: "form-group col-lg-3 form_btn" }, [
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-primary btn_save_category",
+          attrs: { type: "submit" }
+        },
         [
           _c("i", { staticClass: "fas fa-save" }),
           _vm._v("\n\t\t\t\t\t  \tСохранить\n\t\t\t\t\t")
@@ -47448,7 +47454,10 @@ var render = function() {
         _c("div", { staticClass: "table-responsive" }, [
           _c(
             "table",
-            { staticClass: "table table-bordered text-center table-hover" },
+            {
+              staticClass:
+                "table table-bordered text-center table-hover table-striped"
+            },
             [
               _vm._m(1),
               _vm._v(" "),

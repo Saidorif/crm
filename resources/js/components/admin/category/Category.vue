@@ -10,29 +10,29 @@
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
-				<table class="table table-bordered text-center table-hover">
-				<thead>
-					<tr>
-						<th scope="col">№</th>
-						<th scope="col">Название</th>
-						<th scope="col">Действия</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(item,index) in getCategoryList.data">
-						<td scope="row">{{index + 1}}</td>
-						<td>{{item.name}}</td>
-						<td>
-							<router-link tag="button" class="btn_transparent" :to='`/crm/category/edit/${item.id}`'>
-								<i class="pe_icon pe-7s-edit editColor"></i>
-							</router-link>
-							<button class="btn_transparent" @click="deleteCategory(item.id)">
-								<i class="pe_icon pe-7s-junk trashColor"></i>
-							</button>
-						</td>
-					</tr>
-				</tbody>
-				<pagination :limit="4" :data="getCategoryList" @pagination-change-page="getResults"></pagination>
+				<table class="table table-bordered text-center table-hover table-striped">
+					<thead>
+						<tr>
+							<th scope="col">№</th>
+							<th scope="col">Название</th>
+							<th scope="col">Действия</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item,index) in getCategoryList.data">
+							<td scope="row">{{index + 1}}</td>
+							<td>{{item.name}}</td>
+							<td>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/category/edit/${item.id}`'>
+									<i class="pe_icon pe-7s-edit editColor"></i>
+								</router-link>
+								<button class="btn_transparent" @click="deleteCategory(item.id)">
+									<i class="pe_icon pe-7s-junk trashColor"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+					<pagination :limit="4" :data="getCategoryList" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
 		  </div>
