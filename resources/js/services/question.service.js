@@ -8,7 +8,7 @@ const QuestionService = {
 		return ApiService.post(`/api/question/store`,data)
 	},
 	editQuestion(data){
-		return ApiService.get(`/api/question/edit/${data.id}`,data)
+		return ApiService.get(`/api/question/edit/${data.id}`)
 	},
 	updateQuestion(data){
 		return ApiService.post(`/api/question/update/${data.id}`,data)

@@ -6004,25 +6004,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       form: {
-        name: '',
+        title: '',
         category_id: '',
         variants: [{
           title: '',
-          checked: 0
+          is_true: 'false'
         }]
       },
       requiredInput: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList', 'getMassage'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList', 'getMassage']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion']), {
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
     addAnswer: function addAnswer() {
       var value = {
         title: '',
-        checked: 0
+        is_true: 'false'
       };
       var check = false;
 
@@ -6059,9 +6059,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this.form); // this.$router.push("/crm/question");
+                if (!(_this.form.title != '' && _this.form.category_id != '')) {
+                  _context.next = 6;
+                  break;
+                }
 
-              case 1:
+                _context.next = 3;
+                return _this.actionAddQuestion(_this.form);
+
+              case 3:
+                _this.$router.push("/crm/question");
+
+                _context.next = 7;
+                break;
+
+              case 6:
+                _this.requiredInput = true;
+
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -6069,7 +6084,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     }
-  })
+  }),
+  mounted: function mounted() {
+    var _this2 = this;
+
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this2.actionCategoryList();
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  }
 });
 
 /***/ }),
@@ -6078,28 +6114,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /*!**************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/question/EditQuestion.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/question/Question.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/question/Question.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6164,18 +6178,99 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      form: {
+        title: '',
+        category_id: '',
+        variants: [{
+          title: '',
+          is_true: 'false'
+        }]
+      },
+      requiredInput: false
+    };
   },
-  mounted: function mounted() {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionDeleteQuestion']), {
-    getResults: function getResults() {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList', 'getMassage', 'getQuestion']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion', 'actionEditQuestion']), {
+    isRequired: function isRequired(input) {
+      return this.requiredInput && input === '';
+    },
+    addAnswer: function addAnswer() {
+      var value = {
+        title: '',
+        is_true: 'false'
+      };
+      var check = false;
+
+      for (var key in this.form.variants) {
+        if (this.form.variants[key].title != '') {
+          check = true;
+          this.requiredInput = false;
+        } else {
+          this.requiredInput = true;
+          toast.fire({
+            type: "error",
+            icon: 'error',
+            title: "Поле не может быть пустым"
+          });
+          return false;
+        }
+      }
+
+      if (check) {
+        this.form.variants.unshift(value);
+        check = false;
+      }
+    },
+    removeAnswer: function removeAnswer(index) {
+      Vue["delete"](this.form.variants, index);
+    },
+    saveQuestion: function saveQuestion() {
       var _this = this;
 
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -6183,15 +6278,185 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _this.actionQuestionList(page);
+                if (!(_this.form.title != '' && _this.form.category_id != '')) {
+                  _context.next = 6;
+                  break;
+                }
 
-              case 2:
+                _context.next = 3;
+                return _this.actionAddQuestion(_this.form);
+
+              case 3:
+                _this.$router.push("/crm/question");
+
+                _context.next = 7;
+                break;
+
+              case 6:
+                _this.requiredInput = true;
+
+              case 7:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    }
+  }),
+  mounted: function mounted() {
+    var _this2 = this;
+
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              data = {
+                id: _this2.$route.params.questionId
+              };
+              _context2.next = 3;
+              return _this2.actionCategoryList();
+
+            case 3:
+              _context2.next = 5;
+              return _this2.actionEditQuestion(data);
+
+            case 5:
+              _this2.form = _this2.getQuestion;
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/question/Question.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/question/Question.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var page;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              page = 1;
+              _context.next = 3;
+              return _this.actionQuestionList(page);
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionDeleteQuestion']), {
+    getResults: function getResults() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.actionQuestionList(page);
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     }
   })
@@ -48373,7 +48638,7 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     class: _vm.isRequired(_vm.form.category_id)
-                      ? "redFrame"
+                      ? "isRequired"
                       : "",
                     attrs: { id: "countryName" },
                     on: {
@@ -48401,8 +48666,17 @@ var render = function() {
                       "option",
                       { attrs: { value: "", selected: "", disabled: "" } },
                       [_vm._v("Выберите категорию")]
-                    )
-                  ]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.getCategories, function(category, index) {
+                      return _c(
+                        "option",
+                        { domProps: { value: category.id } },
+                        [_vm._v(_vm._s(category.name))]
+                      )
+                    })
+                  ],
+                  2
                 )
               ]),
               _vm._v(" "),
@@ -48416,20 +48690,20 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.form.name,
-                      expression: "form.name"
+                      value: _vm.form.title,
+                      expression: "form.title"
                     }
                   ],
                   staticClass: "form-control input_style",
-                  class: _vm.isRequired(_vm.form.name) ? "isRequired" : "",
+                  class: _vm.isRequired(_vm.form.title) ? "isRequired" : "",
                   attrs: { id: "questionName", placeholder: "Question..." },
-                  domProps: { value: _vm.form.name },
+                  domProps: { value: _vm.form.title },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.form, "name", $event.target.value)
+                      _vm.$set(_vm.form, "title", $event.target.value)
                     }
                   }
                 })
@@ -48505,31 +48779,31 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.variants[index].checked,
-                                expression: "form.variants[index].checked"
+                                value: _vm.form.variants[index].is_true,
+                                expression: "form.variants[index].is_true"
                               }
                             ],
                             staticClass:
                               "form-control input_style radio_style_input",
                             attrs: {
                               type: "radio",
-                              id: "checked" + index,
+                              id: "is_true" + index,
                               placeholder: "Answer...",
-                              name: "checked",
-                              value: "1"
+                              name: "is_true",
+                              value: "true"
                             },
                             domProps: {
                               checked: _vm._q(
-                                _vm.form.variants[index].checked,
-                                "1"
+                                _vm.form.variants[index].is_true,
+                                "true"
                               )
                             },
                             on: {
                               change: function($event) {
                                 return _vm.$set(
                                   _vm.form.variants[index],
-                                  "checked",
-                                  "1"
+                                  "is_true",
+                                  "true"
                                 )
                               }
                             }
@@ -48539,7 +48813,7 @@ var render = function() {
                             "label",
                             {
                               staticClass: "radio_style_label",
-                              attrs: { for: "checked" + index }
+                              attrs: { for: "is_true" + index }
                             },
                             [_vm._v("Right Answer")]
                           )
@@ -48629,9 +48903,307 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "edit_question" })
+  return _c("div", { staticClass: "edit_question" }, [
+    _c("div", { staticClass: "card" }, [
+      _c(
+        "div",
+        { staticClass: "card-header" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { staticClass: "btn btn-primary", attrs: { to: "/crm/question" } },
+            [
+              _c("i", { staticClass: "fas fa-arrow-circle-left" }),
+              _vm._v(" Back")
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                $event.preventDefault()
+                return _vm.saveQuestion($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "categoryName" } }, [
+                  _vm._v("Category Name")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.category_id,
+                        expression: "form.category_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: _vm.isRequired(_vm.form.category_id)
+                      ? "isRequired"
+                      : "",
+                    attrs: { id: "countryName" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.form,
+                          "category_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { value: "", selected: "", disabled: "" } },
+                      [_vm._v("Выберите категорию")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.getCategories, function(category, index) {
+                      return _c(
+                        "option",
+                        { domProps: { value: category.id } },
+                        [_vm._v(_vm._s(category.name))]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "questionName" } }, [
+                  _vm._v("Question")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.title,
+                      expression: "form.title"
+                    }
+                  ],
+                  staticClass: "form-control input_style",
+                  class: _vm.isRequired(_vm.form.title) ? "isRequired" : "",
+                  attrs: { id: "questionName", placeholder: "Question..." },
+                  domProps: { value: _vm.form.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "title", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "answer_head mb-2" }, [
+              _c("h3", [_vm._v("Answers")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.addAnswer }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-plus" }),
+                  _vm._v(" Add answer\n\t\t\t  \t\t ")
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.form.variants, function(answer, index) {
+              return _c("div", { staticClass: "row align-items-end" }, [
+                _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("label", { attrs: { for: "categoryName" } }, [
+                    _vm._v(_vm._s(index + 1) + " ) Answer Name")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.variants[index].title,
+                        expression: "form.variants[index].title"
+                      }
+                    ],
+                    staticClass: "form-control input_style",
+                    class: _vm.isRequired(_vm.form.variants[index].title)
+                      ? "isRequired"
+                      : "",
+                    attrs: {
+                      type: "text",
+                      id: "answer",
+                      placeholder: "Answer..."
+                    },
+                    domProps: { value: _vm.form.variants[index].title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form.variants[index],
+                          "title",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group col-md-2 radio_style_block" },
+                  [
+                    _vm.form.variants[index].title != ""
+                      ? [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.variants[index].is_true,
+                                expression: "form.variants[index].is_true"
+                              }
+                            ],
+                            staticClass:
+                              "form-control input_style radio_style_input",
+                            attrs: {
+                              type: "radio",
+                              id: "is_true" + index,
+                              placeholder: "Answer...",
+                              name: "is_true",
+                              value: "true"
+                            },
+                            domProps: {
+                              checked: _vm._q(
+                                _vm.form.variants[index].is_true,
+                                "true"
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(
+                                  _vm.form.variants[index],
+                                  "is_true",
+                                  "true"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "radio_style_label",
+                              attrs: { for: "is_true" + index }
+                            },
+                            [_vm._v("Right Answer")]
+                          )
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm.form.variants.length > 1
+                  ? _c("div", { staticClass: "form-group col-md-2" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn_save_category",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.removeAnswer(index)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-trash" })]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            }),
+            _vm._v(" "),
+            _vm._m(1)
+          ],
+          2
+        )
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "title_user" }, [
+      _c("i", { staticClass: "peIcon pe-7s-drawer" }),
+      _vm._v("\n\t\t\t    Add Question\n\t\t\t")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "form-group col-lg-3 form_btn" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn_save_category",
+            attrs: { type: "submit" }
+          },
+          [
+            _c("i", { staticClass: "fas fa-save" }),
+            _vm._v("\n\t\t\t\t\t\t  \tСохранить\n\t\t\t\t\t\t")
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -48684,52 +49256,67 @@ var render = function() {
             [
               _vm._m(1),
               _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", { attrs: { scope: "row" } }, [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("2sads")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("2sads")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn_transparent",
-                          attrs: { tag: "button", to: "/crm/question/edit/1" }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "pe_icon pe-7s-edit editColor"
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn_transparent",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteQuestion(1)
+              _c(
+                "tbody",
+                _vm._l(_vm.getQuestionList.data, function(item, index) {
+                  return _c("tr", [
+                    _c("td", { attrs: { scope: "row" } }, [
+                      _vm._v(_vm._s(index + 1))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.title))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.category.name))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn_transparent",
+                            attrs: {
+                              tag: "button",
+                              to: "/crm/question/edit/" + item.id
                             }
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "pe_icon pe-7s-junk trashColor"
-                          })
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "pe_icon pe-7s-edit editColor"
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn_transparent",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteQuestion(1)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "pe_icon pe-7s-junk trashColor"
+                            })
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("pagination", {
+                attrs: { limit: 4, data: _vm.getQuestionList },
+                on: { "pagination-change-page": _vm.getResults }
+              })
+            ],
+            1
           )
         ])
       ])
@@ -48757,9 +49344,9 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("№")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Категория")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Заголовок")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Название")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Категория")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Действия")])
       ])
@@ -83537,7 +84124,7 @@ var QuestionService = {
     return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/question/store", data);
   },
   editQuestion: function editQuestion(data) {
-    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/question/edit/".concat(data.id), data);
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/question/edit/".concat(data.id));
   },
   updateQuestion: function updateQuestion(data) {
     return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/question/update/".concat(data.id), data);
@@ -84709,9 +85296,15 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\style.scss */"./resources/sass/style.scss");
+=======
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
+>>>>>>> a4ee3b4a557246ee7159a0b503152abace901204
 
 
 /***/ })

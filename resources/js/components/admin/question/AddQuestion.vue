@@ -15,11 +15,11 @@
 					    <label for="categoryName">Category Name</label>
 					    <select 
 					    	class="form-control" 
-					    	:class="isRequired(form.category_id) ? 'redFrame' : '' " 
+					    	:class="isRequired(form.category_id) ? 'isRequired' : '' " 
 					    	id="countryName" 
 					    	v-model="form.category_id">
 					      <option value="" selected disabled>Выберите категорию</option>
-					      <!-- <option :value="category.id" v-for="(category,index) in getListCountry">{{category.name}}</option> -->
+					      <option :value="category.id" v-for="(category,index) in getCategories">{{category.name}}</option>
 					    </select>
 					  </div>
 					  <div class="form-group col-md-12">
@@ -28,8 +28,8 @@
 					    	class="form-control input_style" 
 					    	id="questionName" 
 					    	placeholder="Question..."
-					    	v-model="form.name"
-					    	:class="isRequired(form.name) ? 'isRequired' : ''"
+					    	v-model="form.title"
+					    	:class="isRequired(form.title) ? 'isRequired' : ''"
 				    	></textarea>
 					  </div>
 				  	</div>
@@ -53,13 +53,13 @@
 					  </div>
 					  <div class="form-group col-md-2 radio_style_block">
 					  	<template v-if="form.variants[index].title != ''">
-						    <input type="radio" class="form-control input_style radio_style_input" :id="'checked'+index" 
+						    <input type="radio" class="form-control input_style radio_style_input" :id="'is_true'+index" 
 						    	placeholder="Answer..."
-						    	name="checked"
-						    	v-model="form.variants[index].checked"
-						    	value="1"
+						    	name="is_true"
+						    	v-model="form.variants[index].is_true"
+						    	value="true"
 						    >
-						    <label :for="'checked'+index" class="radio_style_label" >Right Answer</label>
+						    <label :for="'is_true'+index" class="radio_style_label" >Right Answer</label>
 
 					  	</template>
 					  </div>
@@ -88,11 +88,11 @@
 		data(){
 			return{
 				form:{
-					name:'',
+					title:'',
 					category_id:'',
 					variants:[
 						{
-							title:'',checked:0
+							title:'',is_true:'false'
 						}
 					],
 				},
@@ -100,15 +100,17 @@
 			}
 		},
 		computed:{
-			...mapGetters('question',['getQuestionList','getMassage'])
+			...mapGetters('question',['getQuestionList','getMassage']),
+			...mapGetters('category',['getCategories']),
 		},
 		methods:{
+			...mapActions('category',['actionCategoryList']),
 			...mapActions('question',['actionQuestionList','actionAddQuestion']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
 		    addAnswer(){
-		    	let value = {title:'',checked:0}
+		    	let value = {title:'',is_true:'false'}
 		    	let check = false
 		    	for(let key in this.form.variants){
 		    		if (this.form.variants[key].title != ''){
@@ -133,9 +135,16 @@
 		    	Vue.delete(this.form.variants,index)
 		    },
 			async saveQuestion(){
-				console.log(this.form)
-				// this.$router.push("/crm/question");
+				if (this.form.title != '' && this.form.category_id != '') {
+					await this.actionAddQuestion(this.form)
+					this.$router.push("/crm/question");
+				}else{
+					this.requiredInput = true
+				}
 			}
+		},
+		async mounted(){
+			await this.actionCategoryList()
 		}
 	}
 </script>
