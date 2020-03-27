@@ -1,0 +1,242 @@
+.content-wrapper {
+  background: #f1f4f6;
+  padding-top: 30px;
+}
+
+.main-sidebar {
+  background: #fff;
+}
+
+.main-header {
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+  background: #3f6ad8;
+  color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+  font-size: 20px;
+  line-height: initial;
+}
+
+.brand-link.open.active {
+  background: #5279dc;
+  color: #fff;
+  text-align: center;
+}
+
+.card {
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+}
+
+.peIcon {
+  text-align: center;
+  width: 34px;
+  height: 34px;
+  line-height: 33px;
+  font-size: 22px;
+  transition: color 300ms;
+  color: #3f6ad8;
+}
+
+.nav-sidebar .nav-item > .nav-link {
+  display: flex;
+  align-items: center;
+  transition-delay: 300ms;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #3f6ad8;
+  background: #e0f3ff;
+  font-weight: bold;
+  font-weight: bold;
+}
+
+.nav-sidebar .nav-treeview {
+  transition: padding 300ms;
+  padding: 0.5em 0 0 2rem;
+  position: relative;
+}
+
+.nav-sidebar .nav-treeview::before {
+  content: "";
+  height: 100%;
+  opacity: 1;
+  width: 3px;
+  background: #e0f3ff;
+  position: absolute;
+  left: 32px;
+  top: 0;
+  border-radius: 15px;
+}
+
+.nav-sidebar .menu-open > .nav-link {
+  font-weight: bold;
+}
+
+.nav-sidebar .nav-link > .right,
+.nav-sidebar .nav-link > p > .right {
+  position: absolute;
+  right: 1rem;
+  top: 18px;
+}
+
+.table th,
+.table td {
+  padding: 0.55rem;
+  padding-top: 0.55rem;
+  padding-right: 0.55rem;
+  padding-bottom: 0.55rem;
+  padding-left: 0.55rem;
+  vertical-align: middle;
+  border-top: 1px solid #e9ecef;
+}
+
+.btn_transparent {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  margin-right: 5px;
+  margin-left: 5px;
+  line-height: 0;
+}
+
+.title_user {
+  color: #3f6ad8;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header .title_user .peIcon {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.btn.btn-primary {
+  color: #3f6ad8;
+  background: transparent;
+  border: 1px solid #3f6ad8;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.btn.btn-primary i {
+  font-size: 12px;
+}
+
+.card-header::after {
+  display: none;
+}
+
+.lognCard {
+  margin-bottom: 0;
+  height: 100vh;
+  width: 100%;
+  border: none;
+}
+
+.login-card-body {
+  background-image: url("/img/loginbg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-card-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 0;
+}
+
+.form_content {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  box-shadow: 5px 5px 20px rgba(0, 35, 109, 0.05);
+  width: 360px;
+  padding: 30px;
+}
+
+.login_alert {
+  width: 360px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid #ff3c3c;
+  color: #ff3c3c;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 30px;
+  padding: 8px 20px;
+  border-radius: 4px;
+}
+
+.login_title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #00236D;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.btn-block {
+  background: #00236D;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: #fff;
+  border: none;
+  height: 46px;
+}
+
+.form-control {
+  background: #FFFFFF;
+  border: 1px solid #D4E2F5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 21px;
+  color: #202020;
+  height: 40px;
+}
+
+.login-card-body .input-group .form-control:focus ~ .input-group-append .input-group-text,
+.register-card-body .input-group .form-control:focus ~ .input-group-append .input-group-text,
+.form-control:focus {
+  border-color: #00236D;
+}
+
+.input-group-text {
+  border-color: #D4E2F5;
+}
+
+.input-group {
+  margin-bottom: 30px;
+}
+

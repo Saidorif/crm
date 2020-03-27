@@ -73,51 +73,5 @@
 	}
 </script>
 <style scoped>
-	.table th, .table td {
-		padding: .55rem;
-		padding-top: 0.55rem;
-		padding-right: 0.55rem;
-		padding-bottom: 0.55rem;
-		padding-left: 0.55rem;
-		vertical-align: middle;
-		border-top: 1px solid #e9ecef;
-	}
 
-	.btn_transparent{
-		background:transparent;
-		border: none;
-		font-size: 24px;
-		margin-right: 5px;
-		margin-left: 5px;
-		line-height: 0;
-	}
-	.title_user{
-		color: #3f6ad8;
-		font-weight: bold;
-		display: flex;
-		align-items: center;
-
-	}
-	.card-header{
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-	.card-header .title_user .peIcon{
-		font-size: 30px;
-		margin-right: 10px;
-	}
-	.btn.btn-primary{
-		color: #3f6ad8;
-		background: transparent;
-		border: 1px solid #3f6ad8;
-		font-size: 16px;
-		line-height: 18px;
-	}
-	.btn.btn-primary i{
-		font-size: 12px;
-	}
-	.card-header::after{
-		display: none;
-	}
 </style>
