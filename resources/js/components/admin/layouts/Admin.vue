@@ -76,6 +76,24 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <span class="peIcon pe-7s-note2" style="font-size: 20px;"></span>
+              <p>
+                Test
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/test/test-for-guest">
+                  <p>
+                    For Guest
+                  </p>
+                </router-link>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/employee">
               <i class="peIcon pe-7s-users"></i>

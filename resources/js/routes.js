@@ -26,6 +26,8 @@ import Question from './components/admin/question/Question'
 import AddQuestion from './components/admin/question/AddQuestion'
 import EditQuestion from './components/admin/question/EditQuestion'
 
+// Test
+import ForGuest from './components/test/ForGuest'
 
 // NotFound
 import NotFound from './components/NotFound/NotFound'
@@ -87,6 +89,10 @@ const router = new Router({
 				{
 					path:'question/edit/:questionId',
 					component:EditQuestion,
+				},
+				{
+					path:'test/test-for-guest',
+					component:ForGuest,
 				},
 			]
 		},
