@@ -6019,6 +6019,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
+    checkRadioBtn: function checkRadioBtn() {
+      var new_arr = this.form.variants.map(function (item) {
+        return item.is_true;
+      });
+      return new_arr.includes('true');
+    },
     addAnswer: function addAnswer() {
       var value = {
         title: '',
@@ -6060,23 +6066,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(_this.form.title != '' && _this.form.category_id != '')) {
-                  _context.next = 6;
+                  _context.next = 11;
                   break;
                 }
 
-                _context.next = 3;
+                if (!_this.checkRadioBtn()) {
+                  _context.next = 8;
+                  break;
+                }
+
+                _context.next = 4;
                 return _this.actionAddQuestion(_this.form);
 
-              case 3:
+              case 4:
+                toast.fire({
+                  type: "success",
+                  icon: 'success',
+                  title: "Вопрос добавлено!"
+                });
+
                 _this.$router.push("/crm/question");
 
-                _context.next = 7;
+                _context.next = 9;
                 break;
 
-              case 6:
+              case 8:
+                toast.fire({
+                  type: "error",
+                  icon: 'error',
+                  title: "Выберите правильный ответ!"
+                });
+
+              case 9:
+                _context.next = 12;
+                break;
+
+              case 11:
                 _this.requiredInput = true;
 
-              case 7:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -6223,6 +6251,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       form: {
+        id: '',
         title: '',
         category_id: '',
         variants: [{
@@ -6234,9 +6263,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList', 'getMassage', 'getQuestion']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion', 'actionEditQuestion']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionUpdateQuestion', 'actionEditQuestion']), {
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
+    },
+    checkRadioBtn: function checkRadioBtn() {
+      var new_arr = this.form.variants.map(function (item) {
+        return item.is_true;
+      });
+      return new_arr.includes('true');
     },
     addAnswer: function addAnswer() {
       var value = {
@@ -6278,24 +6313,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.form.title != '' && _this.form.category_id != '')) {
-                  _context.next = 6;
-                  break;
+                if (_this.form.title != '' && _this.form.category_id != '') {
+                  if (_this.checkRadioBtn()) {
+                    console.log(_this.form); // await this.actionUpdateQuestion(this.form)
+                    // this.$router.push("/crm/question");
+
+                    toast.fire({
+                      type: "success",
+                      icon: 'success',
+                      title: "Вопрос изменено!"
+                    });
+                  } else {
+                    toast.fire({
+                      type: "error",
+                      icon: 'error',
+                      title: "Выберите правильный ответ!"
+                    });
+                  }
+                } else {
+                  _this.requiredInput = true;
                 }
 
-                _context.next = 3;
-                return _this.actionAddQuestion(_this.form);
-
-              case 3:
-                _this.$router.push("/crm/question");
-
-                _context.next = 7;
-                break;
-
-              case 6:
-                _this.requiredInput = true;
-
-              case 7:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -49180,7 +49219,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
       _c("i", { staticClass: "peIcon pe-7s-drawer" }),
-      _vm._v("\n\t\t\t    Add Question\n\t\t\t")
+      _vm._v("\n\t\t\t    Edit Question\n\t\t\t")
     ])
   },
   function() {

@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-drawer"></i>
-				    Add Question
+				    Edit Question
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/question"><i class="fas fa-arrow-circle-left"></i> Back</router-link>
 		  	</div>
@@ -88,6 +88,7 @@
 		data(){
 			return{
 				form:{
+					id:'',
 					title:'',
 					category_id:'',
 					variants:[
@@ -102,13 +103,20 @@
 		computed:{
 			...mapGetters('question',['getQuestionList','getMassage','getQuestion']),
 			...mapGetters('category',['getCategories']),
+			
 		},
 		methods:{
 			...mapActions('category',['actionCategoryList']),
-			...mapActions('question',['actionQuestionList','actionAddQuestion','actionEditQuestion']),
+			...mapActions('question',['actionQuestionList','actionUpdateQuestion','actionEditQuestion']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
+		    checkRadioBtn(){
+				let new_arr = this.form.variants.map(item=>{
+					return item.is_true
+				})
+				return new_arr.includes('true')
+			},
 		    addAnswer(){
 		    	let value = {title:'',is_true:'false'}
 		    	let check = false
@@ -136,8 +144,22 @@
 		    },
 			async saveQuestion(){
 				if (this.form.title != '' && this.form.category_id != '') {
-					await this.actionAddQuestion(this.form)
-					this.$router.push("/crm/question");
+					if (this.checkRadioBtn()) {
+						console.log(this.form)
+						// await this.actionUpdateQuestion(this.form)
+						// this.$router.push("/crm/question");
+						toast.fire({
+							type: "success",
+							icon: 'success',
+							title: "Вопрос изменено!"
+						});
+					}else{
+						toast.fire({
+							type: "error",
+							icon: 'error',
+							title: "Выберите правильный ответ!"
+						});
+					}
 				}else{
 					this.requiredInput = true
 				}
