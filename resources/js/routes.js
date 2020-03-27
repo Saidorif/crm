@@ -10,9 +10,17 @@ import Dashboard from './components/admin/Dashboard'
 import Admin from './components/admin/layouts/Admin'
 import Login from './components/auth/Login'
 import Profile from './components/admin/user/Profile'
+
+// Category
 import Category from './components/admin/category/Category'
 import AddCategory from './components/admin/category/AddCategory'
 import EditCategory from './components/admin/category/EditCategory'
+
+// Employee
+import Employee from './components/admin/employee/Employee'
+import AddEmployee from './components/admin/employee/AddEmployee'
+import EditEmployee from './components/admin/employee/EditEmployee'
+
 
 // NotFound
 import NotFound from './components/NotFound/NotFound'
@@ -50,6 +58,18 @@ const router = new Router({
 				{
 					path:'category/edit/:categoryId',
 					component:EditCategory,
+				},
+				{
+					path:'employee',
+					component:Employee,
+				},
+				{
+					path:'employee/add',
+					component:AddEmployee,
+				},
+				{
+					path:'employee/edit/:employeeId',
+					component:EditEmployee,
 				},
 			]
 		},

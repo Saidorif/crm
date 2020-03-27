@@ -67,6 +67,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/employee">
+              <i class="peIcon pe-7s-users"></i>
+              <p>
+                Employee
+              </p>
+            </router-link>
+          </li>
 
         </ul>
       </nav>
