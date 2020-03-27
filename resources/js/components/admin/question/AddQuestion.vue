@@ -19,7 +19,7 @@
 					    	id="countryName" 
 					    	v-model="form.category_id">
 					      <option value="" selected disabled>Выберите категорию</option>
-					      <option :value="category.id" v-for="(category,index) in getCategories">{{category.name}}</option>
+					      <!-- <option :value="category.id" v-for="(category,index) in getListCountry">{{category.name}}</option> -->
 					    </select>
 					  </div>
 					  <div class="form-group col-md-12">
@@ -33,13 +33,13 @@
 				    	></textarea>
 					  </div>
 				  	</div>
-				  	<div class="answer_head">
+				  	<div class="answer_head mb-2">
 				  		<h3>Answers</h3>
 			  		 	<button type="button" class="btn btn-primary" @click="addAnswer">
 			  		 		<i class="fas fa-plus"></i> Add answer
 				  		 </button>
 				  	</div>
-			  		<div class="row" v-for="(answer,index) in form.variants">
+			  		<div class="row align-items-end" v-for="(answer,index) in form.variants">
 					  <div class="form-group col-md-6">
 					    <label for="categoryName">{{index + 1}} ) Answer Name</label>
 					    <input 
@@ -51,18 +51,16 @@
 					    	:class="isRequired(form.variants[index].title) ? 'isRequired' : ''"
 					    >
 					  </div>
-					  <div class="form-group col-md-2">
+					  <div class="form-group col-md-2 radio_style_block">
 					  	<template v-if="form.variants[index].title != ''">
-						    <label for="checked">Right Answer</label>
-						    <input 
-							    type="radio" 
-						    	class="form-control input_style" 
-						    	id="checked" 
+						    <input type="radio" class="form-control input_style radio_style_input" :id="'checked'+index" 
 						    	placeholder="Answer..."
 						    	name="checked"
 						    	v-model="form.variants[index].checked"
 						    	value="1"
 						    >
+						    <label :for="'checked'+index" class="radio_style_label" >Right Answer</label>
+
 					  	</template>
 					  </div>
 					  <div class="form-group col-md-2" v-if="form.variants.length > 1">
@@ -102,15 +100,10 @@
 			}
 		},
 		computed:{
-			...mapGetters('question',['getQuestionList','getMassage']),
-			...mapGetters('category',['getCategories'])
-		},
-		async mounted(){
-			await this.actionCategoryList()
+			...mapGetters('question',['getQuestionList','getMassage'])
 		},
 		methods:{
 			...mapActions('question',['actionQuestionList','actionAddQuestion']),
-			...mapActions('category',['actionCategoryList']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
@@ -119,9 +112,15 @@
 		    	let check = false
 		    	for(let key in this.form.variants){
 		    		if (this.form.variants[key].title != ''){
-	    				check = true
+						check = true
+						this.requiredInput = false
 		    		}else{
-		    			alert('error')
+						this.requiredInput = true
+						toast.fire({
+							type: "error",
+							icon: 'error',
+							title: "Поле не может быть пустым"
+						});
 	    				return false
 		    		}
 		    	}

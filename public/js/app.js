@@ -5999,8 +5999,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6016,29 +6014,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       requiredInput: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList', 'getMassage']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator(
-    /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _this.actionCategoryList();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList', 'getMassage'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionAddQuestion']), {
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
@@ -6052,8 +6029,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       for (var key in this.form.variants) {
         if (this.form.variants[key].title != '') {
           check = true;
+          this.requiredInput = false;
         } else {
-          alert('error');
+          this.requiredInput = true;
+          toast.fire({
+            type: "error",
+            icon: 'error',
+            title: "Поле не может быть пустым"
+          });
           return false;
         }
       }
@@ -6067,23 +6050,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       Vue["delete"](this.form.variants, index);
     },
     saveQuestion: function saveQuestion() {
-      var _this2 = this;
+      var _this = this;
 
       return _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this2.form); // this.$router.push("/crm/question");
+                console.log(_this.form); // this.$router.push("/crm/question");
 
               case 1:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }))();
     }
   })
@@ -48418,17 +48401,8 @@ var render = function() {
                       "option",
                       { attrs: { value: "", selected: "", disabled: "" } },
                       [_vm._v("Выберите категорию")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.getCategories, function(category, index) {
-                      return _c(
-                        "option",
-                        { domProps: { value: category.id } },
-                        [_vm._v(_vm._s(category.name))]
-                      )
-                    })
-                  ],
-                  2
+                    )
+                  ]
                 )
               ]),
               _vm._v(" "),
@@ -48462,7 +48436,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "answer_head" }, [
+            _c("div", { staticClass: "answer_head mb-2" }, [
               _c("h3", [_vm._v("Answers")]),
               _vm._v(" "),
               _c(
@@ -48480,7 +48454,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _vm._l(_vm.form.variants, function(answer, index) {
-              return _c("div", { staticClass: "row" }, [
+              return _c("div", { staticClass: "row align-items-end" }, [
                 _c("div", { staticClass: "form-group col-md-6" }, [
                   _c("label", { attrs: { for: "categoryName" } }, [
                     _vm._v(_vm._s(index + 1) + " ) Answer Name")
@@ -48522,14 +48496,10 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "form-group col-md-2" },
+                  { staticClass: "form-group col-md-2 radio_style_block" },
                   [
                     _vm.form.variants[index].title != ""
                       ? [
-                          _c("label", { attrs: { for: "checked" } }, [
-                            _vm._v("Right Answer")
-                          ]),
-                          _vm._v(" "),
                           _c("input", {
                             directives: [
                               {
@@ -48539,10 +48509,11 @@ var render = function() {
                                 expression: "form.variants[index].checked"
                               }
                             ],
-                            staticClass: "form-control input_style",
+                            staticClass:
+                              "form-control input_style radio_style_input",
                             attrs: {
                               type: "radio",
-                              id: "checked",
+                              id: "checked" + index,
                               placeholder: "Answer...",
                               name: "checked",
                               value: "1"
@@ -48562,7 +48533,16 @@ var render = function() {
                                 )
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "radio_style_label",
+                              attrs: { for: "checked" + index }
+                            },
+                            [_vm._v("Right Answer")]
+                          )
                         ]
                       : _vm._e()
                   ],
@@ -84729,9 +84709,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })
