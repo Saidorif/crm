@@ -24,6 +24,14 @@ Route::group([
         Route::get('profile', 'UserController@profile');
         Route::post('user/update', 'UserController@update');
 
+        //Role model
+        Route::get('role', 'RoleController@index');
+        Route::post('role/store', 'RoleController@store');
+        Route::get('role/list', 'RoleController@list');
+        Route::get('role/edit/{id}', 'RoleController@edit');
+        Route::post('role/update/{id}', 'RoleController@update');
+        Route::delete('role/destroy/{id}', 'RoleController@destroy');
+
         //TestCategory model
         Route::get('category', 'TestCategoryController@index');
         Route::post('category/store', 'TestCategoryController@store');
