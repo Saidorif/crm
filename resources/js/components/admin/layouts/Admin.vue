@@ -55,7 +55,7 @@
             <router-link class="nav-link" to="/crm/category">
               <span class="peIcon pe-7s-drawer" style="font-size: 20px;"></span>
               <p>
-                Отделы
+                Управления
               </p>
             </router-link>
           </li>
@@ -93,7 +93,14 @@
               </p>
             </router-link>
           </li>
-
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/role">
+              <i class="peIcon pe-7s-id"></i>
+              <p>
+                Role
+              </p>
+            </router-link>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
