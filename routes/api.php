@@ -30,6 +30,13 @@ Route::group([
         Route::get('category/edit/{id}', 'TestCategoryController@edit');
         Route::post('category/update/{id}', 'TestCategoryController@update');
         Route::delete('category/destroy/{id}', 'TestCategoryController@destroy');
+        
+        //Question model
+        Route::get('question', 'QuestionController@index');
+        Route::post('question/store', 'QuestionController@store');
+        Route::get('question/edit/{id}', 'QuestionController@edit');
+        Route::post('question/update/{id}', 'QuestionController@update');
+        Route::delete('question/destroy/{id}', 'QuestionController@destroy');
     });
 
 
