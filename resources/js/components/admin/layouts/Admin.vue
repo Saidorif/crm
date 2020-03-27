@@ -13,7 +13,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="#" @click.prevent="logoutProfile">Logout</a>
+        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2"></i> Logout</a>
       </li>
     </ul>
   </nav>
