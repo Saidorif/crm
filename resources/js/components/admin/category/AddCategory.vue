@@ -3,7 +3,7 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i class="nav-icon fas fa-box"></i>
+			    	<i data-v-956a9a24="" class="peIcon pe-7s-drawer"></i>
 				    Add Category
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/category"><i class="fas fa-arrow-circle-left"></i> Back</router-link>
@@ -15,7 +15,7 @@
 					    <label for="categoryName">Category Name</label>
 					    <input 
 					    	type="text" 
-					    	class="form-control" 
+					    	class="form-control input_style" 
 					    	id="categoryName" 
 					    	placeholder="Category Name"
 					    	v-model="form.name"
@@ -24,7 +24,7 @@
 					  </div>
 					 
 					  <div class="form-group col-lg-3 form_btn">
-					  	<button type="submit" class="btn btn-primary">
+					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
 						</button>	

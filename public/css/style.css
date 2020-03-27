@@ -19,6 +19,12 @@
   line-height: initial;
 }
 
+.brand-link {
+  background: #5279dc;
+  color: #fff;
+  text-align: center;
+}
+
 .brand-link.open.active {
   background: #5279dc;
   color: #fff;
@@ -84,13 +90,17 @@
 
 .table th,
 .table td {
-  padding: 0.55rem;
-  padding-top: 0.55rem;
-  padding-right: 0.55rem;
-  padding-bottom: 0.55rem;
-  padding-left: 0.55rem;
+  padding: 0.25rem;
+  padding-top: 0.25rem;
+  padding-right: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.25rem;
   vertical-align: middle;
   border-top: 1px solid #e9ecef;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e0f3ff;
 }
 
 .btn_transparent {
@@ -125,7 +135,8 @@
   background: transparent;
   border: 1px solid #3f6ad8;
   font-size: 16px;
-  line-height: 18px;
+  line-height: 20px;
+  height: 35px;
 }
 
 .btn.btn-primary i {
@@ -238,5 +249,19 @@
 
 .input-group {
   margin-bottom: 30px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.input_style {
+  min-height: 32px;
+  height: auto;
+}
+
+.form_btn {
+  display: flex;
+  align-items: flex-end;
 }
 
