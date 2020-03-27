@@ -35,16 +35,17 @@ class EmployeeController extends Controller
     {
         $user = $request->user();
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|string',
-            'email'     => 'required|email|unique:users,email,'.$user->id,
-            'password'  => 'required|string|min:6',
+            'name'              => 'required|string',
+            'email'             => 'required|email|unique:users,email,'.$user->id,
+            'password'          => 'required|string|min:6',
             'confirm_password'  => 'required|string|min:6',
-            'role_id'   => 'required|integer',
-            'phone'     => 'string|nullable',
-            'image'     => 'string|nullable',
-            'file'      => 'string|nullable',
-            'address'   => 'string|nullable',
-            'text'      => 'string|nullable',
+            'role_id'           => 'required|integer',
+            'phone'             => 'string|nullable',
+            'image'             => 'string|nullable',
+            'file'              => 'string|nullable',
+            'address'           => 'string|nullable',
+            'text'              => 'string|nullable',
+            'category_id'       => 'integer|nullable',
         ]);
 
         if($validator->fails()){
@@ -91,16 +92,17 @@ class EmployeeController extends Controller
             return response()->json(['error' => true, 'message' => 'Employee not found']);
         }
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|string',
-            'email'     => 'required|email|unique:users,email,'.$employee->id,
-            'password'  => 'nullable|string|min:6',
+            'name'              => 'required|string',
+            'email'             => 'required|email|unique:users,email,'.$employee->id,
+            'password'          => 'nullable|string|min:6',
             'confirm_password'  => 'nullable|string|min:6',
-            'role_id'   => 'required|integer',
-            'phone'     => 'string|nullable',
-            'image'     => 'string|nullable',
-            'file'      => 'string|nullable',
-            'address'   => 'string|nullable',
-            'text'      => 'string|nullable',
+            'role_id'           => 'required|integer',
+            'phone'             => 'string|nullable',
+            'image'             => 'string|nullable',
+            'file'              => 'string|nullable',
+            'address'           => 'string|nullable',
+            'text'              => 'string|nullable',
+            'category_id'       => 'integer|nullable',
         ]);
 
         if($validator->fails()){
