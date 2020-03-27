@@ -12,6 +12,7 @@ import {UserService} from "../services/user.service";
 import {user} from "./user.module"
 import {question} from "./question.module"
 import {category} from "./category.module"
+import {role} from "./role.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -30,6 +31,7 @@ const store = new Vuex.Store(
 		modules:{
 			user,
 			category,
+			role,
 			question
 		},
 		state:{

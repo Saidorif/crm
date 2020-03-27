@@ -93,7 +93,14 @@
               </p>
             </router-link>
           </li>
-
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/role">
+              <i class="peIcon pe-7s-id"></i>
+              <p>
+                Role
+              </p>
+            </router-link>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
