@@ -5497,6 +5497,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 6:
                 toast.fire({
                   type: 'success',
+                  icon: 'success',
                   title: 'Категория удалено!'
                 });
 
@@ -6273,6 +6274,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
       return new_arr.includes(1);
     },
+    selectAnswer: function selectAnswer(selected) {
+      this.form.variants.forEach(function (item) {
+        item.is_true = 0;
+      });
+      selected.is_true = 1;
+    },
     addAnswer: function addAnswer() {
       var value = {
         title: '',
@@ -6313,28 +6320,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_this.form.title != '' && _this.form.category_id != '') {
-                  if (_this.checkRadioBtn()) {
-                    console.log(_this.form); // await this.actionUpdateQuestion(this.form)
-                    // this.$router.push("/crm/question");
-
-                    toast.fire({
-                      type: "success",
-                      icon: 'success',
-                      title: "Вопрос изменено!"
-                    });
-                  } else {
-                    toast.fire({
-                      type: "error",
-                      icon: 'error',
-                      title: "Выберите правильный ответ!"
-                    });
-                  }
-                } else {
-                  _this.requiredInput = true;
+                if (!(_this.form.title != '' && _this.form.category_id != '')) {
+                  _context.next = 11;
+                  break;
                 }
 
-              case 1:
+                if (!_this.checkRadioBtn()) {
+                  _context.next = 8;
+                  break;
+                }
+
+                _context.next = 4;
+                return _this.actionUpdateQuestion(_this.form);
+
+              case 4:
+                _this.$router.push("/crm/question");
+
+                toast.fire({
+                  type: "success",
+                  icon: 'success',
+                  title: "Вопрос изменено!"
+                });
+                _context.next = 9;
+                break;
+
+              case 8:
+                toast.fire({
+                  type: "error",
+                  icon: 'error',
+                  title: "Выберите правильный ответ!"
+                });
+
+              case 9:
+                _context.next = 12;
+                break;
+
+              case 11:
+                _this.requiredInput = true;
+
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -6475,7 +6499,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('question', ['getQuestionList'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionDeleteQuestion']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('question', ['actionQuestionList', 'actionDeleteQuestion', 'actionDeleteQuestion']), {
     getResults: function getResults() {
       var _this2 = this;
 
@@ -6496,6 +6520,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    deleteQuestion: function deleteQuestion(id) {
+      var _this3 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var page;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!confirm("Вы действительно хотите удалить?")) {
+                  _context3.next = 7;
+                  break;
+                }
+
+                page = 1;
+                _context3.next = 4;
+                return _this3.actionDeleteQuestion(id);
+
+              case 4:
+                _context3.next = 6;
+                return _this3.actionQuestionList(page);
+
+              case 6:
+                toast.fire({
+                  type: 'success',
+                  icon: 'success',
+                  title: 'Категория удалено!'
+                });
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   })
@@ -49160,13 +49223,20 @@ var render = function() {
                               )
                             },
                             on: {
-                              change: function($event) {
-                                return _vm.$set(
-                                  _vm.form.variants[index],
-                                  "is_true",
-                                  "1"
-                                )
-                              }
+                              change: [
+                                function($event) {
+                                  return _vm.$set(
+                                    _vm.form.variants[index],
+                                    "is_true",
+                                    "1"
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.selectAnswer(
+                                    _vm.form.variants[index]
+                                  )
+                                }
+                              ]
                             }
                           }),
                           _vm._v(" "),
@@ -49332,7 +49402,7 @@ var render = function() {
                             staticClass: "btn_transparent",
                             on: {
                               click: function($event) {
-                                return _vm.deleteQuestion(1)
+                                return _vm.deleteQuestion(item.id)
                               }
                             }
                           },
@@ -85335,15 +85405,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
-=======
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\style.scss */"./resources/sass/style.scss");
->>>>>>> a08e7289c5d2eca0af5028ff5bc12e1df048f24c
 
 
 /***/ })

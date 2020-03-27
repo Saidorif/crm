@@ -28,7 +28,7 @@
 								<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteQuestion(1)">
+								<button class="btn_transparent" @click="deleteQuestion(item.id)">
 									<i class="pe_icon pe-7s-junk trashColor"></i>
 								</button>
 							</td>
@@ -57,10 +57,22 @@
 			...mapGetters('question',['getQuestionList']),
 		},
 		methods:{
-			...mapActions('question',['actionQuestionList','actionDeleteQuestion']),
+			...mapActions('question',['actionQuestionList','actionDeleteQuestion','actionDeleteQuestion']),
 			async getResults(page = 1){ 
 				await this.actionQuestionList(page)
 			},
+			async deleteQuestion(id){
+				if(confirm("Вы действительно хотите удалить?")){
+					let page = 1
+					await this.actionDeleteQuestion(id)
+					await this.actionQuestionList(page)
+					toast.fire({
+				    	type: 'success',
+				    	icon: 'success',
+						title: 'Категория удалено!',
+				    })
+				}
+			}
 		}
 	}
 </script>
