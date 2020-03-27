@@ -36,23 +36,39 @@
 	</div>
 </template>
 <script>
+	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		data(){
 			return{
 				form:{
+					id:null,
 					name:''
 				},
 				requiredMessage:null,
 				requiredInput:false,
 			}
 		},
+		computed:{
+			...mapGetters('category',['getCategoryList','getMassage','getCategory'])
+		},
+		async mounted(){
+			let data = {
+				id:this.$route.params.categoryId,
+				name:this.form.name
+			}
+			await this.actionEditCategory(data)
+			this.form = this.getCategory
+		},
 		methods:{
+			...mapActions('category',['actionCategoryList','actionEditCategory','actionUpdateCategory']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
-			saveCategory(){
+			async saveCategory(){
 				if (this.form.name != '' && this.form.name != null) {
-					console.log(this.form)
+					await this.actionUpdateCategory(this.form)
+					await this.actionCategoryList()
+					this.$router.push("/crm/category");
 					this.requiredInput =false
 				}else{
 					this.requiredInput =true

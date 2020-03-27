@@ -32,7 +32,7 @@ const store = new Vuex.Store(
 		},
 		state:{
 			rules:[],
-			user:[],
+			userInfo:[],
 			token:'',
 			authenticationErrorCode: false,
 			authenticationError: '',
@@ -42,7 +42,7 @@ const store = new Vuex.Store(
 		},
 		getters:{
 			getUser(state){
-				return state.user
+				return state.userInfo
 			},
 			authenticationErrorCode(state){
 				return state.authenticationErrorCode
@@ -72,7 +72,7 @@ const store = new Vuex.Store(
 				TokenService.saveCurrentUser(user.result);
 				state.token = user.token;
 				state.authenticationErrorCode = false
-				state.user = user.result;
+				state.userInfo = user.result;
 			},
 			loginError(state,user){
 				state.authenticating = false
