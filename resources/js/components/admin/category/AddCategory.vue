@@ -36,6 +36,7 @@
 	</div>
 </template>
 <script>
+	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		data(){
 			return{
@@ -46,13 +47,19 @@
 				requiredInput:false,
 			}
 		},
+		computed:{
+			...mapGetters('category',['getCategoryList','getMassage'])
+		},
 		methods:{
+			...mapActions('category',['actionCategoryList','actionAddCategory']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
-			saveCategory(){
-				if (this.form.name != '' && this.form.name != null) {
-					console.log(this.form)
+			async saveCategory(){
+				if (this.form.name != '' && this.form.name != null){
+					await this.actionAddCategory(this.form)
+					await this.actionCategoryList()
+					this.$router.push("/crm/category");
 					this.requiredInput =false
 				}else{
 					this.requiredInput =true

@@ -19,20 +19,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td scope="row">1</td>
-						<td>sadasd</td>
+					<tr v-for="(item,index) in getCategoryList.data">
+						<td scope="row">{{index + 1}}</td>
+						<td>{{item.name}}</td>
 						<td>
-							<router-link tag="button" class="btn_transparent" to="/crm/category/edit/1">
+							<router-link tag="button" class="btn_transparent" :to='`/crm/category/edit/${item.id}`'>
 								<i class="pe_icon pe-7s-edit editColor"></i>
 							</router-link>
-							<button class="btn_transparent" @click="deleteCategory(1)">
+							<button class="btn_transparent" @click="deleteCategory(item.id)">
 								<i class="pe_icon pe-7s-junk trashColor"></i>
 							</button>
 						</td>
 					</tr>
 				</tbody>
-				<!-- <pagination :limit="4" :data="getCategoryList" @pagination-change-page="getResults"></pagination> -->
+				<pagination :limit="4" :data="getCategoryList" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
 		  </div>
@@ -44,24 +44,31 @@
 	export default{
 		data(){
 			return{
-
+				
 			}
 		},
 		computed:{
 			...mapGetters('category',['getCategoryList'])
 		},
 		methods:{
-			...mapActions('category',['actionCategoryList']),
-			// async getResults(page = 1){ 
-			// 	await this.getCategoryList(page)
-			// },
-			deleteCategory(id){
-				console.log(id)
+			...mapActions('category',['actionCategoryList','actionDeleteCategory']),
+			async getResults(page = 1){ 
+				await this.actionCategoryList(page)
+			},
+			async deleteCategory(id){
+				if(confirm("Вы действительно хотите удалить?")){
+					let page = 1
+					await this.actionDeleteCategory(id)
+					await this.actionCategoryList(page)
+					toast.fire({
+				    	type: 'success',
+						title: 'Категория удалено!',
+				    })
+				}
 			}
 		},
 		async mounted(){
 			await this.actionCategoryList()
-			console.log(this.getCategoryList)
 		}
 	}
 </script>
