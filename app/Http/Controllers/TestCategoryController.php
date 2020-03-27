@@ -23,6 +23,12 @@ class TestCategoryController extends Controller
         return response()->json(['success' => true, 'result' => $category]);
     }
 
+    public function list()
+    {
+        $categories = TestCategory::all();
+        return response()->json(['success' => true, 'result' => $categories]);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [

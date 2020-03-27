@@ -28,6 +28,7 @@ Route::group([
         Route::get('category', 'TestCategoryController@index');
         Route::post('category/store', 'TestCategoryController@store');
         Route::get('category/edit/{id}', 'TestCategoryController@edit');
+        Route::get('category/list', 'TestCategoryController@list');
         Route::post('category/update/{id}', 'TestCategoryController@update');
         Route::delete('category/destroy/{id}', 'TestCategoryController@destroy');
         
