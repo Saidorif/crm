@@ -14,19 +14,18 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
+							<th scope="col">Заголовок</th>
 							<th scope="col">Категория</th>
-							<th scope="col">Название</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td scope="row">1</td>
-							<td>2sads</td>
-							<td>2sads</td>
+						<tr v-for="(item,index) in getQuestionList.data">
+							<td scope="row">{{index+1}}</td>
+							<td>{{item.title}}</td>
+							<td>{{item.category.name}}</td>
 							<td>
-								<!-- <router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'> -->
-								<router-link tag="button" class="btn_transparent" to='/crm/question/edit/1'>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
 								<button class="btn_transparent" @click="deleteQuestion(1)">
@@ -35,7 +34,7 @@
 							</td>
 						</tr>
 					</tbody>
-					<!-- <pagination :limit="4" :data="getCategoryList" @pagination-change-page="getResults"></pagination> -->
+					<pagination :limit="4" :data="getQuestionList" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
 		  </div>
@@ -50,13 +49,14 @@
 
 			}
 		},
-		mounted(){
+		async mounted(){
+			let page = 1
+			await this.actionQuestionList(page)
 		},
 		computed:{
 			...mapGetters('question',['getQuestionList']),
 		},
 		methods:{
-			...mapActions('category',['actionCategoryList']),
 			...mapActions('question',['actionQuestionList','actionDeleteQuestion']),
 			async getResults(page = 1){ 
 				await this.actionQuestionList(page)
