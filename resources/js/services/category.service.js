@@ -1,11 +1,20 @@
 import ApiService from './api.service'
 
 const CategoryService = {
-	categoryList(data){
-		// return ApiService.post(`/api/category/index?page=`+ data.page,data)
+	categoryList(page){
+		return ApiService.get(`/api/category?page=`+ page)
 	},
 	addCategory(data){
-		// return ApiService.post(`/api/category/add`,data)
+		return ApiService.post(`/api/category/store`,data)
+	},
+	editCategory(data){
+		return ApiService.get(`/api/category/edit/${data.id}`,data)
+	},
+	updateCategory(data){
+		return ApiService.post(`/api/category/update/${data.id}`,data)
+	},
+	deleteCategory(id){
+		return ApiService.delete(`/api/category/destroy/${id}`)
 	},
 };
 

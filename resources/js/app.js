@@ -50,7 +50,6 @@ const toast = swal.mixin({
   showConfirmButton: false,
   timer: 3000
 });
-
 window.toast = toast;
 
 import Master from './components/layouts/Master'
