@@ -24,6 +24,14 @@ Route::group([
         Route::get('profile', 'UserController@profile');
         Route::post('user/update', 'UserController@update');
 
+        //Employee CRUD
+        Route::get('employee', 'EmployeeController@index');
+        Route::post('employee/store', 'EmployeeController@store');
+        Route::get('employee/list', 'EmployeeController@list');
+        Route::get('employee/edit/{id}', 'EmployeeController@edit');
+        Route::post('employee/update/{id}', 'EmployeeController@update');
+        Route::delete('employee/destroy/{id}', 'EmployeeController@destroy');
+
         //Role model
         Route::get('role', 'RoleController@index');
         Route::post('role/store', 'RoleController@store');
