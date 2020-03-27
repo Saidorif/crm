@@ -6902,9 +6902,136 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var FULL_DASH_ARRAY = 283;
+var WARNING_THRESHOLD = 10;
+var ALERT_THRESHOLD = 5;
+var COLOR_CODES = {
+  info: {
+    color: "green"
+  },
+  warning: {
+    color: "orange",
+    threshold: WARNING_THRESHOLD
+  },
+  alert: {
+    color: "red",
+    threshold: ALERT_THRESHOLD
+  }
+};
+var TIME_LIMIT = 300;
+var timePassed = 0;
+var timeLeft = TIME_LIMIT;
+var timerInterval = null;
+var remainingPathColor = COLOR_CODES.info.color;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
+  },
+  mounted: function mounted() {
+    this.startTimer();
+  },
+  methods: {
+    onTimesUp: function onTimesUp() {
+      clearInterval(timerInterval);
+    },
+    startTimer: function startTimer() {
+      var _this = this;
+
+      timerInterval = setInterval(function () {
+        timePassed = timePassed += 1;
+        timeLeft = TIME_LIMIT - timePassed;
+        document.getElementById("base-timer-label").innerHTML = _this.formatTime(timeLeft);
+
+        _this.setCircleDasharray();
+
+        _this.setRemainingPathColor(timeLeft);
+
+        if (timeLeft === 0) {
+          _this.onTimesUp();
+        }
+      }, 1000);
+    },
+    formatTime: function formatTime(time) {
+      var minutes = Math.floor(time / 60);
+      var seconds = time % 60;
+
+      if (seconds < 10) {
+        seconds = "0".concat(seconds);
+      }
+
+      return "".concat(minutes, ":").concat(seconds);
+    },
+    setRemainingPathColor: function setRemainingPathColor(timeLeft) {
+      var alert = COLOR_CODES.alert,
+          warning = COLOR_CODES.warning,
+          info = COLOR_CODES.info;
+
+      if (timeLeft <= alert.threshold) {
+        document.getElementById("base-timer-path-remaining").classList.remove(warning.color);
+        document.getElementById("base-timer-path-remaining").classList.add(alert.color);
+      } else if (timeLeft <= warning.threshold) {
+        document.getElementById("base-timer-path-remaining").classList.remove(info.color);
+        document.getElementById("base-timer-path-remaining").classList.add(warning.color);
+      }
+    },
+    calculateTimeFraction: function calculateTimeFraction() {
+      var rawTimeFraction = timeLeft / TIME_LIMIT;
+      return rawTimeFraction - 1 / TIME_LIMIT * (1 - rawTimeFraction);
+    },
+    setCircleDasharray: function setCircleDasharray() {
+      var circleDasharray = "".concat((this.calculateTimeFraction() * FULL_DASH_ARRAY).toFixed(0), " 283");
+      document.getElementById("base-timer-path-remaining").setAttribute("stroke-dasharray", circleDasharray);
+    }
   }
 });
 
@@ -49956,15 +50083,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "for_guest" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "test_pogination_responsive" }, [
+      _c(
+        "ul",
+        { staticClass: "test_pogination" },
+        _vm._l(50, function(item) {
+          return _c("li", { class: item == 1 ? "active" : "" }, [
+            _c("span", { staticClass: "pe-7s-ribbon" }),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(item))])
+          ])
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "test_question_block" }, [
+      _vm._v(
+        "\n\t\t1) Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius ex, quae itaque repellendus qui tempora hic ullam ipsa quidem! Commodi laudantium aliquid itaque reiciendis doloremque ratione tenetur, rerum quam aliquam?\n\t"
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "base-timer" }, [
+      _c(
+        "svg",
+        {
+          staticClass: "base-timer__svg",
+          attrs: { viewBox: "0 0 100 100", xmlns: "http://www.w3.org/2000/svg" }
+        },
+        [
+          _c("g", { staticClass: "base-timer__circle" }, [
+            _c("circle", {
+              staticClass: "base-timer__path-elapsed",
+              attrs: { cx: "50", cy: "50", r: "45" }
+            }),
+            _vm._v(" "),
+            _c("path", {
+              staticClass:
+                "base-timer__path-remaining blue ${remainingPathColor}",
+              attrs: {
+                id: "base-timer-path-remaining",
+                "stroke-dasharray": "283",
+                d:
+                  "\n\t\t\t\tM 50, 50\n\t\t\t\tm -45, 0\n\t\t\t\ta 45,45 0 1,0 90,0\n\t\t\t\ta 45,45 0 1,0 -90,0\n\t\t\t\t"
+              }
+            })
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        { staticClass: "base-timer__label", attrs: { id: "base-timer-label" } },
+        [_vm._v(_vm._s(this.formatTime(_vm.timeLeft)))]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "for_guest" }, [
-      _c("h1", [_vm._v("test\n\t\t\n\t")])
+    return _c("div", { staticClass: "test_header" }, [
+      _c("h1", [_vm._v("Fullname: Amanullayev Javoxir")]),
+      _vm._v(" "),
+      _c("h1", { staticClass: "pr-100" }, [_vm._v("01/50")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "test_answers_block" }, [
+      _c("div", { staticClass: "input_radio_block" }, [
+        _c("input", {
+          attrs: { type: "radio", name: "question1", id: "answera" }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "answera" } }, [
+          _c("span", [_vm._v("A)")]),
+          _vm._v(" Lorem ipsum")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input_radio_block" }, [
+        _c("input", {
+          attrs: { type: "radio", name: "question1", id: "answerb" }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "answerb" } }, [
+          _c("span", [_vm._v("A)")]),
+          _vm._v(" Eius ex")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input_radio_block" }, [
+        _c("input", {
+          attrs: { type: "radio", name: "question1", id: "answerc" }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "answerc" } }, [
+          _c("span", [_vm._v("C) Commodi laudantium")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input_radio_block" }, [
+        _c("input", {
+          attrs: { type: "radio", name: "question1", id: "answerd" }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "answerd" } }, [
+          _c("span", [_vm._v("D) Rerum quam")])
+        ])
+      ])
     ])
   }
 ]
