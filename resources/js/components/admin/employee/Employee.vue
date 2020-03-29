@@ -23,25 +23,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td scope="row">1</td>
-							<td>Name</td>
-							<td>user</td>
+						<tr v-for="(item,index) in getEmployees.data">
+							<td scope="row">{{index+1}}</td>
+							<td>{{item.name}}</td>
+							<td>{{item.role.name}}</td>
 							<td>category</td>
-							<td>email@mail.ru</td>
-							<td>+99899999999</td>
+							<td>{{item.email}}</td>
+							<td>{{item.phone}}</td>
 							<td>
-								<!-- <router-link tag="button" class="btn_transparent" :to='`/crm/employee/edit/${item.id}`'> -->
-								<router-link tag="button" class="btn_transparent" to='/crm/employee/edit/1'>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/employee/edit/${item.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteEmployee(1)">
+								<button class="btn_transparent" @click="deleteEmployee(item.id)">
 									<i class="pe_icon pe-7s-trash trashColor"></i>
 								</button>
 							</td>
 						</tr>
 					</tbody>
-					<!-- <pagination :limit="4" :data="getCategoryList" @pagination-change-page="getResults"></pagination> -->
+					<pagination :limit="4" :data="getEmployees" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
 		  </div>
@@ -56,9 +55,17 @@
 
 			}
 		},
+		async mounted(){
+			let page = 1;
+			await this.actionEmployees()
+		},
+		computed:{
+			...mapGetters('employee',['getEmployees']),
+		},
 		methods:{
+			...mapActions('employee',['actionEmployees']),
 			async getResults(page = 1){ 
-				// await this.actionCategoryPag(page)
+				await this.actionEmployees(page)
 			},
 			deleteEmployee(id){
 

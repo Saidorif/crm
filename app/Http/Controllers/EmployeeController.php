@@ -41,8 +41,8 @@ class EmployeeController extends Controller
             'confirm_password'  => 'required|string|min:6',
             'role_id'   => 'required|integer',
             'phone'     => 'string|nullable',
-            'image'     => 'string|nullable',
-            'file'      => 'string|nullable',
+            'image'     => 'nullable',
+            'file'      => 'nullable',
             'address'   => 'string|nullable',
             'text'      => 'string|nullable',
         ]);
@@ -56,7 +56,7 @@ class EmployeeController extends Controller
         }
         $inputs['password'] = Hash::make($inputs['password']);
         //Upload file and image
-        if($request->hasFile('image')){
+        if($request->image){
             $strpos = strpos($request->image,';');
             $sub = substr($request->image, 0,$strpos);
             $ex = explode('/',$sub)[1];
@@ -67,7 +67,7 @@ class EmployeeController extends Controller
             $img->save($img_path.$img_name);
             $inputs['image'] = $img_name;
         }
-        if($request->hasFile('file')){
+        if($request->file){
             $strpos = strpos($request->file,';');
             $sub = substr($request->file, 0,$strpos);
             $ex = explode('/',$sub)[1];

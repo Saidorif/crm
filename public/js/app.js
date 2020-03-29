@@ -5851,12 +5851,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: '',
         email: '',
         password: '',
-        passwordConfirm: '',
+        confirm_password: '',
         category_id: '',
         address: '',
         role_id: '',
         phone: '',
-        photo: '',
+        image: '',
         file: ''
       },
       requiredInput: false,
@@ -5891,8 +5891,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getMassage']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionAddEmployee']), {
     confirmPassword: function confirmPassword() {
-      if (this.form.password && this.form.passwordConfirm) {
-        if (this.form.password != this.form.passwordConfirm) {
+      if (this.form.password && this.form.confirm_password) {
+        if (this.form.password != this.form.confirm_password) {
           this.checkPassword = true;
         } else {
           this.checkPassword = false;
@@ -5943,7 +5943,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           var reader = new FileReader();
 
           reader.onload = function (event) {
-            _this3.form.photo = event.target.result;
+            _this3.form.image = event.target.result;
           };
 
           reader.readAsDataURL(file);
@@ -5960,11 +5960,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.requiredInput && input === '';
     },
     sendEmployee: function sendEmployee() {
-      if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.form.role_id && this.checkPassword == false) {
-        console.log(this.form);
-      } else {
-        this.requiredInput = true;
-      }
+      var _this4 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this4.form.name && _this4.form.email && _this4.form.password && _this4.form.confirm_password && _this4.form.role_id && _this4.checkPassword == false)) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                _context2.next = 3;
+                return _this4.actionAddEmployee(_this4.form);
+
+              case 3:
+                if (_this4.getMassage.success) {
+                  _this4.$router.push("/crm/employee");
+
+                  _this4.requiredInput = false;
+                  toast.fire({
+                    type: 'success',
+                    icon: 'success',
+                    title: 'Ползователь добавлено!'
+                  });
+                }
+
+                _context2.next = 7;
+                break;
+
+              case 6:
+                _this4.requiredInput = true;
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   })
 });
@@ -6269,11 +6306,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -6328,26 +6370,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {};
   },
-  methods: {
-    getResults: function getResults() {// await this.actionCategoryPag(page)
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var page;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              page = 1;
+              _context.next = 3;
+              return _this.actionEmployees();
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getEmployees'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionEmployees']), {
+    getResults: function getResults() {
+      var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       return _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
+                _context2.next = 2;
+                return _this2.actionEmployees(page);
+
+              case 2:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     },
     deleteEmployee: function deleteEmployee(id) {}
-  }
+  })
 });
 
 /***/ }),
@@ -49606,12 +49677,12 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.form.passwordConfirm,
-                    expression: "form.passwordConfirm"
+                    value: _vm.form.confirm_password,
+                    expression: "form.confirm_password"
                   }
                 ],
                 staticClass: "form-control input_style",
-                class: _vm.isRequired(_vm.form.passwordConfirm)
+                class: _vm.isRequired(_vm.form.confirm_password)
                   ? "isRequired"
                   : "",
                 attrs: {
@@ -49619,14 +49690,18 @@ var render = function() {
                   id: "ConfirmPassword1",
                   placeholder: "Confirm Password.."
                 },
-                domProps: { value: _vm.form.passwordConfirm },
+                domProps: { value: _vm.form.confirm_password },
                 on: {
                   input: [
                     function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.form, "passwordConfirm", $event.target.value)
+                      _vm.$set(
+                        _vm.form,
+                        "confirm_password",
+                        $event.target.value
+                      )
                     },
                     function($event) {
                       return _vm.confirmPassword()
@@ -49777,11 +49852,11 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("label", { attrs: { for: "photo" } }, [_vm._v("Photo")]),
+              _c("label", { attrs: { for: "image" } }, [_vm._v("Photo")]),
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control input_style",
-                attrs: { type: "file", id: "photo" },
+                attrs: { type: "file", id: "image" },
                 on: {
                   change: function($event) {
                     return _vm.changePhoto($event)
@@ -49792,7 +49867,7 @@ var render = function() {
               _c("img", {
                 staticClass: "img_blank",
                 attrs: {
-                  src: _vm.photoImg(_vm.form.photo),
+                  src: _vm.photoImg(_vm.form.image),
                   alt: "",
                   width: "50"
                 }
@@ -50361,58 +50436,73 @@ var render = function() {
             [
               _vm._m(1),
               _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", { attrs: { scope: "row" } }, [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Name")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("user")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("category")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("email@mail.ru")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("+99899999999")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn_transparent",
-                          attrs: { tag: "button", to: "/crm/employee/edit/1" }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "pe_icon pe-7s-edit editColor"
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn_transparent",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteEmployee(1)
+              _c(
+                "tbody",
+                _vm._l(_vm.getEmployees.data, function(item, index) {
+                  return _c("tr", [
+                    _c("td", { attrs: { scope: "row" } }, [
+                      _vm._v(_vm._s(index + 1))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.role.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("category")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.email))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.phone))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn_transparent",
+                            attrs: {
+                              tag: "button",
+                              to: "/crm/employee/edit/" + item.id
                             }
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "pe_icon pe-7s-trash trashColor"
-                          })
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "pe_icon pe-7s-edit editColor"
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn_transparent",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteEmployee(item.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "pe_icon pe-7s-trash trashColor"
+                            })
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("pagination", {
+                attrs: { limit: 4, data: _vm.getEmployees },
+                on: { "pagination-change-page": _vm.getResults }
+              })
+            ],
+            1
           )
         ])
       ])

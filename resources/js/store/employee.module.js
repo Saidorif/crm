@@ -24,7 +24,7 @@ const getters = {
 
 
 const actions = {
-	async actionEmployeeList({commit},){
+	async actionEmployeeList({commit}){
 		try {
 			const employees =  await EmployeeService.employeeList();
 			await commit('setEmployeeList',employees.data.result)

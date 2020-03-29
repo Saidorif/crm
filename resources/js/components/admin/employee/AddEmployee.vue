@@ -57,8 +57,8 @@
 		          	class="form-control input_style" 
 		          	id="ConfirmPassword1" 
 		          	placeholder="Confirm Password.."
-		          	v-model="form.passwordConfirm"
-		          	:class="isRequired(form.passwordConfirm) ? 'isRequired' : ''"  
+		          	v-model="form.confirm_password"
+		          	:class="isRequired(form.confirm_password) ? 'isRequired' : ''"  
 		          	@input="confirmPassword()"
 		  	      >
 			        <small class="redText" v-if="checkPassword"><b>Пароль не совпадает</b></small>
@@ -104,14 +104,14 @@
 		      	<img :src="photoImg(form.file)" alt="" class="img_blank" width="50">
 		        </div>
 		        <div class="form-group col-md-6">
-	          		<label for="photo">Photo</label>
+	          		<label for="image">Photo</label>
 	          		<input 
 			          	type="file" 
 			          	class="form-control input_style" 
-			          	id="photo" 
+			          	id="image" 
 			          	@change="changePhoto($event)"
       				>
-			      	<img :src="photoImg(form.photo)" alt="" class="img_blank" width="50">
+			      	<img :src="photoImg(form.image)" alt="" class="img_blank" width="50">
 		        </div>
 		        <div class="form-group col-md-12">
 		          <label for="text">Text</label>
@@ -139,12 +139,12 @@
 					name:'',
 					email:'',
 					password:'',
-					passwordConfirm:'',
+					confirm_password:'',
 					category_id:'',
 					address:'',
 					role_id:'',
 					phone:'',
-					photo:'',
+					image:'',
 					file:'',
 				},
 				requiredInput:false,
@@ -165,8 +165,8 @@
 			...mapActions('role',['actionRoleList']),
 			...mapActions('employee',['actionAddEmployee']),
 			confirmPassword(){
-		      	if(this.form.password && this.form.passwordConfirm){
-			      	if(this.form.password != this.form.passwordConfirm){
+		      	if(this.form.password && this.form.confirm_password){
+			      	if(this.form.password != this.form.confirm_password){
 				        this.checkPassword = true
 			      	} else {
 				        this.checkPassword = false
@@ -209,7 +209,7 @@
 					}else{
 						let reader = new FileReader();
 						reader.onload = event => {
-							this.form.photo = event.target.result;
+							this.form.image = event.target.result;
 						};
 						reader.readAsDataURL(file);
 						
@@ -225,9 +225,18 @@
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
-		    sendEmployee(){
-				if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm &&  this.form.role_id && this.checkPassword == false) {
-					console.log(this.form)
+		    async sendEmployee(){
+				if (this.form.name && this.form.email && this.form.password && this.form.confirm_password &&  this.form.role_id && this.checkPassword == false) {
+					await this.actionAddEmployee(this.form)
+					if (this.getMassage.success) {
+						this.$router.push("/crm/employee");
+						this.requiredInput =false
+						toast.fire({
+					    	type: 'success',
+					    	icon: 'success',
+							title: 'Ползователь добавлено!',
+					    })
+					}
 				}else{
 					this.requiredInput = true
 				}
