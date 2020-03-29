@@ -50,14 +50,12 @@ class EmployeeController extends Controller
             'email'             => 'required|email|unique:users,email,'.$user->id,
             'password'          => 'required|string|min:6',
             'confirm_password'  => 'required|string|min:6',
-<<<<<<< HEAD
             'role_id'   => 'required|integer',
             'phone'     => 'string|nullable',
             'image'     => 'nullable',
             'file'      => 'nullable',
             'address'   => 'string|nullable',
             'text'      => 'string|nullable',
-=======
             'role_id'           => 'required|integer',
             'phone'             => 'string|nullable',
             'image'             => 'string|nullable',
@@ -65,7 +63,6 @@ class EmployeeController extends Controller
             'address'           => 'string|nullable',
             'text'              => 'string|nullable',
             'category_id'       => 'integer|nullable',
->>>>>>> 0483c6db22531a3dc9b33860f000bf4310020c36
         ]);
 
         if($validator->fails()){
