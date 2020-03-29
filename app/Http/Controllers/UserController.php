@@ -18,15 +18,16 @@ class UserController extends Controller
     {
         $user = $request->user();
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|string',
-            'email'     => 'required|email|unique:users,email,'.$user->id,
-            'password'  => 'string|nullable|min:6',
-            'role_id'   => 'required|integer',
-            'phone'     => 'string|nullable',
-            'image'     => 'string|nullable',
-            'file'      => 'string|nullable',
-            'address'   => 'string|nullable',
-            'text'      => 'string|nullable',
+            'name'        => 'required|string',
+            'email'       => 'required|email|unique:users,email,'.$user->id,
+            'password'    => 'string|nullable|min:6',
+            'role_id'     => 'required|integer',
+            'phone'       => 'string|nullable',
+            'image'       => 'string|nullable',
+            'file'        => 'string|nullable',
+            'address'     => 'string|nullable',
+            'text'        => 'string|nullable',
+            'category_id' => 'integer|nullable',
         ]);
 
         if($validator->fails()){

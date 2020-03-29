@@ -22,6 +22,17 @@ class EmployeeController extends Controller
         return response()->json(['success' => true, 'result' => $users]);
     }
 
+    public function checkemail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email',
+        ]);
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
+        }
+        return response()->json(['success' => true, 'message' => 'Email is free to use']);
+    }
+
     public function edit($id)
     {
         $user = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
@@ -35,16 +46,26 @@ class EmployeeController extends Controller
     {
         $user = $request->user();
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|string',
-            'email'     => 'required|email|unique:users,email,'.$user->id,
-            'password'  => 'required|string|min:6',
+            'name'              => 'required|string',
+            'email'             => 'required|email|unique:users,email,'.$user->id,
+            'password'          => 'required|string|min:6',
             'confirm_password'  => 'required|string|min:6',
+<<<<<<< HEAD
             'role_id'   => 'required|integer',
             'phone'     => 'string|nullable',
             'image'     => 'nullable',
             'file'      => 'nullable',
             'address'   => 'string|nullable',
             'text'      => 'string|nullable',
+=======
+            'role_id'           => 'required|integer',
+            'phone'             => 'string|nullable',
+            'image'             => 'string|nullable',
+            'file'              => 'string|nullable',
+            'address'           => 'string|nullable',
+            'text'              => 'string|nullable',
+            'category_id'       => 'integer|nullable',
+>>>>>>> 0483c6db22531a3dc9b33860f000bf4310020c36
         ]);
 
         if($validator->fails()){
@@ -91,16 +112,17 @@ class EmployeeController extends Controller
             return response()->json(['error' => true, 'message' => 'Employee not found']);
         }
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|string',
-            'email'     => 'required|email|unique:users,email,'.$employee->id,
-            'password'  => 'nullable|string|min:6',
+            'name'              => 'required|string',
+            'email'             => 'required|email|unique:users,email,'.$employee->id,
+            'password'          => 'nullable|string|min:6',
             'confirm_password'  => 'nullable|string|min:6',
-            'role_id'   => 'required|integer',
-            'phone'     => 'string|nullable',
-            'image'     => 'string|nullable',
-            'file'      => 'string|nullable',
-            'address'   => 'string|nullable',
-            'text'      => 'string|nullable',
+            'role_id'           => 'required|integer',
+            'phone'             => 'string|nullable',
+            'image'             => 'string|nullable',
+            'file'              => 'string|nullable',
+            'address'           => 'string|nullable',
+            'text'              => 'string|nullable',
+            'category_id'       => 'integer|nullable',
         ]);
 
         if($validator->fails()){
