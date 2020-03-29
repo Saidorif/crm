@@ -89269,9 +89269,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/sass/style.scss */"./resources/sass/style.scss");
 
 
 /***/ })
