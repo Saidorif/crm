@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use Hash;
+use Image;
 
 class UserController extends Controller
 {
@@ -42,6 +43,33 @@ class UserController extends Controller
             }
         }else{
             unset($inputs['password']);
+        }
+        //Upload file and image
+        if($request->hasFile('image')){
+            $strpos = strpos($request->image,';');
+            $sub = substr($request->image, 0,$strpos);
+            $ex = explode('/',$sub)[1];
+            $img_name = time().".".$ex;
+
+            $img = Image::make($request->image);
+            $img_path = public_path()."/users/";
+            $img->save($img_path.$img_name);
+            $inputs['image'] = $img_name;
+        }else{
+            unset($inputs['image']);
+        }
+        if($request->hasFile('file')){
+            $strpos = strpos($request->file,';');
+            $sub = substr($request->file, 0,$strpos);
+            $ex = explode('/',$sub)[1];
+            $img_name = time().".".$ex;
+
+            $img = Image::make($request->file);
+            $img_path = public_path()."/users/";
+            $img->save($img_path.$img_name);
+            $inputs['file'] = $img_name;
+        }else{
+            unset($inputs['file']);
         }
         $user->update($inputs);
         return response()->json(['success' => true, 'result' => $user]);

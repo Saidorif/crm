@@ -49,7 +49,7 @@ class EmployeeController extends Controller
         $user = $request->user();
         $validator = Validator::make($request->all(), [
             'name'              => 'required|string',
-            'email'             => 'required|email|unique:users,email,'.$user->id,
+            'email'             => 'required|email|unique:users,email',
             'password'          => 'required|string|min:6',
             'confirm_password'  => 'required|string|min:6',
             'role_id'   => 'required|integer',
