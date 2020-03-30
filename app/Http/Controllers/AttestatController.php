@@ -20,7 +20,7 @@ class AttestatController extends Controller
     	}
     	$inputs = $request->all();
 
-    	$questions = Question::with(['variants'])->where(['category_id' => $inputs['category_id']])->get();
+    	$questions = Question::with(['variants'])->where(['category_id' => $inputs['category_id']])->limit($inputs['limit'])->get();
     	foreach ($questions as $key => $value) {
     		$variants = $value->variants;
 		    foreach ($variants as $key => $item) {

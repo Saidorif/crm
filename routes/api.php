@@ -22,7 +22,9 @@ Route::group([
     Route::group(['middleware' => 'jwt.auth'], function(){
         //User model
         Route::get('profile', 'UserController@profile');
+        Route::post('change-password', 'UserController@changePasword');
         Route::post('user/update', 'UserController@update');
+        
 
         //Employee CRUD
         Route::get('employee', 'EmployeeController@index');
