@@ -16,6 +16,7 @@ class CreateTestCategoriesTable extends Migration
         Schema::create('test_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->bigInteger('time')->default(60);
             $table->string('status')->default('active');
             $table->timestamps();
         });
