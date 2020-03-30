@@ -6267,10 +6267,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     photoImg: function photoImg(img) {
-      if (img.length < 100) {
-        return '/users/' + img;
-      } else {
-        return img;
+      if (img) {
+        if (img.length < 100) {
+          return '/users/' + img;
+        } else {
+          return img;
+        }
       }
     },
     changeFile: function changeFile(event) {
@@ -6338,15 +6340,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 if (!(_this4.form.name && _this4.form.email && _this4.form.role_id)) {
-                  _context2.next = 7;
+                  _context2.next = 6;
                   break;
                 }
 
-                console.log(_this4.form);
-                _context2.next = 4;
+                _context2.next = 3;
                 return _this4.actionUpdateEmployee(_this4.form);
 
-              case 4:
+              case 3:
                 if (_this4.getMassage.success) {
                   _this4.$router.push("/crm/employee");
 
@@ -6358,13 +6359,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-                _context2.next = 8;
+                _context2.next = 7;
                 break;
 
-              case 7:
+              case 6:
                 _this4.requiredInput = true;
 
-              case 8:
+              case 7:
               case "end":
                 return _context2.stop();
             }
