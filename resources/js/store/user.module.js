@@ -43,6 +43,15 @@ const actions = {
 			return false
 		}
 	},
+	async ActionChangePassword({commit},payload){
+		try {
+			let sendData = await UserService.changePass(payload);
+			await commit('setMessage',sendData.data)
+			return true
+		}catch(e){
+			return false
+		}
+	},
 };
 
 const mutations = {

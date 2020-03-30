@@ -7959,6 +7959,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7970,11 +7980,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         phone: '',
         image: '',
         file: '',
-        text: '',
+        text: ''
+      },
+      passwords: {
         password: '',
-        passwordConfirm: ''
+        confirm_password: ''
       },
       requiredInput: false,
+      requiredPassword: false,
       checkPassword: false
     };
   },
@@ -8003,10 +8016,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, _callee);
     }))();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('user', ['ActionProfile', 'ActionProfileUpdate']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('user', ['ActionProfile', 'ActionProfileUpdate', 'ActionChangePassword']), {
     confirmPassword: function confirmPassword() {
-      if (this.form.password && this.form.passwordConfirm) {
-        if (this.form.password != this.form.passwordConfirm) {
+      if (this.passwords.password && this.passwords.confirm_password) {
+        if (this.passwords.password != this.passwords.confirm_password) {
           this.checkPassword = true;
         } else {
           this.checkPassword = false;
@@ -8015,7 +8028,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     photoImg: function photoImg(img) {
       if (img) {
-        if (img.length < 100) {// return '/img/'+img;
+        if (img.length < 100) {
+          return '/users/' + img;
         } else {
           return img;
         }
@@ -8075,6 +8089,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
+    isRequiredPassword: function isRequiredPassword(input) {
+      return this.requiredPassword && input === '';
+    },
     sendProfile: function sendProfile() {
       var _this4 = this;
 
@@ -8085,7 +8102,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(_this4.form.name && _this4.form.email && _this4.form.password && _this4.form.passwordConfirm && _this4.checkPassword == false)) {
+                if (!(_this4.form.name && _this4.form.email)) {
                   _context2.next = 6;
                   break;
                 }
@@ -8111,6 +8128,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
           }
         }, _callee2);
+      }))();
+    },
+    changePassword: function changePassword() {
+      var _this5 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(_this5.passwords.password && _this5.passwords.confirm_password && _this5.checkPassword == false)) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                _context3.next = 3;
+                return _this5.ActionChangePassword(_this5.passwords);
+
+              case 3:
+                toast.fire({
+                  type: 'success',
+                  icon: 'success',
+                  title: 'Пароль изменен!'
+                });
+                _context3.next = 7;
+                break;
+
+              case 6:
+                _this5.requiredPassword = true;
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   })
@@ -52750,6 +52805,33 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
+          _vm._m(1)
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Change password")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            $event.preventDefault()
+            return _vm.changePassword($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "card-body d-flex flex-wrap" }, [
           _c("div", { staticClass: "form-group col-md-6" }, [
             _c("label", { attrs: { for: "exampleInputPassword1" } }, [
               _vm._v("Password")
@@ -52760,24 +52842,26 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.password,
-                  expression: "form.password"
+                  value: _vm.passwords.password,
+                  expression: "passwords.password"
                 }
               ],
               staticClass: "form-control input_style",
-              class: _vm.isRequired(_vm.form.password) ? "isRequired" : "",
+              class: _vm.isRequiredPassword(_vm.passwords.password)
+                ? "isRequired"
+                : "",
               attrs: {
                 type: "password",
                 id: "exampleInputPassword1",
                 placeholder: "Password.."
               },
-              domProps: { value: _vm.form.password },
+              domProps: { value: _vm.passwords.password },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "password", $event.target.value)
+                  _vm.$set(_vm.passwords, "password", $event.target.value)
                 }
               }
             })
@@ -52793,12 +52877,12 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.passwordConfirm,
-                  expression: "form.passwordConfirm"
+                  value: _vm.passwords.confirm_password,
+                  expression: "passwords.confirm_password"
                 }
               ],
               staticClass: "form-control input_style",
-              class: _vm.isRequired(_vm.form.passwordConfirm)
+              class: _vm.isRequiredPassword(_vm.passwords.confirm_password)
                 ? "isRequired"
                 : "",
               attrs: {
@@ -52806,14 +52890,18 @@ var render = function() {
                 id: "ConfirmPassword1",
                 placeholder: "Confirm Password.."
               },
-              domProps: { value: _vm.form.passwordConfirm },
+              domProps: { value: _vm.passwords.confirm_password },
               on: {
                 input: [
                   function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.form, "passwordConfirm", $event.target.value)
+                    _vm.$set(
+                      _vm.passwords,
+                      "confirm_password",
+                      $event.target.value
+                    )
                   },
                   function($event) {
                     return _vm.confirmPassword()
@@ -52829,7 +52917,7 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(2)
         ])
       ]
     )
@@ -52845,6 +52933,18 @@ var staticRenderFns = [
         _c("i", { staticClass: "peIcon pe-7s-user" }),
         _vm._v("User profile")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 d-flex justify-content-end" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_c("i", { staticClass: "fas fa-save" }), _vm._v(" Сохранить")]
+      )
     ])
   },
   function() {
@@ -88174,6 +88274,9 @@ var UserService = {
   },
   profileUpdate: function profileUpdate(data) {
     return _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/user/update", data);
+  },
+  changePass: function changePass(data) {
+    return _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/change-password", data);
   }
 };
 
@@ -89688,6 +89791,41 @@ var actions = {
         }
       }, _callee3, null, [[0, 9]]);
     }))();
+  },
+  ActionChangePassword: function ActionChangePassword(_ref4, payload) {
+    var commit = _ref4.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      var sendData;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return _services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"].changePass(payload);
+
+            case 3:
+              sendData = _context4.sent;
+              _context4.next = 6;
+              return commit('setMessage', sendData.data);
+
+            case 6:
+              return _context4.abrupt("return", true);
+
+            case 9:
+              _context4.prev = 9;
+              _context4.t0 = _context4["catch"](0);
+              return _context4.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[0, 9]]);
+    }))();
   }
 };
 var mutations = {
@@ -89737,9 +89875,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/sass/style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })
