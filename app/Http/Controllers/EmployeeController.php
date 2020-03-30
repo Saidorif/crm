@@ -12,7 +12,8 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $users = User::where('role_id', '!=', 1)->paginate(12);
+        // $users = User::with('role')->where('role_id', '!=', 1)->paginate(12);
+        $users = User::with('role')->paginate(12);
         return response()->json(['success' => true, 'result' => $users]);
     }
 

@@ -76,6 +76,9 @@ const UserService = {
 	profileUser(){
 		return ApiService.get(`/api/profile`);
 	},
+	profileUpdate(data){
+		return ApiService.post(`/api/user/update`,data);
+	}
 };
 
 export { UserService,AuthenticationError };

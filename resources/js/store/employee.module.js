@@ -78,6 +78,15 @@ const actions = {
 			return false
 		}
 	},
+	async actionCheckEmail({commit},payload){
+		try {
+			const email =  await EmployeeService.checkEmail(payload);
+			await commit('setMessage',email.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 };
 
 const mutations = {

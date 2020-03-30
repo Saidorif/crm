@@ -34,6 +34,15 @@ const actions = {
 			return false
 		}
 	},
+	async ActionProfileUpdate({commit},payload){
+		try {
+			let sendData = await UserService.profileUpdate(payload);
+			await commit('setMessage',sendData.data)
+			return true
+		}catch(e){
+			return false
+		}
+	},
 };
 
 const mutations = {

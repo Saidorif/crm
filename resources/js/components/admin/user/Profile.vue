@@ -81,7 +81,7 @@
       this.form = this.getProfile
     },
 		methods:{
-      ...mapActions('user',['ActionProfile']),
+      ...mapActions('user',['ActionProfile','ActionProfileUpdate']),
 	    confirmPassword(){
 	      	if(this.form.password && this.form.passwordConfirm){
 		      	if(this.form.password != this.form.passwordConfirm){
@@ -94,9 +94,14 @@
 			isRequired(input){
     		return this.requiredInput && input === '';
 	    },
-			sendProfile(){
+			async sendProfile(){
 				if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false) {
-					console.log(this.form)
+            await this.ActionProfileUpdate(this.form)
+            toast.fire({
+              type: 'success',
+              icon: 'success',
+              title: 'Данный изменен!',
+            })
 				}else{
 					this.requiredInput = true
 				}
