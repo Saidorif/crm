@@ -5859,7 +5859,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         role_id: '',
         phone: '',
         image: '',
-        file: ''
+        file: '',
+        text: ''
       },
       requiredInput: false,
       checkPassword: false,
@@ -6214,7 +6215,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         role_id: '',
         phone: '',
         image: '',
-        file: ''
+        file: '',
+        text: ''
       },
       requiredInput: false,
       checkPassword: false,
@@ -6340,7 +6342,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 if (!(_this4.form.name && _this4.form.email && _this4.form.role_id)) {
-                  _context2.next = 6;
+                  _context2.next = 7;
                   break;
                 }
 
@@ -6348,6 +6350,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this4.actionUpdateEmployee(_this4.form);
 
               case 3:
+                console.log(_this4.getMassage);
+
                 if (_this4.getMassage.success) {
                   _this4.$router.push("/crm/employee");
 
@@ -6359,13 +6363,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-                _context2.next = 7;
+                _context2.next = 8;
                 break;
 
-              case 6:
+              case 7:
                 _this4.requiredInput = true;
 
-              case 7:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -88686,7 +88690,7 @@ var actions = {
             case 3:
               employees = _context5.sent;
               _context5.next = 6;
-              return commit('setEditEmployee', employees.data.result);
+              return commit('setMessage', employees.data);
 
             case 6:
               return _context5.abrupt("return", true);
@@ -88721,7 +88725,7 @@ var actions = {
             case 3:
               employees = _context6.sent;
               _context6.next = 6;
-              return commit('setMessage', employees.data.result);
+              return commit('setMessage', employees.data);
 
             case 6:
               return _context6.abrupt("return", true);

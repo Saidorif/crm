@@ -63,7 +63,7 @@ const actions = {
 	async actionUpdateEmployee({commit},payload){
 		try {
 			const employees =  await EmployeeService.updateEmployee(payload);
-			await commit('setEditEmployee',employees.data.result)
+			await commit('setMessage',employees.data)
 			return true
 		} catch (error) {
 			return false
@@ -72,7 +72,7 @@ const actions = {
 	async actionDeleteEmployee({commit},id){
 		try {
 			const employees =  await EmployeeService.deleteEmployee(id);
-			await commit('setMessage',employees.data.result)
+			await commit('setMessage',employees.data)
 			return true
 		} catch (error) {
 			return false

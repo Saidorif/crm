@@ -148,6 +148,7 @@
 					phone:'',
 					image:'',
 					file:'',
+					text:'',
 				},
 				requiredInput:false,
 				checkPassword:false,
