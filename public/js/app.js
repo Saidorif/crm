@@ -5843,6 +5843,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5860,7 +5862,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         file: ''
       },
       requiredInput: false,
-      checkPassword: false
+      checkPassword: false,
+      emailError: false
     };
   },
   mounted: function mounted() {
@@ -5889,7 +5892,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getMassage']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionAddEmployee']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionAddEmployee', 'actionCheckEmail']), {
     confirmPassword: function confirmPassword() {
       if (this.form.password && this.form.confirm_password) {
         if (this.form.password != this.form.confirm_password) {
@@ -6001,6 +6004,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    checkEmailInput: function checkEmailInput() {
+      var _this5 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _this5.actionCheckEmail({
+                  email: _this5.form.email
+                });
+
+              case 2:
+                if (_this5.getMassage.error && _this5.getMassage.message.email == 'The email has already been taken.') {
+                  _this5.emailError = true;
+                } else {
+                  _this5.emailError = false;
+                }
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   })
@@ -7831,7 +7864,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, _callee);
     }))();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('user', ['ActionProfile']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('user', ['ActionProfile', 'ActionProfileUpdate']), {
     confirmPassword: function confirmPassword() {
       if (this.form.password && this.form.passwordConfirm) {
         if (this.form.password != this.form.passwordConfirm) {
@@ -7845,11 +7878,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.requiredInput && input === '';
     },
     sendProfile: function sendProfile() {
-      if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false) {
-        console.log(this.form);
-      } else {
-        this.requiredInput = true;
-      }
+      var _this2 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this2.form.name && _this2.form.email && _this2.form.password && _this2.form.passwordConfirm && _this2.checkPassword == false)) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                _context2.next = 3;
+                return _this2.ActionProfileUpdate(_this2.form);
+
+              case 3:
+                toast.fire({
+                  type: 'success',
+                  icon: 'success',
+                  title: 'Данный изменен!'
+                });
+                _context2.next = 7;
+                break;
+
+              case 6:
+                _this2.requiredInput = true;
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   })
 });
@@ -49751,6 +49815,7 @@ var render = function() {
                 },
                 domProps: { value: _vm.form.email },
                 on: {
+                  blur: _vm.checkEmailInput,
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -49758,7 +49823,13 @@ var render = function() {
                     _vm.$set(_vm.form, "email", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.emailError
+                ? _c("small", { staticClass: "redText" }, [
+                    _vm._v("Email почта занят!")
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-6" }, [
@@ -87477,6 +87548,9 @@ var EmployeeService = {
   },
   deleteEmployee: function deleteEmployee(id) {
     return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/employee/destroy/".concat(id));
+  },
+  checkEmail: function checkEmail(data) {
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/checkemail", data);
   }
 };
 
@@ -87776,6 +87850,9 @@ var UserService = {
   },
   profileUser: function profileUser() {
     return _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/profile");
+  },
+  profileUpdate: function profileUpdate(data) {
+    return _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/user/update", data);
   }
 };
 
@@ -88341,6 +88418,41 @@ var actions = {
           }
         }
       }, _callee6, null, [[0, 9]]);
+    }))();
+  },
+  actionCheckEmail: function actionCheckEmail(_ref7, payload) {
+    var commit = _ref7.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+      var email;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.prev = 0;
+              _context7.next = 3;
+              return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["EmployeeService"].checkEmail(payload);
+
+            case 3:
+              email = _context7.sent;
+              _context7.next = 6;
+              return commit('setMessage', email.data);
+
+            case 6:
+              return _context7.abrupt("return", true);
+
+            case 9:
+              _context7.prev = 9;
+              _context7.t0 = _context7["catch"](0);
+              return _context7.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7, null, [[0, 9]]);
     }))();
   }
 };
@@ -89220,6 +89332,41 @@ var actions = {
         }
       }, _callee2, null, [[0, 9]]);
     }))();
+  },
+  ActionProfileUpdate: function ActionProfileUpdate(_ref3, payload) {
+    var commit = _ref3.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var sendData;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return _services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"].profileUpdate(payload);
+
+            case 3:
+              sendData = _context3.sent;
+              _context3.next = 6;
+              return commit('setMessage', sendData.data);
+
+            case 6:
+              return _context3.abrupt("return", true);
+
+            case 9:
+              _context3.prev = 9;
+              _context3.t0 = _context3["catch"](0);
+              return _context3.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 9]]);
+    }))();
   }
 };
 var mutations = {
@@ -89269,9 +89416,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/sass/style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })

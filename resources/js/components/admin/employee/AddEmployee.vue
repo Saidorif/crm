@@ -37,7 +37,9 @@
 		          	id="exampleInputEmail1" 
 		          	placeholder="Enter email"
 		          	v-model="form.email"
+		          	@blur="checkEmailInput"
 		      	>
+		      	<small class="redText" v-if="emailError">Email почта занят!</small>
 		        </div>
 		        <div class="form-group col-md-6">
 	          		<label for="exampleInputPassword1">Password</label>
@@ -149,6 +151,7 @@
 				},
 				requiredInput:false,
 				checkPassword:false,
+				emailError:false,
 			}
 		},
 		async mounted(){
@@ -163,7 +166,7 @@
 		methods:{
 			...mapActions('category',['actionCategoryList']),		
 			...mapActions('role',['actionRoleList']),
-			...mapActions('employee',['actionAddEmployee']),
+			...mapActions('employee',['actionAddEmployee','actionCheckEmail']),
 			confirmPassword(){
 		      	if(this.form.password && this.form.confirm_password){
 			      	if(this.form.password != this.form.confirm_password){
@@ -239,6 +242,14 @@
 					}
 				}else{
 					this.requiredInput = true
+				}
+			},
+			async checkEmailInput(){
+				await this.actionCheckEmail({email:this.form.email})
+				if (this.getMassage.error && this.getMassage.message.email == 'The email has already been taken.') {
+					this.emailError = true
+				}else{
+					this.emailError = false
 				}
 			}
 		},
