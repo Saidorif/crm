@@ -18,8 +18,8 @@ class Question extends Model
         return $this->hasMany(QuestionVariant::class,'question_id');
     }
 
-    public function variantsWHA
+    public function variantsWHA()
     {
-    	return $this->variants()->where('is_true','=' 0);
+    	return $this->variants()->where('is_true','=', 0);
     }
 }
