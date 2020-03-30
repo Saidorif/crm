@@ -20,7 +20,7 @@ class AttestatController extends Controller
     	}
     	$inputs = $request->all();
 
-    	$questions = Question::where(['category_id' => $inputs['category_id']])->limit($inputs['limit'])->get();
+    	$questions = Question::with('variantsWHA')->where(['category_id' => $inputs['category_id']])->get();
     	return response()->json(['success' => true, 'result' => $questions]);
     }
 
