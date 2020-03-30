@@ -7908,6 +7908,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7915,6 +7964,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       form: {
         name: '',
         email: '',
+        address: '',
+        phone: '',
+        image: '',
+        file: '',
+        text: '',
         password: '',
         passwordConfirm: ''
       },
@@ -7957,11 +8011,70 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
     },
+    photoImg: function photoImg(img) {
+      if (img) {
+        if (img.length < 100) {// return '/img/'+img;
+        } else {
+          return img;
+        }
+      }
+    },
+    changeFile: function changeFile(event) {
+      var _this2 = this;
+
+      var file = event.target.files[0];
+
+      if (file.size > 1048576) {
+        swal.fire({
+          type: 'error',
+          icon: 'error',
+          title: 'Ошибка',
+          text: 'Размер файл не должно быть больше 1мб'
+        });
+      } else {
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          _this2.form.file = event.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+    },
+    changePhoto: function changePhoto(event) {
+      var _this3 = this;
+
+      var file = event.target.files[0];
+
+      if (event.target.files[0]['type'] === 'image/png' || event.target.files[0]['type'] === 'image/jpeg' || event.target.files[0]['type'] === 'image/jpg') {
+        if (file.size > 1048576) {
+          swal.fire({
+            type: 'error',
+            title: 'Ошибка',
+            text: 'Размер изображения больше лимита'
+          });
+        } else {
+          var reader = new FileReader();
+
+          reader.onload = function (event) {
+            _this3.form.image = event.target.result;
+          };
+
+          reader.readAsDataURL(file);
+        }
+      } else {
+        swal.fire({
+          type: 'error',
+          title: 'Ошибка',
+          text: 'Картинка должна быть только png,jpg,jpeg!'
+        });
+      }
+    },
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
     sendProfile: function sendProfile() {
-      var _this2 = this;
+      var _this4 = this;
 
       return _asyncToGenerator(
       /*#__PURE__*/
@@ -7970,13 +8083,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(_this2.form.name && _this2.form.email && _this2.form.password && _this2.form.passwordConfirm && _this2.checkPassword == false)) {
+                if (!(_this4.form.name && _this4.form.email && _this4.form.password && _this4.form.passwordConfirm && _this4.checkPassword == false)) {
                   _context2.next = 6;
                   break;
                 }
 
                 _context2.next = 3;
-                return _this2.ActionProfileUpdate(_this2.form);
+                return _this4.ActionProfileUpdate(_this4.form);
 
               case 3:
                 toast.fire({
@@ -7988,7 +8101,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 break;
 
               case 6:
-                _this2.requiredInput = true;
+                _this4.requiredInput = true;
 
               case 7:
               case "end":
@@ -52514,6 +52627,122 @@ var render = function() {
                     return
                   }
                   _vm.$set(_vm.form, "email", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6" }, [
+            _c("label", { attrs: { for: "address" } }, [_vm._v("Address")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.address,
+                  expression: "form.address"
+                }
+              ],
+              staticClass: "form-control input_style",
+              attrs: { type: "text", id: "address", placeholder: "Address.." },
+              domProps: { value: _vm.form.address },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "address", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6" }, [
+            _c("label", { attrs: { for: "phone" } }, [_vm._v("Phone")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.phone,
+                  expression: "form.phone"
+                }
+              ],
+              staticClass: "form-control input_style",
+              attrs: { type: "text", id: "phone", placeholder: "Phone.." },
+              domProps: { value: _vm.form.phone },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "phone", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6" }, [
+            _c("label", { attrs: { for: "file" } }, [_vm._v("File")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control input_style",
+              attrs: { type: "file", id: "file" },
+              on: {
+                change: function($event) {
+                  return _vm.changeFile($event)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "img_blank",
+              attrs: { src: _vm.photoImg(_vm.form.file), alt: "", width: "50" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6" }, [
+            _c("label", { attrs: { for: "image" } }, [_vm._v("Photo")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control input_style",
+              attrs: { type: "file", id: "image" },
+              on: {
+                change: function($event) {
+                  return _vm.changePhoto($event)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "img_blank",
+              attrs: { src: _vm.photoImg(_vm.form.image), alt: "", width: "50" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-12" }, [
+            _c("label", { attrs: { for: "text" } }, [_vm._v("Text")]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.text,
+                  expression: "form.text"
+                }
+              ],
+              staticClass: "form-control input_style",
+              attrs: { rows: "10", id: "text" },
+              domProps: { value: _vm.form.text },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "text", $event.target.value)
                 }
               }
             })
