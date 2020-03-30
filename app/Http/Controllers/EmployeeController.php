@@ -36,7 +36,8 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
-        $user = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
+        // $user = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
+        $user = User::findOrFail($id);
         if(!$user){
             return response()->json(['error' => true, 'message' => 'User not found']);
         }
@@ -105,7 +106,8 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $user = $request->user();
-        $employee = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
+        // $employee = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
+        $employee = User::findOrFail($id);
         if(!$employee){
             return response()->json(['error' => true, 'message' => 'Employee not found']);
         }
@@ -140,7 +142,7 @@ class EmployeeController extends Controller
             unset($inputs['password']);
         }
         //Upload file and image
-        if($request->hasFile('image')){
+        if($request->image){
             $strpos = strpos($request->image,';');
             $sub = substr($request->image, 0,$strpos);
             $ex = explode('/',$sub)[1];
@@ -151,7 +153,7 @@ class EmployeeController extends Controller
             $img->save($img_path.$img_name);
             $inputs['image'] = $img_name;
         }
-        if($request->hasFile('file')){
+        if($request->file){
             $strpos = strpos($request->file,';');
             $sub = substr($request->file, 0,$strpos);
             $ex = explode('/',$sub)[1];

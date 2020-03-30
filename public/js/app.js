@@ -6197,11 +6197,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
+        id: '',
         name: '',
         email: '',
         password: '',
@@ -6210,11 +6213,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         address: '',
         role_id: '',
         phone: '',
-        photo: '',
+        image: '',
         file: ''
       },
       requiredInput: false,
-      checkPassword: false
+      checkPassword: false,
+      emailError: false
     };
   },
   mounted: function mounted() {
@@ -6235,6 +6239,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.actionCategoryList();
 
             case 4:
+              _context.next = 6;
+              return _this.actionEditEmployee({
+                id: _this.$route.params.employeeId
+              });
+
+            case 6:
+              _this.form = _this.getEmployee;
+
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -6242,8 +6255,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getMassage']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionAddEmployee']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getMassage', 'getEmployee']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionUpdateEmployee', 'actionCheckEmail', 'actionEditEmployee']), {
     confirmPassword: function confirmPassword() {
       if (this.form.password && this.form.passwordConfirm) {
         if (this.form.password != this.form.passwordConfirm) {
@@ -6254,7 +6267,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     photoImg: function photoImg(img) {
-      if (img.length < 100) {// return '/img/'+img;
+      if (img.length < 100) {
+        return '/users/' + img;
       } else {
         return img;
       }
@@ -6297,7 +6311,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           var reader = new FileReader();
 
           reader.onload = function (event) {
-            _this3.form.photo = event.target.result;
+            _this3.form.image = event.target.result;
           };
 
           reader.readAsDataURL(file);
@@ -6314,11 +6328,79 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.requiredInput && input === '';
     },
     sendEmployee: function sendEmployee() {
-      if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.form.role_id && this.checkPassword == false) {
-        console.log(this.form);
-      } else {
-        this.requiredInput = true;
-      }
+      var _this4 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this4.form.name && _this4.form.email && _this4.form.role_id)) {
+                  _context2.next = 7;
+                  break;
+                }
+
+                console.log(_this4.form);
+                _context2.next = 4;
+                return _this4.actionUpdateEmployee(_this4.form);
+
+              case 4:
+                if (_this4.getMassage.success) {
+                  _this4.$router.push("/crm/employee");
+
+                  _this4.requiredInput = false;
+                  toast.fire({
+                    type: 'success',
+                    icon: 'success',
+                    title: 'Ползователь изменено!'
+                  });
+                }
+
+                _context2.next = 8;
+                break;
+
+              case 7:
+                _this4.requiredInput = true;
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    checkEmailInput: function checkEmailInput() {
+      var _this5 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _this5.actionCheckEmail({
+                  email: _this5.form.email
+                });
+
+              case 2:
+                if (_this5.getMassage.error && _this5.getMassage.message.email == 'The email has already been taken.') {
+                  _this5.emailError = true;
+                } else {
+                  _this5.emailError = false;
+                }
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   })
 });
@@ -50278,6 +50360,7 @@ var render = function() {
                 },
                 domProps: { value: _vm.form.email },
                 on: {
+                  blur: _vm.checkEmailInput,
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -50285,7 +50368,13 @@ var render = function() {
                     _vm.$set(_vm.form, "email", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.emailError
+                ? _c("small", { staticClass: "redText" }, [
+                    _vm._v("Email почта занят!")
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-6" }, [
@@ -50502,11 +50591,11 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("label", { attrs: { for: "photo" } }, [_vm._v("Photo")]),
+              _c("label", { attrs: { for: "image" } }, [_vm._v("Photo")]),
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control input_style",
-                attrs: { type: "file", id: "photo" },
+                attrs: { type: "file", id: "image" },
                 on: {
                   change: function($event) {
                     return _vm.changePhoto($event)
@@ -50517,7 +50606,7 @@ var render = function() {
               _c("img", {
                 staticClass: "img_blank",
                 attrs: {
-                  src: _vm.photoImg(_vm.form.photo),
+                  src: _vm.photoImg(_vm.form.image),
                   alt: "",
                   width: "50"
                 }
