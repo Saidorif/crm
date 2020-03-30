@@ -15,17 +15,37 @@ class UserController extends Controller
         return response()->json(['success' => true, 'result' => $user]);
     }
 
+    public function changePasword(Request $request)
+    {
+        $user = $request->user();
+        $validator = Validator::make($request->all(), [
+            'password'    => 'required|string|min:6',
+            'confirm_password'    => 'required|string|min:6',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
+        }
+        $inputs = $request->all();
+        if($inputs['password'] !== $inputs['confirm_password']){
+            return response()->json(['error' => true, 'message' => 'Passwords are not same']);
+        }
+
+        $user->password = Hash::make($inputs['password']);
+        $user->save();
+        return response()->json(['success' => true, 'message' => 'Passwords changed successul']);
+    }
+
     public function update(Request $request)
     {
         $user = $request->user();
         $validator = Validator::make($request->all(), [
             'name'        => 'required|string',
             'email'       => 'required|email|unique:users,email,'.$user->id,
-            'password'    => 'string|nullable|min:6',
             'role_id'     => 'required|integer',
             'phone'       => 'string|nullable',
-            'image'       => 'string|nullable',
-            'file'        => 'string|nullable',
+            'image'       => 'file|nullable',
+            'file'        => 'file|nullable',
             'address'     => 'string|nullable',
             'text'        => 'string|nullable',
             'category_id' => 'integer|nullable',
@@ -35,26 +55,19 @@ class UserController extends Controller
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
         $inputs = $request->all();
-        if($request->has('password')){
-            if($inputs['password'] != '' || strlen($inputs['password']) >= 6){
-                $inputs['password'] = Hash::make($request->input('password'));
-            }else{
-                unset($inputs['password']);
-            }
-        }else{
-            unset($inputs['password']);
-        }
         //Upload file and image
-        if($request->hasFile('image')){
-            $strpos = strpos($request->image,';');
-            $sub = substr($request->image, 0,$strpos);
-            $ex = explode('/',$sub)[1];
-            $img_name = time().".".$ex;
+        if($request->file('image')){
+            if($request->file('image')->isValid()){
+                $strpos = strpos($request->image,';');
+                $sub = substr($request->image, 0,$strpos);
+                $ex = explode('/',$sub)[1];
+                $img_name = time().".".$ex;
 
-            $img = Image::make($request->image);
-            $img_path = public_path()."/users/";
-            $img->save($img_path.$img_name);
-            $inputs['image'] = $img_name;
+                $img = Image::make($request->image);
+                $img_path = public_path()."/users/";
+                $img->save($img_path.$img_name);
+                $inputs['image'] = $img_name;
+            }
         }else{
             unset($inputs['image']);
         }
@@ -71,6 +84,7 @@ class UserController extends Controller
         }else{
             unset($inputs['file']);
         }
+        unset($inputs['password']);
         $user->update($inputs);
         return response()->json(['success' => true, 'result' => $user]);
     }
