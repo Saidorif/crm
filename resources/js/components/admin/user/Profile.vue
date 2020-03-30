@@ -76,35 +76,45 @@
             v-model="form.text"
           ></textarea>
         </div>
-        <div class="form-group col-md-6">
-          <label for="exampleInputPassword1">Password</label>
-          <input 
-          	type="password" 
-          	class="form-control input_style" 
-          	id="exampleInputPassword1" 
-          	placeholder="Password.."
-          	:class="isRequired(form.password) ? 'isRequired' : ''"  
-          	v-model="form.password"
-      	>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="ConfirmPassword1">Confirm Password</label>
-          <input 
-          	type="password" 
-          	class="form-control input_style" 
-          	id="ConfirmPassword1" 
-          	placeholder="Confirm Password.."
-          	v-model="form.passwordConfirm"
-          	:class="isRequired(form.passwordConfirm) ? 'isRequired' : ''"  
-          	@input="confirmPassword()"
-  	      >
-	        <small class="redText" v-if="checkPassword"><b>Пароль не совпадает</b></small>
-        </div>
         <div class="col-12 d-flex justify-content-end">
           <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Сохранить</button>
         </div>
       </div>
   	</form>
+
+    <hr>
+    <h3>Change password</h3>
+    <form @submit.prevent.enter="changePassword">
+      <div class="card-body d-flex flex-wrap">
+        <div class="form-group col-md-6">
+          <label for="exampleInputPassword1">Password</label>
+          <input 
+            type="password" 
+            class="form-control input_style" 
+            id="exampleInputPassword1" 
+            placeholder="Password.."
+            :class="isRequiredPassword(passwords.password) ? 'isRequired' : ''"  
+            v-model="passwords.password"
+        >
+        </div>
+        <div class="form-group col-md-6">
+          <label for="ConfirmPassword1">Confirm Password</label>
+          <input 
+            type="password" 
+            class="form-control input_style" 
+            id="ConfirmPassword1" 
+            placeholder="Confirm Password.."
+            v-model="passwords.confirm_password"
+            :class="isRequiredPassword(passwords.confirm_password) ? 'isRequired' : ''"  
+            @input="confirmPassword()"
+          >
+          <small class="redText" v-if="checkPassword"><b>Пароль не совпадает</b></small>
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Сохранить</button>
+        </div>
+      </div>
+    </form>
   </div>
 </template>	
 <script>
@@ -120,10 +130,13 @@
           image:'',
           file:'',
           text:'',
-					password:'',
-					passwordConfirm:'',
 				},
+        passwords:{
+					password:'',
+					confirm_password:''
+        },
 				requiredInput:false,
+        requiredPassword:false,
 				checkPassword:false,
 			}
 		},
@@ -135,10 +148,10 @@
       this.form = this.getProfile
     },
 		methods:{
-      ...mapActions('user',['ActionProfile','ActionProfileUpdate']),
+      ...mapActions('user',['ActionProfile','ActionProfileUpdate','ActionChangePassword']),
 	    confirmPassword(){
-	      	if(this.form.password && this.form.passwordConfirm){
-		      	if(this.form.password != this.form.passwordConfirm){
+	      	if(this.passwords.password && this.passwords.confirm_password){
+		      	if(this.passwords.password != this.passwords.confirm_password){
 			        this.checkPassword = true
 		      	} else {
 			        this.checkPassword = false
@@ -148,7 +161,7 @@
       photoImg(img){
         if (img) {
           if (img.length < 100) {
-            // return '/img/'+img;
+            return '/users/'+img;
           }else{
             return img
           }
@@ -198,8 +211,11 @@
 			isRequired(input){
     		return this.requiredInput && input === '';
 	    },
+      isRequiredPassword(input){
+        return this.requiredPassword && input === '';
+      },
 			async sendProfile(){
-				if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false){
+				if (this.form.name && this.form.email){
             await this.ActionProfileUpdate(this.form)
             toast.fire({
               type: 'success',
@@ -209,7 +225,20 @@
 				}else{
 					this.requiredInput = true
 				}
-			}
+			},
+      async changePassword(){
+        if(this.passwords.password && this.passwords.confirm_password && this.checkPassword == false) 
+        {
+          await this.ActionChangePassword(this.passwords)
+          toast.fire({
+            type: 'success',
+            icon: 'success',
+            title: 'Пароль изменен!',
+          })
+        }else{
+          this.requiredPassword = true
+        }
+      }
 		}
 	}
 </script>

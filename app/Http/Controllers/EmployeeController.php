@@ -80,7 +80,7 @@ class EmployeeController extends Controller
             $strpos = strpos($request->image,';');
             $sub = substr($request->image, 0,$strpos);
             $ex = explode('/',$sub)[1];
-            $img_name = time().".".$ex;
+            $img_name = time()."image.".$ex;
 
             $img = Image::make($request->image);
             $img_path = public_path()."/users/";
@@ -88,15 +88,15 @@ class EmployeeController extends Controller
             $inputs['image'] = $img_name;
         }
         if($request->file){
-            $strpos = strpos($request->file,';');
-            $sub = substr($request->file, 0,$strpos);
-            $ex = explode('/',$sub)[1];
-            $img_name = time().".".$ex;
+            $strposfile = strpos($request->file,';');
+            $subfile = substr($request->file, 0,$strposfile);
+            $exfile = explode('/',$subfile)[1];
+            $file_name = time()."file.".$exfile;
 
-            $img = Image::make($request->file);
-            $img_path = public_path()."/users/";
-            $img->save($img_path.$img_name);
-            $inputs['file'] = $img_name;
+            $file = Image::make($request->file);
+            $file_path = public_path()."/users/";
+            $file->save($file_path.$file_name);
+            $inputs['file'] = $file_name;
         }
 
         $employee = User::create($inputs);
@@ -118,8 +118,6 @@ class EmployeeController extends Controller
             'confirm_password'  => 'nullable|string|min:6',
             'role_id'           => 'required|integer',
             'phone'             => 'string|nullable',
-            'image'             => 'string|nullable',
-            'file'              => 'string|nullable',
             'address'           => 'string|nullable',
             'text'              => 'string|nullable',
             'category_id'       => 'integer|nullable',
@@ -142,29 +140,41 @@ class EmployeeController extends Controller
             unset($inputs['password']);
         }
         //Upload file and image
-        if($request->image){
+        if ($request->image != $user->image) {
             $strpos = strpos($request->image,';');
             $sub = substr($request->image, 0,$strpos);
             $ex = explode('/',$sub)[1];
-            $img_name = time().".".$ex;
-
+            $name = time()."image.".$ex;
             $img = Image::make($request->image);
             $img_path = public_path()."/users/";
-            $img->save($img_path.$img_name);
-            $inputs['image'] = $img_name;
+            $img->save($img_path.$name);
+            $image = $img_path.$user->image;
+            if (file_exists($image)) {
+                @unlink($image);
+            }
         }
-        if($request->file){
-            $strpos = strpos($request->file,';');
-            $sub = substr($request->file, 0,$strpos);
-            $ex = explode('/',$sub)[1];
-            $img_name = time().".".$ex;
-
-            $img = Image::make($request->file);
-            $img_path = public_path()."/users/";
-            $img->save($img_path.$img_name);
-            $inputs['file'] = $img_name;
+        else{
+            $name = $user->image;
         }
 
+        if ($request->file != $user->file) {
+            $strposFile = strpos($request->file,';');
+            $subFile = substr($request->file, 0,$strposFile);
+            $exFile = explode('/',$subFile)[1];
+            $nameFile = time()."file.".$exFile;
+            $imgFile = Image::make($request->file);
+            $file_path = public_path()."/users/";
+            $imgFile->save($file_path.$nameFile);
+            $imageFile = $file_path.$user->file;
+            if (file_exists($imageFile)) {
+                @unlink($imageFile);
+            }
+        }
+        else{
+            $nameFile = $user->file;
+        }
+        $inputs['image'] = $name;
+        $inputs['file'] = $nameFile;
         $employee->update($inputs);
         return response()->json(['success' => true, 'message' => 'Employee updated successfuly']);
     }

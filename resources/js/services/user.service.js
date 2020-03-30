@@ -78,6 +78,9 @@ const UserService = {
 	},
 	profileUpdate(data){
 		return ApiService.post(`/api/user/update`,data);
+	},
+	changePass(data){
+		return ApiService.post(`/api/change-password`,data);
 	}
 };
 
