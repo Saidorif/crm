@@ -6342,7 +6342,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 if (!(_this4.form.name && _this4.form.email && _this4.form.role_id)) {
-                  _context2.next = 7;
+                  _context2.next = 6;
                   break;
                 }
 
@@ -6350,8 +6350,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this4.actionUpdateEmployee(_this4.form);
 
               case 3:
-                console.log(_this4.getMassage);
-
                 if (_this4.getMassage.success) {
                   _this4.$router.push("/crm/employee");
 
@@ -6363,13 +6361,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-                _context2.next = 8;
+                _context2.next = 7;
                 break;
 
-              case 7:
+              case 6:
                 _this4.requiredInput = true;
 
-              case 8:
+              case 7:
               case "end":
                 return _context2.stop();
             }
