@@ -181,11 +181,13 @@
 		      	}
 		    },
 		    photoImg(img){
-				if (img.length < 100) {
-					return '/users/'+img;
-				}else{
-					return img
-				}
+		    	if (img) {
+					if (img.length < 100) {
+						return '/users/'+img;
+					}else{
+						return img
+					}
+		    	}
 			},
 		    changeFile(event){
 		    	let file = event.target.files[0];
@@ -234,7 +236,6 @@
 		    },
 		    async sendEmployee(){
 				if (this.form.name && this.form.email && this.form.role_id) {
-					console.log(this.form)
 					await this.actionUpdateEmployee(this.form)
 					if (this.getMassage.success) {
 						this.$router.push("/crm/employee");
