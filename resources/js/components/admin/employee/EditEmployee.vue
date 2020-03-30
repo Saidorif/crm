@@ -149,6 +149,7 @@
 					phone:'',
 					image:'',
 					file:'',
+					text:'',
 				},
 				requiredInput:false,
 				checkPassword:false,
@@ -237,6 +238,7 @@
 		    async sendEmployee(){
 				if (this.form.name && this.form.email && this.form.role_id) {
 					await this.actionUpdateEmployee(this.form)
+					console.log(this.getMassage)
 					if (this.getMassage.success) {
 						this.$router.push("/crm/employee");
 						this.requiredInput =false
