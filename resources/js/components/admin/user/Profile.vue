@@ -199,7 +199,7 @@
     		return this.requiredInput && input === '';
 	    },
 			async sendProfile(){
-				if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false) {
+				if (this.form.name && this.form.email && this.form.password && this.form.passwordConfirm && this.checkPassword == false){
             await this.ActionProfileUpdate(this.form)
             toast.fire({
               type: 'success',
