@@ -20,7 +20,18 @@ class AttestatController extends Controller
     	}
     	$inputs = $request->all();
 
-    	$questions = Question::with('variantsWHA')->where(['category_id' => $inputs['category_id']])->get();
+    	$questions = Question::with(['variants'])->where(['category_id' => $inputs['category_id']])->get();
+    	foreach ($questions as $key => $value) {
+    		$variants = $value->variants;
+		    foreach ($variants as $key => $item) {
+		    	unset($item['is_true']);
+		    }
+		    return $value;
+    	}
+
+		// $questions->getCollection()->transform(function ($value) {
+		    
+		// });
     	return response()->json(['success' => true, 'result' => $questions]);
     }
 
