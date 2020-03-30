@@ -22,4 +22,17 @@ class Question extends Model
     {
     	return $this->variants()->where('is_true','=', 0);
     }
+
+    public function check($is_true)
+    {
+        $variants = $this->variants;
+        foreach ($variants as $key => $variant) {
+            if($variant->id == (int)$is_true){
+                if($variant->is_true == 1){
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
 }

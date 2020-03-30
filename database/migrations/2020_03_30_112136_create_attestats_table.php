@@ -19,7 +19,13 @@ class CreateAttestatsTable extends Migration
             $table->bigInteger('user_id')->nullable();
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
+            $table->bigInteger('limit');
             $table->bigInteger('time');
+            $table->string('status')->default('progress');
+            $table->text('question_ids');
+            $table->text('answer')->nullable();
+            $table->text('true_answers')->nullable();
+            $table->text('wrong_answers')->nullable();
             $table->timestamps();
         });
     }
