@@ -66,6 +66,9 @@ class AttestatController extends Controller
         if(!$attestat){
             return response()->json(['error' => true, 'message' => 'Not found...']);
         }
+        if($attestat->status == 'complete'){
+            return response()->json(['error' => true, 'message' => 'Doucument is already completed ...']);
+        }
 
         $inputs = $request->all();
 
@@ -83,14 +86,14 @@ class AttestatController extends Controller
                 $wrong_answers++;
             }
         }
-        // $attestat->answer = json_encode($inputs['questions']);
-        // $attestat->true_answers = $true_answers;
-        // $attestat->wrong_answers = $wrong_answers;
-        // $attestat->status = 'complete';
-        // $attestat->save();
-        if(date('Y-m-d H:m:s') > $attestat->ended_at){
-            return response()->json(['error' => true,'message' => 'Time over...']);
-        }
+        $attestat->answer = json_encode($inputs['questions']);
+        $attestat->true_answers = $true_answers;
+        $attestat->wrong_answers = $wrong_answers;
+        $attestat->status = 'complete';
+        $attestat->save();
+        // if(date('Y-m-d H:m:s') > $attestat->ended_at){
+        //     return response()->json(['error' => true,'message' => 'Time over...']);
+        // }
         
         return response()->json(['success' => true, 'wrong_answers' => $wrong_answers,'true_answers' => $true_answers, 'ended_at' => $attestat->ended_at,'the_time' => date('Y-m-d H:m:s')]);
     }
