@@ -77,6 +77,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <router-link class="nav-link" to="/crm/test/start-test">
+                  <p>
+                    Start Test
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
                 <router-link class="nav-link" to="/crm/test/test-for-guest">
                   <p>
                     For Guest

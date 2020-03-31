@@ -53,14 +53,14 @@
 					  </div>
 					  <div class="form-group col-md-2 radio_style_block">
 					  	<template v-if="form.variants[index].title != ''">
-						    <input type="radio" class="form-control input_style radio_style_input" :id="'is_true'+index" 
+						    <input type="radio" class="form-control input_style radio_style_input" 
+						    	:id="'is_true'+index" 
 						    	placeholder="Answer..."
 						    	name="is_true"
 						    	v-model="form.variants[index].is_true"
 						    	value="1"
 						    >
 						    <label :for="'is_true'+index" class="radio_style_label" >Right Answer</label>
-
 					  	</template>
 					  </div>
 					  <div class="form-group col-md-2" v-if="form.variants.length > 1">

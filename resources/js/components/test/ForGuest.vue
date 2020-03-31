@@ -1,39 +1,40 @@
 <template>
 	<div class="for_guest">
-		<div class="test_header">
-			<h1>Fullname: Amanullayev Javoxir</h1>
+		<div class="test_header" v-if="userInfo">
+			<h1>Ф.И.О: {{userInfo.fio}}</h1>
 			<h1 class="pr-100">01/50</h1>
 		</div>
 		<div class="test_pogination_responsive">
-			<ul class="test_pogination">
-				<li v-for="item in 50" :class="item == 1 ? 'active' : ''">
+			<ul class="test_pogination" v-if="tests.length > 0">
+				<li v-for="(item,index) in tests" :class="item == 1 ? 'active' : ''" @click="chooseAnswer(item.id)">
 					<span class="pe-7s-ribbon"></span>
-					<p>{{item}}</p>
+					<p>{{index+1}}</p>
 				</li>
 			</ul>
 		</div>
-
-		<div class="test_question_block">
-			1) Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius ex, quae itaque repellendus qui tempora hic ullam ipsa quidem! Commodi laudantium aliquid itaque reiciendis doloremque ratione tenetur, rerum quam aliquam?
-		</div>
-		<div class="test_answers_block">
-			<div class="input_radio_block">
-				<input type="radio" name="question1" id="answera">
-				<label for="answera"><span>A)</span> Lorem ipsum</label>
-			</div>
-			<div class="input_radio_block">
-				<input type="radio" name="question1" id="answerb">
-				<label for="answerb"><span>A)</span> Eius ex</label>
-			</div>
-			<div class="input_radio_block">
-				<input type="radio" name="question1" id="answerc">
-				<label for="answerc"><span>C) Commodi laudantium</span></label>
-			</div>
-			<div class="input_radio_block">
-				<input type="radio" name="question1" id="answerd">
-				<label for="answerd"><span>D) Rerum quam</span></label>
-			</div>
-		</div>
+		<template v-for="(item,index) in showItem" v-if="showItem.length">
+			<template v-if="item">
+				<div class="test_question_block">
+				 	{{item.title}} ?
+				</div>
+				<div class="test_answers_block" v-for="(variant,i) in item.variants">
+					<div class="input_radio_block">
+						<input 
+							type="radio" 
+							:name='"answer"+variant.id' 
+							:id='"answer"+variant.id'
+							:value="variant.id"
+							v-model="answers[index]"
+							@change="clickAnswer(variant.question_id,variant.id)"
+						>
+						<label :for='"answer"+variant.id'>
+							<span>{{i+1}})</span>{{variant.title}}
+						</label>
+					</div>
+				</div>
+			</template>
+		</template>
+		<button class="btn btn-success" @click.prevent="completeTest">complete test</button>
 		<div class="base-timer">
 			<svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 				<g class="base-timer__circle">
@@ -51,7 +52,7 @@
 				></path>
 				</g>
 			</svg>
-			<span id="base-timer-label" class="base-timer__label">{{this.formatTime(timeLeft)}}</span>
+			<span id="base-timer-label" class="base-timer__label">{{formatTime(timeLeft)}}</span>
 		</div>
 	</div>
 </template>		
@@ -77,16 +78,66 @@
 	let timeLeft = TIME_LIMIT;
 	let timerInterval = null;
 	let remainingPathColor = COLOR_CODES.info.color;
+	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		data(){
-			return{}
+			return{
+				answers:[],
+				userInfo:[],
+				tests:[],
+				chosenAnswerID:null,
+				myAnswers:[]
+			}
 		},
 		mounted(){
 			this.startTimer();
+			this.userInfo = this.getTests.attestat
+			this.tests = this.getTests.result
+		},
+		computed:{
+			...mapGetters('test',['getTests','getMassage','getComplete']),
+			showItem(){
+				if (this.tests.length > 0) {
+					let newArr = this.tests.map((item,index)=>{
+						if(this.chosenAnswerID == null){
+							if (index == 0) {
+								return item
+							}
+						}else{
+							if (this.chosenAnswerID == parseInt(item.id)) {
+								return item
+							}
+						}
+					})
+					return newArr;
+				}
+			}
 		},
 		methods:{
+			...mapActions('test',['actionCompleteTest']),
+			async completeTest(){
+				let data = {
+					attestat_id:this.userInfo.id,
+					questions:this.myAnswers
+				}
+				await this.actionCompleteTest(data)
+				console.log(this.getComplete)
+			},
+			clickAnswer(qID,ansID){	
+				this.myAnswers = this.myAnswers.filter((item,index)=>{
+					if (item) {
+						if (item.id != parseInt(qID)) {
+							return item 
+						}
+					}	
+				})
+				this.myAnswers.push({id:parseInt(qID),answer_id:ansID})
+			},
 			onTimesUp() {
 				clearInterval(timerInterval);
+			},
+			chooseAnswer(id){
+				this.chosenAnswerID = id
 			},
 			startTimer() {
 				timerInterval = setInterval(() => {
@@ -132,13 +183,11 @@
 					.classList.add(warning.color);
 				}
 			},
-
 			calculateTimeFraction() {
 				const rawTimeFraction = timeLeft / TIME_LIMIT;
 				return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
 			},
-
-			setCircleDasharray() {
+			setCircleDasharray(){
 				const circleDasharray = `${(
 					this.calculateTimeFraction() * FULL_DASH_ARRAY
 				).toFixed(0)} 283`;

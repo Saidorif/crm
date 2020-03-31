@@ -32,6 +32,7 @@ import AddRole from './components/admin/role/AddRole'
 import EditRole from './components/admin/role/EditRole'
 
 // Test
+import StartTest from './components/test/StartTest'
 import ForGuest from './components/test/ForGuest'
 
 // NotFound
@@ -110,6 +111,10 @@ const router = new Router({
 				{
 					path:'test/test-for-guest',
 					component:ForGuest,
+				},
+				{
+					path:'test/start-test',
+					component:StartTest,
 				},
 			]
 		},
