@@ -4,6 +4,7 @@ const state = {
 	message: [],
 	tests: [],
 	complete: [],
+	test: [],
 };
 
 const getters = {
@@ -15,6 +16,9 @@ const getters = {
 	},
 	getComplete(state){
 		return state.complete
+	},
+	getTest(state){
+		return state.test
 	},
 };
 
@@ -38,6 +42,15 @@ const actions = {
 			return false
 		}
 	},
+	async actionShowTest({commit},id){
+		try {
+			const items =  await TestService.showTest(id);
+			await commit('setShowTest',items.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 };
 
 const mutations = {
@@ -49,6 +62,9 @@ const mutations = {
 	},
 	setComplete(state, complete){
 		state.complete = complete
+	},
+	setShowTest(state, complete){
+		state.test = complete
 	},
 };
 

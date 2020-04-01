@@ -1,80 +1,84 @@
 <template>
 	<div class="for_guest">
-		<div class="test_header" v-if="userInfo">
-			<h1>Ф.И.О: {{userInfo.fio}}</h1>
-			<h1 class="pr-100" v-if="tests.length > 0" >{{nextItemIndex + 1}}/{{tests.length}}</h1>
-		</div>
-		<div class="test_pogination_responsive">
-			<ul class="test_pogination" v-if="tests.length > 0">
-				<li v-for="(item,index) in tests" :class="index == nextItemIndex ? 'active' : ''">
-					<span class="pe-7s-ribbon"></span>
-					<p>{{index+1}}</p>
-				</li>
-			</ul>
-		</div>
-		<template v-for="(item,index) in showItem" v-if="showItem.length">
-			<template v-if="item">
-				<div class="test_question_block">
-				 	{{item.title}} ?
-				</div>
-				<div class="test_answers_block" v-for="(variant,i) in item.variants">
-					<div class="input_radio_block">
-						<input 
-							type="radio" 
-							:name='"answer"+variant.id' 
-							:id='"answer"+variant.id'
-							:value="variant.id"
-							v-model="answers[index]"
-							@change="clickAnswer(variant.question_id,variant.id)"
-						>
-						<label :for='"answer"+variant.id'>
-							<span>{{i+1}})</span>{{variant.title}}
-						</label>
+		<template v-if="!showResult">
+			<div class="test_header" v-if="userInfo">
+				<h1>Ф.И.О: {{userInfo.fio}}</h1>
+				<h1 class="pr-100" v-if="tests.length > 0" >{{nextItemIndex + 1}}/{{tests.length}}</h1>
+			</div>
+			<div class="test_pogination_responsive">
+				<ul class="test_pogination" v-if="tests.length > 0">
+					<li v-for="(item,index) in tests" :class="index == nextItemIndex ? 'active' : ''">
+						<span class="pe-7s-ribbon"></span>
+						<p>{{index+1}}</p>
+					</li>
+				</ul>
+			</div>
+			<template v-for="(item,index) in showItem" v-if="showItem.length">
+				<template v-if="item">
+					<div class="test_question_block">
+					 	{{item.title}} ?
 					</div>
-				</div>
+					<ol type="A">
+						<li v-for="(variant,i) in item.variants" class="input_radio_block">
+							<input 
+								type="radio" 
+								:name='"answer"+variant.id' 
+								:id='"answer"+variant.id'
+								:value="variant.id"
+								v-model="answers[index]"
+								@change="clickAnswer(variant.question_id,variant.id)"
+							>
+							<label :for='"answer"+variant.id'>
+								{{variant.title}}
+							</label>
+						</li>
+					</ol>
+				</template>
 			</template>
+			<button 
+				class="btn btn-success" 
+				@click.prevent="prevBtn">
+				< prev 
+			</button>
+			<button 
+				class="btn btn-success" 
+				@click.prevent="nextBtn"
+				:disabled="disabledTrue"
+			>
+				next >
+			</button>
+			<button 
+				v-if="tests.length == myAnswers.length"
+				class="btn btn-success" 
+				@click.prevent="completeTest">
+				complete test
+			</button>
+			<div class="base-timer">
+				<svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					<g class="base-timer__circle">
+					<circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+					<path
+						id="base-timer-path-remaining"
+						stroke-dasharray="283"
+						class="base-timer__path-remaining blue ${remainingPathColor}"
+						d="
+						M 50, 50
+						m -45, 0
+						a 45,45 0 1,0 90,0
+						a 45,45 0 1,0 -90,0
+						"
+					></path>
+					</g>
+				</svg>
+				<span id="base-timer-label" class="base-timer__label">{{formatTime(timeLeft)}}</span>
+			</div>
 		</template>
-		<button 
-			class="btn btn-success" 
-			@click.prevent="prevBtn">
-			< prev 
-		</button>
-		<button 
-			class="btn btn-success" 
-			@click.prevent="nextBtn"
-			:disabled="disabledTrue"
-		>
-			next >
-		</button>
-		<button 
-			v-if="tests.length == myAnswers.length"
-			class="btn btn-success" 
-			@click.prevent="completeTest">
-			complete test
-		</button>
-		<div class="base-timer">
-			<svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-				<g class="base-timer__circle">
-				<circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
-				<path
-					id="base-timer-path-remaining"
-					stroke-dasharray="283"
-					class="base-timer__path-remaining blue ${remainingPathColor}"
-					d="
-					M 50, 50
-					m -45, 0
-					a 45,45 0 1,0 90,0
-					a 45,45 0 1,0 -90,0
-					"
-				></path>
-				</g>
-			</svg>
-			<span id="base-timer-label" class="base-timer__label">{{formatTime(timeLeft)}}</span>
-		</div>
+		<template v-else>
+			<ResultTest :items="items" />
+		</template>
 	</div>
 </template>		
 <script>
-	const FULL_DASH_ARRAY = 283;
 	const WARNING_THRESHOLD = 10;
 	const ALERT_THRESHOLD = 5;
 	const COLOR_CODES = {
@@ -92,8 +96,12 @@
 	};
 	let remainingPathColor = COLOR_CODES.info.color;
 	import {mapActions, mapGetters} from 'vuex'
+	import ResultTest from './ResultTest'
 	import {TokenService} from './../../services/storage.service'
 	export default{
+		components:{
+			ResultTest
+		},
 		data(){
 			return{
 				answers:[],
@@ -103,9 +111,11 @@
 				nextItemIndex:null,
 				myAnswers:[],
 				timePassed:0,
-				timeLeft:300,
-				TIME_LIMIT:300,
+				timeLeft:0,
+				TIME_LIMIT:0,
 				timerInterval:null,
+				items:[],
+				showResult:false
 			}
 		},
 		async mounted(){
@@ -153,7 +163,7 @@
 			}
 		},
 		methods:{
-			...mapActions('test',['actionCompleteTest','actionStartTest']),
+			...mapActions('test',['actionCompleteTest','actionStartTest','actionShowTest']),
 			async completeTest(){
 				if (this.tests.length == this.myAnswers.length){
 					let data = {
@@ -162,6 +172,12 @@
 					}
 					await this.actionCompleteTest(data)
 					TokenService.removeGuestInfo()
+					if (this.getComplete.success){
+						this.showResult = true
+						this.items = this.getComplete
+						this.items['id'] = this.userInfo.id
+						this.onTimesUp()
+					}
 				}
 			},
 			prevBtn(){
@@ -183,11 +199,10 @@
 					}	
 				})
 				this.myAnswers.push({id:parseInt(qID),answer_id:ansID})
-				console.log(this.myAnswers.length)
-				console.log(this.nextItemIndex+1)
 			},
-			onTimesUp() {
+			onTimesUp(){
 				clearInterval(this.timerInterval);
+				this.timeLeft = 0
 			},
 			chooseAnswer(id){
 				this.chosenAnswerID = id
@@ -242,7 +257,7 @@
 			},
 			setCircleDasharray(){
 				const circleDasharray = `${(
-					this.calculateTimeFraction() * FULL_DASH_ARRAY
+					this.calculateTimeFraction() * this.TIME_LIMIT
 				).toFixed(0)} 283`;
 				document
 					.getElementById("base-timer-path-remaining")

@@ -83,13 +83,6 @@
                   </p>
                 </router-link>
               </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/crm/test/test-for-guest">
-                  <p>
-                    For Guest
-                  </p>
-                </router-link>
-              </li>
             </ul>
           </li>
           <li class="nav-item">

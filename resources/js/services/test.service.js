@@ -7,6 +7,9 @@ const TestService = {
 	completeTest(data){
 		return ApiService.post(`/api/attestat/complete/${data.attestat_id}`,data)
 	},
+	showTest(id){
+		return ApiService.post(`/api/attestat/show/${id}`)
+	},
 };
 
 export { TestService };
