@@ -26258,6 +26258,11 @@ svg:not(:root).svg-inline--fa {
   content: "\F1BA";
 }
 
+.login_logo {
+  display: flex;
+  justify-content: center;
+}
+
 .isRequired {
   border: 1px solid red;
 }

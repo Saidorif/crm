@@ -6692,6 +6692,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
@@ -8224,6 +8226,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
 //
 //
 //
@@ -51567,7 +51572,7 @@ var render = function() {
             { staticClass: "brand-link", attrs: { to: "/crm" } },
             [
               _c("span", { staticClass: "brand-text font-weight-light" }, [
-                _vm._v("E-KADR")
+                _c("img", { attrs: { src: "/logo.png" } })
               ])
             ]
           ),
@@ -53560,6 +53565,8 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "form_content" }, [
+        _vm._m(0),
+        _vm._v(" "),
         _c("p", { staticClass: "login_title" }, [
           _vm._v(" Вход в персональный кабинет")
         ]),
@@ -53604,7 +53611,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _vm._m(0)
+              _vm._m(1)
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group" }, [
@@ -53630,10 +53637,10 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _vm._m(1)
+              _vm._m(2)
             ]),
             _vm._v(" "),
-            _vm._m(2)
+            _vm._m(3)
           ]
         )
       ])
@@ -53641,6 +53648,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "login_logo" }, [
+      _c("img", { attrs: { src: "/logo.png" } })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -16,9 +16,10 @@
   line-height: initial;
 }
 .brand-link{
-    background: #5279dc;
+    border-bottom:1px solid #5279dc;
     color: #fff;   
     text-align: center;
+    padding: 2px .5rem !important;
 }
 .brand-link.open.active{
   background: #5279dc;
@@ -170,7 +171,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(65, 107, 216, 0.8);
     z-index: 0;
 }
 .form_content{
@@ -179,7 +180,7 @@
     background: #FFFFFF;
     box-shadow: 5px 5px 20px rgba(0, 35, 109, 0.05);
     width: 360px;
-    padding: 30px;
+    padding: 5px 30px 30px 30px ;
 }
 .login_alert{
     width: 360px;

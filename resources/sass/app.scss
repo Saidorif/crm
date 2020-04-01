@@ -15,7 +15,10 @@
 @import "~@fortawesome/fontawesome-free/css/solid";
 @import "~@fortawesome/fontawesome-free/css/svg-with-js";
 @import "~@fortawesome/fontawesome-free/css/v4-shims";
-
+.login_logo{
+	display:flex;
+	justify-content:center;
+}
 .isRequired{
 	border:1px solid red;
 }
