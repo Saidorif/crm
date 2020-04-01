@@ -26263,6 +26263,10 @@ svg:not(:root).svg-inline--fa {
   justify-content: center;
 }
 
+.nav.nav-pills.nav-sidebar.flex-column {
+  font-size: 18px;
+}
+
 .isRequired {
   border: 1px solid red;
 }
