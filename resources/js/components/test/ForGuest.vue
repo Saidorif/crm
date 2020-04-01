@@ -155,7 +155,7 @@
 		methods:{
 			...mapActions('test',['actionCompleteTest','actionStartTest']),
 			async completeTest(){
-				if (this.tests.length == this.myAnswers.length) {
+				if (this.tests.length == this.myAnswers.length){
 					let data = {
 						attestat_id:this.userInfo.id,
 						questions:this.myAnswers
