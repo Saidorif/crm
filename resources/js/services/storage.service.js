@@ -1,5 +1,6 @@
 const TOKEN_KEY = 'access_token'
 const USER = 'user'
+const GUEST = 'guestInfo'
 
 const TokenService = {
 	getToken() {
@@ -16,9 +17,21 @@ const TokenService = {
 		let data = JSON.parse(localStorage.getItem(USER));
 		return data;
 	},
+	saveGuestInfo(guest){
+		localStorage.setItem(GUEST, JSON.stringify(guest));
+	},
+
+	getGuestInfo(){
+		let data = JSON.parse(localStorage.getItem(GUEST));
+		return data;
+	},
 
 	removeCurrentUser(){
 		localStorage.removeItem(USER);
+	},
+	
+	removeGuestInfo(){
+		localStorage.removeItem(GUEST);
 	},
 
 	removeToken() {

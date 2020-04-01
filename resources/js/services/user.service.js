@@ -68,7 +68,7 @@ const UserService = {
 		// Remove the token and remove Authorization header from Api Service as well
 		ApiService.post('/api/logout');
 		TokenService.removeToken();
-		TokenService.removeCurrentUser();
+		TokenService.removeGuestInfo()
 		ApiService.removeHeader();
 		// // NOTE: Again, we'll cover the 401 Interceptor a bit later.
 		ApiService.unmount401Interceptor();

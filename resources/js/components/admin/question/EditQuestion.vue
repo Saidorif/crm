@@ -32,6 +32,18 @@
 					    	:class="isRequired(form.title) ? 'isRequired' : ''"
 				    	></textarea>
 					  </div>
+					  <div class="form-group col-md-12">
+					    <label for="time">Время (s)</label>
+					    <input
+					    	type="number" 
+					    	min="1"
+					    	class="form-control input_style" 
+					    	id="time" 
+					    	placeholder="Время..."
+					    	v-model="form.time"
+					    	:class="isRequired(form.time) ? 'isRequired' : ''"
+				    	/>
+					  </div>
 				  	</div>
 				  	<div class="answer_head mb-2">
 				  		<h3>Answers</h3>
@@ -91,6 +103,7 @@
 					id:'',
 					title:'',
 					category_id:'',
+					time:'',
 					variants:[
 						{
 							title:'',is_true:0
@@ -149,7 +162,7 @@
 		    	Vue.delete(this.form.variants,index)
 		    },
 			async saveQuestion(){
-				if (this.form.title != '' && this.form.category_id != '') {
+				if (this.form.title != '' && this.form.category_id != '' && this.form.time != '') {
 					if (this.checkRadioBtn()) {
 						await this.actionUpdateQuestion(this.form)
 						this.$router.push("/crm/question");

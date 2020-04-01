@@ -6823,6 +6823,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6830,6 +6842,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       form: {
         title: '',
         category_id: '',
+        time: '',
         variants: [{
           title: '',
           is_true: 0
@@ -6889,7 +6902,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.form.title != '' && _this.form.category_id != '')) {
+                if (!(_this.form.title != '' && _this.form.category_id != '' && _this.form.time != '')) {
                   _context.next = 11;
                   break;
                 }
@@ -7070,6 +7083,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7078,6 +7103,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: '',
         title: '',
         category_id: '',
+        time: '',
         variants: [{
           title: '',
           is_true: 0
@@ -7143,7 +7169,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.form.title != '' && _this.form.category_id != '')) {
+                if (!(_this.form.title != '' && _this.form.category_id != '' && _this.form.time != '')) {
                   _context.next = 11;
                   break;
                 }
@@ -8346,6 +8372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../services/storage.service */ "./resources/js/services/storage.service.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -8358,6 +8385,23 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8432,11 +8476,8 @@ var COLOR_CODES = {
     threshold: ALERT_THRESHOLD
   }
 };
-var TIME_LIMIT = 300;
-var timePassed = 0;
-var timeLeft = TIME_LIMIT;
-var timerInterval = null;
 var remainingPathColor = COLOR_CODES.info.color;
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -8445,9 +8486,12 @@ var remainingPathColor = COLOR_CODES.info.color;
       userInfo: [],
       tests: [],
       chosenAnswerID: null,
+      nextItemIndex: null,
       myAnswers: [],
-      textBTN: 'next >',
-      nextItemIndex: null
+      timePassed: 0,
+      timeLeft: 300,
+      TIME_LIMIT: 300,
+      timerInterval: null
     };
   },
   mounted: function mounted() {
@@ -8460,12 +8504,28 @@ var remainingPathColor = COLOR_CODES.info.color;
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              if (!_services_storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].getGuestInfo()) {
+                _context.next = 10;
+                break;
+              }
+
+              _context.next = 3;
+              return _this.actionStartTest(_services_storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].getGuestInfo());
+
+            case 3:
               _this.startTimer();
 
               _this.userInfo = _this.getTests.attestat;
               _this.tests = _this.getTests.result;
+              _this.timeLeft = _this.getTests.total_time;
+              _this.TIME_LIMIT = _this.getTests.total_time;
+              _context.next = 11;
+              break;
 
-            case 3:
+            case 10:
+              _this.$router.push("/crm/test/start-test");
+
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -8493,9 +8553,20 @@ var remainingPathColor = COLOR_CODES.info.color;
         });
         return newArr;
       }
+    },
+    disabledTrue: function disabledTrue() {
+      if (this.myAnswers.length == this.tests.length) {
+        return false;
+      } else {
+        if (this.myAnswers.length != this.nextItemIndex + 1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
   }),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('test', ['actionCompleteTest']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('test', ['actionCompleteTest', 'actionStartTest']), {
     completeTest: function completeTest() {
       var _this3 = this;
 
@@ -8508,7 +8579,7 @@ var remainingPathColor = COLOR_CODES.info.color;
             switch (_context2.prev = _context2.next) {
               case 0:
                 if (!(_this3.tests.length == _this3.myAnswers.length)) {
-                  _context2.next = 7;
+                  _context2.next = 5;
                   break;
                 }
 
@@ -8520,14 +8591,9 @@ var remainingPathColor = COLOR_CODES.info.color;
                 return _this3.actionCompleteTest(data);
 
               case 4:
-                _this3.textBtn = 'complete test';
-                _context2.next = 8;
-                break;
+                _services_storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].removeGuestInfo();
 
-              case 7:
-                _this3.nextBtn();
-
-              case 8:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -8536,15 +8602,13 @@ var remainingPathColor = COLOR_CODES.info.color;
       }))();
     },
     prevBtn: function prevBtn() {
-      if (this.tests[this.nextItemIndex + 1]) {
-        this.chosenAnswerID = this.tests[this.nextItemIndex + 1].id;
-        this.textBtn = '< prev';
+      if (this.tests[this.nextItemIndex - 1]) {
+        this.chosenAnswerID = this.tests[this.nextItemIndex - 1].id;
       }
     },
     nextBtn: function nextBtn() {
       if (this.tests[this.nextItemIndex + 1]) {
         this.chosenAnswerID = this.tests[this.nextItemIndex + 1].id;
-        this.textBtn = 'next >';
       }
     },
     clickAnswer: function clickAnswer(qID, ansID) {
@@ -8559,9 +8623,11 @@ var remainingPathColor = COLOR_CODES.info.color;
         id: parseInt(qID),
         answer_id: ansID
       });
+      console.log(this.myAnswers.length);
+      console.log(this.nextItemIndex + 1);
     },
     onTimesUp: function onTimesUp() {
-      clearInterval(timerInterval);
+      clearInterval(this.timerInterval);
     },
     chooseAnswer: function chooseAnswer(id) {
       this.chosenAnswerID = id;
@@ -8569,16 +8635,16 @@ var remainingPathColor = COLOR_CODES.info.color;
     startTimer: function startTimer() {
       var _this4 = this;
 
-      timerInterval = setInterval(function () {
-        timePassed = timePassed += 1;
-        timeLeft = TIME_LIMIT - timePassed;
-        document.getElementById("base-timer-label").innerHTML = _this4.formatTime(timeLeft);
+      this.timerInterval = setInterval(function () {
+        _this4.timePassed = _this4.timePassed += 1;
+        _this4.timeLeft = _this4.TIME_LIMIT - _this4.timePassed;
+        document.getElementById("base-timer-label").innerHTML = _this4.formatTime(_this4.timeLeft);
 
         _this4.setCircleDasharray();
 
-        _this4.setRemainingPathColor(timeLeft);
+        _this4.setRemainingPathColor(_this4.timeLeft);
 
-        if (timeLeft === 0) {
+        if (_this4.timeLeft === 0) {
           _this4.onTimesUp();
         }
       }, 1000);
@@ -8607,8 +8673,8 @@ var remainingPathColor = COLOR_CODES.info.color;
       }
     },
     calculateTimeFraction: function calculateTimeFraction() {
-      var rawTimeFraction = timeLeft / TIME_LIMIT;
-      return rawTimeFraction - 1 / TIME_LIMIT * (1 - rawTimeFraction);
+      var rawTimeFraction = this.timeLeft / this.TIME_LIMIT;
+      return rawTimeFraction - 1 / this.TIME_LIMIT * (1 - rawTimeFraction);
     },
     setCircleDasharray: function setCircleDasharray() {
       var circleDasharray = "".concat((this.calculateTimeFraction() * FULL_DASH_ARRAY).toFixed(0), " 283");
@@ -8631,6 +8697,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../services/storage.service */ "./resources/js/services/storage.service.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -8701,6 +8768,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8749,7 +8817,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context2.prev = _context2.next) {
               case 0:
                 if (!(_this2.form.category_id && _this2.form.fio && _this2.form.limit)) {
-                  _context2.next = 6;
+                  _context2.next = 7;
                   break;
                 }
 
@@ -8757,6 +8825,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this2.actionStartTest(_this2.form);
 
               case 3:
+                _services_storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveGuestInfo(_this2.form);
+
                 if (_this2.getTests.success) {
                   _this2.$router.push("/crm/test/test-for-guest");
 
@@ -8773,13 +8843,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   });
                 }
 
-                _context2.next = 7;
+                _context2.next = 8;
                 break;
 
-              case 6:
+              case 7:
                 _this2.requiredInput = true;
 
-              case 7:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -51812,6 +51882,38 @@ var render = function() {
                     }
                   }
                 })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "time" } }, [_vm._v("Время (s)")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.time,
+                      expression: "form.time"
+                    }
+                  ],
+                  staticClass: "form-control input_style",
+                  class: _vm.isRequired(_vm.form.time) ? "isRequired" : "",
+                  attrs: {
+                    type: "number",
+                    min: "1",
+                    id: "time",
+                    placeholder: "Время..."
+                  },
+                  domProps: { value: _vm.form.time },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "time", $event.target.value)
+                    }
+                  }
+                })
               ])
             ]),
             _vm._v(" "),
@@ -52131,6 +52233,38 @@ var render = function() {
                         return
                       }
                       _vm.$set(_vm.form, "title", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "time" } }, [_vm._v("Время (s)")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.time,
+                      expression: "form.time"
+                    }
+                  ],
+                  staticClass: "form-control input_style",
+                  class: _vm.isRequired(_vm.form.time) ? "isRequired" : "",
+                  attrs: {
+                    type: "number",
+                    min: "1",
+                    id: "time",
+                    placeholder: "Время..."
+                  },
+                  domProps: { value: _vm.form.time },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "time", $event.target.value)
                     }
                   }
                 })
@@ -53499,7 +53633,15 @@ var render = function() {
         ? _c("div", { staticClass: "test_header" }, [
             _c("h1", [_vm._v("Ф.И.О: " + _vm._s(_vm.userInfo.fio))]),
             _vm._v(" "),
-            _c("h1", { staticClass: "pr-100" }, [_vm._v("01/50")])
+            _vm.tests.length > 0
+              ? _c("h1", { staticClass: "pr-100" }, [
+                  _vm._v(
+                    _vm._s(_vm.nextItemIndex + 1) +
+                      "/" +
+                      _vm._s(_vm.tests.length)
+                  )
+                ])
+              : _vm._e()
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -53511,14 +53653,7 @@ var render = function() {
               _vm._l(_vm.tests, function(item, index) {
                 return _c(
                   "li",
-                  {
-                    class: item == 1 ? "active" : "",
-                    on: {
-                      click: function($event) {
-                        return _vm.chooseAnswer(item.id)
-                      }
-                    }
-                  },
+                  { class: index == _vm.nextItemIndex ? "active" : "" },
                   [
                     _c("span", { staticClass: "pe-7s-ribbon" }),
                     _vm._v(" "),
@@ -53604,12 +53739,43 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              return _vm.completeTest($event)
+              return _vm.prevBtn($event)
             }
           }
         },
-        [_vm._v(_vm._s(_vm.textBTN) + _vm._s(_vm.nextItemIndex))]
+        [_vm._v("\n\t\t< prev \n\t")]
       ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { disabled: _vm.disabledTrue },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.nextBtn($event)
+            }
+          }
+        },
+        [_vm._v("\n\t\tnext >\n\t")]
+      ),
+      _vm._v(" "),
+      _vm.tests.length == _vm.myAnswers.length
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.completeTest($event)
+                }
+              }
+            },
+            [_vm._v("\n\t\tcomplete test\n\t")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "base-timer" }, [
         _c(
@@ -88717,6 +88883,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenService", function() { return TokenService; });
 var TOKEN_KEY = 'access_token';
 var USER = 'user';
+var GUEST = 'guestInfo';
 var TokenService = {
   getToken: function getToken() {
     return localStorage.getItem(TOKEN_KEY);
@@ -88731,8 +88898,18 @@ var TokenService = {
     var data = JSON.parse(localStorage.getItem(USER));
     return data;
   },
+  saveGuestInfo: function saveGuestInfo(guest) {
+    localStorage.setItem(GUEST, JSON.stringify(guest));
+  },
+  getGuestInfo: function getGuestInfo() {
+    var data = JSON.parse(localStorage.getItem(GUEST));
+    return data;
+  },
   removeCurrentUser: function removeCurrentUser() {
     localStorage.removeItem(USER);
+  },
+  removeGuestInfo: function removeGuestInfo() {
+    localStorage.removeItem(GUEST);
   },
   removeToken: function removeToken() {
     localStorage.removeItem(TOKEN_KEY);
@@ -88946,7 +89123,7 @@ var UserService = {
     // Remove the token and remove Authorization header from Api Service as well
     _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/logout');
     _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].removeToken();
-    _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].removeCurrentUser();
+    _storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].removeGuestInfo();
     _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].removeHeader(); // // NOTE: Again, we'll cover the 401 Interceptor a bit later.
 
     _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].unmount401Interceptor();
@@ -90689,9 +90866,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/saidorif/Desktop/crm/resources/sass/style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\ospanel\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })

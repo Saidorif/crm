@@ -57,6 +57,7 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+	import {TokenService} from './../../services/storage.service'
 	export default{
 		data(){
 			return{
@@ -84,6 +85,7 @@
 		    async startTest(){
 		    	if (this.form.category_id && this.form.fio &&  this.form.limit) {
 		    		await this.actionStartTest(this.form)
+		    		TokenService.saveGuestInfo(this.form)
 		    		if (this.getTests.success){
 		    			this.$router.push("/crm/test/test-for-guest");
 		    			toast.fire({

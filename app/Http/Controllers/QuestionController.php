@@ -30,7 +30,7 @@ class QuestionController extends Controller
         $validator = Validator::make($request->all(),[
             'title'       => 'required|string',
             'category_id' => 'required|integer',
-            'time' => 'integer',
+            'time' => 'required|integer',
             'variants' => 'required|array',
             'variants.*.title' => 'required|string',
             'variants.*.is_true' => 'required',
@@ -57,7 +57,7 @@ class QuestionController extends Controller
         $validator = Validator::make($request->all(),[
             'title'       => 'required|string',
             'category_id' => 'required|integer',
-            'time' => 'integer',
+            'time' => 'required|integer',
             'variants' => 'required|array',
             'variants.*.title' => 'required|string',
             'variants.*.is_true' => 'required',

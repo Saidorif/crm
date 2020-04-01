@@ -2,11 +2,11 @@
 	<div class="for_guest">
 		<div class="test_header" v-if="userInfo">
 			<h1>Ф.И.О: {{userInfo.fio}}</h1>
-			<h1 class="pr-100">01/50</h1>
+			<h1 class="pr-100" v-if="tests.length > 0" >{{nextItemIndex + 1}}/{{tests.length}}</h1>
 		</div>
 		<div class="test_pogination_responsive">
 			<ul class="test_pogination" v-if="tests.length > 0">
-				<li v-for="(item,index) in tests" :class="item == 1 ? 'active' : ''" @click="chooseAnswer(item.id)">
+				<li v-for="(item,index) in tests" :class="index == nextItemIndex ? 'active' : ''">
 					<span class="pe-7s-ribbon"></span>
 					<p>{{index+1}}</p>
 				</li>
@@ -34,7 +34,24 @@
 				</div>
 			</template>
 		</template>
-		<button class="btn btn-success" @click.prevent="completeTest">{{textBTN}}{{nextItemIndex}}</button>
+		<button 
+			class="btn btn-success" 
+			@click.prevent="prevBtn">
+			< prev 
+		</button>
+		<button 
+			class="btn btn-success" 
+			@click.prevent="nextBtn"
+			:disabled="disabledTrue"
+		>
+			next >
+		</button>
+		<button 
+			v-if="tests.length == myAnswers.length"
+			class="btn btn-success" 
+			@click.prevent="completeTest">
+			complete test
+		</button>
 		<div class="base-timer">
 			<svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 				<g class="base-timer__circle">
@@ -73,12 +90,9 @@
 			threshold: ALERT_THRESHOLD
 		}
 	};
-	const TIME_LIMIT = 300;
-	let timePassed = 0;
-	let timeLeft = TIME_LIMIT;
-	let timerInterval = null;
 	let remainingPathColor = COLOR_CODES.info.color;
 	import {mapActions, mapGetters} from 'vuex'
+	import {TokenService} from './../../services/storage.service'
 	export default{
 		data(){
 			return{
@@ -86,15 +100,25 @@
 				userInfo:[],
 				tests:[],
 				chosenAnswerID:null,
+				nextItemIndex:null,
 				myAnswers:[],
-				textBTN:'next >',
-				nextItemIndex:null
+				timePassed:0,
+				timeLeft:300,
+				TIME_LIMIT:300,
+				timerInterval:null,
 			}
 		},
 		async mounted(){
-			this.startTimer();
-			this.userInfo = this.getTests.attestat
-			this.tests = this.getTests.result
+			if (TokenService.getGuestInfo()) {
+				await this.actionStartTest(TokenService.getGuestInfo())
+				this.startTimer();
+				this.userInfo = this.getTests.attestat
+				this.tests = this.getTests.result
+				this.timeLeft = this.getTests.total_time
+				this.TIME_LIMIT = this.getTests.total_time
+			}else{
+				this.$router.push("/crm/test/start-test");
+			}
 		},
 		computed:{
 			...mapGetters('test',['getTests','getMassage','getComplete']),
@@ -115,10 +139,21 @@
 					})
 					return newArr;
 				}
+			},
+			disabledTrue(){
+				if(this.myAnswers.length == this.tests.length){
+					return false
+				}else{
+					if (this.myAnswers.length != (this.nextItemIndex+1)) {
+						return true
+					}else{
+						return false
+					}
+				}
 			}
 		},
 		methods:{
-			...mapActions('test',['actionCompleteTest']),
+			...mapActions('test',['actionCompleteTest','actionStartTest']),
 			async completeTest(){
 				if (this.tests.length == this.myAnswers.length) {
 					let data = {
@@ -126,21 +161,17 @@
 						questions:this.myAnswers
 					}
 					await this.actionCompleteTest(data)
-					this.textBtn='complete test'
-				}else{
-					this.nextBtn()
+					TokenService.removeGuestInfo()
 				}
 			},
 			prevBtn(){
-				if (this.tests[this.nextItemIndex+1]) {
-					this.chosenAnswerID = this.tests[this.nextItemIndex+1].id
-					this.textBtn='< prev'
+				if (this.tests[this.nextItemIndex-1]) {
+					this.chosenAnswerID = this.tests[this.nextItemIndex-1].id
 				}
 			},
 			nextBtn(){
 				if (this.tests[this.nextItemIndex+1]) {
 					this.chosenAnswerID = this.tests[this.nextItemIndex+1].id
-					this.textBtn='next >'
 				}
 			},
 			clickAnswer(qID,ansID){	
@@ -152,25 +183,27 @@
 					}	
 				})
 				this.myAnswers.push({id:parseInt(qID),answer_id:ansID})
+				console.log(this.myAnswers.length)
+				console.log(this.nextItemIndex+1)
 			},
 			onTimesUp() {
-				clearInterval(timerInterval);
+				clearInterval(this.timerInterval);
 			},
 			chooseAnswer(id){
 				this.chosenAnswerID = id
 			},
 			startTimer() {
-				timerInterval = setInterval(() => {
-					timePassed = timePassed += 1;
-					timeLeft = TIME_LIMIT - timePassed;
+				this.timerInterval = setInterval(() => {
+					this.timePassed = this.timePassed += 1;
+					this.timeLeft = this.TIME_LIMIT - this.timePassed;
 					document.getElementById("base-timer-label").innerHTML = this.formatTime(
-					timeLeft
+					this.timeLeft
 					);
 					this.setCircleDasharray();
-					this.setRemainingPathColor(timeLeft);
+					this.setRemainingPathColor(this.timeLeft);
 
-					if (timeLeft === 0) {
-					this.onTimesUp();
+					if(this.timeLeft === 0){
+						this.onTimesUp();
 					}
 				}, 1000);
 			},
@@ -204,8 +237,8 @@
 				}
 			},
 			calculateTimeFraction() {
-				const rawTimeFraction = timeLeft / TIME_LIMIT;
-				return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+				const rawTimeFraction = this.timeLeft / this.TIME_LIMIT;
+				return rawTimeFraction - (1 / this.TIME_LIMIT) * (1 - rawTimeFraction);
 			},
 			setCircleDasharray(){
 				const circleDasharray = `${(
@@ -219,5 +252,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>
