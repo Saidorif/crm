@@ -104,7 +104,11 @@ class AttestatController extends Controller
         if(!$attestat){
             return response()->json(['error' => true, 'message' => 'Not found...']);
         }
-        return response()->json(['success' => true, 'message' => $attestat]);
+        $result = [
+            'attestat' => $attestat,
+            'questions' => $attestat->questionsWithResult(),
+        ];
+        return response()->json(['success' => true, 'result' => $result]);
     }
 
 

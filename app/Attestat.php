@@ -6,5 +6,41 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attestat extends Model
 {
-    protected $fillable = ['fio','user_id','started_at','ended_at','time','question_ids', 'limit','wrong_answers','true_answers','answer','status'];
+    protected $fillable = ['fio','user_id','started_at','ended_at','time','question_ids', 'limit','wrong_answers','true_answers','answer','status','category_id'];
+
+    public function getQuestions()
+    {
+    	$ids = json_decode($this->question_ids);
+    	$questions = Question::whereIn('id', $ids)->get();
+    	// foreach ($questions as $key => $value) {
+    	// 	# code...
+    	// }
+    	return $questions;
+    }
+
+    public function questionsWithResult()
+    {
+    	$ids = json_decode($this->question_ids);
+    	$questions = Question::whereIn('id', $ids)->get();
+    	if(count($questions) < 1){
+    		return response()->json(['error' => true, 'message' => 'Something went wrong...']);
+    	}
+    	if(count($questions) != count($ids)){
+    		return response()->json(['error' => true, 'message' => 'Some questions deleted... Showing result unavailable...']);
+    	}
+    	$results = [];
+    	foreach ($questions as $key => $item) {
+    		$answers = json_decode($this->answer);
+    		$res = new \StdClass();
+    		$res->id = $item->id;
+    		$res->title = $item->title;
+    		$res->time = $item->time;
+    		$res->category = $item->category->name;
+    		$res->pass_test = $item->check($answers[$key]->answer_id);
+    		$res->user_choose = $answers[$key]->answer_id;
+    		$res->variants = $item->variants;
+    		$results[] = $res;
+    	}
+    	return $results;
+    }
 }

@@ -17,6 +17,7 @@ class CreateAttestatsTable extends Migration
             $table->bigIncrements('id');
             $table->string('fio');
             $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('category_id');
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
             $table->bigInteger('limit');
