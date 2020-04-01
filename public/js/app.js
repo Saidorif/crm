@@ -8348,15 +8348,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //
 //
@@ -8445,26 +8445,48 @@ var remainingPathColor = COLOR_CODES.info.color;
       userInfo: [],
       tests: [],
       chosenAnswerID: null,
-      myAnswers: []
+      myAnswers: [],
+      textBTN: 'next >',
+      nextItemIndex: null
     };
   },
   mounted: function mounted() {
-    this.startTimer();
-    this.userInfo = this.getTests.attestat;
-    this.tests = this.getTests.result;
+    var _this = this;
+
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this.startTimer();
+
+              _this.userInfo = _this.getTests.attestat;
+              _this.tests = _this.getTests.result;
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('test', ['getTests', 'getMassage', 'getComplete']), {
     showItem: function showItem() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.tests.length > 0) {
         var newArr = this.tests.map(function (item, index) {
-          if (_this.chosenAnswerID == null) {
+          if (_this2.chosenAnswerID == null) {
             if (index == 0) {
+              _this2.nextItemIndex = index;
               return item;
             }
           } else {
-            if (_this.chosenAnswerID == parseInt(item.id)) {
+            if (_this2.chosenAnswerID == parseInt(item.id)) {
+              _this2.nextItemIndex = index;
               return item;
             }
           }
@@ -8475,33 +8497,55 @@ var remainingPathColor = COLOR_CODES.info.color;
   }),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('test', ['actionCompleteTest']), {
     completeTest: function completeTest() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                data = {
-                  attestat_id: _this2.userInfo.id,
-                  questions: _this2.myAnswers
-                };
-                _context.next = 3;
-                return _this2.actionCompleteTest(data);
+                if (!(_this3.tests.length == _this3.myAnswers.length)) {
+                  _context2.next = 7;
+                  break;
+                }
 
-              case 3:
-                console.log(_this2.getComplete);
+                data = {
+                  attestat_id: _this3.userInfo.id,
+                  questions: _this3.myAnswers
+                };
+                _context2.next = 4;
+                return _this3.actionCompleteTest(data);
 
               case 4:
+                _this3.textBtn = 'complete test';
+                _context2.next = 8;
+                break;
+
+              case 7:
+                _this3.nextBtn();
+
+              case 8:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
+    },
+    prevBtn: function prevBtn() {
+      if (this.tests[this.nextItemIndex + 1]) {
+        this.chosenAnswerID = this.tests[this.nextItemIndex + 1].id;
+        this.textBtn = '< prev';
+      }
+    },
+    nextBtn: function nextBtn() {
+      if (this.tests[this.nextItemIndex + 1]) {
+        this.chosenAnswerID = this.tests[this.nextItemIndex + 1].id;
+        this.textBtn = 'next >';
+      }
     },
     clickAnswer: function clickAnswer(qID, ansID) {
       this.myAnswers = this.myAnswers.filter(function (item, index) {
@@ -8523,19 +8567,19 @@ var remainingPathColor = COLOR_CODES.info.color;
       this.chosenAnswerID = id;
     },
     startTimer: function startTimer() {
-      var _this3 = this;
+      var _this4 = this;
 
       timerInterval = setInterval(function () {
         timePassed = timePassed += 1;
         timeLeft = TIME_LIMIT - timePassed;
-        document.getElementById("base-timer-label").innerHTML = _this3.formatTime(timeLeft);
+        document.getElementById("base-timer-label").innerHTML = _this4.formatTime(timeLeft);
 
-        _this3.setCircleDasharray();
+        _this4.setCircleDasharray();
 
-        _this3.setRemainingPathColor(timeLeft);
+        _this4.setRemainingPathColor(timeLeft);
 
         if (timeLeft === 0) {
-          _this3.onTimesUp();
+          _this4.onTimesUp();
         }
       }, 1000);
     },
@@ -53564,7 +53608,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("complete test")]
+        [_vm._v(_vm._s(_vm.textBTN) + _vm._s(_vm.nextItemIndex))]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "base-timer" }, [

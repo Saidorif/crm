@@ -34,7 +34,7 @@
 				</div>
 			</template>
 		</template>
-		<button class="btn btn-success" @click.prevent="completeTest">complete test</button>
+		<button class="btn btn-success" @click.prevent="completeTest">{{textBTN}}{{nextItemIndex}}</button>
 		<div class="base-timer">
 			<svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 				<g class="base-timer__circle">
@@ -86,10 +86,12 @@
 				userInfo:[],
 				tests:[],
 				chosenAnswerID:null,
-				myAnswers:[]
+				myAnswers:[],
+				textBTN:'next >',
+				nextItemIndex:null
 			}
 		},
-		mounted(){
+		async mounted(){
 			this.startTimer();
 			this.userInfo = this.getTests.attestat
 			this.tests = this.getTests.result
@@ -101,10 +103,12 @@
 					let newArr = this.tests.map((item,index)=>{
 						if(this.chosenAnswerID == null){
 							if (index == 0) {
+								this.nextItemIndex = index
 								return item
 							}
 						}else{
 							if (this.chosenAnswerID == parseInt(item.id)) {
+								this.nextItemIndex = index
 								return item
 							}
 						}
@@ -116,12 +120,28 @@
 		methods:{
 			...mapActions('test',['actionCompleteTest']),
 			async completeTest(){
-				let data = {
-					attestat_id:this.userInfo.id,
-					questions:this.myAnswers
+				if (this.tests.length == this.myAnswers.length) {
+					let data = {
+						attestat_id:this.userInfo.id,
+						questions:this.myAnswers
+					}
+					await this.actionCompleteTest(data)
+					this.textBtn='complete test'
+				}else{
+					this.nextBtn()
 				}
-				await this.actionCompleteTest(data)
-				console.log(this.getComplete)
+			},
+			prevBtn(){
+				if (this.tests[this.nextItemIndex+1]) {
+					this.chosenAnswerID = this.tests[this.nextItemIndex+1].id
+					this.textBtn='< prev'
+				}
+			},
+			nextBtn(){
+				if (this.tests[this.nextItemIndex+1]) {
+					this.chosenAnswerID = this.tests[this.nextItemIndex+1].id
+					this.textBtn='next >'
+				}
 			},
 			clickAnswer(qID,ansID){	
 				this.myAnswers = this.myAnswers.filter((item,index)=>{
