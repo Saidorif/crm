@@ -267,5 +267,10 @@
 	}
 </script>
 <style scoped>
-
+	ol{
+		padding-left: 25px;
+	    font-weight: bold;
+	    display: flex;
+	    justify-content: space-between;
+	}
 </style>
