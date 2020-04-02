@@ -11,7 +11,7 @@
 			  <form @submit.prevent.enter="startTest" >
 					<div class="row">
 						<div class="form-group col-md-6">
-						    <label for="status">Тип</label>
+						    <label for="status">Типы</label>
 						    <select 
 						    	class="form-control" 
 						    	id="status" 
