@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Question;
 use App\Attestat;
+use App\User;
 
 class AttestatController extends Controller
 {
 
     public function index()
     {
-        $attestats = Attestat::paginate(12);
+        $attestats = Attestat::orderBy('id','DESC')->paginate(12);
         return response()->json(['success' => true, 'result' => $attestats]);
     }
 
@@ -60,8 +61,21 @@ class AttestatController extends Controller
         $inputs['time'] = $ex_time;
         $inputs['question_ids'] = json_encode($q_ids);
         $inputs['status'] = $status;
-        $attestat = Attestat::create($inputs);
-    	return response()->json(['success' => true,'total_time'=> $ex_time,'start' => $start,'end' => $end, 'result' => $questions, 'attestat' => $attestat]);
+        
+        if($status == 'start'){
+            $employees = User::where(['category_id' => $inputs['category_id']])->get();
+            foreach ($employees as $key => $employee) {
+                $inputs['user_id'] = $employee->id;
+                $inputs['fio'] = $employee->name;
+                $attestat = Attestat::create($inputs);
+            }
+            return response()->json(['success' => true, 'message' => 'Tests created for '. count($employees) .' employees']);
+        }
+        if($status == 'progress'){
+            $attestat = Attestat::create($inputs);
+            return response()->json(['success' => true,'total_time'=> $ex_time,'start' => $start,'end' => $end, 'result' => $questions, 'attestat' => $attestat]);
+        }
+        return response()->json(['error' => true,'message' => 'Something went wrong...']);
     }
 
     public function complete(Request $request,$id)
@@ -117,6 +131,13 @@ class AttestatController extends Controller
         $attestat = Attestat::find($id);
         if(!$attestat){
             return response()->json(['error' => true, 'message' => 'Not found...']);
+        }
+        if($attestat->status == 'start'){
+            $result = [
+                'attestat' => $attestat,
+                'questions' => $attestat->getQuestions(),
+            ];
+            return response()->json(['success' => true, 'result' => $result]);
         }
         $result = [
             'attestat' => $attestat,

@@ -12,10 +12,21 @@ class Attestat extends Model
     {
     	$ids = json_decode($this->question_ids);
     	$questions = Question::whereIn('id', $ids)->get();
-    	// foreach ($questions as $key => $value) {
-    	// 	# code...
-    	// }
-    	return $questions;
+    	$results = [];
+        foreach ($questions as $key => $item) {
+            $variants = $item->variants;
+            foreach ($variants as $key => $value) {
+                unset($value->is_true);
+            }
+            $res = new \StdClass();
+            $res->id = $item->id;
+            $res->title = $item->title;
+            $res->time = $item->time;
+            $res->category = $item->category->name;
+            $res->variants = $variants;
+            $results[] = $res;
+        }
+    	return $results;
     }
 
     public function questionsWithResult()
