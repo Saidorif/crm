@@ -11,6 +11,17 @@
 			  <form @submit.prevent.enter="startTest" >
 					<div class="row">
 						<div class="form-group col-md-6">
+						    <label for="status">Тип</label>
+						    <select 
+						    	class="form-control" 
+						    	id="status" 
+						    	v-model="form.type">
+						      <option :value="type.type" v-for="(type,index) in types">	
+						      	{{type.name}}
+						      </option>
+						    </select>
+					  	</div>
+						<div class="form-group col-md-6" v-if="form.type == 'guest'">
 						    <label for="categoryName">Ф.И.О</label>
 						    <input 
 						    	type="text" 
@@ -65,13 +76,27 @@
 					category_id:'',
 					fio:'',
 					limit:'',
+					type:'employee',
 				},
+				types:[
+					{'name':'Кандидат','type':'guest'},
+					{'name':'Сотрудник','type':'employee'},
+				],
 				requiredInput:false,
 			}
 		},
 		computed:{
 			...mapGetters('test',['getTests','getMassage']),
-			...mapGetters('category',['getCategories'])
+			...mapGetters('category',['getCategories']),
+			checkInputs(){
+				if (this.form.type == 'guest' && this.form.category_id && this.form.fio &&  this.form.limit) {
+					return true
+				}else if(this.form.type == 'employee' && this.form.category_id &&  this.form.limit){
+					return true
+				}else{
+					return false
+				}
+			}
 		},
 		async mounted(){
 			await this.actionCategoryList()
@@ -83,7 +108,7 @@
 	    		return this.requiredInput && input === '';
 		    },
 		    async startTest(){
-		    	if (this.form.category_id && this.form.fio &&  this.form.limit) {
+		    	if (this.checkInputs) {
 		    		await this.actionStartTest(this.form)
 		    		TokenService.saveGuestInfo(this.form)
 		    		if (this.getTests.success){
