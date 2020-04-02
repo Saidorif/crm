@@ -9,19 +9,32 @@ use App\Attestat;
 
 class AttestatController extends Controller
 {
+
+    public function index()
+    {
+        $attestats = Attestat::paginate(12);
+        return response()->json(['success' => true, 'result' => $attestats]);
+    }
+
+
     public function attestat(Request $request)
     {
     	$validator = Validator::make($request->all(),[
     		'category_id' => 'required|integer',
     		'limit' => 'required|integer',
             'fio' => 'required|string',
-            'user_id' => 'integer|nullable'
+            'user_id' => 'integer|nullable',
+            'type' => 'required|string',
     	]);
 
     	if($validator->fails()){
     		return response()->json(['error' => true, 'message' => $validator->messages()]);
     	}
     	$inputs = $request->all();
+        $status = 'progress';
+        if($inputs['type'] == 'employee'){
+            $status = 'start';
+        }
 
     	$questions = Question::with(['variants'])->where(['category_id' => $inputs['category_id']])->limit($inputs['limit'])->get();
         if(count($questions) < $inputs['limit']){
@@ -46,6 +59,7 @@ class AttestatController extends Controller
         $inputs['ended_at'] = $end;
         $inputs['time'] = $ex_time;
         $inputs['question_ids'] = json_encode($q_ids);
+        $inputs['status'] = $status;
         $attestat = Attestat::create($inputs);
     	return response()->json(['success' => true,'total_time'=> $ex_time,'start' => $start,'end' => $end, 'result' => $questions, 'attestat' => $attestat]);
     }
