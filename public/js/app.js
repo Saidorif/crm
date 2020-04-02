@@ -54359,7 +54359,7 @@ var render = function() {
           [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "form-group col-md-6" }, [
-                _c("label", { attrs: { for: "status" } }, [_vm._v("Тип")]),
+                _c("label", { attrs: { for: "status" } }, [_vm._v("Типы")]),
                 _vm._v(" "),
                 _c(
                   "select",
