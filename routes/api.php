@@ -59,6 +59,7 @@ Route::group([
         Route::delete('question/destroy/{id}', 'QuestionController@destroy');
 
         //Attestat Model
+        Route::get('attestat/all','AttestatController@index');
         Route::post('attestat','AttestatController@attestat');
         Route::post('attestat/complete/{id}','AttestatController@complete');
         Route::post('attestat/show/{id}','AttestatController@show');
