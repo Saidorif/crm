@@ -1,33 +1,28 @@
 <template>
 	<div class="show_test_result">
-		<ul v-if="userInfo">
-			<li>User Fullname : {{userInfo.fio}}</li>
-			<li>Status Test : {{userInfo.status}}</li>
-			<li>Test Quantity : {{userInfo.limit}} in percentage 100%</li>
+		<ul v-if="userInfo" class="user_info_result">
+			<li><b> User Fullname :</b> {{userInfo.fio}}</li>
+			<li><b>Status Test :</b> {{userInfo.status}}</li>
+			<li><b>Test Quantity : </b>{{userInfo.limit}} in percentage 100%</li>
 			<li>
-				Wrong answers : {{userInfo.wrong_answers}} in percentage 
+				<b>Wrong answers :</b> {{userInfo.wrong_answers}} in percentage 
 				{{countPercentage(userInfo.wrong_answers)}}
 			</li>
 			<li>
-				Right answers : {{userInfo.true_answers}} in percentage 
+				<b>Right answers :</b> {{userInfo.true_answers}} in percentage 
 				{{countPercentage(userInfo.true_answers)}}
 			</li>
-			<li>Data for test : {{getTime}}</li>
+			<li><b>Data for test :</b> {{getTime}}</li>
+			<li><b>Test Category: </b> {{items[0].category}}</li>
 		</ul>
-		<ul v-for="(item,index) in items" v-if="items.length > 0">
-			<li>{{index+1}} ) </li>
-			<li>Test title: {{item.title}}</li>
-			<li>Test Category: {{item.category}}</li>
-			<b>Variants</b>
-			<ol type="A">
-				<li 
-					v-for="(q,i) in item.variants" 
-				>	
-					<span :class="chechAnswer(item.user_choose,q)">{{q.title}} </span>
-					<b>
-						{{chechAnswer(item.user_choose,q) =='wrong_answer' ? '/ user mistake' : '' }}
-					</b>
-				</li>
+		<ul v-for="(item,index) in items" v-if="items.length > 0" class="result_test_item">
+			<li class="result_quelstion_item">{{index+1}} ) <b> {{item.title}}</b></li>
+			<ol type="A" class="result_test_item_variants">
+				<template  v-for="(q,i) in item.variants" >	
+					<li :class="{'correctAnswer': chechAnswer(item.user_choose,q)=='true_answer', 'mistakeAnswer': chechAnswer(item.user_choose,q)=='wrong_answer'}">
+						<span >{{q.title}}  </span>
+					</li>
+				</template>
 			</ol>
 		</ul>
 	</div>

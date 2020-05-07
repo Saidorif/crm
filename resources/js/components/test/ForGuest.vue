@@ -18,7 +18,7 @@
 					<div class="test_question_block">
 					 	{{item.title}} ?
 					</div>
-					<ol type="A">
+					<ol type="A" class="test_answers_list">
 						<li v-for="(variant,i) in item.variants" class="input_radio_block">
 							<input 
 								type="radio" 
@@ -35,24 +35,28 @@
 					</ol>
 				</template>
 			</template>
-			<button 
-				class="btn btn-success" 
-				@click.prevent="prevBtn">
-				< prev 
-			</button>
-			<button 
-				class="btn btn-success" 
-				@click.prevent="nextBtn"
-				:disabled="disabledTrue"
-			>
-				next >
-			</button>
-			<button 
-				v-if="tests.length == myAnswers.length"
-				class="btn btn-success" 
-				@click.prevent="completeTest">
-				complete test
-			</button>
+			<div class="answers_buttons">
+				<button 
+					class="btn_prev" 
+					@click.prevent="prevBtn">
+					<span class="pe-7s-angle-left-circle"></span>  prev 
+				</button>
+				<button 
+					class="btn_next" 
+					@click.prevent="nextBtn"
+					:disabled="disabledTrue"
+					v-if="tests.length != myAnswers.length"
+				>
+					next <span class="pe-7s-angle-right-circle"></span> 
+				</button>
+				<button 
+					v-if="tests.length == myAnswers.length"
+					class="btn_finish" 
+					@click.prevent="completeTest">
+					<span class="pe-7s-display1"></span>
+					complete test
+				</button>
+			</div>
 			<div class="base-timer">
 				<svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 					<g class="base-timer__circle">
@@ -267,10 +271,4 @@
 	}
 </script>
 <style scoped>
-	ol{
-		padding-left: 25px;
-	    font-weight: bold;
-	    display: flex;
-	    justify-content: space-between;
-	}
 </style>
