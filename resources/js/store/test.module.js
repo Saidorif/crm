@@ -5,7 +5,7 @@ const state = {
 	tests: [],
 	complete: [],
 	test: [],
-	testList: [],
+	testList: {},
 };
 
 const getters = {
@@ -57,8 +57,8 @@ const actions = {
 	},
 	async actionTestList({commit},payload){
 		try {
-			const items =  await TestService.testList(payload);
-			await commit('setTestList',items.data)
+			const items =  await TestService.testListUrl(payload);
+			await commit('setTestList',items.data.result)
 			return true
 		} catch (error) {
 			return false
