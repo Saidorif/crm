@@ -124,7 +124,7 @@
 		},
 		async mounted(){
 			if (TokenService.getGuestInfo()) {
-				await this.actionStartTest(TokenService.getGuestInfo())
+				// await this.actionStartTest(TokenService.getGuestInfo())
 				this.startTimer();
 				this.userInfo = this.getTests.attestat
 				this.tests = this.getTests.result

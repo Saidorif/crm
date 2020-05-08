@@ -13,7 +13,7 @@
 				{{countPercentage(userInfo.true_answers)}}
 			</li>
 			<li><b>Data for test :</b> {{getTime}}</li>
-			<li><b>Test Category: </b> {{items[0].category}}</li>
+			<li><b>Test Category: </b> {{items.length > 0 ? items[0].category : ''}}</li>
 		</ul>
 		<ul v-for="(item,index) in items" v-if="items.length > 0" class="result_test_item">
 			<li class="result_quelstion_item">{{index+1}} ) <b> {{item.title}}</b></li>
@@ -33,7 +33,8 @@
 		data(){
 			return{
 				userInfo:[],
-				items:[]
+				items:[],
+				category:null
 			}
 		},
 		async mounted(){
@@ -41,7 +42,7 @@
 			if (this.getTest.success) {
 				this.userInfo = this.getTest.result.attestat
 				this.items = this.getTest.result.questions
-				console.log(this.items)
+				this.category = this.items[0].category
 			}
 		},
 		methods:{
