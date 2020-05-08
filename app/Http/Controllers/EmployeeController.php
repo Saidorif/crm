@@ -107,6 +107,7 @@ class EmployeeController extends Controller
     {
         $user = $request->user();
         // $employee = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
+        $employee = User::where(['id' => $id])->first();
         $employee = User::findOrFail($id);
         if(!$employee){
             return response()->json(['error' => true, 'message' => 'Employee not found']);
@@ -139,8 +140,8 @@ class EmployeeController extends Controller
         }else{
             unset($inputs['password']);
         }
-        //Upload file and image
-        if ($request->image != $user->image) {
+        // Upload file and image
+        if ($request->image != $employee->image){
             $strpos = strpos($request->image,';');
             $sub = substr($request->image, 0,$strpos);
             $ex = explode('/',$sub)[1];
@@ -148,16 +149,16 @@ class EmployeeController extends Controller
             $img = Image::make($request->image);
             $img_path = public_path()."/users/";
             $img->save($img_path.$name);
-            $image = $img_path.$user->image;
-            if (file_exists($image)) {
+            $image = $img_path.$employee->image;
+            if (file_exists($image)){
                 @unlink($image);
             }
         }
         else{
-            $name = $user->image;
+            $name = $employee->image;
         }
 
-        if ($request->file != $user->file) {
+        if ($request->file != $employee->file) {
             $strposFile = strpos($request->file,';');
             $subFile = substr($request->file, 0,$strposFile);
             $exFile = explode('/',$subFile)[1];
@@ -165,13 +166,13 @@ class EmployeeController extends Controller
             $imgFile = Image::make($request->file);
             $file_path = public_path()."/users/";
             $imgFile->save($file_path.$nameFile);
-            $imageFile = $file_path.$user->file;
+            $imageFile = $file_path.$employee->file;
             if (file_exists($imageFile)) {
                 @unlink($imageFile);
             }
         }
         else{
-            $nameFile = $user->file;
+            $nameFile = $employee->file;
         }
         $inputs['image'] = $name;
         $inputs['file'] = $nameFile;

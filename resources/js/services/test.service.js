@@ -10,6 +10,9 @@ const TestService = {
 	showTest(id){
 		return ApiService.post(`/api/attestat/show/${id}`)
 	},
+	testListUrl(){
+		// return ApiService.post(`/api/`)
+	},
 };
 
 export { TestService };
