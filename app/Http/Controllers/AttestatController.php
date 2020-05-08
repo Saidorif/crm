@@ -23,7 +23,7 @@ class AttestatController extends Controller
     	$validator = Validator::make($request->all(),[
     		'category_id' => 'required|integer',
     		'limit' => 'required|integer',
-            'fio' => 'required|string',
+            'fio' => 'string|nullable',
             'user_id' => 'integer|nullable',
             'type' => 'required|string',
     	]);
@@ -35,6 +35,15 @@ class AttestatController extends Controller
         $status = 'progress';
         if($inputs['type'] == 'employee'){
             $status = 'start';
+        }
+        if($inputs['type'] == 'guest'){
+            $guestvalidator = Validator::make($request->all(),[
+                'fio' => 'required|string',
+            ]);
+
+            if($guestvalidator->fails()){
+                return response()->json(['error' => true, 'message' => $guestvalidator->messages()]);
+            }
         }
 
     	$questions = Question::with(['variants'])->where(['category_id' => $inputs['category_id']])->limit($inputs['limit'])->get();

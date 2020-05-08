@@ -13,7 +13,7 @@ class EmployeeController extends Controller
     public function index()
     {
         // $users = User::with('role')->where('role_id', '!=', 1)->paginate(12);
-        $users = User::with('role')->paginate(12);
+        $users = User::with(['role','position'])->paginate(12);
         return response()->json(['success' => true, 'result' => $users]);
     }
 
@@ -37,7 +37,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         // $user = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
-        $user = User::findOrFail($id);
+        $user = User::with(['role','position'])->find($id);
         if(!$user){
             return response()->json(['error' => true, 'message' => 'User not found']);
         }
@@ -52,12 +52,13 @@ class EmployeeController extends Controller
             'email'             => 'required|email|unique:users,email',
             'password'          => 'required|string|min:6',
             'confirm_password'  => 'required|string|min:6',
-            'role_id'   => 'required|integer',
-            'phone'     => 'string|nullable',
-            'image'     => 'nullable',
-            'file'      => 'nullable',
-            'address'   => 'string|nullable',
-            'text'      => 'string|nullable',
+            'role_id'           => 'required|integer',
+            'position_id'       => 'required|integer',
+            'phone'             => 'string|nullable',
+            'image'             => 'nullable',
+            'file'              => 'nullable',
+            'address'           => 'string|nullable',
+            'text'              => 'string|nullable',
             'role_id'           => 'required|integer',
             'phone'             => 'string|nullable',
             'image'             => 'string|nullable',
@@ -117,6 +118,7 @@ class EmployeeController extends Controller
             'password'          => 'nullable|string|min:6',
             'confirm_password'  => 'nullable|string|min:6',
             'role_id'           => 'required|integer',
+            'position_id'       => 'required|integer',
             'phone'             => 'string|nullable',
             'address'           => 'string|nullable',
             'text'              => 'string|nullable',
