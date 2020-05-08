@@ -13,7 +13,14 @@ class AttestatController extends Controller
 
     public function index()
     {
-        $attestats = Attestat::orderBy('id','DESC')->paginate(12);
+        $attestats = Attestat::with(['category'])->orderBy('id','DESC')->paginate(12);
+        return response()->json(['success' => true, 'result' => $attestats]);
+    }
+
+    public function userindex()
+    {
+        $user = request()->user();
+        $attestats = Attestat::where(['user_id' => $user->id])->with(['category'])->orderBy('id','DESC')->paginate(12);
         return response()->json(['success' => true, 'result' => $attestats]);
     }
 

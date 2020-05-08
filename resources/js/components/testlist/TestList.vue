@@ -15,28 +15,27 @@
 								<th scope="col">№</th>
 								<th scope="col">Ф.И.О</th>
 								<th scope="col">Направления</th>
-								<th scope="col">Заголовок</th>
+								<th scope="col">Статус</th>
 								<th scope="col">Количество вопроса</th>
 								<th scope="col">Балл</th>
 								<th scope="col">Действия</th>
 							</tr>
 						</thead>
 						<tbody>
-						<!-- 	<tr v-for="(item,index) in getTestList.data">
+							<tr v-for="(item,index) in getTestList.data">
 								<td scope="row">{{index+1}}</td>
-								<td>{{item.title}}</td>
-								<td>{{item.category.name}}</td>
+								<td>{{item.fio}}</td>
+								<!-- <td>{{item.category.name}}</td> -->
+								<td>{{item.status}}</td>
+								<td>{{item.limit}}</td>
 								<td>
-									<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>
+								<!-- 	<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>
 										<i class="pe_icon pe-7s-edit editColor"></i>
-									</router-link>
-									<button class="btn_transparent" @click="deleteQuestion(item.id)">
-										<i class="pe_icon pe-7s-junk trashColor"></i>
-									</button>
+									</router-link> -->
 								</td>
-							</tr> -->
+							</tr>
 						</tbody>
-						<!-- <pagination :limit="4" :data="getTestList" @pagination-change-page="getResults"></pagination> -->
+						<pagination :limit="4" :data="getTestList" @pagination-change-page="getResults"></pagination>
 					</table>
 			  	</div>
 		  	</div>
@@ -55,10 +54,15 @@
 			...mapGetters('test',['getTestList'])
 		},
 		methods:{
-			...mapActions('test',['actionTestList'])
+			...mapActions('test',['actionTestList']),
+			async getResults(page = 1){ 
+				await this.actionTestList(page)
+			},
 		},
-		mounted(){
-
+		async mounted(){
+			let page = 1
+			await this.actionTestList({page:page})
+			console.log(this.getTestList)
 		}
 	}
 </script>
