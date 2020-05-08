@@ -85,6 +85,13 @@
                   </p>
                 </router-link>
               </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/test/list">
+                  <p>
+                    Test List
+                  </p>
+                </router-link>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
