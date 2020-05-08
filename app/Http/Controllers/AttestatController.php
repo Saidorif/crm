@@ -20,7 +20,7 @@ class AttestatController extends Controller
     public function userindex()
     {
         $user = request()->user();
-        $attestats = Attestat::where(['user_id' => $user->id])->orderBy('id','DESC')->paginate(12);
+        $attestats = Attestat::where(['user_id' => $user->id])->with(['category'])->orderBy('id','DESC')->paginate(12);
         return response()->json(['success' => true, 'result' => $attestats]);
     }
 

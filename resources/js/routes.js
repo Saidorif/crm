@@ -26,10 +26,15 @@ import Question from './components/admin/question/Question'
 import AddQuestion from './components/admin/question/AddQuestion'
 import EditQuestion from './components/admin/question/EditQuestion'
 
-// Question
+// Role
 import Role from './components/admin/role/Role'
 import AddRole from './components/admin/role/AddRole'
 import EditRole from './components/admin/role/EditRole'
+
+// Position
+import Position from './components/admin/position/Position'
+import AddPosition from './components/admin/position/AddPosition'
+import EditPosition from './components/admin/position/EditPosition'
 
 // Test
 import ShowTestResult from './components/test/ShowTestResult'
@@ -111,6 +116,18 @@ const router = new Router({
 				{
 					path:'role/edit/:roleId',
 					component:EditRole,
+				},
+				{
+					path:'position',
+					component:Position,
+				},
+				{
+					path:'position/add',
+					component:AddPosition,
+				},
+				{
+					path:'position/edit/:positionId',
+					component:EditPosition,
 				},
 				{
 					path:'test/test-for-guest',
