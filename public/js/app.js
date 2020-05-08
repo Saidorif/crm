@@ -91595,15 +91595,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\crm.loc\resources\sass\style.scss */"./resources/sass/style.scss");
-=======
-__webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\sass\style.scss */"./resources/sass/style.scss");
->>>>>>> 2b153b656aafff07dae36f444af65b2639bca78e
+__webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })
