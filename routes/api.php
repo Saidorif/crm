@@ -72,6 +72,20 @@ Route::group([
         Route::post('attestat','AttestatController@attestat');
         Route::post('attestat/complete/{id}','AttestatController@complete');
         Route::post('attestat/show/{id}','AttestatController@show');
+
+        // Controllers
+        Route::get('controller', 'ContsController@index');
+        Route::post('controller/find', 'ContsController@find');
+        Route::post('controller/store', 'ContsController@store');
+        Route::post('controller/update/{id}', 'ContsController@update')->where('id', '[0-9]+');
+        Route::get('controller/edit/{id}', 'ContsController@edit')->where('id', '[0-9]+');
+        Route::get('all-controller-actions', 'ContsController@allContActions');
+
+        // Actions
+        Route::get('action', 'ActionController@index');
+        Route::post('action/store', 'ActionController@store');
+        Route::post('action/update/{id}', 'ActionController@update')->where('id', '[0-9]+');
+        Route::get('action/edit/{id}', 'ActionController@edit')->where('id', '[0-9]+');
     });
 
 
