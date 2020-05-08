@@ -54,4 +54,9 @@ class Attestat extends Model
     	}
     	return $results;
     }
+
+    public function category()
+    {
+        return $this->belongsTo(TestCategory::class,'category_id');
+    }
 }
