@@ -1,18 +1,18 @@
 <template>
-	<div class="result_test">
-		<h4>All questions {{items.wrong_answers + items.true_answers}} in percentage 100%</h4>
-		<h4>
-			Wrong answers : {{items.wrong_answers}} in percentage 
+	<ul class="result_test user_info_result">
+		<li><b> All questions</b> {{items.wrong_answers + items.true_answers}} in percentage 100%</li>
+		<li>
+			<b>Wrong answers :</b> {{items.wrong_answers}} in percentage 
 			{{countPercentage(items.wrong_answers)}}
-		</h4>
-		<h4>
-			Right answers : {{items.true_answers}} in percentage 
+		</li>
+		<li>
+			<b>Right answers :</b> {{items.true_answers}} in percentage 
 			{{countPercentage(items.true_answers)}}
-		</h4>
+		</li>
 		<router-link tag="button" class="btn btn-primary" :to='`/crm/test/test-result/${items.id}`'>
 			Show test result
 		</router-link>
-	</div>
+	</ul>
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
