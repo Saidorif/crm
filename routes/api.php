@@ -35,6 +35,14 @@ Route::group([
         Route::post('employee/update/{id}', 'EmployeeController@update');
         Route::delete('employee/destroy/{id}', 'EmployeeController@destroy');
 
+        //Position Model
+        Route::get('position/all','PositionController@index');
+        Route::get('position/list','PositionController@list');
+        Route::post('position/store','PositionController@store');
+        Route::get('position/edit/{id}','PositionController@edit');
+        Route::post('position/update/{id}','PositionController@update');
+        Route::delete('position/destroy/{id}','PositionController@destroy');
+
         //Role model
         Route::get('role', 'RoleController@index');
         Route::post('role/store', 'RoleController@store');
