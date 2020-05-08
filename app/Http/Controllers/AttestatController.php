@@ -144,7 +144,7 @@ class AttestatController extends Controller
 
     public function show($id)
     {
-        $attestat = Attestat::find($id);
+        $attestat = Attestat::with(['category'])->find($id);
         if(!$attestat){
             return response()->json(['error' => true, 'message' => 'Not found...']);
         }
