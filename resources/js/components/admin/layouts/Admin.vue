@@ -110,6 +110,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/position">
+              <i class="peIcon pe-7s-id"></i>
+              <p>
+                Должность
+              </p>
+            </router-link>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

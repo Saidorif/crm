@@ -25,13 +25,13 @@
 							<tr v-for="(item,index) in getTestList.data">
 								<td scope="row">{{index+1}}</td>
 								<td>{{item.fio}}</td>
-								<!-- <td>{{item.category.name}}</td> -->
+								<td>{{item.category.name}}</td>
 								<td>{{item.status}}</td>
 								<td>{{item.limit}}</td>
 								<td>
-								<!-- 	<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>
+									<router-link tag="button" class="btn_transparent" :to='`/crm/test/test-result/${item.id}`'>
 										<i class="pe_icon pe-7s-edit editColor"></i>
-									</router-link> -->
+									</router-link>
 								</td>
 							</tr>
 						</tbody>
