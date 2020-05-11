@@ -52511,7 +52511,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.name))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.position.name))]),
+                    _c("td", [
+                      _vm._v(_vm._s(item.position ? item.position.name : ""))
+                    ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.role.name))]),
                     _vm._v(" "),
