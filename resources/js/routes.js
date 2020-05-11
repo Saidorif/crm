@@ -42,8 +42,9 @@ import StartTest from './components/test/StartTest'
 import ForGuest from './components/test/ForGuest'
 import TestList from './components/testlist/TestList'
 
-// 
+// TestUser
 import TestUser from './components/testUser/TestUser'
+import TestUserStart from './components/testUser/TestUserStart'
 
 
 // NotFound
@@ -148,8 +149,12 @@ const router = new Router({
 					component:ShowTestResult,
 				},
 				{
-					path:'test-user',
+					path:'test/test-user',
 					component:TestUser,
+				},
+				{
+					path:'test/test-user-start/:userTestId',
+					component:TestUserStart,
 				},
 			]
 		},
