@@ -9840,9 +9840,7 @@ var remainingPathColor = COLOR_CODES.info.color;
       timePassed: 0,
       timeLeft: 0,
       TIME_LIMIT: 0,
-      timerInterval: null,
-      items: [],
-      showResult: false
+      timerInterval: null
     };
   },
   mounted: function mounted() {
@@ -9859,8 +9857,6 @@ var remainingPathColor = COLOR_CODES.info.color;
               return _this.actionStartUserTest(_this.$route.params.userTestId);
 
             case 2:
-              console.log(_this.getStartUserTest);
-
               _this.startTimer();
 
               _this.userInfo = _this.getStartUserTest.attestat;
@@ -9868,7 +9864,7 @@ var remainingPathColor = COLOR_CODES.info.color;
               _this.timeLeft = _this.getStartUserTest.total_time;
               _this.TIME_LIMIT = _this.getStartUserTest.total_time;
 
-            case 8:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -9935,9 +9931,7 @@ var remainingPathColor = COLOR_CODES.info.color;
 
               case 4:
                 if (_this3.getComplete.success) {
-                  _this3.showResult = true;
-                  _this3.items = _this3.getComplete;
-                  _this3.items['id'] = _this3.userInfo.id;
+                  _this3.$router.push("/crm/test/test-user");
 
                   _this3.onTimesUp();
                 }

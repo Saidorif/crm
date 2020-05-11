@@ -111,13 +111,10 @@
 				timeLeft:0,
 				TIME_LIMIT:0,
 				timerInterval:null,
-				items:[],
-				showResult:false
 			}
 		},
 		async mounted(){
 			await this.actionStartUserTest(this.$route.params.userTestId)
-			console.log(this.getStartUserTest)
 			this.startTimer();
 			this.userInfo = this.getStartUserTest.attestat
 			this.tests = this.getStartUserTest.result
@@ -166,9 +163,7 @@
 					}
 					await this.actionCompleteTest(data)
 					if (this.getComplete.success){
-						this.showResult = true
-						this.items = this.getComplete
-						this.items['id'] = this.userInfo.id
+						this.$router.push("/crm/test/test-user");
 						this.onTimesUp()
 					}
 				}
