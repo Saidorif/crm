@@ -9599,6 +9599,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -55997,6 +55999,8 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.created_at))]),
+                    _vm._v(" "),
                     _c(
                       "td",
                       [
@@ -56060,6 +56064,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Количество вопроса")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Балл")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Дата")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Действия")])
       ])
@@ -93756,15 +93762,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
-=======
-__webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\sass\style.scss */"./resources/sass/style.scss");
->>>>>>> 43545c212be7658b41636b77eff950357e0f9d52
 
 
 /***/ })

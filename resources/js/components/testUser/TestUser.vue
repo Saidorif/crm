@@ -16,6 +16,7 @@
 								<th scope="col">Статус</th>
 								<th scope="col">Количество вопроса</th>
 								<th scope="col">Балл</th>
+								<th scope="col">Дата</th>
 								<th scope="col">Действия</th>
 							</tr>
 						</thead>
@@ -29,6 +30,7 @@
 								</td>
 								<td>{{item.limit}}</td>
 								<td>{{percentage(item.limit,item.true_answers)}}</td>
+								<td>{{item.created_at}}</td>
 								<td>
 									<router-link tag="button" class="btn_transparent" :to='`/crm/test/test-result/${item.id}`'>
 										<i class="pe_icon pe-7s-edit editColor"></i>
