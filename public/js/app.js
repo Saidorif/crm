@@ -52568,7 +52568,7 @@ var render = function() {
                           attrs: { to: "/crm/position" }
                         },
                         [
-                          _c("i", { staticClass: "peIcon pe-7s-id" }),
+                          _c("i", { staticClass: "peIcon pe-7s-graph1" }),
                           _vm._v(" "),
                           _c("p", [
                             _vm._v(

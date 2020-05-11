@@ -112,7 +112,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/position">
-              <i class="peIcon pe-7s-id"></i>
+              <i class="peIcon pe-7s-graph1"></i>
               <p>
                 Должность
               </p>
