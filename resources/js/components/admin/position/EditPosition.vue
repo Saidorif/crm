@@ -4,30 +4,30 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-id"></i>
-				    Edit Role
+				    Edit Position
 				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/role"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				<router-link class="btn btn-primary back_btn" to="/crm/position"><span class="peIcon pe-7s-back"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
-		  		<form @submit.prevent.enter="saveRole" >
+		  		<form @submit.prevent.enter="savePosition" >
 					<div class="row">
 					  <div class="form-group col-md-9">
-					    <label for="roleName">Role Name</label>
+					    <label for="positionName">Position Name</label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
-					    	id="roleName" 
-					    	placeholder="Role Name"
+					    	id="positionName" 
+					    	placeholder="Position Name"
 					    	v-model="form.name"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>
 					  </div>
 					 <div class="form-group col-md-9">
-					    <label for="roleName">Label</label>
+					    <label for="positionName">Label</label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
-					    	id="roleName" 
+					    	id="positionName" 
 					    	placeholder="Label"
 					    	v-model="form.label"
 					    	:class="isRequired(form.label) ? 'isRequired' : ''"  
@@ -58,21 +58,21 @@
 			}
 		},
 		computed:{
-			...mapGetters('role',['getMassage','getRole'])
+			...mapGetters('position',['getMassage','getPosition'])
 		},
 		async mounted(){
-			await this.actionEditRole({id:this.$route.params.roleId})
-			this.form = this.getRole
+			await this.actionEditPosition({id:this.$route.params.positionId})
+			this.form = this.getPosition
 		},
 		methods:{
-			...mapActions('role',['actionEditRole','actionUpdateRole']),
+			...mapActions('position',['actionEditPosition','actionUpdatePosition']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
-		    async saveRole(){
+		    async savePosition(){
 		    	if (this.form.name != '' && this.form.name != null){
-					await this.actionUpdateRole(this.form)
-					this.$router.push("/crm/role");
+					await this.actionUpdatePosition(this.form)
+					this.$router.push("/crm/position");
 					this.requiredInput =false
 				}else{
 					this.requiredInput =true

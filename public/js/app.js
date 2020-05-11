@@ -6936,7 +6936,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       requiredInput: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getMassage', 'getRole'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('position', ['getMassage', 'getPosition'])),
   mounted: function mounted() {
     var _this = this;
 
@@ -6948,12 +6948,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.actionEditRole({
-                id: _this.$route.params.roleId
+              return _this.actionEditPosition({
+                id: _this.$route.params.positionId
               });
 
             case 2:
-              _this.form = _this.getRole;
+              _this.form = _this.getPosition;
 
             case 3:
             case "end":
@@ -6963,11 +6963,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, _callee);
     }))();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionEditRole', 'actionUpdateRole']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('position', ['actionEditPosition', 'actionUpdatePosition']), {
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
-    saveRole: function saveRole() {
+    savePosition: function savePosition() {
       var _this2 = this;
 
       return _asyncToGenerator(
@@ -6983,10 +6983,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
 
                 _context2.next = 3;
-                return _this2.actionUpdateRole(_this2.form);
+                return _this2.actionUpdatePosition(_this2.form);
 
               case 3:
-                _this2.$router.push("/crm/role");
+                _this2.$router.push("/crm/position");
 
                 _this2.requiredInput = false;
                 _context2.next = 8;
@@ -7091,7 +7091,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.actionRoles();
+              return _this.actionPositions();
 
             case 2:
             case "end":
@@ -7101,8 +7101,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoles', 'getMassage'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoles', 'actionDeleteRole']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('position', ['getPositions', 'getMassage'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('position', ['actionPositions', 'actionDeletePosition']), {
     getResults: function getResults() {
       var _this2 = this;
 
@@ -7115,7 +7115,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.actionRoles(page);
+                return _this2.actionPositions(page);
 
               case 2:
               case "end":
@@ -7125,7 +7125,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    deleteRole: function deleteRole(id) {
+    deletePosition: function deletePosition(id) {
       var _this3 = this;
 
       return _asyncToGenerator(
@@ -7143,11 +7143,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 page = 1;
                 _context3.next = 4;
-                return _this3.actionDeleteRole(id);
+                return _this3.actionDeletePosition(id);
 
               case 4:
                 _context3.next = 6;
-                return _this3.actionRoles(page);
+                return _this3.actionPositions(page);
 
               case 6:
                 toast.fire({
@@ -52664,7 +52664,7 @@ var render = function() {
             "router-link",
             {
               staticClass: "btn btn-primary back_btn",
-              attrs: { to: "/crm/role" }
+              attrs: { to: "/crm/position" }
             },
             [_c("span", { staticClass: "peIcon pe-7s-back" }), _vm._v(" Назад")]
           )
@@ -52766,7 +52766,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
       _c("i", { staticClass: "peIcon pe-7s-id" }),
-      _vm._v("\n\t\t\t    Add Role\n\t\t\t")
+      _vm._v("\n\t\t\t    Add Position\n\t\t\t")
     ])
   },
   function() {
@@ -52821,7 +52821,7 @@ var render = function() {
             "router-link",
             {
               staticClass: "btn btn-primary back_btn",
-              attrs: { to: "/crm/role" }
+              attrs: { to: "/crm/position" }
             },
             [_c("span", { staticClass: "peIcon pe-7s-back" }), _vm._v(" Назад")]
           )
@@ -52842,15 +52842,15 @@ var render = function() {
                   return null
                 }
                 $event.preventDefault()
-                return _vm.saveRole($event)
+                return _vm.savePosition($event)
               }
             }
           },
           [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "form-group col-md-9" }, [
-                _c("label", { attrs: { for: "roleName" } }, [
-                  _vm._v("Role Name")
+                _c("label", { attrs: { for: "positionName" } }, [
+                  _vm._v("Position Name")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -52866,8 +52866,8 @@ var render = function() {
                   class: _vm.isRequired(_vm.form.name) ? "isRequired" : "",
                   attrs: {
                     type: "text",
-                    id: "roleName",
-                    placeholder: "Role Name"
+                    id: "positionName",
+                    placeholder: "Position Name"
                   },
                   domProps: { value: _vm.form.name },
                   on: {
@@ -52882,7 +52882,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-9" }, [
-                _c("label", { attrs: { for: "roleName" } }, [_vm._v("Label")]),
+                _c("label", { attrs: { for: "positionName" } }, [
+                  _vm._v("Label")
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -52895,7 +52897,11 @@ var render = function() {
                   ],
                   staticClass: "form-control input_style",
                   class: _vm.isRequired(_vm.form.label) ? "isRequired" : "",
-                  attrs: { type: "text", id: "roleName", placeholder: "Label" },
+                  attrs: {
+                    type: "text",
+                    id: "positionName",
+                    placeholder: "Label"
+                  },
                   domProps: { value: _vm.form.label },
                   on: {
                     input: function($event) {
@@ -52923,7 +52929,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
       _c("i", { staticClass: "peIcon pe-7s-id" }),
-      _vm._v("\n\t\t\t    Edit Role\n\t\t\t")
+      _vm._v("\n\t\t\t    Edit Position\n\t\t\t")
     ])
   },
   function() {
@@ -52976,7 +52982,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "router-link",
-            { staticClass: "btn btn-primary", attrs: { to: "/crm/role/add" } },
+            {
+              staticClass: "btn btn-primary",
+              attrs: { to: "/crm/position/add" }
+            },
             [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Add")]
           )
         ],
@@ -52996,15 +53005,15 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.getRoles.data, function(role, index) {
+                _vm._l(_vm.getPositions.data, function(position, index) {
                   return _c("tr", [
                     _c("td", { attrs: { scope: "row" } }, [
                       _vm._v(_vm._s(index + 1))
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(role.name))]),
+                    _c("td", [_vm._v(_vm._s(position.name))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(role.label))]),
+                    _c("td", [_vm._v(_vm._s(position.label))]),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -53015,7 +53024,7 @@ var render = function() {
                             staticClass: "btn_transparent",
                             attrs: {
                               tag: "button",
-                              to: "/crm/role/edit/" + role.id
+                              to: "/crm/position/edit/" + position.id
                             }
                           },
                           [
@@ -53031,7 +53040,7 @@ var render = function() {
                             staticClass: "btn_transparent",
                             on: {
                               click: function($event) {
-                                return _vm.deleteRole(role.id)
+                                return _vm.deletePosition(position.id)
                               }
                             }
                           },
@@ -53050,7 +53059,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("pagination", {
-                attrs: { limit: 4, data: _vm.getRoles },
+                attrs: { limit: 4, data: _vm.getPositions },
                 on: { "pagination-change-page": _vm.getResults }
               })
             ],
@@ -53068,7 +53077,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
       _c("i", { staticClass: "peIcon pe-7s-id" }),
-      _vm._v("\n\t\t\t    Role \n\t\t\t")
+      _vm._v("\n\t\t\t    Position \n\t\t\t")
     ])
   },
   function() {
@@ -93277,9 +93286,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\kadr.loc\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })

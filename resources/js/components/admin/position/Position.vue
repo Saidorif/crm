@@ -4,9 +4,9 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-id"></i>
-				    Role 
+				    Position 
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/role/add"><i class="fas fa-plus"></i> Add</router-link>
+				<router-link class="btn btn-primary" to="/crm/position/add"><i class="fas fa-plus"></i> Add</router-link>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
@@ -20,21 +20,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(role,index) in getRoles.data">
+						<tr v-for="(position,index) in getPositions.data">
 							<td scope="row">{{index+1}}</td>
-							<td>{{role.name}}</td>
-							<td>{{role.label}}</td>
+							<td>{{position.name}}</td>
+							<td>{{position.label}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/role/edit/${role.id}`'>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/position/edit/${position.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteRole(role.id)">
+								<button class="btn_transparent" @click="deletePosition(position.id)">
 									<i class="pe_icon pe-7s-trash trashColor"></i>
 								</button>
 							</td>
 						</tr>
 					</tbody>
-					<pagination :limit="4" :data="getRoles" @pagination-change-page="getResults"></pagination>
+					<pagination :limit="4" :data="getPositions" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
 		  </div>
@@ -50,21 +50,21 @@
 			}
 		},
 		async mounted(){
-			await this.actionRoles()
+			await this.actionPositions()
 		},
 		computed:{
-			...mapGetters('role',['getRoles','getMassage'])
+			...mapGetters('position',['getPositions','getMassage'])
 		},
 		methods:{
-			...mapActions('role',['actionRoles','actionDeleteRole']),
+			...mapActions('position',['actionPositions','actionDeletePosition']),
 			async getResults(page = 1){ 
-				await this.actionRoles(page)
+				await this.actionPositions(page)
 			},
-			async deleteRole(id){
+			async deletePosition(id){
 				if(confirm("Вы действительно хотите удалить?")){
 					let page = 1
-					await this.actionDeleteRole(id)
-					await this.actionRoles(page)
+					await this.actionDeletePosition(id)
+					await this.actionPositions(page)
 					toast.fire({
 				    	type: 'success',
 				    	icon: 'success',
