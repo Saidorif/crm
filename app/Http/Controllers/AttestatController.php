@@ -94,6 +94,19 @@ class AttestatController extends Controller
         return response()->json(['error' => true,'message' => 'Something went wrong...']);
     }
 
+    public function startTestUser(Request $request,$id)
+    {
+        $user = request()->user();
+        $attestat = Attestat::with(['category'])->find($id);
+        if(!$attestat){
+            return response()->json(['error' => true, 'message' => 'Attestat not found']);
+        }
+        if($attestat->status == 'start'){
+            return response()->json(['success' => true,'result' => $attestat->getQuestions(),'attestat' => $attestat]);
+        }
+        return response()->json(['error' => true,'message' => 'Something went wrong...']);
+    }
+
     public function complete(Request $request,$id)
     {
         $validator = Validator::make($request->all(),[
