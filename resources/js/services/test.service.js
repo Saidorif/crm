@@ -13,6 +13,9 @@ const TestService = {
 	testListUrl(page){
 		return ApiService.get(`/api/attestat/all?page=`+ page)
 	},
+	testUserListUrl(page){
+		return ApiService.get(`/api/attestat/user?page=`+ page)
+	},
 };
 
 export { TestService };

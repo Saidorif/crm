@@ -6,6 +6,7 @@ const state = {
 	complete: [],
 	test: [],
 	testList: {},
+	testUserList:{}
 };
 
 const getters = {
@@ -23,6 +24,9 @@ const getters = {
 	},
 	getTestList(state){
 		return state.testList
+	},
+	getTestUserList(state){
+		return state.testUserList
 	},
 };
 
@@ -64,6 +68,15 @@ const actions = {
 			return false
 		}
 	},
+	async actionUserTestList({commit},page){
+		try {
+			const items =  await TestService.testUserListUrl(page);
+			await commit('setUserTestList',items.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 };
 
 const mutations = {
@@ -81,6 +94,9 @@ const mutations = {
 	},
 	setTestList(state, testList){
 		state.testList = testList
+	},
+	setUserTestList(state, testUserList){
+		state.testUserList = testUserList
 	},
 };
 
