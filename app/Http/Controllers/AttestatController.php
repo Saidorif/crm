@@ -101,8 +101,15 @@ class AttestatController extends Controller
         if(!$attestat){
             return response()->json(['error' => true, 'message' => 'Attestat not found']);
         }
+        $ex_time = 0;
+        //Questions
+        $questions = $attestat->getQuestions();
+
+        foreach ($questions as $key => $value) {
+            $ex_time += $value->time;
+        }
         if($attestat->status == 'start'){
-            return response()->json(['success' => true,'result' => $attestat->getQuestions(),'attestat' => $attestat]);
+            return response()->json(['success' => true,'total_time'=> $ex_time,'result' => $questions,'attestat' => $attestat]);
         }
         return response()->json(['error' => true,'message' => 'Something went wrong...']);
     }
