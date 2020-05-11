@@ -5,7 +5,7 @@ const PositionService = {
 		return ApiService.get(`/api/position/list`)
 	},
 	positions(page){
-		return ApiService.get(`/api/position?page=`+ page)
+		return ApiService.get(`/api/position/all?page=`+ page)
 	},
 	addPosition(data){
 		return ApiService.post(`/api/position/store`,data)

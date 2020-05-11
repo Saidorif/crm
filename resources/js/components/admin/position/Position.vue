@@ -3,10 +3,10 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i  class="peIcon pe-7s-id"></i>
-				    Position 
+			    	<i  class="peIcon pe-7s-graph1"></i>
+				    Должность 
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/position/add"><i class="fas fa-plus"></i> Add</router-link>
+				<router-link class="btn btn-primary" to="/crm/position/add"><i class="fas fa-plus"></i> Добавить</router-link>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
@@ -14,8 +14,7 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-							<th scope="col">Название 11</th>
-							<th scope="col">Label</th>
+							<th scope="col">Название</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
@@ -23,7 +22,6 @@
 						<tr v-for="(position,index) in getPositions.data">
 							<td scope="row">{{index+1}}</td>
 							<td>{{position.name}}</td>
-							<td>{{position.label}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/position/edit/${position.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
@@ -50,6 +48,7 @@
 			}
 		},
 		async mounted(){
+			let page = 1;
 			await this.actionPositions()
 		},
 		computed:{

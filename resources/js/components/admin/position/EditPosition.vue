@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-id"></i>
-				    Edit Position
+				    Редактировать Должность
 				</h4>
 				<router-link class="btn btn-primary back_btn" to="/crm/position"><span class="peIcon pe-7s-back"></span> Назад</router-link>
 		  	</div>
@@ -12,25 +12,14 @@
 		  		<form @submit.prevent.enter="savePosition" >
 					<div class="row">
 					  <div class="form-group col-md-9">
-					    <label for="positionName">Position Name</label>
+					    <label for="positionName">Должность</label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
 					    	id="positionName" 
-					    	placeholder="Position Name"
+					    	placeholder="Должность"
 					    	v-model="form.name"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
-				    	>
-					  </div>
-					 <div class="form-group col-md-9">
-					    <label for="positionName">Label</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="positionName" 
-					    	placeholder="Label"
-					    	v-model="form.label"
-					    	:class="isRequired(form.label) ? 'isRequired' : ''"  
 				    	>
 					  </div>
 					  <div class="form-group col-lg-3 form_btn">
@@ -52,7 +41,6 @@
 			return{
 				form:{
 					name:'',
-					label:''
 				},
 				requiredInput:false
 			}
@@ -63,6 +51,7 @@
 		async mounted(){
 			await this.actionEditPosition({id:this.$route.params.positionId})
 			this.form = this.getPosition
+			console.log(this.getPosition)
 		},
 		methods:{
 			...mapActions('position',['actionEditPosition','actionUpdatePosition']),
