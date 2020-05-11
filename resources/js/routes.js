@@ -41,7 +41,6 @@ import ShowTestResult from './components/test/ShowTestResult'
 import StartTest from './components/test/StartTest'
 import ForGuest from './components/test/ForGuest'
 import TestList from './components/testlist/TestList'
-import TestListShow from './components/testlist/TestListShow'
 
 
 // NotFound
@@ -140,10 +139,6 @@ const router = new Router({
 				{
 					path:'test/list',
 					component:TestList,
-				},
-				{
-					path:'test/list/show',
-					component:TestListShow,
 				},
 				{
 					path:'test/test-result/:showTestId',

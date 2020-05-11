@@ -26,8 +26,13 @@
 								<td scope="row">{{index+1}}</td>
 								<td>{{item.fio}}</td>
 								<td>{{item.category.name}}</td>
-								<td>{{item.status}}</td>
+								<td> 
+									<div class="badge status_f_s" :class="item.status =='complete' ? 'badge-success' : 'badge-warning'">
+										<b>{{word_to_russian(item.status)}}</b>
+									</div> 
+								</td>
 								<td>{{item.limit}}</td>
+								<td>{{percentage(item.limit,item.true_answers)}}</td>
 								<td>
 									<router-link tag="button" class="btn_transparent" :to='`/crm/test/test-result/${item.id}`'>
 										<i class="pe_icon pe-7s-edit editColor"></i>
@@ -46,9 +51,7 @@
 	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		data(){
-			return{
-
-			}
+			return{}
 		},
 		computed:{
 			...mapGetters('test',['getTestList'])
@@ -58,14 +61,26 @@
 			async getResults(page = 1){ 
 				await this.actionTestList(page)
 			},
+			percentage(limit,true_answers){
+				let number = true_answers ? parseInt(true_answers)*100/parseInt(limit)+' %' : ''
+				return number 
+			},
+			word_to_russian(word){
+				if (word =='complete') {
+					return 'завершено'
+				}else if(word =='progress'){
+					return 'не завершено'
+				}
+			}
 		},
 		async mounted(){
 			let page = 1
 			await this.actionTestList({page:page})
-			console.log(this.getTestList)
 		}
 	}
 </script>
 <style scoped>
-	
+	.status_f_s{
+		font-size:12px;
+	}
 </style>
