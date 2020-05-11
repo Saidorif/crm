@@ -54,6 +54,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/test-user">
+              <i class="peIcon pe-7s-note2"></i>
+              <p>
+                Test USER
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/category">
               <span class="peIcon pe-7s-drawer" style="font-size: 20px;"></span>
               <p>
