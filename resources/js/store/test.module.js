@@ -84,7 +84,7 @@ const actions = {
 	async actionStartUserTest({commit},id){
 		try {
 			const items =  await TestService.startUserTest(id);
-			await commit('setStartUserTest',items.data.result)
+			await commit('setStartUserTest',items.data)
 			return true
 		} catch (error) {
 			return false

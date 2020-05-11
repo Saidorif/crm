@@ -9859,6 +9859,16 @@ var remainingPathColor = COLOR_CODES.info.color;
               return _this.actionStartUserTest(_this.$route.params.userTestId);
 
             case 2:
+              console.log(_this.getStartUserTest);
+
+              _this.startTimer();
+
+              _this.userInfo = _this.getStartUserTest.attestat;
+              _this.tests = _this.getStartUserTest.result;
+              _this.timeLeft = _this.getStartUserTest.total_time;
+              _this.TIME_LIMIT = _this.getStartUserTest.total_time;
+
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -94588,7 +94598,7 @@ var actions = {
             case 3:
               items = _context6.sent;
               _context6.next = 6;
-              return commit('setStartUserTest', items.data.result);
+              return commit('setStartUserTest', items.data);
 
             case 6:
               return _context6.abrupt("return", true);
@@ -94861,9 +94871,9 @@ var user = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\ekadr.loc\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\testcader\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })
