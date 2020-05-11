@@ -7,6 +7,7 @@ use Validator;
 use App\Question;
 use App\Attestat;
 use App\User;
+use Carbon\Carbon;
 
 class AttestatController extends Controller
 {
@@ -70,10 +71,13 @@ class AttestatController extends Controller
             $q_ids[] = $value->id; 
             $q_answers[] = $value->id; 
     	}
-        $start = date('Y-m-d H:m:s');
-        $end = date("Y-m-d H:i:s", (strtotime(date($start)) + $ex_time));
-        $inputs['started_at'] = $start;
-        $inputs['ended_at'] = $end;
+        //Set times for test exam
+        $currentTime = Carbon::now();
+        $startTime = $currentTime->toDateTimeString();
+        $endTime = $currentTime->addSeconds($ex_time)->toDateTimeString();
+
+        $inputs['started_at'] = $startTime;
+        $inputs['ended_at'] = $endTime;
         $inputs['time'] = $ex_time;
         $inputs['question_ids'] = json_encode($q_ids);
         $inputs['status'] = $status;
@@ -94,8 +98,41 @@ class AttestatController extends Controller
         return response()->json(['error' => true,'message' => 'Something went wrong...']);
     }
 
+    public function startTestUser(Request $request,$id)
+    {
+        $user = request()->user();
+        $attestat = Attestat::with(['category'])->where(['user_id' => $user->id])->find($id);
+        if(!$attestat){
+            return response()->json(['error' => true, 'message' => 'Attestat not found']);
+        }
+        $ex_time = 0;
+        //Questions
+        $questions = $attestat->getQuestions();
+
+        foreach ($questions as $key => $value) {
+            $ex_time += $value->time;
+        }
+        if($attestat->status == 'start'){
+            $currentTime = Carbon::now();
+            $startTime = $currentTime->toDateTimeString();
+            $endTime = $currentTime->addSeconds($ex_time)->toDateTimeString();
+            $attestat->started_at = $startTime;
+            $attestat->ended_at = $endTime;
+            $attestat->status = 'progress';
+            $attestat->save();
+            return response()->json(['success' => true,'total_time'=> $ex_time,'result' => $questions,'attestat' => $attestat]);
+        }
+        //If attestat already passed
+        if($attestat->status == 'complete'){
+            return response()->json(['error' => true, 'message' => 'Test is already completed ...']);
+        }
+        return response()->json(['error' => true,'message' => 'Something went wrong...']);
+    }
+
     public function complete(Request $request,$id)
     {
+        $user = request()->user();
+
         $validator = Validator::make($request->all(),[
             'questions' => 'required|array',
             'questions.*.id' => 'required|integer',
@@ -110,8 +147,29 @@ class AttestatController extends Controller
         if(!$attestat){
             return response()->json(['error' => true, 'message' => 'Not found...']);
         }
+        //If attestat already passed
         if($attestat->status == 'complete'){
-            return response()->json(['error' => true, 'message' => 'Doucument is already completed ...']);
+            return response()->json(['error' => true, 'message' => 'Test is already completed ...']);
+        }
+
+        //If the test not for this user
+        if($attestat->user_id != $user->id){
+            return response()->json(['error' => true, 'message' => 'You are not allowed']);
+        }
+
+        //Check for time
+        $currentTime = Carbon::now();
+        if($currentTime->toDateTimeString() > $attestat->ended_at){
+            if($attestat->status == 'progress'){
+                $attestat->status = 'fail';
+                $attestat->save();
+            }
+            return response()->json([
+                'error' => true,
+                'message' => 'Time over...',
+                'now' => $currentTime->toDateTimeString(),
+                'ended_at' => $attestat->ended_at
+            ]);
         }
 
         $inputs = $request->all();
@@ -135,9 +193,7 @@ class AttestatController extends Controller
         $attestat->wrong_answers = $wrong_answers;
         $attestat->status = 'complete';
         $attestat->save();
-        // if(date('Y-m-d H:m:s') > $attestat->ended_at){
-        //     return response()->json(['error' => true,'message' => 'Time over...']);
-        // }
+        
         
         return response()->json(['success' => true, 'wrong_answers' => $wrong_answers,'true_answers' => $true_answers, 'ended_at' => $attestat->ended_at,'the_time' => date('Y-m-d H:m:s')]);
     }

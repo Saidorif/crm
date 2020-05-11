@@ -27,7 +27,7 @@
 						<tr v-for="(item,index) in getEmployees.data">
 							<td scope="row">{{index+1}}</td>
 							<td>{{item.name}}</td>
-							<td>{{item.position.name}}</td>
+							<td>{{item.position ? item.position.name : ''}}</td>
 							<td>{{item.role.name}}</td>
 							<td>category</td>
 							<td>{{item.email}}</td>

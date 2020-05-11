@@ -16,6 +16,7 @@
 								<th scope="col">Статус</th>
 								<th scope="col">Количество вопроса</th>
 								<th scope="col">Балл</th>
+								<th scope="col">Дата</th>
 								<th scope="col">Действия</th>
 							</tr>
 						</thead>
@@ -23,15 +24,29 @@
 							<tr v-for="(item,index) in getTestUserList.data">
 								<td scope="row">{{index+1}}</td>
 								<td> 
-									<div class="badge status_f_s" :class="item.status =='complete' ? 'badge-success' : 'badge-warning'">
+									<div class="badge status_f_s" :class="status_class(item.status)">
 										<b>{{word_to_russian(item.status)}}</b>
 									</div> 
 								</td>
 								<td>{{item.limit}}</td>
 								<td>{{percentage(item.limit,item.true_answers)}}</td>
+								<td>{{item.created_at}}</td>
 								<td>
-									<router-link tag="button" class="btn_transparent" :to='`/crm/test/test-result/${item.id}`'>
+									<router-link 
+										tag="button" 
+										class="btn_transparent" 
+										:to='`/crm/test/test-result/${item.id}`'
+										v-if="item.status == 'complete'"
+									>
 										<i class="pe_icon pe-7s-edit editColor"></i>
+									</router-link>
+									<router-link 
+										tag="button" 
+										class="btn_transparent" 
+										:to='`/crm/test/test-user-start/${item.id}`'
+										v-if="item.status == 'start'"
+									>
+										<i class="pe_icon pe-7s-play editColor"></i>
 									</router-link>
 								</td>
 							</tr>
@@ -66,6 +81,17 @@
 					return 'завершено'
 				}else if(word =='progress'){
 					return 'не завершено'
+				}else if(word =='start'){
+					return 'новый тест'
+				}
+			},
+			status_class(status){
+				if (status =='complete') {
+					return 'badge-success'
+				}else if(status =='progress'){
+					return 'badge-warning'
+				}else if(status =='start'){
+					return 'badge-primary'
 				}
 			}
 		},

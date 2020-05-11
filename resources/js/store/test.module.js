@@ -5,6 +5,7 @@ const state = {
 	tests: [],
 	complete: [],
 	test: [],
+	startUserTest: [],
 	testList: {},
 	testUserList:{}
 };
@@ -27,6 +28,9 @@ const getters = {
 	},
 	getTestUserList(state){
 		return state.testUserList
+	},
+	getStartUserTest(state){
+		return state.startUserTest
 	},
 };
 
@@ -77,6 +81,15 @@ const actions = {
 			return false
 		}
 	},
+	async actionStartUserTest({commit},id){
+		try {
+			const items =  await TestService.startUserTest(id);
+			await commit('setStartUserTest',items.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 };
 
 const mutations = {
@@ -97,6 +110,9 @@ const mutations = {
 	},
 	setUserTestList(state, testUserList){
 		state.testUserList = testUserList
+	},
+	setStartUserTest(state, startUserTest){
+		state.startUserTest = startUserTest
 	},
 };
 
