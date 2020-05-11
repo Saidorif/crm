@@ -15,6 +15,7 @@
 						<tr>
 							<th scope="col">№</th>
 							<th scope="col">Ф.И.О</th>
+							<th scope="col">Должность</th>
 							<th scope="col">Рол</th>
 							<th scope="col">Управления</th>
 							<th scope="col">Email</th>
@@ -26,6 +27,7 @@
 						<tr v-for="(item,index) in getEmployees.data">
 							<td scope="row">{{index+1}}</td>
 							<td>{{item.name}}</td>
+							<td>{{item.position.name}}</td>
 							<td>{{item.role.name}}</td>
 							<td>category</td>
 							<td>{{item.email}}</td>

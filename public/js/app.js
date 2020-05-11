@@ -5845,6 +5845,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5857,6 +5868,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         category_id: '',
         address: '',
         role_id: '',
+        position_id: '',
         phone: '',
         image: '',
         file: '',
@@ -5885,6 +5897,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.actionCategoryList();
 
             case 4:
+              _context.next = 6;
+              return _this.actionPositionList();
+
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -5892,8 +5908,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getMassage']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionAddEmployee', 'actionCheckEmail']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getMassage']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('position', ['getPositionList'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionAddEmployee', 'actionCheckEmail']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('position', ['actionPositionList']), {
     confirmPassword: function confirmPassword() {
       if (this.form.password && this.form.confirm_password) {
         if (this.form.password != this.form.confirm_password) {
@@ -6200,6 +6216,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6213,6 +6240,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         category_id: '',
         address: '',
         role_id: '',
+        position_id: '',
         phone: '',
         image: '',
         file: '',
@@ -6242,14 +6270,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 4:
               _context.next = 6;
+              return _this.actionPositionList();
+
+            case 6:
+              _context.next = 8;
               return _this.actionEditEmployee({
                 id: _this.$route.params.employeeId
               });
 
-            case 6:
+            case 8:
               _this.form = _this.getEmployee;
 
-            case 7:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -6257,8 +6289,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getMassage', 'getEmployee']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionUpdateEmployee', 'actionCheckEmail', 'actionEditEmployee']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('employee', ['getMassage', 'getEmployee']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('position', ['getPositionList'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionRoleList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('employee', ['actionUpdateEmployee', 'actionCheckEmail', 'actionEditEmployee']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('position', ['actionPositionList']), {
     confirmPassword: function confirmPassword() {
       if (this.form.password && this.form.passwordConfirm) {
         if (this.form.password != this.form.passwordConfirm) {
@@ -6434,6 +6466,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -6793,35 +6827,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
-        name: '',
-        label: ''
+        name: ''
       },
       requiredInput: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('role', ['getMassage'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('role', ['actionAddRole']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('position', ['getMassage'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('position', ['actionAddPosition']), {
     isRequired: function isRequired(input) {
       return this.requiredInput && input === '';
     },
-    saveRole: function saveRole() {
+    savePosition: function savePosition() {
       var _this = this;
 
       return _asyncToGenerator(
@@ -6831,16 +6852,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.form.name != '' && _this.form.label != '')) {
+                if (!(_this.form.name != '')) {
                   _context.next = 7;
                   break;
                 }
 
                 _context.next = 3;
-                return _this.actionAddRole(_this.form);
+                return _this.actionAddPosition(_this.form);
 
               case 3:
-                _this.$router.push("/crm/role");
+                _this.$router.push("/crm/position");
 
                 _this.requiredInput = false;
                 _context.next = 8;
@@ -6922,24 +6943,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
-        name: '',
-        label: ''
+        name: ''
       },
       requiredInput: false
     };
@@ -6962,8 +6971,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             case 2:
               _this.form = _this.getPosition;
+              console.log(_this.getPosition);
 
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -7081,8 +7091,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7094,14 +7102,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var page;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              page = 1;
+              _context.next = 3;
               return _this.actionPositions();
 
-            case 2:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -51475,6 +51485,62 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-6" }, [
+              _c("label", { attrs: { for: "positon" } }, [_vm._v("Должность")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.position_id,
+                      expression: "form.position_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: _vm.isRequired(_vm.form.position_id)
+                    ? "isRequired"
+                    : "",
+                  attrs: { id: "positon" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "position_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { value: "", selected: "", disabled: "" } },
+                    [_vm._v("Выберите Должность")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.getPositionList, function(position, index) {
+                    return _c("option", { domProps: { value: position.id } }, [
+                      _vm._v(_vm._s(position.name))
+                    ])
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-md-6" }, [
               _c("label", { attrs: { for: "role" } }, [_vm._v("Role")]),
               _vm._v(" "),
               _c(
@@ -51938,6 +52004,64 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-6" }, [
+              _c("label", { attrs: { for: "position" } }, [
+                _vm._v("Должность")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.position_id,
+                      expression: "form.position_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: _vm.isRequired(_vm.form.position_id)
+                    ? "isRequired"
+                    : "",
+                  attrs: { id: "position" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "position_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { value: "", selected: "", disabled: "" } },
+                    [_vm._v("Выберите рол")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.getPositionList, function(position, index) {
+                    return _c("option", { domProps: { value: position.id } }, [
+                      _vm._v(_vm._s(position.name))
+                    ])
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-md-6" }, [
               _c("label", { attrs: { for: "role" } }, [_vm._v("Role")]),
               _vm._v(" "),
               _c(
@@ -52387,6 +52511,8 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.name))]),
                     _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.position.name))]),
+                    _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(item.role.name))]),
                     _vm._v(" "),
                     _c("td", [_vm._v("category")]),
@@ -52469,6 +52595,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("№")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Ф.И.О")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Должность")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Рол")]),
         _vm._v(" "),
@@ -52936,7 +53064,7 @@ var render = function() {
                   return null
                 }
                 $event.preventDefault()
-                return _vm.saveRole($event)
+                return _vm.savePosition($event)
               }
             }
           },
@@ -52944,7 +53072,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "form-group col-md-9" }, [
                 _c("label", { attrs: { for: "roleName" } }, [
-                  _vm._v("Role Name")
+                  _vm._v("Название должность")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -52961,7 +53089,7 @@ var render = function() {
                   attrs: {
                     type: "text",
                     id: "roleName",
-                    placeholder: "Role Name"
+                    placeholder: "Должность"
                   },
                   domProps: { value: _vm.form.name },
                   on: {
@@ -52970,33 +53098,6 @@ var render = function() {
                         return
                       }
                       _vm.$set(_vm.form, "name", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-9" }, [
-                _c("label", { attrs: { for: "roleName" } }, [_vm._v("Label")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.label,
-                      expression: "form.label"
-                    }
-                  ],
-                  staticClass: "form-control input_style",
-                  class: _vm.isRequired(_vm.form.label) ? "isRequired" : "",
-                  attrs: { type: "text", id: "roleName", placeholder: "Label" },
-                  domProps: { value: _vm.form.label },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "label", $event.target.value)
                     }
                   }
                 })
@@ -53017,7 +53118,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
       _c("i", { staticClass: "peIcon pe-7s-id" }),
-      _vm._v("\n\t\t\t    Add Position\n\t\t\t")
+      _vm._v("\n\t\t\t    Добавить Должность\n\t\t\t")
     ])
   },
   function() {
@@ -53101,7 +53202,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "form-group col-md-9" }, [
                 _c("label", { attrs: { for: "positionName" } }, [
-                  _vm._v("Position Name")
+                  _vm._v("Должность")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -53118,7 +53219,7 @@ var render = function() {
                   attrs: {
                     type: "text",
                     id: "positionName",
-                    placeholder: "Position Name"
+                    placeholder: "Должность"
                   },
                   domProps: { value: _vm.form.name },
                   on: {
@@ -53127,39 +53228,6 @@ var render = function() {
                         return
                       }
                       _vm.$set(_vm.form, "name", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-9" }, [
-                _c("label", { attrs: { for: "positionName" } }, [
-                  _vm._v("Label")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.label,
-                      expression: "form.label"
-                    }
-                  ],
-                  staticClass: "form-control input_style",
-                  class: _vm.isRequired(_vm.form.label) ? "isRequired" : "",
-                  attrs: {
-                    type: "text",
-                    id: "positionName",
-                    placeholder: "Label"
-                  },
-                  domProps: { value: _vm.form.label },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "label", $event.target.value)
                     }
                   }
                 })
@@ -53180,7 +53248,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
       _c("i", { staticClass: "peIcon pe-7s-id" }),
-      _vm._v("\n\t\t\t    Edit Position\n\t\t\t")
+      _vm._v("\n\t\t\t    Редактировать Должность\n\t\t\t")
     ])
   },
   function() {
@@ -53237,7 +53305,7 @@ var render = function() {
               staticClass: "btn btn-primary",
               attrs: { to: "/crm/position/add" }
             },
-            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Add")]
+            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Добавить")]
           )
         ],
         1
@@ -53263,8 +53331,6 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(position.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(position.label))]),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -53327,8 +53393,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
-      _c("i", { staticClass: "peIcon pe-7s-id" }),
-      _vm._v("\n\t\t\t    Position \n\t\t\t")
+      _c("i", { staticClass: "peIcon pe-7s-graph1" }),
+      _vm._v("\n\t\t\t    Должность \n\t\t\t")
     ])
   },
   function() {
@@ -53339,9 +53405,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("№")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Название 11")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Label")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Название")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Действия")])
       ])
@@ -91563,6 +91627,42 @@ var EmployeeService = {
 
 /***/ }),
 
+/***/ "./resources/js/services/position.service.js":
+/*!***************************************************!*\
+  !*** ./resources/js/services/position.service.js ***!
+  \***************************************************/
+/*! exports provided: PositionService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PositionService", function() { return PositionService; });
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api.service */ "./resources/js/services/api.service.js");
+
+var PositionService = {
+  positionList: function positionList() {
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/position/list");
+  },
+  positions: function positions(page) {
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/position/all?page=" + page);
+  },
+  addPosition: function addPosition(data) {
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/position/store", data);
+  },
+  editPosition: function editPosition(data) {
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/position/edit/".concat(data.id), data);
+  },
+  updatePosition: function updatePosition(data) {
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/position/update/".concat(data.id), data);
+  },
+  deletePosition: function deletePosition(id) {
+    return _api_service__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/position/destroy/".concat(id));
+  }
+};
+
+
+/***/ }),
+
 /***/ "./resources/js/services/question.service.js":
 /*!***************************************************!*\
   !*** ./resources/js/services/question.service.js ***!
@@ -92533,6 +92633,282 @@ var employee = {
 
 /***/ }),
 
+/***/ "./resources/js/store/position.module.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/position.module.js ***!
+  \***********************************************/
+/*! exports provided: position */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "position", function() { return position; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_position_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/position.service */ "./resources/js/services/position.service.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var state = {
+  positions: {},
+  positionList: [],
+  message: [],
+  position: []
+};
+var getters = {
+  getPositions: function getPositions(state) {
+    return state.positions;
+  },
+  getPositionList: function getPositionList(state) {
+    return state.positionList;
+  },
+  getMassage: function getMassage(state) {
+    return state.message;
+  },
+  getPosition: function getPosition(state) {
+    return state.position;
+  }
+};
+var actions = {
+  actionPositionList: function actionPositionList(_ref) {
+    var commit = _ref.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var positions;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _services_position_service__WEBPACK_IMPORTED_MODULE_1__["PositionService"].positionList();
+
+            case 3:
+              positions = _context.sent;
+              _context.next = 6;
+              return commit('setPositionList', positions.data.result);
+
+            case 6:
+              return _context.abrupt("return", true);
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](0);
+              return _context.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 9]]);
+    }))();
+  },
+  actionPositions: function actionPositions(_ref2, page) {
+    var commit = _ref2.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var positions;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _services_position_service__WEBPACK_IMPORTED_MODULE_1__["PositionService"].positions(page);
+
+            case 3:
+              positions = _context2.sent;
+              _context2.next = 6;
+              return commit('setPositions', positions.data.result);
+
+            case 6:
+              return _context2.abrupt("return", true);
+
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](0);
+              return _context2.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 9]]);
+    }))();
+  },
+  actionAddPosition: function actionAddPosition(_ref3, payload) {
+    var commit = _ref3.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var positions;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return _services_position_service__WEBPACK_IMPORTED_MODULE_1__["PositionService"].addPosition(payload);
+
+            case 3:
+              positions = _context3.sent;
+              _context3.next = 6;
+              return commit('setMessage', positions.data);
+
+            case 6:
+              return _context3.abrupt("return", true);
+
+            case 9:
+              _context3.prev = 9;
+              _context3.t0 = _context3["catch"](0);
+              return _context3.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 9]]);
+    }))();
+  },
+  actionEditPosition: function actionEditPosition(_ref4, payload) {
+    var commit = _ref4.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      var positions;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return _services_position_service__WEBPACK_IMPORTED_MODULE_1__["PositionService"].editPosition(payload);
+
+            case 3:
+              positions = _context4.sent;
+              _context4.next = 6;
+              return commit('setEditPosition', positions.data.result);
+
+            case 6:
+              return _context4.abrupt("return", true);
+
+            case 9:
+              _context4.prev = 9;
+              _context4.t0 = _context4["catch"](0);
+              return _context4.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[0, 9]]);
+    }))();
+  },
+  actionUpdatePosition: function actionUpdatePosition(_ref5, payload) {
+    var commit = _ref5.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+      var positions;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.prev = 0;
+              _context5.next = 3;
+              return _services_position_service__WEBPACK_IMPORTED_MODULE_1__["PositionService"].updatePosition(payload);
+
+            case 3:
+              positions = _context5.sent;
+              _context5.next = 6;
+              return commit('setEditPosition', positions.data.result);
+
+            case 6:
+              return _context5.abrupt("return", true);
+
+            case 9:
+              _context5.prev = 9;
+              _context5.t0 = _context5["catch"](0);
+              return _context5.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5, null, [[0, 9]]);
+    }))();
+  },
+  actionDeletePosition: function actionDeletePosition(_ref6, id) {
+    var commit = _ref6.commit;
+    return _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+      var positions;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.prev = 0;
+              _context6.next = 3;
+              return _services_position_service__WEBPACK_IMPORTED_MODULE_1__["PositionService"].deletePosition(id);
+
+            case 3:
+              positions = _context6.sent;
+              _context6.next = 6;
+              return commit('setMessage', positions.data.result);
+
+            case 6:
+              return _context6.abrupt("return", true);
+
+            case 9:
+              _context6.prev = 9;
+              _context6.t0 = _context6["catch"](0);
+              return _context6.abrupt("return", false);
+
+            case 12:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6, null, [[0, 9]]);
+    }))();
+  }
+};
+var mutations = {
+  setPositionList: function setPositionList(state, positions) {
+    state.positionList = positions;
+  },
+  setPositions: function setPositions(state, positions) {
+    state.positions = positions;
+  },
+  setMessage: function setMessage(state, message) {
+    state.message = message;
+  },
+  setEditPosition: function setEditPosition(state, positions) {
+    state.position = positions;
+  }
+};
+var position = {
+  namespaced: true,
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+};
+
+/***/ }),
+
 /***/ "./resources/js/store/question.module.js":
 /*!***********************************************!*\
   !*** ./resources/js/store/question.module.js ***!
@@ -93098,9 +93474,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _question_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./question.module */ "./resources/js/store/question.module.js");
 /* harmony import */ var _category_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./category.module */ "./resources/js/store/category.module.js");
 /* harmony import */ var _role_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./role.module */ "./resources/js/store/role.module.js");
-/* harmony import */ var _employee_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./employee.module */ "./resources/js/store/employee.module.js");
-/* harmony import */ var _test_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./test.module */ "./resources/js/store/test.module.js");
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./../services/storage.service */ "./resources/js/services/storage.service.js");
+/* harmony import */ var _position_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./position.module */ "./resources/js/store/position.module.js");
+/* harmony import */ var _employee_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./employee.module */ "./resources/js/store/employee.module.js");
+/* harmony import */ var _test_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./test.module */ "./resources/js/store/test.module.js");
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./../services/storage.service */ "./resources/js/services/storage.service.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -93123,6 +93500,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ability = _ability__WEBPACK_IMPORTED_MODULE_4__["ability"];
 var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
@@ -93135,8 +93513,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     user: _user_module__WEBPACK_IMPORTED_MODULE_7__["user"],
     category: _category_module__WEBPACK_IMPORTED_MODULE_9__["category"],
     role: _role_module__WEBPACK_IMPORTED_MODULE_10__["role"],
-    employee: _employee_module__WEBPACK_IMPORTED_MODULE_11__["employee"],
-    test: _test_module__WEBPACK_IMPORTED_MODULE_12__["test"],
+    position: _position_module__WEBPACK_IMPORTED_MODULE_11__["position"],
+    employee: _employee_module__WEBPACK_IMPORTED_MODULE_12__["employee"],
+    test: _test_module__WEBPACK_IMPORTED_MODULE_13__["test"],
     question: _question_module__WEBPACK_IMPORTED_MODULE_8__["question"]
   },
   state: {
@@ -93177,7 +93556,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
       state.rules = [];
     },
     loginSuccess: function loginSuccess(state, user) {
-      _services_storage_service__WEBPACK_IMPORTED_MODULE_13__["TokenService"].saveCurrentUser(user.result);
+      _services_storage_service__WEBPACK_IMPORTED_MODULE_14__["TokenService"].saveCurrentUser(user.result);
       state.token = user.token;
       state.authenticationErrorCode = false;
       state.userInfo = user.result;

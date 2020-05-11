@@ -8,7 +8,7 @@ const state = {
 };
 
 const getters = {
-	getPositiones(state){
+	getPositions(state){
 		return state.positions
 	},
 	getPositionList(state){
@@ -91,11 +91,11 @@ const mutations = {
 		state.message = message
 	},
 	setEditPosition(state, positions){
-		state.positions = positions
+		state.position = positions
 	},
 };
 
-export const positions = {
+export const position = {
 	namespaced: true,
 	state,
 	getters,

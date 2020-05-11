@@ -18,6 +18,17 @@
 		      	>
 		        </div>
 		        <div class="form-group col-md-6">
+				    <label for="position">Должность</label>
+				    <select 
+				    	class="form-control" 
+				    	:class="isRequired(form.position_id) ? 'isRequired' : '' " 
+				    	id="position" 
+				    	v-model="form.position_id">
+				      <option value="" selected disabled>Выберите рол</option>
+				      <option :value="position.id" v-for="(position,index) in getPositionList">{{position.name}}</option>
+				    </select>
+			  	</div>
+		        <div class="form-group col-md-6">
 				    <label for="role">Role</label>
 				    <select 
 				    	class="form-control" 
@@ -146,6 +157,7 @@
 					category_id:'',
 					address:'',
 					role_id:'',
+					position_id:'',
 					phone:'',
 					image:'',
 					file:'',
@@ -159,6 +171,7 @@
 		async mounted(){
 			await this.actionRoleList()
      	 	await this.actionCategoryList()
+     	 	await this.actionPositionList()
      	 	await this.actionEditEmployee({id:this.$route.params.employeeId})
      	 	this.form = this.getEmployee
 
@@ -166,12 +179,14 @@
 		computed:{
 			...mapGetters('employee',['getMassage','getEmployee']),
 			...mapGetters('role',['getRoleList']),
-			...mapGetters('category',['getCategories'])
+			...mapGetters('category',['getCategories']),
+			...mapGetters('position',['getPositionList'])
 		},
 		methods:{
 			...mapActions('category',['actionCategoryList']),		
 			...mapActions('role',['actionRoleList']),
 			...mapActions('employee',['actionUpdateEmployee','actionCheckEmail','actionEditEmployee']),
+			...mapActions('position',['actionPositionList']),
 			confirmPassword(){
 		      	if(this.form.password && this.form.passwordConfirm){
 			      	if(this.form.password != this.form.passwordConfirm){
