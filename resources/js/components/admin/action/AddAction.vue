@@ -1,0 +1,140 @@
+<template>
+	<div class="add_action">
+		<div class="card">
+		  	<div class="card-header">
+			    <h4 class="title_user">
+			    	<i class="peIcon pe-7s-id"></i>
+				    Add Action
+				</h4>
+				<router-link class="btn btn-primary back_btn" to="/crm/action"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+		  	</div>
+		  	<div class="card-body">
+		  		<form @submit.prevent.enter="saveAction" >
+					<div class="row">
+					  <div class="form-group col-md-9">
+					    <label for="contName">Controller Name</label>
+						<multiselect 
+						:value="findController"
+						:options="getContList"
+						@search-change="value => filterController(value)"
+						v-model="findController" 
+						placeholder="Выберите"
+						:searchable="true"
+						track-by="id"
+						label="name"
+						:max="3"
+						:loading="isLoading"
+						selectLabel="Нажмите Enter, чтобы выбрать"
+						deselectLabel="Нажмите Enter, чтобы удалить"
+						@select="selectedItem"
+      					:class="isRequired(form.conts_id) ? 'isRequired' : ''"  
+						>
+						<span slot="noResult">По вашему запросу ничего не найдено</span>
+						<span slot="noOptions">Cписок пустой</span>
+						</multiselect>
+					  </div>
+					  <div class="form-group col-md-9">
+					    <label for="contName">Action Name</label>
+					    <input 
+					    	type="text" 
+					    	class="form-control input_style" 
+					    	id="contName" 
+					    	placeholder="Action Name"
+					    	v-model="form.name"
+					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
+				    	>
+					  </div>
+					  <div class="form-group col-md-9">
+					    <label for="contName">Code</label>
+					    <input 
+					    	type="text" 
+					    	class="form-control input_style" 
+					    	id="contName" 
+					    	placeholder="Code"
+					    	v-model="form.code"
+					    	:class="isRequired(form.code) ? 'isRequired' : ''"  
+				    	>
+					  </div>
+					 
+					  <div class="form-group col-lg-3 form_btn">
+					  	<button type="submit" class="btn btn-primary btn_save_category">
+					  		<i class="fas fa-save"></i>
+						  	Сохранить
+						</button>	
+				  	  </div>
+					</div>
+				</form>
+		  	</div>
+	  	</div>
+	</div>
+</template>
+<script>
+	import Multiselect from 'vue-multiselect';
+	import {mapActions,mapGetters} from 'vuex'
+	export default{
+		components: {
+	    	Multiselect,
+	  	},
+		data(){
+			return{
+				form:{
+					name:'',
+					code:'',
+					conts_id:'',
+				},
+				requiredInput:false,
+				isLoading: false,
+				findController: {},
+			}
+		},
+		computed:{
+			...mapGetters('action',['getMassage']),
+			...mapGetters('conts',['getContList']),
+		},
+		methods:{
+			...mapActions('action',['actionAddAction']),
+			...mapActions('conts',['actionContsFind']),
+			isRequired(input){
+	    		return this.requiredInput && input === '';
+		    },
+		    async saveAction(){
+		    	if (this.form.name != '' && this.form.code != ''){
+					await this.actionAddAction(this.form)
+					if (this.getMassage.success) {
+						toast.fire({
+					    	type: 'success',
+					    	icon: 'success',
+							title: 'Action добавлен!',
+					    })
+						this.$router.push("/crm/conts");
+						this.requiredInput =false
+					}else{
+						toast.fire({
+					    	type: 'error',
+					    	icon: 'error',
+							title: 'Такой Action уже существует!',
+					    })
+					}
+				}else{
+					this.requiredInput =true
+				}
+		    },
+		    filterController(value){
+	      		if(value != ''){
+	      			this.isLoading = true
+					setTimeout(()=>{
+		          		this.actionContsFind({name: value,})
+						this.isLoading = false
+					},1000)
+				}
+		    },
+		    selectedItem(selectedOption, id){
+	      		this.findController = selectedOption
+	      		this.form.conts_id = this.findController.id
+			},
+		}
+	}
+</script>
+<style scoped>
+	
+</style>

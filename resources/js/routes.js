@@ -46,6 +46,16 @@ import TestList from './components/testlist/TestList'
 import TestUser from './components/testUser/TestUser'
 import TestUserStart from './components/testUser/TestUserStart'
 
+// controller
+import Conts from './components/admin/conts/Conts'
+import AddConts from './components/admin/conts/AddConts'
+import EditConts from './components/admin/conts/EditConts'
+
+// controller
+import Action from './components/admin/action/Action'
+import AddAction from './components/admin/action/AddAction'
+import EditAction from './components/admin/action/EditAction'
+
 
 // NotFound
 import NotFound from './components/NotFound/NotFound'
@@ -155,6 +165,30 @@ const router = new Router({
 				{
 					path:'test/test-user-start/:userTestId',
 					component:TestUserStart,
+				},
+				{
+					path:'conts',
+					component:Conts,
+				},
+				{
+					path:'conts/add',
+					component:AddConts,
+				},
+				{
+					path:'conts/edit/:contId',
+					component:EditConts,
+				},
+				{
+					path:'action',
+					component:Action,
+				},
+				{
+					path:'action/add',
+					component:AddAction,
+				},
+				{
+					path:'action/edit/:actionId',
+					component:EditAction,
 				},
 			]
 		},
