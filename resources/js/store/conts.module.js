@@ -24,9 +24,9 @@ const getters = {
 
 
 const actions = {
-	async actionContsFind({commit},){
+	async actionContsFind({commit}, payload){
 		try {
-			const conts =  await ContsService.contFindUrl();
+			const conts =  await ContsService.contFindUrl(payload);
 			await commit('setContList',conts.data.result)
 			return true
 		} catch (error) {

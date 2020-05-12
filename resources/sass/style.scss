@@ -663,3 +663,84 @@ button:disabled{
 .result_test_item_variants li:nth-child(10)::before { content: 'J)'; }
 .result_test_item_variants li:nth-child(11)::before { content: 'K)'; }
 .result_test_item_variants li:nth-child(12)::before { content: 'L)'; }
+// .multiselect__input{
+//     background: #FFFFFF;
+//     box-sizing: border-box;
+//     border-radius: 5px;
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 15px;
+//     line-height: 21px;
+//     color: #202020;
+//     width: calc(100% - 32px) !important;
+//     min-height: 35px;
+//     padding-left: 15px !important;
+//     border: none;
+// }
+// .multiselect{
+//     min-height: 37px;
+//     border-radius: 5px;
+//     border: 1px solid #D4E2F5;
+// }
+// .multiselect__content-wrapper {
+//     position: absolute;
+//     display: block;
+//     left: 15px;
+//     top: 66px;
+//     background: #fff;
+//     width: calc(100% - 30px) !important;
+//     max-height: 240px;
+//     overflow: auto;
+//     border: 1px solid #D4E2F5;
+//     border-top: none;
+//     border-bottom-left-radius: 5px;
+//     border-bottom-right-radius: 5px;
+//     z-index: 50;
+
+//     -webkit-overflow-scrolling: touch;
+// }
+// .multiselect__content{
+//     display: block !important;
+//     width: 100%;
+//     margin-bottom: 0px;
+// }
+// .multiselect__content li{
+//     list-style: none;
+// }
+// .multiselect__element {
+//     display: block;
+//     width: 100%;
+// }
+// .multiselect__option {
+//     display: block;
+//     padding: 13px;
+//     min-height: 40px;
+//     line-height: 16px;
+//     text-decoration: none;
+//     text-transform: none;
+//     vertical-align: middle;
+//     position: relative;
+//     cursor: pointer;
+//     white-space: nowrap;
+// }
+// .multiselect__option--highlight {
+//     background: #3f6ad8;
+//     outline: none;
+//     color: #fff;
+// }
+// .multiselect__single {
+//     position: relative;
+//     display: block;
+//     min-height: 35px;
+//     line-height: 34px;
+//     border: none;
+//     padding-left: 12px !important;
+//     border-radius: 5px;
+//     background: #fff;
+//     padding: 0 0 0 5px;
+//     width: 100%;
+//     transition: border 0.1s ease;
+//     box-sizing: border-box;
+//     margin-bottom: 0;
+//     vertical-align: top;
+// }
