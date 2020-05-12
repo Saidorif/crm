@@ -1,12 +1,12 @@
 <template>
-	<div class="role">
+	<div class="action">
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-box1"></i>
-				    Controller 
+				    Action 
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/conts/add"><i class="fas fa-plus"></i> Add</router-link>
+				<router-link class="btn btn-primary" to="/crm/action/add"><i class="fas fa-plus"></i> Add</router-link>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
@@ -15,17 +15,19 @@
 						<tr>
 							<th scope="col">№</th>
 							<th scope="col">Название</th>
-							<th scope="col">Label</th>
+							<th scope="col">Controller</th>
+							<th scope="col">Code</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(cont,index) in getConts.data">
+						<tr v-for="(cont,index) in getActions.data">
 							<td scope="row">{{index+1}}</td>
 							<td>{{cont.name}}</td>
-							<td>{{cont.label}}</td>
+							<td>controller</td>
+							<td>{{cont.code}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/conts/edit/${cont.id}`'>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/action/edit/${cont.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
 							<!-- 	<button class="btn_transparent" @click="deleteConts(cont.id)">
@@ -34,7 +36,7 @@
 							</td>
 						</tr>
 					</tbody>
-					<pagination :limit="4" :data="getConts" @pagination-change-page="getResults"></pagination>
+					<pagination :limit="4" :data="getActions" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
 		  </div>
@@ -42,7 +44,7 @@
 	</div>
 </template>
 <script>
-	import {mapActions, mapGetters} from 'vuex'
+	import {mapActions,mapGetters} from 'vuex'
 	export default{
 		data(){
 			return{
@@ -50,15 +52,15 @@
 			}
 		},
 		async mounted(){
-			await this.actionConts()
+			await this.actionActions()
 		},
 		computed:{
-			...mapGetters('conts',['getConts','getMassage'])
+			...mapGetters('action',['getActions','getMassage'])
 		},
 		methods:{
-			...mapActions('conts',['actionConts']),
+			...mapActions('action',['actionActions']),
 			async getResults(page = 1){ 
-				await this.actionConts(page)
+				await this.actionActions(page)
 			},
 		}
 	}
