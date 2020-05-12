@@ -7,6 +7,7 @@ use Validator;
 use Hash;
 use Image;
 use App\User;
+use App\UserExperience;
 
 class EmployeeController extends Controller
 {
@@ -37,7 +38,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         // $user = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
-        $user = User::with(['role','position'])->find($id);
+        $user = User::with(['role','position','experience'])->find($id);
         if(!$user){
             return response()->json(['error' => true, 'message' => 'User not found']);
         }
@@ -48,24 +49,31 @@ class EmployeeController extends Controller
     {
         $user = $request->user();
         $validator = Validator::make($request->all(), [
-            'name'              => 'required|string',
-            'email'             => 'required|email|unique:users,email',
-            'password'          => 'required|string|min:6',
-            'confirm_password'  => 'required|string|min:6',
-            'role_id'           => 'required|integer',
-            'position_id'       => 'required|integer',
-            'phone'             => 'string|nullable',
-            'birthday'          => 'date|nullable',
-            'image'             => 'nullable',
-            'file'              => 'nullable',
-            'address'           => 'string|nullable',
-            'text'              => 'string|nullable',
-            'role_id'           => 'required|integer',
-            'image'             => 'string|nullable',
-            'file'              => 'string|nullable',
-            'address'           => 'string|nullable',
-            'text'              => 'string|nullable',
-            'category_id'       => 'integer|nullable',
+            'name'                      => 'required|string',
+            'email'                     => 'required|email|unique:users,email',
+            'password'                  => 'required|string|min:6',
+            'confirm_password'          => 'required|string|min:6',
+            'role_id'                   => 'required|integer',
+            'position_id'               => 'required|integer',
+            'phone'                     => 'string|nullable',
+            'birthday'                  => 'date|nullable',
+            'image'                     => 'nullable',
+            'file'                      => 'nullable',
+            'address'                   => 'string|nullable',
+            'text'                      => 'string|nullable',
+            'role_id'                   => 'required|integer',
+            'image'                     => 'string|nullable',
+            'file'                      => 'string|nullable',
+            'address'                   => 'string|nullable',
+            'text'                      => 'string|nullable',
+            'category_id'               => 'integer|nullable',
+            'experience'                => 'array|nullable',
+            'experience.*.date_from'    => 'required|date|nullable',
+            'experience.*.date_to'      => 'required|date|nullable',
+            'experience.*.company'      => 'required|string|nullable',
+            'experience.*.address'      => 'required|string|nullable',
+            'experience.*.position'     => 'required|string|nullable',
+            'experience.*.description'  => 'required|string|nullable',
         ]);
 
         if($validator->fails()){
@@ -101,6 +109,15 @@ class EmployeeController extends Controller
         }
 
         $employee = User::create($inputs);
+
+        //Save user experience
+        if(!empty($inputs['experience'])){
+            foreach ($inputs['experience'] as $key => $item) {
+                $item['user_id'] = $employee->id;
+                $experience = UserExperience::create($item);
+            }
+        }
+
         return response()->json(['success' => true, 'message' => 'Employee created successfuly']);
     }
 
@@ -114,16 +131,23 @@ class EmployeeController extends Controller
             return response()->json(['error' => true, 'message' => 'Employee not found']);
         }
         $validator = Validator::make($request->all(), [
-            'name'              => 'required|string',
-            'email'             => 'required|email|unique:users,email,'.$employee->id,
-            'password'          => 'nullable|string|min:6',
-            'confirm_password'  => 'nullable|string|min:6',
-            'role_id'           => 'required|integer',
-            'position_id'       => 'required|integer',
-            'phone'             => 'string|nullable',
-            'address'           => 'string|nullable',
-            'text'              => 'string|nullable',
-            'category_id'       => 'integer|nullable',
+            'name'                      => 'required|string',
+            'email'                     => 'required|email|unique:users,email,'.$employee->id,
+            'password'                  => 'nullable|string|min:6',
+            'confirm_password'          => 'nullable|string|min:6',
+            'role_id'                   => 'required|integer',
+            'position_id'               => 'required|integer',
+            'phone'                     => 'string|nullable',
+            'address'                   => 'string|nullable',
+            'text'                      => 'string|nullable',
+            'category_id'               => 'integer|nullable',
+            'experience'                => 'array|nullable',
+            'experience.*.date_from'    => 'required|date|nullable',
+            'experience.*.date_to'      => 'required|date|nullable',
+            'experience.*.company'      => 'required|string|nullable',
+            'experience.*.address'      => 'required|string|nullable',
+            'experience.*.position'     => 'required|string|nullable',
+            'experience.*.description'  => 'required|string|nullable',
         ]);
 
         if($validator->fails()){
@@ -179,6 +203,19 @@ class EmployeeController extends Controller
         $inputs['image'] = $name;
         $inputs['file'] = $nameFile;
         $employee->update($inputs);
+
+        //Update user experience
+        if(!empty($inputs['experience'])){
+            $exps = $employee->experience;
+            foreach ($exps as $key => $value) {
+                $value->delete();
+            }
+            foreach ($inputs['experience'] as $key => $item) {
+                $item['user_id'] = $employee->id;
+                $experience = UserExperience::create($item);
+            }
+        }
+
         return response()->json(['success' => true, 'message' => 'Employee updated successfuly']);
     }
 
@@ -189,7 +226,14 @@ class EmployeeController extends Controller
         if(!$employee){
             return response()->json(['error' => true, 'message' => 'Employee not found']);
         }
+
+        $exps = $employee->experience;
+        //Delete User
         $employee->delete();
+        //Delete user experience
+        foreach ($exps as $key => $value) {
+            $value->delete();
+        }
         return response()->json(['error' => true, 'message' => 'Employee deleted']);
     }
 }
