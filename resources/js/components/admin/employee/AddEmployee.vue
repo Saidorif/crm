@@ -104,7 +104,7 @@
 		          	id="address" 
 		          	placeholder="Address.."
 		          	v-model="form.address"
-		      	>
+		      		>
 		        </div>
 		        <div class="form-group col-md-6">
 	          		<label for="file">File</label>
@@ -126,16 +126,72 @@
       				>
 			      	<img :src="photoImg(form.image)" alt="" class="img_blank" width="50">
 		        </div>
-		        <div class="form-group col-md-12">
-		          <label for="text">Text</label>
-		          <textarea 
-		          	rows="10" 
-		          	class="form-control input_style" 
-		          	id="text" 
-		          	v-model="form.text"
-		  	      ></textarea>
-		        </div>
+				<div class="row col-md-12" v-for="(ex, index) in form.experience">
+					<div class="col-12 d-flex justify-content-end" v-if="index != 0">
+						<button type="button" class="btn btn-primary mr-3" @click="removeExperience(ex, index)"> <i class="fas fa-plus"></i> Remove experience</button>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="company">Company name</label>
+						<input 
+							type="text" 
+							class="form-control input_style" 
+							id="company" 
+							:class="isRequired(ex.company) ? 'isRequired' : ''" 
+							placeholder="Company name"
+							v-model="ex.company">
+					</div>
+					<div class="form-group col-md-3">
+						<label for="position">position name</label>
+						<input 
+							type="text" 
+							class="form-control input_style" 
+							id="position" 
+							:class="isRequired(ex.position) ? 'isRequired' : ''" 
+							placeholder="position"
+							v-model="ex.position">
+					</div>
+					<div class="form-group col-md-3">
+						<label for="date_from">date_from</label>
+						<input 
+							type="date" 
+							class="form-control input_style" 
+							id="date_from" 
+							:class="isRequired(ex.date_from) ? 'isRequired' : ''" 
+							placeholder="date_from"
+							v-model="ex.date_from">
+					</div>
+					<div class="form-group col-md-3">
+						<label for="date_to">date_to</label>
+						<input 
+							type="date" 
+							class="form-control input_style" 
+							id="date_to" 
+							:class="isRequired(ex.date_to) ? 'isRequired' : ''" 
+							placeholder="date_to"
+							v-model="ex.date_to">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="address">address</label>
+						<input 
+							type="text" 
+							class="form-control input_style" 
+							id="address" 
+							placeholder="address"
+							v-model="ex.address">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="description">description</label>
+						<input 
+							type="text" 
+							class="form-control input_style" 
+							id="description" 
+							placeholder="description"
+							v-model="ex.description">
+					</div>
+					<hr>
+				</div>
 		        <div class="col-12 d-flex justify-content-end">
+		          <button type="button" class="btn btn-primary mr-3" @click="addExperience()"> <i class="fas fa-plus"></i> Add experience</button>
 		          <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Сохранить</button>
 		        </div>
 		      </div>
@@ -161,6 +217,9 @@
 					image:'',
 					file:'',
 					text:'',
+					experience: [
+						{company: '', date_from: '', date_to: '', address: '', position: '', description: ''}
+					]
 				},
 				requiredInput:false,
 				checkPassword:false,
@@ -242,7 +301,9 @@
 				}
 			},
 			isRequired(input){
-	    		return this.requiredInput && input === '';
+				if(input != null){
+	    			return this.requiredInput && input === '';
+				}
 		    },
 		    async sendEmployee(){
 				if (this.form.name && this.form.email && this.form.password && this.form.confirm_password &&  this.form.role_id && this.checkPassword == false) {
@@ -267,6 +328,13 @@
 				}else{
 					this.emailError = false
 				}
+			},
+			addExperience(){
+				let item = {company: '', date_from: '', date_to: '', address: '', position: '', description: ''};
+				this.form.experience.push(item)
+			},
+			removeExperience(ex, index){
+				this.form.experience.splice(index, 1);
 			}
 		},
 	}

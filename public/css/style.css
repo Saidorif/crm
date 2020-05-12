@@ -839,6 +839,10 @@ button:disabled {
   content: "L)";
 }
 
+hr {
+  width: 100%;
+}
+
 .multiselect__input {
   background: #FFFFFF;
   box-sizing: border-box;
