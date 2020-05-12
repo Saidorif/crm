@@ -3,118 +3,146 @@
   	<div class="card-header">
       <h3 class="card-title title_user mb-0"><i class="peIcon pe-7s-user"></i>User profile</h3>
   	</div>
-  	<form role="form" @submit.prevent.enter="sendProfile">
-      <div class="card-body d-flex flex-wrap">
-        <div class="form-group col-md-6">
-          <label for="name">Fullname</label>
-          <input 
-          	type="text" 
-          	class="form-control input_style" 
-          	id="name" 
-          	:class="isRequired(form.name) ? 'isRequired' : ''" 
-          	placeholder="Fullname"
-          	v-model="form.name"
-      	>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="exampleInputEmail1">Email</label>
-          <input 
-          	type="email" 
-          	class="form-control input_style"
-          	:class="isRequired(form.email) ? 'isRequired' : ''"  
-          	id="exampleInputEmail1" 
-          	placeholder="Enter email"
-          	v-model="form.email"
-      	>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="address">Address</label>
-          <input 
-            type="text" 
-            class="form-control input_style" 
-            id="address" 
-            placeholder="Address.."
-            v-model="form.address"
-        >
-        </div>
-        <div class="form-group col-md-6">
-          <label for="phone">Phone</label>
-          <input 
-            type="text" 
-            class="form-control input_style" 
-            id="phone" 
-            placeholder="Phone.."
-            v-model="form.phone"
-        >
-        </div>
-        <div class="form-group col-md-6">
-            <label for="file">File</label>
-            <input 
-              type="file" 
-              class="form-control input_style" 
-              id="file" 
-              @change="changeFile($event)"
-          >
-          <img :src="photoImg(form.file)" alt="" class="img_blank" width="50">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="image">Photo</label>
-            <input 
-              type="file" 
-              class="form-control input_style" 
-              id="image" 
-              @change="changePhoto($event)"
-          >
-          <img :src="photoImg(form.image)" alt="" class="img_blank" width="50">
-        </div>
-        <div class="form-group col-md-12">
-          <label for="text">Text</label>
-          <textarea 
-            rows="10" 
-            class="form-control input_style" 
-            id="text" 
-            v-model="form.text"
-          ></textarea>
-        </div>
-        <div class="col-12 d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Сохранить</button>
-        </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="peIcon pe-7s-config"></i>Основные настройки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="peIcon pe-7s-unlock"></i>  Изменить пароль</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><i class="peIcon pe-7s-user"></i> Резюме</a>
+        </li>
+      </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <form role="form" @submit.prevent.enter="sendProfile">
+          <div class="card-body d-flex flex-wrap">
+            <div class="form-group col-md-6">
+              <label for="name">Fullname</label>
+              <input 
+                type="text" 
+                class="form-control input_style" 
+                id="name" 
+                :class="isRequired(form.name) ? 'isRequired' : ''" 
+                placeholder="Fullname"
+                v-model="form.name"
+            >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="exampleInputEmail1">Email</label>
+              <input 
+                type="email" 
+                class="form-control input_style"
+                :class="isRequired(form.email) ? 'isRequired' : ''"  
+                id="exampleInputEmail1" 
+                placeholder="Enter email"
+                v-model="form.email"
+            >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="address">Address</label>
+              <input 
+                type="text" 
+                class="form-control input_style" 
+                id="address" 
+                placeholder="Address.."
+                v-model="form.address"
+            >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="phone">Phone</label>
+              <input 
+                type="text" 
+                class="form-control input_style" 
+                id="phone" 
+                placeholder="Phone.."
+                v-model="form.phone"
+            >
+            </div>
+            <div class="form-group col-md-6 photoFileUploader">
+                <!-- <label for="file">File</label>
+                <input 
+                  type="file" 
+                  class="form-control input_style" 
+                  id="file" 
+                  @change="changeFile($event)"
+              <img :src="photoImg(form.file)" alt="" class="img_blank" width="50"> -->
+                <div class="avatar-upload">
+                  <div class="avatar-edit">
+                      <input type='file' id="file" @change="changeFile($event)" />
+                      <label for="file"><i class="pe-7s-pen"></i> </label>
+                  </div>
+                  <div class="avatar-preview">
+                      <div id="fileimagePreview">
+                        <span>{{fileFormat}}</span>
+                      </div>
+                  </div>
+                </div>
+                <!-- userImg -->
+                <div class="avatar-upload">
+                  <div class="avatar-edit">
+                      <input type='file' id="image" accept=".png, .jpg, .jpeg" @change="changePhoto($event)" />
+                      <label for="image"><i class="pe-7s-pen"></i> </label>
+                  </div>
+                  <div class="avatar-preview">
+                      <div id="imagePreview" :style="{'backgroundImage': 'url('+photoImg(form.image)+')'}">
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="text">Text</label>
+              <textarea 
+                rows="10" 
+                class="form-control input_style" 
+                id="text" 
+                v-model="form.text"
+              ></textarea>
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Сохранить</button>
+            </div>
+          </div>
+        </form>
       </div>
-  	</form>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <h3>Change password</h3>
+          <form @submit.prevent.enter="changePassword">
+            <div class="card-body d-flex flex-wrap">
+              <div class="form-group col-md-6">
+                <label for="exampleInputPassword1">Password</label>
+                <input 
+                  type="password" 
+                  class="form-control input_style" 
+                  id="exampleInputPassword1" 
+                  placeholder="Password.."
+                  :class="isRequiredPassword(passwords.password) ? 'isRequired' : ''"  
+                  v-model="passwords.password"
+              >
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ConfirmPassword1">Confirm Password</label>
+                <input 
+                  type="password" 
+                  class="form-control input_style" 
+                  id="ConfirmPassword1" 
+                  placeholder="Confirm Password.."
+                  v-model="passwords.confirm_password"
+                  :class="isRequiredPassword(passwords.confirm_password) ? 'isRequired' : ''"  
+                  @input="confirmPassword()"
+                >
+                <small class="redText" v-if="checkPassword"><b>Пароль не совпадает</b></small>
+              </div>
+              <div class="col-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Сохранить</button>
+              </div>
+            </div>
+          </form>
+      </div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+    </div>
 
-    <hr>
-    <h3>Change password</h3>
-    <form @submit.prevent.enter="changePassword">
-      <div class="card-body d-flex flex-wrap">
-        <div class="form-group col-md-6">
-          <label for="exampleInputPassword1">Password</label>
-          <input 
-            type="password" 
-            class="form-control input_style" 
-            id="exampleInputPassword1" 
-            placeholder="Password.."
-            :class="isRequiredPassword(passwords.password) ? 'isRequired' : ''"  
-            v-model="passwords.password"
-        >
-        </div>
-        <div class="form-group col-md-6">
-          <label for="ConfirmPassword1">Confirm Password</label>
-          <input 
-            type="password" 
-            class="form-control input_style" 
-            id="ConfirmPassword1" 
-            placeholder="Confirm Password.."
-            v-model="passwords.confirm_password"
-            :class="isRequiredPassword(passwords.confirm_password) ? 'isRequired' : ''"  
-            @input="confirmPassword()"
-          >
-          <small class="redText" v-if="checkPassword"><b>Пароль не совпадает</b></small>
-        </div>
-        <div class="col-12 d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Сохранить</button>
-        </div>
-      </div>
-    </form>
   </div>
 </template>	
 <script>
@@ -127,10 +155,11 @@
 					email:'',
           address:'',
           phone:'',
-          image:'',
+          image:'/img/user.jpg',
           file:'',
           text:'',
-				},
+        },
+        fileFormat: 'no-file',
         passwords:{
 					password:'',
 					confirm_password:''
@@ -157,7 +186,7 @@
 			        this.checkPassword = false
 		      	}
 	      	}
-	    },
+      },
       photoImg(img){
         if (img) {
           if (img.length < 100) {
@@ -180,6 +209,7 @@
               let reader = new FileReader();
               reader.onload = event=> {
                 this.form.file = event.target.result;
+                this.fileFormat = 'docx'
               };
               reader.readAsDataURL(file);
           }
@@ -243,5 +273,89 @@
 	}
 </script>
 <style scoped>
+.photoFileUploader{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+  .nav-item a{
+    display: flex;
+    align-items: center;
+  }
+  .nav-tabs .nav-link.active, 
+  .nav-tabs .nav-item.show .nav-link{
+    border: none;
+    border-bottom: 3px solid;
+  }
+  .nav-tabs{
+    justify-content: flex-end;
+  }
+  .avatar-upload {
+  position: relative;
+  max-width: 205px;
+  margin: 30px 0px;
+}
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+}
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+.avatar-upload .avatar-edit input + label {
+    display: flex;
+    width: 34px;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+    font-size: 18px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background: #FFFFFF;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+}
+.avatar-upload .avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
 
+.avatar-upload .avatar-preview {
+  width: 192px;
+  height: 192px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #F8F8F8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.avatar-upload .avatar-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#fileimagePreview{
+    background-image: url(/img/file.png);
+    background-size: 55%;
+    background-position-x: 40%;
+}
+#imagePreview{
+    background-image: url(/img/user.jpg);
+}
+#fileimagePreview span{
+    position: absolute;
+    top: 50px;
+    left: 33px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    width: 66px;
+}
 </style>
