@@ -26306,3 +26306,18 @@ input[type=number] {
   max-height: 0;
 }
 
+.header_title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header_filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters {
+  width: 100%;
+}
+

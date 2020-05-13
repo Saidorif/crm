@@ -13,8 +13,8 @@ const TestService = {
 	testListUrl(data){
 		return ApiService.post(`/api/attestat/all?page=`+ data.page,data.items)
 	},
-	testUserListUrl(page){
-		return ApiService.get(`/api/attestat/user?page=`+ page)
+	testUserListUrl(data){
+		return ApiService.post(`/api/attestat/user?page=`+ data.page,data.items)
 	},
 	startUserTest(id){
 		return ApiService.get(`/api/attestat/userstart/${id}`)
