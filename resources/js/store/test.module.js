@@ -72,9 +72,9 @@ const actions = {
 			return false
 		}
 	},
-	async actionUserTestList({commit},page){
+	async actionUserTestList({commit},payload){
 		try {
-			const items =  await TestService.testUserListUrl(page);
+			const items =  await TestService.testUserListUrl(payload);
 			await commit('setUserTestList',items.data.result)
 			return true
 		} catch (error) {

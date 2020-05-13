@@ -1,11 +1,52 @@
 <template>
 	<div class="test_user">
 		<div class="card">
-		  	<div class="card-header">
-			    <h4 class="title_user">
-			    	<i class="peIcon pe-7s-browser"></i>
-				    Test USER List 
-				</h4>
+		  	<div class="card-header header_filter">
+		  		<div class="header_title">
+				    <h4 class="title_user">
+				    	<i class="peIcon pe-7s-browser"></i>
+					    Test USER List 
+					</h4>
+					<div class="add_user_btn">
+			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
+						    <i class="fas fa-filter"></i>Филтр
+						</button>
+		            </div>
+		  		</div>
+		    	<transition name="slide">
+				  	<div class="filters" v-if="filterShow">
+				  		<div class="row">
+				  			<div class="col-lg-4 form-group">
+						  	 	<label for="date">Дата</label>
+							    <date-picker 
+							    	lang="ru" 
+							    	v-model="filter.date" 
+							    	valueType="format" 
+							    	format="YYYY-MM-DD"
+						    	></date-picker>
+			   			  	</div>
+  					  		<div class="form-group col-lg-4">
+	  							<label for="status">Статус</label>
+  								<select name="" v-model="filter.status" class="form-control" >
+  									<option value="">Выберите статус</option>
+  									<option value="complete">Завершено</option>
+  									<option value="progress">Не завершено</option>
+  									<option value="start">Новый тест</option>
+  								</select>
+					  			</div>		
+						  	<div class="col-lg-4 form-group btn_search">
+							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
+							  		<i class="fas fa-search"></i>
+								  	найти
+							  	</button>
+							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
+							  		<i class="fas fa-times"></i>
+								  	сброс
+							  	</button>
+					  	  	</div>	
+				  		</div>
+				  	</div>	
+			  	</transition>
 		  	</div>
 		  	<div class="card-body">
 			  	<div class="table-responsive">
@@ -59,10 +100,22 @@
 	</div>
 </template>
 <script>
+	import DatePicker from 'vue2-datepicker'
 	import {mapActions, mapGetters} from 'vuex'
+	import 'vue2-datepicker/index.css';
 	export default{
+		components:{
+			DatePicker
+		},
 		data(){
-			return{}
+			return{
+				filterShow:false,
+				filter:{
+					status:'',
+					date:'',
+				},
+				pageList:1,
+			}
 		},
 		computed:{
 			...mapGetters('test',['getTestUserList'])
@@ -70,7 +123,8 @@
 		methods:{
 			...mapActions('test',['actionUserTestList']),
 			async getResults(page = 1){ 
-				await this.actionUserTestList(page)
+				await this.actionUserTestList({page: page,items:this.filter})
+				this.pageList = page
 			},
 			percentage(limit,true_answers){
 				let number = true_answers ? parseInt(true_answers)*100/parseInt(limit)+' %' : ''
@@ -93,7 +147,25 @@
 				}else if(status =='start'){
 					return 'badge-primary'
 				}
-			}
+			},
+			async search(){
+				let page = 1
+				if(this.filter.status || this.filter.date){
+					await this.actionUserTestList({page: page,items:this.filter})
+				}
+			},
+			async clear(){
+				if(this.filter.status || this.filter.date){
+					this.filter.status = ''
+					this.filter.date = ''
+					let page  = 1
+					await this.actionUserTestList({page: page,items:this.filter});
+				}
+
+			},
+			toggleFilter(){
+				this.filterShow = !this.filterShow
+			},
 		},
 		async mounted(){
 			let page = 1

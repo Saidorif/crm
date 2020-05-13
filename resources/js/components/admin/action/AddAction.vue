@@ -14,23 +14,23 @@
 					  <div class="form-group col-md-9">
 					    <label for="contName">Название контроллера</label>
 						<multiselect 
-						:value="findController"
-						:options="getContList"
-						@search-change="value => filterController(value)"
-						v-model="findController" 
-						placeholder="Выберите"
-						:searchable="true"
-						track-by="id"
-						label="name"
-						:max="3"
-						:loading="isLoading"
-						selectLabel="Нажмите Enter, чтобы выбрать"
-						deselectLabel="Нажмите Enter, чтобы удалить"
-						@select="selectedItem"
-      					:class="isRequired(form.conts_id) ? 'isRequired' : ''"  
-						>
-						<span slot="noResult">По вашему запросу ничего не найдено</span>
-						<span slot="noOptions">Cписок пустой</span>
+							:value="findController"
+							:options="getContList"
+							@search-change="value => filterController(value)"
+							v-model="findController" 
+							placeholder="Выберите"
+							:searchable="true"
+							track-by="id"
+							label="name"
+							:max="3"
+							:loading="isLoading"
+							selectLabel="Нажмите Enter, чтобы выбрать"
+							deselectLabel="Нажмите Enter, чтобы удалить"
+							@select="selectedItem"
+	      					:class="isRequired(form.conts_id) ? 'isRequired' : ''"  
+							>
+							<span slot="noResult">По вашему запросу ничего не найдено</span>
+							<span slot="noOptions">Cписок пустой</span>
 						</multiselect>
 					  </div>
 					  <div class="form-group col-md-9">

@@ -12,16 +12,47 @@ use Carbon\Carbon;
 class AttestatController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $attestats = Attestat::with(['category'])->orderBy('id','DESC')->paginate(12);
+        $builder = Attestat::query()->with(['category']);
+        $params = $request->all();
+        if(count($params) > 0){
+            if(!empty($params['fio'])){
+                $builder->where('fio','LIKE','%'.$params['fio'].'%');
+            }
+            if(!empty($params['status'])){
+                $builder->where(['status' => $params['status']]);
+            }
+            if(!empty($params['category_id'])){
+                $builder->where(['category_id' => $params['category_id']]);
+            }
+            $attestats = $builder->orderBy('id','DESC')->paginate(12);
+        }else{
+            $attestats = Attestat::with(['category'])->orderBy('id','DESC')->paginate(12);
+        }
+
         return response()->json(['success' => true, 'result' => $attestats]);
     }
 
-    public function userindex()
+    public function userindex(Request $request)
     {
         $user = request()->user();
-        $attestats = Attestat::where(['user_id' => $user->id])->with(['category'])->orderBy('id','DESC')->paginate(12);
+
+        $builder = Attestat::query()->where(['user_id' => $user->id])->with(['category']);
+        $params = $request->all();
+        if(count($params) > 0){
+            if(!empty($params['date'])){
+                $builder->whereBetween('created_at', [$params['date']." 00:00:00", $params['date']." 23:59:59"]);
+            }
+            if(!empty($params['status'])){
+                $builder->where(['status' => $params['status']]);
+            }
+            $attestats = $builder->orderBy('id','DESC')->paginate(12);
+        }else{
+            $attestats = Attestat::with(['category'])->orderBy('id','DESC')->paginate(12);
+        }
+
+        // $attestats = Attestat::where(['user_id' => $user->id])->with(['category'])->orderBy('id','DESC')->paginate(12);
         return response()->json(['success' => true, 'result' => $attestats]);
     }
 
@@ -124,7 +155,7 @@ class AttestatController extends Controller
         }
         //If attestat already passed
         if($attestat->status == 'complete'){
-            return response()->json(['error' => true, 'message' => 'Test is already completed ...']);
+            return response()->json(['error' => true, 'message' => 'completed']);
         }
         return response()->json(['error' => true,'message' => 'Something went wrong...']);
     }
@@ -149,7 +180,7 @@ class AttestatController extends Controller
         }
         //If attestat already passed
         if($attestat->status == 'complete'){
-            return response()->json(['error' => true, 'message' => 'Test is already completed ...']);
+            return response()->json(['error' => true, 'message' => 'completed']);
         }
 
         //If the test not for this user
