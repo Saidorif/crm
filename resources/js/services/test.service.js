@@ -10,8 +10,8 @@ const TestService = {
 	showTest(id){
 		return ApiService.post(`/api/attestat/show/${id}`)
 	},
-	testListUrl(page){
-		return ApiService.get(`/api/attestat/all?page=`+ page)
+	testListUrl(data){
+		return ApiService.post(`/api/attestat/all?page=`+ data.page,data.items)
 	},
 	testUserListUrl(page){
 		return ApiService.get(`/api/attestat/user?page=`+ page)
