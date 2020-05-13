@@ -227,7 +227,7 @@
     font-size: 15px;
     line-height: 21px;
     color: #202020;
-    height: 40px;
+    height: 35px;
 }
 .login-card-body .input-group .form-control:focus~.input-group-append .input-group-text, .register-card-body .input-group .form-control:focus~.input-group-append .input-group-text,
 .form-control:focus{
@@ -746,4 +746,159 @@ hr{
     box-sizing: border-box;
     margin-bottom: 0;
     vertical-align: top;
+}
+.photoFileUploader{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+    .nav-item a{
+      display: flex;
+      align-items: center;
+    }
+    .nav-tabs .nav-link.active, 
+    .nav-tabs .nav-item.show .nav-link{
+      border: none;
+      border-bottom: 3px solid;
+    }
+    .nav-tabs{
+      justify-content: flex-end;
+    }
+    .avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 18px 0px;
+  }
+  .avatar-upload .avatar-edit {
+    position: absolute;
+    right: 12px;
+    z-index: 1;
+    top: 10px;
+  }
+  .avatar-upload .avatar-edit input {
+    display: none;
+  }
+  .avatar-upload .avatar-edit input + label {
+      display: flex;
+      width: 34px;
+      justify-content: center;
+      align-items: center;
+      height: 34px;
+      font-size: 18px;
+      margin-bottom: 0;
+      border-radius: 100%;
+      background: #FFFFFF;
+      border: 1px solid transparent;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+      font-weight: normal;
+      transition: all 0.2s ease-in-out;
+  }
+  .avatar-upload .avatar-edit input + label:hover {
+    background: #f1f1f1;
+    border-color: #d6d6d6;
+  }
+  
+  .avatar-upload .avatar-preview {
+    width: 192px;
+    height: 192px;
+    position: relative;
+    border-radius: 100%;
+    border: 6px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+  .avatar-upload .avatar-preview > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  #fileimagePreview{
+      background-image: url(/img/file.png);
+      background-size: 55%;
+      background-position-x: 40%;
+  }
+  #imagePreview{
+      background-image: url(/img/user.jpg);
+  }
+  #fileimagePreview span{
+      position: absolute;
+      top: 50px;
+      left: 33px;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      width: 66px;
+  }
+  .sub_title{
+      border-bottom: 1px solid #000;
+      display: block;
+      padding-bottom: 10px;
+      width: 100%;
+      font-weight: bold;
+      margin-bottom: 20px;
+  }
+  .input_block_d_flex{
+      display: flex;
+  }
+  .input_block_d_flex .form-group.col-md-4:nth-child(1){
+      padding-left: 0;
+  }
+  .input_block_d_flex .form-group.col-md-4:nth-child(3){
+      padding-right: 0;
+  }
+  .input_switch{
+    --active: #275EFE;
+    --active-inner: #fff;
+    --focus: 2px rgba(39, 94, 254, .3);
+    --border: #BBC1E1;
+    --border-hover: #275EFE;
+    --background: #fff;
+    --disabled: #F6F8FF;
+    --disabled-inner: #E1E6F9;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 21px;
+    outline: none;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin: 0;
+    width: 38px;
+    border-radius: 11px;
+    cursor: pointer;
+    border: 1px solid var(--bc, var(--border));
+    background: var(--b, var(--background));
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+  } 
+  .input_switch::before{
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--ab, var(--border));
+      transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+      transform: translateX(var(--x, 0));
+  }
+  .input_switch:checked {
+    --b: var(--active);
+    --bc: var(--active);
+    --d-o: .3s;
+    --d-t: .6s;
+    --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+    --ab: var(--active-inner);
+    --x: 17px;
+}
+.input_switch:checked::before{
+    transform: translateX(var(--x));
+}
+.input_radio{
+    position: absolute;
+    top: 3px;
+    right: 0px;
 }
