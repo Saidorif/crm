@@ -7,8 +7,8 @@ const ActionService = {
 	addAction(data){
 		return ApiService.post(`/api/action/store`,data)
 	},
-	editAction(id){
-		return ApiService.get(`/api/action/edit/${id}`)
+	editAction(data){
+		return ApiService.get(`/api/action/edit/${data.id}`)
 	},
 	updateAction(data){
 		return ApiService.post(`/api/action/update/${data.id}`,data)

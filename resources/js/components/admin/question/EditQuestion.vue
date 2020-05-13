@@ -6,7 +6,7 @@
 			    	<i class="peIcon pe-7s-drawer"></i>
 				    Edit Question
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/question"><i class="fas fa-arrow-circle-left"></i> Back</router-link>
+				<router-link class="btn btn-primary back_btn" to="/crm/question"><span class="peIcon pe-7s-back"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveQuestion" >

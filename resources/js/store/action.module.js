@@ -49,7 +49,7 @@ const actions = {
 	},
 	async actionUpdateAction({commit},payload){
 		try {
-			const actions =  await ActionService.updateCont(payload);
+			const actions =  await ActionService.updateAction(payload);
 			await commit('setEditAction',actions.data.result)
 			return true
 		} catch (error) {
@@ -65,8 +65,8 @@ const mutations = {
 	setMessage(state, message){
 		state.message = message
 	},
-	setEditAction(state, cont){
-		state.cont = cont
+	setEditAction(state, action){
+		state.action = action
 	},
 };
 

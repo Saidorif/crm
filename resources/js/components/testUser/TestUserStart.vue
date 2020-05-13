@@ -115,11 +115,15 @@
 		},
 		async mounted(){
 			await this.actionStartUserTest(this.$route.params.userTestId)
-			this.startTimer();
-			this.userInfo = this.getStartUserTest.attestat
-			this.tests = this.getStartUserTest.result
-			this.timeLeft = this.getStartUserTest.total_time
-			this.TIME_LIMIT = this.getStartUserTest.total_time
+			if(this.getStartUserTest.error && this.getStartUserTest.message == 'completed'){
+				this.$router.push("/crm/test/test-user");
+			}else{
+				this.startTimer();
+				this.userInfo = this.getStartUserTest.attestat
+				this.tests = this.getStartUserTest.result
+				this.timeLeft = this.getStartUserTest.total_time
+				this.TIME_LIMIT = this.getStartUserTest.total_time
+			}
 		},
 		computed:{
 			...mapGetters('test',['getStartUserTest','getMassage','getComplete']),

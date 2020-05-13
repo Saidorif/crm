@@ -1,8 +1,8 @@
 import ApiService from './api.service'
 
 const ContsService = {
-	contFindUrl(){
-		return ApiService.post(`/api/controller/find`)
+	contFindUrl(data){
+		return ApiService.post(`/api/controller/find`, data)
 	},
 	conts(){
 		return ApiService.get(`/api/controller`)
