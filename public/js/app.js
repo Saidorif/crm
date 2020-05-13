@@ -10664,20 +10664,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 3:
                 _services_storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveGuestInfo(_this2.form);
 
-                if (_this2.getTests.success) {
-                  _this2.$router.push("/crm/test/test-for-guest");
-
+                if (_this2.form.type == 'employee') {
                   toast.fire({
                     type: "success",
                     icon: 'success',
-                    title: "Тест начался!"
+                    title: "Тест создан!"
                   });
-                } else if (_this2.getTests.error && _this2.getTests.message == 'Big limit...') {
-                  toast.fire({
-                    type: "error",
-                    icon: 'error',
-                    title: "Эти типы вопросов не достаточно в базе данных!"
-                  });
+                  _this2.form.category_id = '';
+                  _this2.form.fio = '';
+                  _this2.form.limit = '';
+                } else {
+                  if (_this2.getTests.success) {
+                    _this2.$router.push("/crm/test/test-for-guest");
+
+                    toast.fire({
+                      type: "success",
+                      icon: 'success',
+                      title: "Тест начался!"
+                    });
+                  } else if (_this2.getTests.error && _this2.getTests.message == 'Big limit...') {
+                    toast.fire({
+                      type: "error",
+                      icon: 'error',
+                      title: "Эти типы вопросов не достаточно в базе данных!"
+                    });
+                  }
                 }
 
                 _context2.next = 8;
@@ -11297,6 +11308,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return 'завершено';
       } else if (word == 'progress') {
         return 'не завершено';
+      } else if (word == 'start') {
+        return 'новый тест!';
+      }
+    },
+    status_class: function status_class(status) {
+      if (status == 'complete') {
+        return 'badge-success';
+      } else if (status == 'progress') {
+        return 'badge-warning';
+      } else if (status == 'start') {
+        return 'badge-primary';
       }
     }
   }),
@@ -59697,10 +59719,7 @@ var render = function() {
                         "div",
                         {
                           staticClass: "badge status_f_s",
-                          class:
-                            item.status == "complete"
-                              ? "badge-success"
-                              : "badge-warning"
+                          class: _vm.status_class(item.status)
                         },
                         [
                           _c("b", [

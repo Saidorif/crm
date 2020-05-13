@@ -1,4 +1,4 @@
-<template>
+ <template>
 	<div class="start_test">
 		<div class="card">
 		  	<div class="card-header">
@@ -111,20 +111,31 @@
 		    	if (this.checkInputs) {
 		    		await this.actionStartTest(this.form)
 		    		TokenService.saveGuestInfo(this.form)
-		    		if (this.getTests.success){
-		    			this.$router.push("/crm/test/test-for-guest");
+		    		if (this.form.type == 'employee'){
 		    			toast.fire({
 							type: "success",
 							icon: 'success',
-							title: "Тест начался!"
+							title: "Тест создан!"
 						});
-		    		}
-		    		else if(this.getTests.error && this.getTests.message == 'Big limit...'){
-		    			toast.fire({
-							type: "error",
-							icon: 'error',
-							title: "Эти типы вопросов не достаточно в базе данных!"
-						});
+						this.form.category_id = ''
+						this.form.fio = ''
+						this.form.limit = ''
+		    		}else{
+			    		if (this.getTests.success){
+			    			this.$router.push("/crm/test/test-for-guest");
+			    			toast.fire({
+								type: "success",
+								icon: 'success',
+								title: "Тест начался!"
+							});
+			    		}
+			    		else if(this.getTests.error && this.getTests.message == 'Big limit...'){
+			    			toast.fire({
+								type: "error",
+								icon: 'error',
+								title: "Эти типы вопросов не достаточно в базе данных!"
+							});
+			    		}
 		    		}
 		    	}else{
 		    		this.requiredInput = true

@@ -27,7 +27,7 @@
 								<td>{{item.fio}}</td>
 								<td>{{item.category.name}}</td>
 								<td> 
-									<div class="badge status_f_s" :class="item.status =='complete' ? 'badge-success' : 'badge-warning'">
+									<div class="badge status_f_s" :class="status_class(item.status)">
 										<b>{{word_to_russian(item.status)}}</b>
 									</div> 
 								</td>
@@ -70,6 +70,17 @@
 					return 'завершено'
 				}else if(word =='progress'){
 					return 'не завершено'
+				}else if(word =='start'){
+					return 'новый тест!'
+				}
+			},
+			status_class(status){
+				if (status =='complete') {
+					return 'badge-success'
+				}else if(status =='progress'){
+					return 'badge-warning'
+				}else if(status =='start'){
+					return 'badge-primary'
 				}
 			}
 		},
