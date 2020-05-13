@@ -11027,16 +11027,18 @@ var remainingPathColor = COLOR_CODES.info.color;
               return _this.actionStartUserTest(_this.$route.params.userTestId);
 
             case 2:
-              console.log(_this.getStartUserTest);
+              if (_this.getStartUserTest.error && _this.getStartUserTest.message == 'completed') {
+                _this.$router.push("/crm/test/test-user");
+              } else {
+                _this.startTimer();
 
-              _this.startTimer();
+                _this.userInfo = _this.getStartUserTest.attestat;
+                _this.tests = _this.getStartUserTest.result;
+                _this.timeLeft = _this.getStartUserTest.total_time;
+                _this.TIME_LIMIT = _this.getStartUserTest.total_time;
+              }
 
-              _this.userInfo = _this.getStartUserTest.attestat;
-              _this.tests = _this.getStartUserTest.result;
-              _this.timeLeft = _this.getStartUserTest.total_time;
-              _this.TIME_LIMIT = _this.getStartUserTest.total_time;
-
-            case 8:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -59358,21 +59360,23 @@ var render = function() {
                             )
                           : _vm._e(),
                         _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn_transparent",
-                            attrs: {
-                              tag: "button",
-                              to: "/crm/test/test-user-start/" + item.id
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "pe_icon pe-7s-play editColor"
-                            })
-                          ]
-                        )
+                        item.status == "start"
+                          ? _c(
+                              "router-link",
+                              {
+                                staticClass: "btn_transparent",
+                                attrs: {
+                                  tag: "button",
+                                  to: "/crm/test/test-user-start/" + item.id
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "pe_icon pe-7s-play editColor"
+                                })
+                              ]
+                            )
+                          : _vm._e()
                       ],
                       1
                     )
