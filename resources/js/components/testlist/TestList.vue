@@ -2,7 +2,7 @@
 	<div class="test_list">
 		<div class="card">
 		  	<div class="card-header">
-		  		<div>
+		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i class="peIcon pe-7s-browser"></i>
 					    Test List 

@@ -2,10 +2,55 @@
 	<div class="test_user">
 		<div class="card">
 		  	<div class="card-header">
-			    <h4 class="title_user">
-			    	<i class="peIcon pe-7s-browser"></i>
-				    Test USER List 
-				</h4>
+		  		<div class="header_title">
+				    <h4 class="title_user">
+				    	<i class="peIcon pe-7s-browser"></i>
+					    Test USER List 
+					</h4>
+					<div class="add_user_btn">
+			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
+						    <i class="fas fa-filter"></i>Филтр
+						</button>
+		            </div>
+		  		</div>
+		  		<div class="filters">
+			    	<transition name="slide">
+					  	<div class="filters" v-if="filterShow">
+				  			<form>
+						  		<div class="row">
+						  			<div class="col-lg-3 form-group">
+								  	 	<label for="deadline_to">Дата по</label>
+									    <date-picker 
+									    	lang="ru" 
+									    	v-model="filter.date" 
+									    	valueType="format" 
+									    	format="YYYY-MM-DD"
+								    	></date-picker>
+					   			  	</div>
+		  					  		<div class="form-group col-lg-3">
+			  							<label for="status">Статус</label>
+		  								<select name="" v-model="filter.status" class="form-control" >
+		  									<option value="">Выберите статус</option>
+		  									<option value="complete">Завершено</option>
+		  									<option value="progress">Не завершено</option>
+		  									<option value="start">Новый тест</option>
+		  								</select>
+	  					  			</div>		
+								  	<div class="col-lg-12 form-group btn_search">
+									  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
+									  		<i class="fas fa-search"></i>
+										  	найти
+									  	</button>
+									  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
+									  		<i class="fas fa-times"></i>
+										  	сброс
+									  	</button>
+							  	  	</div>	
+						  		</div>
+							</form>
+					  	</div>	
+				  	</transition>
+			    </div>
 		  	</div>
 		  	<div class="card-body">
 			  	<div class="table-responsive">
@@ -59,10 +104,24 @@
 	</div>
 </template>
 <script>
+	import DatePicker from 'vue2-datepicker'
 	import {mapActions, mapGetters} from 'vuex'
+	import 'vue2-datepicker/index.css';
 	export default{
+		components:{
+			DatePicker
+		},
 		data(){
-			return{}
+			return{
+				filterShow:false,
+				filter:{
+					status:'',
+					date_from:'',
+					date_to:'',
+					date:'',
+				},
+				pageList:1,
+			}
 		},
 		computed:{
 			...mapGetters('test',['getTestUserList'])
@@ -93,7 +152,24 @@
 				}else if(status =='start'){
 					return 'badge-primary'
 				}
-			}
+			},
+			async search(){
+				let page = 1
+				if(this.filter.status || this.filter.date){
+					// await this.actionTestList({page: page,items:this.filter})
+				}
+			},
+			async clear(){
+				if(this.filter.status || this.filter.date){
+					this.filter.status = ''
+					let page  = 1
+					// await this.actionTestList({page: page,items:this.filter});
+				}
+
+			},
+			toggleFilter(){
+				this.filterShow = !this.filterShow
+			},
 		},
 		async mounted(){
 			let page = 1
