@@ -44,8 +44,8 @@
 										tag="button" 
 										class="btn_transparent" 
 										:to='`/crm/test/test-user-start/${item.id}`'
-										v-if="item.status == 'start'"
 									>
+										<!-- v-if="item.status == 'start'" -->
 										<i class="pe_icon pe-7s-play editColor"></i>
 									</router-link>
 								</td>

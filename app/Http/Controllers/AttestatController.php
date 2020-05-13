@@ -124,7 +124,7 @@ class AttestatController extends Controller
         }
         //If attestat already passed
         if($attestat->status == 'complete'){
-            return response()->json(['error' => true, 'message' => 'Test is already completed ...']);
+            return response()->json(['error' => true, 'message' => 'completed']);
         }
         return response()->json(['error' => true,'message' => 'Something went wrong...']);
     }
@@ -149,7 +149,7 @@ class AttestatController extends Controller
         }
         //If attestat already passed
         if($attestat->status == 'complete'){
-            return response()->json(['error' => true, 'message' => 'Test is already completed ...']);
+            return response()->json(['error' => true, 'message' => 'completed']);
         }
 
         //If the test not for this user

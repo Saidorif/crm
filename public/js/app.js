@@ -11027,6 +11027,8 @@ var remainingPathColor = COLOR_CODES.info.color;
               return _this.actionStartUserTest(_this.$route.params.userTestId);
 
             case 2:
+              console.log(_this.getStartUserTest);
+
               _this.startTimer();
 
               _this.userInfo = _this.getStartUserTest.attestat;
@@ -11034,7 +11036,7 @@ var remainingPathColor = COLOR_CODES.info.color;
               _this.timeLeft = _this.getStartUserTest.total_time;
               _this.TIME_LIMIT = _this.getStartUserTest.total_time;
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -59356,23 +59358,21 @@ var render = function() {
                             )
                           : _vm._e(),
                         _vm._v(" "),
-                        item.status == "start"
-                          ? _c(
-                              "router-link",
-                              {
-                                staticClass: "btn_transparent",
-                                attrs: {
-                                  tag: "button",
-                                  to: "/crm/test/test-user-start/" + item.id
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "pe_icon pe-7s-play editColor"
-                                })
-                              ]
-                            )
-                          : _vm._e()
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn_transparent",
+                            attrs: {
+                              tag: "button",
+                              to: "/crm/test/test-user-start/" + item.id
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "pe_icon pe-7s-play editColor"
+                            })
+                          ]
+                        )
                       ],
                       1
                     )

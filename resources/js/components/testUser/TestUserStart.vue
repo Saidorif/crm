@@ -115,6 +115,7 @@
 		},
 		async mounted(){
 			await this.actionStartUserTest(this.$route.params.userTestId)
+			console.log(this.getStartUserTest)
 			this.startTimer();
 			this.userInfo = this.getStartUserTest.attestat
 			this.tests = this.getStartUserTest.result
