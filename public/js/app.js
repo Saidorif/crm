@@ -11328,8 +11328,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -11343,8 +11341,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       pageList: 1
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('test', ['getTestList'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('test', ['actionTestList']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('test', ['getTestList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('category', ['getCategories'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('test', ['actionTestList']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('category', ['actionCategoryList']), {
     getResults: function getResults() {
       var _this = this;
 
@@ -11483,6 +11481,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               });
 
             case 3:
+              _context4.next = 5;
+              return _this4.actionCategoryList();
+
+            case 5:
             case "end":
               return _context4.stop();
           }
@@ -60001,18 +60003,15 @@ var render = function() {
                                 _vm._v("Выберите направления")
                               ]),
                               _vm._v(" "),
-                              _c("option", { attrs: { value: "complete" } }, [
-                                _vm._v("Завершено")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "progress" } }, [
-                                _vm._v("Не завершено")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "start" } }, [
-                                _vm._v("Новый тест")
-                              ])
-                            ]
+                              _vm._l(_vm.getCategories, function(cat, index) {
+                                return _c(
+                                  "option",
+                                  { key: cat.id, domProps: { value: cat.id } },
+                                  [_vm._v(_vm._s(cat.name))]
+                                )
+                              })
+                            ],
+                            2
                           )
                         ]),
                         _vm._v(" "),

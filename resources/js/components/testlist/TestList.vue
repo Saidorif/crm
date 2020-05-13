@@ -42,9 +42,7 @@
 			  							<label for="category_id">Направления</label>
 		  								<select name="" v-model="filter.category_id" class="form-control" >
 		  									<option value="">Выберите направления</option>
-		  									<option value="complete">Завершено</option>
-		  									<option value="progress">Не завершено</option>
-		  									<option value="start">Новый тест</option>
+		  									<option :value="cat.id" v-for="(cat,index) in getCategories" :key="cat.id">{{cat.name}}</option>
 		  								</select>
 	  					  			</div>	
 								  	<div class="col-lg-12 form-group btn_search">
@@ -118,10 +116,12 @@
 			}
 		},
 		computed:{
-			...mapGetters('test',['getTestList'])
+			...mapGetters('test',['getTestList']),
+			...mapGetters('category',['getCategories'])
 		},
 		methods:{
 			...mapActions('test',['actionTestList']),
+			...mapActions('category',['actionCategoryList']),
 			async getResults(page = 1){ 
 				await this.actionTestList({page: page,items:this.filter})
 				this.pageList = page
@@ -171,6 +171,7 @@
 		async mounted(){
 			let page = 1
 			await this.actionTestList({page:page})
+			await this.actionCategoryList()
 		}
 	}
 </script>
