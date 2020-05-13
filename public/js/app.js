@@ -56563,11 +56563,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "router-link",
-            { staticClass: "btn btn-primary", attrs: { to: "/crm/question" } },
-            [
-              _c("i", { staticClass: "fas fa-arrow-circle-left" }),
-              _vm._v(" Back")
-            ]
+            {
+              staticClass: "btn btn-primary back_btn",
+              attrs: { to: "/crm/question" }
+            },
+            [_c("span", { staticClass: "peIcon pe-7s-back" }), _vm._v(" Назад")]
           )
         ],
         1
@@ -56917,11 +56917,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "router-link",
-            { staticClass: "btn btn-primary", attrs: { to: "/crm/question" } },
-            [
-              _c("i", { staticClass: "fas fa-arrow-circle-left" }),
-              _vm._v(" Back")
-            ]
+            {
+              staticClass: "btn btn-primary back_btn",
+              attrs: { to: "/crm/question" }
+            },
+            [_c("span", { staticClass: "peIcon pe-7s-back" }), _vm._v(" Назад")]
           )
         ],
         1
