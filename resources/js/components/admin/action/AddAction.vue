@@ -12,7 +12,7 @@
 		  		<form @submit.prevent.enter="saveAction" >
 					<div class="row">
 					  <div class="form-group col-md-9">
-					    <label for="contName">Controller Name</label>
+					    <label for="contName">Название контроллера</label>
 						<multiselect 
 							:value="findController"
 							:options="getContList"
@@ -106,7 +106,7 @@
 					    	icon: 'success',
 							title: 'Action добавлен!',
 					    })
-						this.$router.push("/crm/conts");
+						this.$router.push("/crm/action");
 						this.requiredInput =false
 					}else{
 						toast.fire({
@@ -121,7 +121,7 @@
 		    },
 		    filterController(value){
 	      		if(value != ''){
-	      			this.isLoading = true
+					  this.isLoading = true
 					setTimeout(()=>{
 		          		this.actionContsFind({name: value,})
 						this.isLoading = false
@@ -132,9 +132,21 @@
 	      		this.findController = selectedOption
 	      		this.form.conts_id = this.findController.id
 			},
+		},
+		async mounted(){
+
 		}
 	}
 </script>
 <style scoped>
-	
+
+	.multiselect__tags {
+		min-height: 40px;
+		display: block;
+		padding: 8px 40px 0 8px;
+		border-radius: 5px;
+		border: 1px solid #e8e8e8;
+		background: #fff;
+		font-size: 14px;
+	}
 </style>

@@ -65,4 +65,9 @@ class User extends Authenticatable implements JWTSubject
     public function position(){
         return $this->belongsTo(Position::class);
     }
+
+    public function experience()
+    {
+        return $this->hasMany(\App\UserExperience::class,'user_id');
+    }
 }
