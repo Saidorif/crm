@@ -1,7 +1,7 @@
 <template>
 	<div class="test_user">
 		<div class="card">
-		  	<div class="card-header">
+		  	<div class="card-header header_filter">
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i class="peIcon pe-7s-browser"></i>
@@ -13,44 +13,40 @@
 						</button>
 		            </div>
 		  		</div>
-		  		<div class="filters">
-			    	<transition name="slide">
-					  	<div class="filters" v-if="filterShow">
-				  			<form>
-						  		<div class="row">
-						  			<div class="col-lg-3 form-group">
-								  	 	<label for="deadline_to">Дата по</label>
-									    <date-picker 
-									    	lang="ru" 
-									    	v-model="filter.date" 
-									    	valueType="format" 
-									    	format="YYYY-MM-DD"
-								    	></date-picker>
-					   			  	</div>
-		  					  		<div class="form-group col-lg-3">
-			  							<label for="status">Статус</label>
-		  								<select name="" v-model="filter.status" class="form-control" >
-		  									<option value="">Выберите статус</option>
-		  									<option value="complete">Завершено</option>
-		  									<option value="progress">Не завершено</option>
-		  									<option value="start">Новый тест</option>
-		  								</select>
-	  					  			</div>		
-								  	<div class="col-lg-12 form-group btn_search">
-									  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
-									  		<i class="fas fa-search"></i>
-										  	найти
-									  	</button>
-									  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
-									  		<i class="fas fa-times"></i>
-										  	сброс
-									  	</button>
-							  	  	</div>	
-						  		</div>
-							</form>
-					  	</div>	
-				  	</transition>
-			    </div>
+		    	<transition name="slide">
+				  	<div class="filters" v-if="filterShow">
+				  		<div class="row">
+				  			<div class="col-lg-4 form-group">
+						  	 	<label for="date">Дата</label>
+							    <date-picker 
+							    	lang="ru" 
+							    	v-model="filter.date" 
+							    	valueType="format" 
+							    	format="YYYY-MM-DD"
+						    	></date-picker>
+			   			  	</div>
+  					  		<div class="form-group col-lg-4">
+	  							<label for="status">Статус</label>
+  								<select name="" v-model="filter.status" class="form-control" >
+  									<option value="">Выберите статус</option>
+  									<option value="complete">Завершено</option>
+  									<option value="progress">Не завершено</option>
+  									<option value="start">Новый тест</option>
+  								</select>
+					  			</div>		
+						  	<div class="col-lg-4 form-group btn_search">
+							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
+							  		<i class="fas fa-search"></i>
+								  	найти
+							  	</button>
+							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
+							  		<i class="fas fa-times"></i>
+								  	сброс
+							  	</button>
+					  	  	</div>	
+				  		</div>
+				  	</div>	
+			  	</transition>
 		  	</div>
 		  	<div class="card-body">
 			  	<div class="table-responsive">
@@ -116,8 +112,6 @@
 				filterShow:false,
 				filter:{
 					status:'',
-					date_from:'',
-					date_to:'',
 					date:'',
 				},
 				pageList:1,
@@ -129,7 +123,8 @@
 		methods:{
 			...mapActions('test',['actionUserTestList']),
 			async getResults(page = 1){ 
-				await this.actionUserTestList(page)
+				await this.actionUserTestList({page: page,items:this.filter})
+				this.pageList = page
 			},
 			percentage(limit,true_answers){
 				let number = true_answers ? parseInt(true_answers)*100/parseInt(limit)+' %' : ''
@@ -156,14 +151,15 @@
 			async search(){
 				let page = 1
 				if(this.filter.status || this.filter.date){
-					// await this.actionTestList({page: page,items:this.filter})
+					await this.actionUserTestList({page: page,items:this.filter})
 				}
 			},
 			async clear(){
 				if(this.filter.status || this.filter.date){
 					this.filter.status = ''
+					this.filter.date = ''
 					let page  = 1
-					// await this.actionTestList({page: page,items:this.filter});
+					await this.actionUserTestList({page: page,items:this.filter});
 				}
 
 			},
