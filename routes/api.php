@@ -69,7 +69,7 @@ Route::group([
 
             //Attestat Model
             Route::post('attestat/all','AttestatController@index');
-            Route::get('attestat/user','AttestatController@userindex');
+            Route::post('attestat/user','AttestatController@userindex');
             Route::post('attestat','AttestatController@attestat');
             Route::get('attestat/userstart/{id}','AttestatController@startTestUser');
             Route::post('attestat/complete/{id}','AttestatController@complete');

@@ -34,10 +34,25 @@ class AttestatController extends Controller
         return response()->json(['success' => true, 'result' => $attestats]);
     }
 
-    public function userindex()
+    public function userindex(Request $request)
     {
         $user = request()->user();
-        $attestats = Attestat::where(['user_id' => $user->id])->with(['category'])->orderBy('id','DESC')->paginate(12);
+
+        $builder = Attestat::query()->where(['user_id' => $user->id])->with(['category']);
+        $params = $request->all();
+        if(count($params) > 0){
+            if(!empty($params['date'])){
+                $builder->whereBetween('created_at', [$params['date']." 00:00:00", $params['date']." 23:59:59"]);
+            }
+            if(!empty($params['status'])){
+                $builder->where(['status' => $params['status']]);
+            }
+            $attestats = $builder->orderBy('id','DESC')->paginate(12);
+        }else{
+            $attestats = Attestat::with(['category'])->orderBy('id','DESC')->paginate(12);
+        }
+
+        // $attestats = Attestat::where(['user_id' => $user->id])->with(['category'])->orderBy('id','DESC')->paginate(12);
         return response()->json(['success' => true, 'result' => $attestats]);
     }
 
