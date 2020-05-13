@@ -52546,7 +52546,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "title_user" }, [
       _c("i", { staticClass: "peIcon pe-7s-id" }),
-      _vm._v("\n\t\t\t\t    Add Action\n\t\t\t\t")
+      _vm._v("\n\t\t\t    Add Action\n\t\t\t")
     ])
   },
   function() {
@@ -52562,7 +52562,7 @@ var staticRenderFns = [
         },
         [
           _c("i", { staticClass: "fas fa-save" }),
-          _vm._v("\n\t\t\t\t\t\t  \tСохранить\n\t\t\t\t\t\t")
+          _vm._v("\n\t\t\t\t\t  \tСохранить\n\t\t\t\t\t")
         ]
       )
     ])
