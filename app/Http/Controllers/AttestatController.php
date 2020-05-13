@@ -12,9 +12,25 @@ use Carbon\Carbon;
 class AttestatController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $attestats = Attestat::with(['category'])->orderBy('id','DESC')->paginate(12);
+        $builder = Attestat::query()->with(['category']);
+        $params = $request->all();
+        if(count($params) > 0){
+            if(!empty($params['fio'])){
+                $builder->where('fio','LIKE','%'.$params['fio'].'%');
+            }
+            if(!empty($params['status'])){
+                $builder->where(['status' => $params['status']]);
+            }
+            if(!empty($params['category_id'])){
+                $builder->where(['category_id' => $params['category_id']]);
+            }
+            $attestats = $builder->orderBy('id','DESC')->paginate(12);
+        }else{
+            $attestats = Attestat::with(['category'])->orderBy('id','DESC')->paginate(12);
+        }
+
         return response()->json(['success' => true, 'result' => $attestats]);
     }
 

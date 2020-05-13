@@ -11,10 +11,26 @@ use App\UserExperience;
 
 class EmployeeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // $users = User::with('role')->where('role_id', '!=', 1)->paginate(12);
-        $users = User::with(['role','position'])->paginate(12);
+        $builder = User::query()->where('role_id', '!=', 1)->with(['role','position']);
+        $params = $request->all();
+        if(count($params) > 0){
+            if(!empty($params['name'])){
+                $builder->where('name','LIKE','%'.$params['name'].'%');
+            }
+            if(!empty($params['position_id'])){
+                $builder->where(['position_id' => $params['position_id']]);
+            }
+            if(!empty($params['category_id'])){
+                $builder->where(['category_id' => $params['category_id']]);
+            }
+            $users = $builder->orderBy('id','DESC')->paginate(12);
+        }else{
+            $users = User::with(['role','position'])->paginate(12);
+        }
+        // $users = User::with(['role','position'])->paginate(12);
         return response()->json(['success' => true, 'result' => $users]);
     }
 

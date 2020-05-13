@@ -28,7 +28,7 @@ Route::group([
             
 
             //Employee CRUD
-            Route::get('employee', 'EmployeeController@index');
+            Route::post('employee', 'EmployeeController@index');
             Route::post('checkemail', 'EmployeeController@checkemail');
             Route::post('employee/store', 'EmployeeController@store');
             Route::get('employee/list', 'EmployeeController@list');
@@ -68,7 +68,7 @@ Route::group([
             Route::delete('question/destroy/{id}', 'QuestionController@destroy');
 
             //Attestat Model
-            Route::get('attestat/all','AttestatController@index');
+            Route::post('attestat/all','AttestatController@index');
             Route::get('attestat/user','AttestatController@userindex');
             Route::post('attestat','AttestatController@attestat');
             Route::get('attestat/userstart/{id}','AttestatController@startTestUser');
