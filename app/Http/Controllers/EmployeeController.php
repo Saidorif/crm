@@ -14,7 +14,7 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         // $users = User::with('role')->where('role_id', '!=', 1)->paginate(12);
-        $builder = User::query()->where('role_id', '!=', 1)->with(['role','position']);
+        $builder = User::query()->where('role_id', '!=', 1)->with(['role','position','category']);
         $params = $request->all();
         if(count($params) > 0){
             if(!empty($params['name'])){
@@ -28,7 +28,7 @@ class EmployeeController extends Controller
             }
             $users = $builder->orderBy('id','DESC')->paginate(12);
         }else{
-            $users = User::with(['role','position'])->paginate(12);
+            $users = User::with(['role','position','category'])->paginate(12);
         }
         // $users = User::with(['role','position'])->paginate(12);
         return response()->json(['success' => true, 'result' => $users]);
