@@ -914,3 +914,20 @@ hr{
 .mx-icon-calendar, .mx-icon-clear{
     color: #D4E2F5 !important;
 }
+.mx-input:disabled, .mx-input.disabled {
+    color: #ccc;
+    background-color: #f3f3f3 !important;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+.backBtn{
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid #3f6ad8;
+    padding: 5px 20px;
+    line-height: 20px;
+}
+.backBtn span{
+    margin-right: 5px;
+}
