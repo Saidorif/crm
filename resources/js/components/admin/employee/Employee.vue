@@ -5,27 +5,27 @@
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i  class="peIcon pe-7s-users"></i>
-					    Employee 
+					    Сотрудники 
 					</h4>
 					<div class="add_user_btn">
 			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
 						    <i class="fas fa-filter"></i>
 			            	Филтр
 						</button>
-						<router-link class="btn btn-primary" to="/crm/employee/add"><i class="fas fa-plus"></i> Add</router-link>
+						<router-link class="btn btn-primary" to="/crm/employee/add"><i class="fas fa-plus"></i> Добавить</router-link>
 		            </div>
 		  		</div>
 		    	<transition name="slide">
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
   					  		<div class="form-group col-lg-3">
-	  							<label for="fio">Ф.И.О</label>
+	  							<label for="name">Ф.И.О</label>
 	  							<input 
 	  								type="text" 
 	  								class="form-control" 
-	  								id="fio" 
+	  								id="name" 
 	  								placeholder="Ф.И.О..."
-	  								v-model="filter.fio"
+	  								v-model="filter.name"
   								>
 				  			</div>
   					  		<div class="form-group col-lg-3">
@@ -68,8 +68,8 @@
 							<th scope="col">Должность</th>
 							<th scope="col">Рол</th>
 							<th scope="col">Управления</th>
-							<th scope="col">Email</th>
-							<th scope="col">Phone</th>
+							<th scope="col">E-mail</th>
+							<th scope="col">Телефон</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
@@ -78,8 +78,8 @@
 							<td scope="row">{{index+1}}</td>
 							<td>{{item.name}}</td>
 							<td>{{item.position ? item.position.name : ''}}</td>
-							<td>{{item.role.name}}</td>
-							<td>category</td>
+							<td>{{item.role ? item.role.name : ''}}</td>
+							<td>{{item.category ? item.category.name : ''}}</td>
 							<td>{{item.email}}</td>
 							<td>{{item.phone}}</td>
 							<td>
@@ -105,7 +105,7 @@
 		data(){
 			return{
 				filter:{
-					fio:'',
+					name:'',
 					category_id:'',
 					position_id:'',
 				},
@@ -132,6 +132,22 @@
 			},
 			toggleFilter(){
 				this.filterShow = !this.filterShow
+			},
+			async search(){
+				let page = 1
+				if(this.filter.name || this.filter.category_id || this.filter.position_id){
+					await this.actionEmployees({page: page,items:this.filter})
+				}
+			},
+			async clear(){
+				if(this.filter.name || this.filter.category_id || this.filter.position_id){
+					this.filter.name = ''
+					this.filter.category_id = ''
+					this.filter.position_id = ''
+					let page  = 1
+					await this.actionEmployees({page: page,items:this.filter})
+				}
+
 			},
 			deleteEmployee(id){
 

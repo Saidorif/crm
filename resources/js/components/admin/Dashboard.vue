@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-rocket"></i>
-				    Dashboard
+				    Админ панель
 				</h4>
 		  	</div>
 		  	<div class="card-body">

@@ -19,29 +19,29 @@
         <form role="form" @submit.prevent.enter="sendProfile">
           <div class="card-body d-flex flex-wrap">
             <div class="form-group col-md-6">
-              <label for="name">Fullname</label>
+              <label for="name">Ф.И.О</label>
               <input 
                 type="text" 
                 class="form-control input_style" 
                 id="name" 
                 :class="isRequired(form.name) ? 'isRequired' : ''" 
-                placeholder="Fullname"
+                placeholder="Ф.И.О"
                 v-model="form.name"
             >
             </div>
             <div class="form-group col-md-6">
-              <label for="exampleInputEmail1">Email</label>
+              <label for="exampleInputEmail1">E-mail</label>
               <input 
                 type="email" 
                 class="form-control input_style"
                 :class="isRequired(form.email) ? 'isRequired' : ''"  
                 id="exampleInputEmail1" 
-                placeholder="Enter email"
+                placeholder="E-mail"
                 v-model="form.email"
             >
             </div>
             <div class="form-group col-md-6">
-              <label for="address">Address</label>
+              <label for="address">Адрес</label>
               <input 
                 type="text" 
                 class="form-control input_style" 
@@ -51,12 +51,12 @@
             >
             </div>
             <div class="form-group col-md-6">
-              <label for="phone">Phone</label>
+              <label for="phone">Телефон</label>
               <input 
                 type="text" 
                 class="form-control input_style" 
                 id="phone" 
-                placeholder="Phone.."
+                placeholder="Телефон.."
                 v-model="form.phone"
             >
             </div>
@@ -92,7 +92,7 @@
               </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="text">Text</label>
+              <label for="text">Текст</label>
               <textarea 
                 rows="10" 
                 class="form-control input_style" 
@@ -107,11 +107,11 @@
         </form>
       </div>
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <h3>Change password</h3>
+          <h3>Изменить пароль</h3>
           <form @submit.prevent.enter="changePassword">
             <div class="card-body d-flex flex-wrap">
               <div class="form-group col-md-6">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="exampleInputPassword1">Пароль</label>
                 <input 
                   type="password" 
                   class="form-control input_style" 
@@ -122,12 +122,12 @@
               >
               </div>
               <div class="form-group col-md-6">
-                <label for="ConfirmPassword1">Confirm Password</label>
+                <label for="ConfirmPassword1">Подтвердите пароль</label>
                 <input 
                   type="password" 
                   class="form-control input_style" 
                   id="ConfirmPassword1" 
-                  placeholder="Confirm Password.."
+                  placeholder="Подтвердите пароль.."
                   v-model="passwords.confirm_password"
                   :class="isRequiredPassword(passwords.confirm_password) ? 'isRequired' : ''"  
                   @input="confirmPassword()"
@@ -159,7 +159,7 @@
           file:'',
           text:'',
         },
-        fileFormat: 'no-file',
+        fileFormat: 'нет-файла',
         passwords:{
 					password:'',
 					confirm_password:''

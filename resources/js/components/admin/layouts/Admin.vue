@@ -13,7 +13,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2"></i> Logout</a>
+        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2"></i> Выйти</a>
       </li>
     </ul>
   </nav>
@@ -41,7 +41,7 @@
             <router-link to="/crm/dashboard" class="nav-link">
               <span class="peIcon pe-7s-rocket" style="font-size: 20px;"></span>
               <p>
-                Dashboard
+                Админ панель
               </p>
             </router-link>
           </li>
@@ -49,7 +49,7 @@
             <router-link class="nav-link" to="/crm/profile">
               <i class="peIcon pe-7s-user"></i>
               <p>
-                Profile
+                Мои данные
               </p>
             </router-link>
           </li>
@@ -57,7 +57,7 @@
             <router-link class="nav-link" to="/crm/test/test-user">
               <i class="peIcon pe-7s-note2"></i>
               <p>
-                Test USER
+                Тесты <span class="badge badge-warning">user</span>
               </p>
             </router-link>
           </li>
@@ -73,7 +73,7 @@
             <router-link class="nav-link" to="/crm/question">
               <span class="peIcon pe-7s-note" style="font-size: 20px;"></span>
               <p>
-                Question
+                Вопросы
               </p>
             </router-link>
           </li>
@@ -81,7 +81,7 @@
             <a href="#" class="nav-link">
               <span class="peIcon pe-7s-note2" style="font-size: 20px;"></span>
               <p>
-                Test
+                Тесты
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -89,14 +89,14 @@
               <li class="nav-item">
                 <router-link class="nav-link" to="/crm/test/start-test">
                   <p>
-                    Start Test
+                    Создать тест
                   </p>
                 </router-link>
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" to="/crm/test/list">
                   <p>
-                    Test List
+                    Список теста
                   </p>
                 </router-link>
               </li>
@@ -106,7 +106,7 @@
             <router-link class="nav-link" to="/crm/employee">
               <i class="peIcon pe-7s-users"></i>
               <p>
-                Employee
+                Пользователи
               </p>
             </router-link>
           </li>

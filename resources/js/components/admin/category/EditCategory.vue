@@ -4,20 +4,20 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="nav-icon fas fa-box"></i>
-				    Edit Category
+				    Редактировать управление 
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/category"><i class="fas fa-arrow-circle-left"></i> Back</router-link>
+				<router-link class="btn btn-primary back_btn" to="/crm/category"><span class="peIcon pe-7s-back"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveCategory">
 					<div class="row">
 					  <div class="form-group col-md-9">
-					    <label for="categoryName">Category Name</label>
+					    <label for="categoryName">Название</label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
 					    	id="categoryName" 
-					    	placeholder="Category Name"
+					    	placeholder="Название"
 					    	v-model="form.name"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>
