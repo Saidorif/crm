@@ -37,7 +37,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="role">Role</label>
+              <label for="role">Рол</label>
               <select
                 class="form-control"
                 :class="isRequired(form.role_id) ? 'isRequired' : '' "
