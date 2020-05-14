@@ -119,7 +119,7 @@
 					<div class="avatar-preview">
 						<div
 						id="imagePreview"
-						:style="{'backgroundImage': 'url('+photoImg(form.image)+')'}"
+						:style="{'backgroundImage': 'url('+ photoImg(form.image) +')'}"
 						></div>
 					</div>
 					</div>
@@ -175,7 +175,8 @@
 							v-model="form.date_to"
 						/>
 						<div class="input_radio">
-							<input type="checkbox" class="input_switch" name="working" v-model="form.working" >
+                <label for="working">to this day</label>
+                <input type="checkbox" class="input_switch" name="working" v-model="form.working" id="working" >
 						</div>
 					</div>
 					
@@ -290,10 +291,11 @@ export default {
         phone: "",
         image: "",
         file: "",
-		text: "",
-		date_from: "",
-		date_to: "",
-		working: false,
+        text: "",
+        date_from: "",
+        birthday: '',
+        date_to: "",
+        working: false,
         experience: [
           {
             company: "",
@@ -355,12 +357,10 @@ export default {
       }
     },
     photoImg(img) {
-      if (img) {
-        if (img.length < 100) {
-          return "/users/" + img;
-        } else {
-          return img;
-        }
+      if (img.length < 100) {
+        return '/img/user.jpg';
+      } else {
+        return img;
       }
     },
     changeFile(event) {
@@ -374,9 +374,9 @@ export default {
         });
       } else {
         let reader = new FileReader();
-        reader.onload = event => {
-		  this.form.file = event.target.result;
-		                  this.fileFormat = 'docx'
+        reader.onload = e => {
+          this.form.file = e.target.result;
+          this.fileFormat = event.target.files[0].name.substr(event.target.files[0].name.lastIndexOf('\\') + 1).split('.')[0];
         };
         reader.readAsDataURL(file);
       }
