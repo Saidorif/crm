@@ -5,6 +5,7 @@ const state = {
 	contList: [],
 	message: [],
 	cont: [],
+	consActions: [],
 };
 
 const getters = {
@@ -19,6 +20,9 @@ const getters = {
 	},
 	getCont(state){
 		return state.cont
+	},
+	getAllContsActions(state){
+		return state.consActions
 	},
 };
 
@@ -69,11 +73,23 @@ const actions = {
 			return false
 		}
 	},
+	async actionAllContsActions({commit},payload){
+		try {
+			const conts =  await ContsService.allContsActions(payload);
+			await commit('setAllContsActions',conts.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 };
 
 const mutations = {
 	setContList(state, contList){
 		state.contList = contList
+	},
+	setAllContsActions(state, consActions){
+		state.consActions = consActions
 	},
 	setConts(state, conts){
 		state.conts = conts

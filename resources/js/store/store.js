@@ -18,6 +18,7 @@ import {employee} from "./employee.module"
 import {test} from "./test.module"
 import {conts} from "./conts.module"
 import {action} from "./action.module"
+import {permission} from "./permission.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -43,6 +44,7 @@ const store = new Vuex.Store(
 			question,
 			conts,
 			action,
+			permission,
 		},
 		state:{
 			rules:[],

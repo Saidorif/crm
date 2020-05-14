@@ -21,8 +21,14 @@
 					</thead>
 					<tbody>
 						<tr v-for="(role,index) in getRoles.data">
-							<td scope="row">{{index+1}}</td>
-							<td>{{role.name}}</td>
+							<td scope="row">
+								{{index+1}}
+							</td>
+							<td>
+								<router-link tag="a" :to='`/crm/role/${role.id}`'>
+									{{role.name}}
+								</router-link>
+							</td>
 							<td>{{role.label}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/role/edit/${role.id}`'>
