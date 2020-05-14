@@ -53,7 +53,7 @@ class ContsController extends Controller
         $inputs = $request->all();
         $inputs['created_by'] = $request->user()->id;
         $controller = Conts::create($inputs);
-        return response()->json(['success' => true, 'message' => 'Controller created']);
+        return response()->json(['success' => true, 'message' => 'Контроллер создан']);
     }
 
     
@@ -73,7 +73,7 @@ class ContsController extends Controller
     {
         $controller = Conts::find($id);
         if(!$controller){
-            return response()->json(['error' => true, 'message' => 'Controller not found']);
+            return response()->json(['error' => true, 'message' => 'Контроллер не найден']);
         }
         return response()->json(['success' => true, 'result' => $controller]);
     }
@@ -83,13 +83,13 @@ class ContsController extends Controller
     {
         $controller = Conts::find($id);
         if(!$controller){
-            return response()->json(['error' => true, 'message' => 'Controller not found']);
+            return response()->json(['error' => true, 'message' => 'Контроллер не найден']);
         }
             
         $inputs = $request->all();
         $inputs['updated_by'] = $request->user()->id;
         $controller->update($inputs);
-        return response()->json(['success' => true, 'message' => 'Controller updated']);
+        return response()->json(['success' => true, 'message' => 'Контроллер обновлен']);
     }
 
     

@@ -87,7 +87,7 @@ class AttestatController extends Controller
 
     	$questions = Question::with(['variants'])->where(['category_id' => $inputs['category_id']])->limit($inputs['limit'])->get();
         if(count($questions) < $inputs['limit']){
-            return response()->json(['error' => true, 'message' => 'Big limit...']);
+            return response()->json(['error' => true, 'message' => 'Большой лимит...']);
         }
         $ex_time = 0;
         //Question ids
@@ -120,13 +120,13 @@ class AttestatController extends Controller
                 $inputs['fio'] = $employee->name;
                 $attestat = Attestat::create($inputs);
             }
-            return response()->json(['success' => true, 'message' => 'Tests created for '. count($employees) .' employees']);
+            return response()->json(['success' => true, 'message' => 'Тесты созданы для '. count($employees) .' сотрудников']);
         }
         if($status == 'progress'){
             $attestat = Attestat::create($inputs);
             return response()->json(['success' => true,'total_time'=> $ex_time,'start' => $start,'end' => $end, 'result' => $questions, 'attestat' => $attestat]);
         }
-        return response()->json(['error' => true,'message' => 'Something went wrong...']);
+        return response()->json(['error' => true,'message' => 'Что-то пошло не так...']);
     }
 
     public function startTestUser(Request $request,$id)
@@ -134,7 +134,7 @@ class AttestatController extends Controller
         $user = request()->user();
         $attestat = Attestat::with(['category'])->where(['user_id' => $user->id])->find($id);
         if(!$attestat){
-            return response()->json(['error' => true, 'message' => 'Attestat not found']);
+            return response()->json(['error' => true, 'message' => 'Тест не найден']);
         }
         $ex_time = 0;
         //Questions
@@ -155,9 +155,9 @@ class AttestatController extends Controller
         }
         //If attestat already passed
         if($attestat->status == 'complete'){
-            return response()->json(['error' => true, 'message' => 'completed']);
+            return response()->json(['error' => true, 'message' => 'завершено']);
         }
-        return response()->json(['error' => true,'message' => 'Something went wrong...']);
+        return response()->json(['error' => true,'message' => 'Что-то пошло не так...']);
     }
 
     public function complete(Request $request,$id)
@@ -176,16 +176,16 @@ class AttestatController extends Controller
 
         $attestat = Attestat::find($id);
         if(!$attestat){
-            return response()->json(['error' => true, 'message' => 'Not found...']);
+            return response()->json(['error' => true, 'message' => 'Не найден...']);
         }
         //If attestat already passed
         if($attestat->status == 'complete'){
-            return response()->json(['error' => true, 'message' => 'completed']);
+            return response()->json(['error' => true, 'message' => 'завершено']);
         }
 
         //If the test not for this user
         if($attestat->user_id != $user->id){
-            return response()->json(['error' => true, 'message' => 'You are not allowed']);
+            return response()->json(['error' => true, 'message' => 'Вам не разрешено']);
         }
 
         //Check for time
@@ -206,7 +206,7 @@ class AttestatController extends Controller
         $inputs = $request->all();
 
         if(count($inputs['questions']) != $attestat->limit){
-            return response()->json(['error' => true, 'message' => 'Something wrong with limit' ,'limit' => $attestat->limit]);
+            return response()->json(['error' => true, 'message' => 'Что-то пошло не так' ,'limit' => $attestat->limit]);
         }
         $true_answers = 0;
         $wrong_answers = 0;
@@ -233,7 +233,7 @@ class AttestatController extends Controller
     {
         $attestat = Attestat::with(['category'])->find($id);
         if(!$attestat){
-            return response()->json(['error' => true, 'message' => 'Not found...']);
+            return response()->json(['error' => true, 'message' => 'Не найден...']);
         }
         if($attestat->status == 'start'){
             $result = [

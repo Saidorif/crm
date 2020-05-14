@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->date('order_date')->nullable();
             $table->date('leave_date')->nullable();
             $table->boolean('working')->default(false)->nullable();
+            $table->string('status')->default('active');
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();

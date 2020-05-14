@@ -39,12 +39,12 @@ class UserController extends Controller
         }
         $inputs = $request->all();
         if($inputs['password'] !== $inputs['confirm_password']){
-            return response()->json(['error' => true, 'message' => 'Passwords are not same']);
+            return response()->json(['error' => true, 'message' => 'Пароли не совпадают']);
         }
 
         $user->password = Hash::make($inputs['password']);
         $user->save();
-        return response()->json(['success' => true, 'message' => 'Passwords changed successul']);
+        return response()->json(['success' => true, 'message' => 'Пароль успешно изменен']);
     }
 
     public function update(Request $request)

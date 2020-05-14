@@ -41,7 +41,7 @@ class PermissionController extends Controller
     {
         $role = Role::find($id);
         if(!$role){
-            return response()->json(['error' => true, 'message' => 'Role not found']);
+            return response()->json(['error' => true, 'message' => 'Роль не найдена']);
         }
         $validator = Validator::make($request->all(), [
             'permissions' => 'required|array',
@@ -67,7 +67,7 @@ class PermissionController extends Controller
             $permission->actions = json_encode(['create', 'index', 'store']);
             $permission->save();
         }
-        return response()->json(['success' => true, 'message' => 'Permission created']);
+        return response()->json(['success' => true, 'message' => 'Разрешение создано']);
     }
 
     

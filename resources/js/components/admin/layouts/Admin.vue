@@ -57,7 +57,7 @@
             <router-link class="nav-link" to="/crm/test/test-user">
               <i class="peIcon pe-7s-note2"></i>
               <p>
-                Тест <span class="badge badge-warning">user</span>
+                Тесты <span class="badge badge-warning">user</span>
               </p>
             </router-link>
           </li>
