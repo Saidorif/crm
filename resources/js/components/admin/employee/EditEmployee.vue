@@ -399,9 +399,7 @@ export default {
         let reader = new FileReader();
         reader.onload = e => {
           this.form.file = e.target.result;
-          this.fileFormat = event.target.files[0].name
-            .substr(event.target.files[0].name.lastIndexOf("\\") + 1)
-            .split(".")[0];
+          this.fileFormat = event.target.files[0].name.substr(event.target.files[0].name.lastIndexOf("\\") + 1).split(".")[1];
         };
         reader.readAsDataURL(file);
       }
