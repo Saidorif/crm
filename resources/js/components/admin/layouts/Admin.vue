@@ -143,16 +143,16 @@
                   </p>
                 </router-link>
               </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/action">
+                  <i class="peIcon pe-7s-box1"></i>
+                  <p>
+                    Actions
+                  </p>
+                </router-link>
+              </li>
             </ul>
           </li>  
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/action">
-              <i class="peIcon pe-7s-box1"></i>
-              <p>
-                Actions
-              </p>
-            </router-link>
-          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

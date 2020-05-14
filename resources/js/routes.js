@@ -30,6 +30,7 @@ import EditQuestion from './components/admin/question/EditQuestion'
 import Role from './components/admin/role/Role'
 import AddRole from './components/admin/role/AddRole'
 import EditRole from './components/admin/role/EditRole'
+import Permission from './components/admin/permission/Permission'
 
 // Position
 import Position from './components/admin/position/Position'
@@ -129,6 +130,10 @@ const router = new Router({
 				{
 					path:'role/edit/:roleId',
 					component:EditRole,
+				},
+				{
+					path:'role/:roleId',
+					component:Permission,
 				},
 				{
 					path:'position',
