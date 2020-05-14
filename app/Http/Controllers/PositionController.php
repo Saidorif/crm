@@ -24,7 +24,7 @@ class PositionController extends Controller
     {
         $result = Position::find($id);
         if(!$result){
-            return response()->json(['error' => true, 'message' => 'Position not found']);
+            return response()->json(['error' => true, 'message' => 'Должность не найдено']);
         }
         return response()->json(['success' => true, 'result' => $result]);
     }
@@ -41,7 +41,7 @@ class PositionController extends Controller
         }
         $inputs = $request->all();
         $result = Position::create($inputs);
-        return response()->json(['success' => true, 'message' => 'Position created successfuly']);
+        return response()->json(['success' => true, 'message' => 'Должность успешно создана']);
     }
 
     public function update(Request $request, $id)
@@ -49,7 +49,7 @@ class PositionController extends Controller
         $user = $request->user();
         $result = Position::find($id);
         if(!$result){
-            return response()->json(['error' => true, 'message' => 'Position not found']);
+            return response()->json(['error' => true, 'message' => 'Должность не найдено']);
         }
         $validator = Validator::make($request->all(), [
             'name' => 'required|string'
@@ -60,7 +60,7 @@ class PositionController extends Controller
         }
         $inputs = $request->all();
         $result->update($inputs);
-        return response()->json(['success' => true, 'message' => 'Position updated successfuly']);
+        return response()->json(['success' => true, 'message' => 'Должность успешно обновлено']);
     }
 
     public function destroy(Request $request, $id)
@@ -68,9 +68,9 @@ class PositionController extends Controller
         $user = $request->user();
         $result = Position::find($id);
         if(!$result){
-            return response()->json(['error' => true, 'message' => 'Position not found']);
+            return response()->json(['error' => true, 'message' => 'Должность не найдено']);
         }
         $result->delete();
-        return response()->json(['error' => true, 'message' => 'Position deleted']);
+        return response()->json(['error' => true, 'message' => 'Должность удален']);
     }
 }
