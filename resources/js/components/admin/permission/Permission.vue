@@ -1,4 +1,4 @@
-]<template>
+<template>
 	<div class="permissions">
 		<div class="card">
 		  	<div class="card-header">
