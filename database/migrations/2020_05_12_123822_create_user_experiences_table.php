@@ -19,9 +19,9 @@ class CreateUserExperiencesTable extends Migration
             $table->date('date_from');
             $table->date('date_to');
             $table->string('company');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('position');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
