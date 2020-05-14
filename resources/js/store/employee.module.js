@@ -33,9 +33,9 @@ const actions = {
 			return false
 		}
 	},
-	async actionEmployees({commit},page){
+	async actionEmployees({commit},payload){
 		try {
-			const employees =  await EmployeeService.employees(page);
+			const employees =  await EmployeeService.employees(payload);
 			await commit('setEmployees',employees.data.result)
 			return true
 		} catch (error) {
