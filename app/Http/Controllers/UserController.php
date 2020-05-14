@@ -6,13 +6,24 @@ use Illuminate\Http\Request;
 use Validator;
 use Hash;
 use Image;
+use App\Permission;
 
 class UserController extends Controller
 {
     public function profile(Request $request)
     {
         $user = $request->user();
-        return response()->json(['success' => true, 'result' => $user]);
+        $pers = [];
+        $permissions = Permission::where(['role_id' => $user->role->id])->with(['controller', 'action'])->get();
+        foreach($permissions as $k => $permission){
+            $pers[$k]['action'] = $permission->action->code;
+            $pers[$k]['subject'] = $permission->controller->name;
+        }
+        $pers = array_unique($pers, SORT_REGULAR);
+        $pers = array_values($pers);
+        $result['permissions'] = $pers;
+        $result['user'] = $user;
+        return response()->json(['success' => true, 'result' => $result]);
     }
 
     public function changePasword(Request $request)
