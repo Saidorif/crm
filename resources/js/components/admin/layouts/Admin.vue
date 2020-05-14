@@ -129,7 +129,6 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <router-link class="nav-link" to="/crm/role">
-                  <i class="peIcon pe-7s-id"></i>
                   <p>
                     Role
                   </p>
@@ -137,7 +136,6 @@
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" to="/crm/conts">
-                  <i class="peIcon pe-7s-box1"></i>
                   <p>
                     Controller
                   </p>
@@ -145,7 +143,6 @@
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" to="/crm/action">
-                  <i class="peIcon pe-7s-box1"></i>
                   <p>
                     Actions
                   </p>
@@ -186,7 +183,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+  import { mapActions, mapGetters } from "vuex";
+  import {TokenService} from './../../../services/storage.service'
 export default {
   components: {
   },
@@ -196,10 +194,14 @@ export default {
     }
   },
   computed: {
-   
+    ...mapGetters(['getUser']),
+  },
+  async mounted(){
+    await this.profileUser()
+    // console.log(this.getUser)
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout','profileUser']),
     logoutProfile(){
       this.logout();
     },
