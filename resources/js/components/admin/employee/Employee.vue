@@ -79,7 +79,7 @@
 							<td>{{item.name}}</td>
 							<td>{{item.position ? item.position.name : ''}}</td>
 							<td>{{item.role ? item.role.name : ''}}</td>
-							<td>category</td>
+							<td>{{item.category ? item.category.name : ''}}</td>
 							<td>{{item.email}}</td>
 							<td>{{item.phone}}</td>
 							<td>
