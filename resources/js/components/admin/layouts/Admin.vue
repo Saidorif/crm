@@ -38,6 +38,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
+             <!-- v-if="$can('profile', 'UserController')" -->
             <router-link to="/crm/dashboard" class="nav-link">
               <span class="peIcon pe-7s-rocket" style="font-size: 20px;"></span>
               <p>
@@ -198,7 +199,6 @@ export default {
   },
   async mounted(){
     await this.profileUser()
-    // console.log(this.getUser)
   },
   methods: {
     ...mapActions(['logout','profileUser']),

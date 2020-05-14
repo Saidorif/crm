@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title title_user mb-0">
-          <i class="peIcon pe-7s-user"></i>Добавить
+          <i class="peIcon pe-7s-user"></i>Добавить пользователя
         </h3>
         <router-link class="btn btn-primary back_btn" to="/crm/employee"><span class="peIcon pe-7s-back"></span> Назад</router-link>
       </div>
@@ -43,7 +43,6 @@
                 :class="isRequired(form.role_id) ? 'isRequired' : '' "
                 id="countryName"
                 v-model="form.role_id"
-                @change="selectUserRole()"
               >
                 <option value selected disabled>Выберите рол</option>
                 <option :value="role.id" v-for="(role,index) in getRoleList">{{role.name}}</option>
@@ -140,16 +139,25 @@
                 >{{category.name}}</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="birthday">Дата рождения</label>
-              <date-picker
-                  lang="ru"
-                  v-model="form.birthday"
-                  valuetype="format"
-                  format="YYYY-MM-DD"
-                  placeholder="YYYY-MM-DD"
-                ></date-picker>
-            </div>
+            <div class="input_block_d_flex" >
+              <div class="form-group col-md-6">
+                <label for="birthday">Дата рождения</label>
+                <date-picker
+                    lang="ru"
+                    v-model="form.birthday"
+                    valuetype="format"
+                    format="YYYY-MM-DD"
+                    placeholder="YYYY-MM-DD"
+                  ></date-picker>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="birthday">Статус</label>
+                <select v-model="form.status"  class="form-control" >
+                  <option value="active" selected>Активный</option>
+                  <option value="inactive">Неактивный</option>
+                </select>
+              </div>
+           </div>
             <div class="input_block_d_flex" v-if="form.role_id != 3">
               <div class="form-group col-md-6">
                 <label for="date_from">Дата с</label>
@@ -258,7 +266,7 @@
                 valuetype="format"
                 placeholder="YYYY-MM-DD"
                 format="YYYY-MM-DD"
-                                :class="isRequired(ex.date_to) ? 'isRequired' : ''"
+                :class="isRequired(ex.date_to) ? 'isRequired' : ''"
               ></date-picker>
             </div>
             <div class="form-group col-md-6">
@@ -321,6 +329,7 @@ export default {
         birthday: "",
         order_date: "",
         leave_date: "",
+        status: 'active',
         working: false,
         experience: []
       },
@@ -422,7 +431,7 @@ export default {
         this.form.role_id &&
         this.checkPassword == false
       ) {
-        if(this.form.experience.length){
+        if(this.form.experience && this.form.experience.length){
           await this.actionAddEmployee(this.form);
         }else{
           delete this.form.experience;

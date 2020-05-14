@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title title_user mb-0">
-          <i class="peIcon pe-7s-user"></i>Редактировать
+          <i class="peIcon pe-7s-user"></i>Редактировать пользователя
         </h3>
         <router-link class="btn btn-primary back_btn" to="/crm/employee"><span class="peIcon pe-7s-back"></span> Назад</router-link>
       </div>
@@ -37,7 +37,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="role">Role</label>
+              <label for="role">Рол</label>
               <select
                 class="form-control"
                 :class="isRequired(form.role_id) ? 'isRequired' : '' "
@@ -143,16 +143,25 @@
                 >{{category.name}}</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="birthday">Дата рождения</label>
-              <date-picker
-                lang="ru"
-                v-model="form.birthday"
-                valuetype="format"
-                format="YYYY-MM-DD"
-                placeholder="YYYY-MM-DD"
-              ></date-picker>
-            </div>
+            <div class="input_block_d_flex" >
+              <div class="form-group col-md-6">
+                <label for="birthday">Дата рождения</label>
+                <date-picker
+                    lang="ru"
+                    v-model="form.birthday"
+                    valueType="format"
+                    format="YYYY-MM-DD"
+                    placeholder="YYYY-MM-DD"
+                  ></date-picker>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="birthday">Статус</label>
+                <select v-model="form.status"  class="form-control" >
+                  <option value="active" selected>Активный</option>
+                  <option value="inactive">Неактивный</option>
+                </select>
+              </div>
+           </div>
             <div class="form-group">
               <label for="address">Адрес</label>
               <input
@@ -169,7 +178,7 @@
                 <date-picker
                   lang="ru"
                   v-model="form.order_date"
-                  valuetype="format"
+                  valueType="format"
                   format="YYYY-MM-DD"
                   placeholder="YYYY-MM-DD"
                 ></date-picker>
@@ -179,7 +188,7 @@
                 <date-picker
                   lang="ru"
                   v-model="form.leave_date"
-                  valuetype="format"
+                  valueType="format"
                   format="YYYY-MM-DD"
                   placeholder="YYYY-MM-DD"
                   :disabled="form.working"
@@ -324,6 +333,7 @@ export default {
         order_date: "",
         birthday: "",
         leave_date: "",
+        status: 'active',
         working: false,
         experience: []
       },
@@ -365,7 +375,6 @@ export default {
       }
     },
     photoImg(img) {
-      console.log(img)
       if(img){
         if (img.length < 100) {
           return "/img/user.jpg";
