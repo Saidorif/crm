@@ -1037,17 +1037,18 @@ hr {
   width: 100%;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .input_block_d_flex {
   display: flex;
 }
 
-.input_block_d_flex .form-group.col-md-4:nth-child(1) {
+.input_block_d_flex .form-group.col-md-6:nth-child(1) {
   padding-left: 0;
 }
 
-.input_block_d_flex .form-group.col-md-4:nth-child(3) {
+.input_block_d_flex .form-group.col-md-6:nth-child(2) {
   padding-right: 0;
 }
 
@@ -1107,5 +1108,19 @@ hr {
   position: absolute;
   top: 3px;
   right: 0px;
+}
+
+.mx-datepicker {
+  width: 100% !important;
+}
+
+.mx-input {
+  background: #FFFFFF !important;
+  border: 1px solid #D4E2F5 !important;
+}
+
+.mx-icon-calendar,
+.mx-icon-clear {
+  color: #D4E2F5 !important;
 }
 

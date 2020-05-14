@@ -86,8 +86,10 @@
                 <b>Пароль не совпадает</b>
               </small>
             </div>
-
-
+            <div class="form-group">
+              <label for="fortext">Text</label>
+              <textarea class="form-control input_style" v-model="form.text" placeholder="Text.." style="height: 114px; resize: none;"></textarea>
+            </div>
           </div>
           <div class="col-md-6">
             <div class="form-group photoFileUploader">
@@ -120,7 +122,7 @@
                 <div class="avatar-preview">
                   <div
                     id="imagePreview"
-                    :style="{'backgroundImage': 'url('+photoImg(form.image)+')'}"
+						          :style="{'backgroundImage': 'url('+ photoImg(form.image) +')'}"
                   ></div>
                 </div>
               </div>
@@ -137,6 +139,60 @@
               </select>
             </div>
             <div class="form-group">
+              <label for="birthday">birthday</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="birthday"
+                placeholder="birthday.."
+                v-model="form.birthday"
+                :class="isRequired(form.birthday) ? 'isRequired' : ''"
+              />
+            </div>
+            <div class="input_block_d_flex">
+              <div class="form-group col-md-6">
+                <label for="date_from">date_from</label>
+                <date-picker
+                  lang="ru"
+                  v-model="form.order_date"
+                  valuetype="format"
+                  format="YYYY-MM-DD"
+                  placeholder="YYYY-MM-DD"
+                ></date-picker>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="date_to">date_to</label>
+                <date-picker
+                  lang="ru"
+                  v-model="form.leave_date"
+                  valuetype="format"
+                  format="YYYY-MM-DD"
+                  placeholder="YYYY-MM-DD"
+                ></date-picker>
+                <div class="input_radio">
+                  <label for="working">to this day</label>
+                  <input
+                    type="checkbox"
+                    class="input_switch"
+                    name="working"
+                    v-model="form.working"
+                    id="working"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="phone"
+                placeholder="Phone.."
+                v-model="form.phone"
+                :class="isRequired(form.phone) ? 'isRequired' : ''"
+              />
+            </div>
+            <div class="form-group">
               <label for="address">Address</label>
               <input
                 type="text"
@@ -144,46 +200,11 @@
                 id="address"
                 placeholder="Address.."
                 v-model="form.address"
+                :class="isRequired(form.address) ? 'isRequired' : ''"
               />
             </div>
-				<div class="input_block_d_flex">
-					<div class="form-group col-md-4">
-						<label for="phone">Phone</label>
-						<input
-							type="text"
-							class="form-control input_style"
-							id="phone"
-							placeholder="Phone.."
-							v-model="form.phone"
-						/>
-					</div>
-					<div class="form-group col-md-4">
-						<label for="date_from">date_from</label>
-						<input
-							type="date"
-							class="form-control input_style"
-							id="date_from"
-							placeholder="date_from.."
-							v-model="form.date_from"
-						/>
-					</div>
-					<div class="form-group col-md-4">
-						<label for="date_to">date_to</label>
-						<input
-							type="date"
-							class="form-control input_style"
-							id="date_to"
-							placeholder="date_to.."
-							v-model="form.date_to"
-							:disabled="form.working"
-						/>
-						<div class="input_radio">
-							<input type="checkbox" class="input_switch" name="working" v-model="form.working" >
-						</div>
-					</div>
-				</div>
           </div>
-		    <h5 class="sub_title">Трудовая деятельность</h5>
+          <h5 class="sub_title">Трудовая деятельность</h5>
           <div class="row col-md-12" v-for="(ex, index) in form.experience">
             <div class="col-12 d-flex justify-content-end" v-if="index != 0">
               <button
@@ -200,7 +221,6 @@
                 type="text"
                 class="form-control input_style"
                 id="company"
-                :class="isRequired(ex.company) ? 'isRequired' : ''"
                 placeholder="Company name"
                 v-model="ex.company"
               />
@@ -211,32 +231,29 @@
                 type="text"
                 class="form-control input_style"
                 id="position"
-                :class="isRequired(ex.position) ? 'isRequired' : ''"
                 placeholder="position"
                 v-model="ex.position"
               />
             </div>
             <div class="form-group col-md-3">
               <label for="date_from">date_from</label>
-              <input
-                type="date"
-                class="form-control input_style"
-                id="date_from"
-                :class="isRequired(ex.date_from) ? 'isRequired' : ''"
-                placeholder="date_from"
+              <date-picker
+                lang="ru"
                 v-model="ex.date_from"
-              />
+                valuetype="format"
+                placeholder="YYYY-MM-DD"
+                format="YYYY-MM-DD"
+              ></date-picker>
             </div>
             <div class="form-group col-md-3">
               <label for="date_to">date_to</label>
-              <input
-                type="date"
-                class="form-control input_style"
-                id="date_to"
-                :class="isRequired(ex.date_to) ? 'isRequired' : ''"
-                placeholder="date_to"
+              <date-picker
+                lang="ru"
                 v-model="ex.date_to"
-              />
+                valuetype="format"
+                placeholder="YYYY-MM-DD"
+                format="YYYY-MM-DD"
+              ></date-picker>
             </div>
             <div class="form-group col-md-6">
               <label for="address">address</label>
@@ -274,8 +291,12 @@
   </div>
 </template>
 <script>
+import DatePicker from "vue2-datepicker";
 import { mapActions, mapGetters } from "vuex";
 export default {
+  components: {
+    DatePicker
+  },
   data() {
     return {
       form: {
@@ -290,10 +311,11 @@ export default {
         phone: "",
         image: "",
         file: "",
-		text: "",
-		date_from: "",
-		date_to: "",
-		working: false,
+        text: "",
+        birthday: "",
+        order_date: "",
+        leave_date: "",
+        working: false,
         experience: [
           {
             company: "",
@@ -304,8 +326,8 @@ export default {
             description: ""
           }
         ]
-	  },
-	  fileFormat: 'no-file',
+      },
+      fileFormat: "no-file",
       requiredInput: false,
       checkPassword: false,
       emailError: false
@@ -338,7 +360,7 @@ export default {
     },
     photoImg(img) {
       if (img.length < 100) {
-        // return '/img/'+img;
+        return '/img/user.jpg';
       } else {
         return img;
       }
@@ -353,10 +375,10 @@ export default {
           text: "Размер файл не должно быть больше 1мб"
         });
       } else {
-		let reader = new FileReader();
-		this.fileFormat = 'docx'
-        reader.onload = event => {
-          this.form.file = event.target.result;
+        let reader = new FileReader();
+        reader.onload = e => {
+          this.form.file = e.target.result;
+          this.fileFormat = event.target.files[0].name.substr(event.target.files[0].name.lastIndexOf('\\') + 1).split('.')[0];
         };
         reader.readAsDataURL(file);
       }
@@ -441,7 +463,7 @@ export default {
     },
     removeExperience(ex, index) {
       this.form.experience.splice(index, 1);
-	}
+    }
   }
 };
 </script>
