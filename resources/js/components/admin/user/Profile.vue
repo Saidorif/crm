@@ -1,7 +1,7 @@
 <template>
 	<div class="card">
   	<div class="card-header">
-      <h3 class="card-title title_user mb-0"><i class="peIcon pe-7s-user"></i>User profile</h3>
+      <h3 class="card-title title_user mb-0"><i class="peIcon pe-7s-user"></i>Мои данные</h3>
   	</div>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -20,14 +20,27 @@
           <div class="card-body d-flex flex-wrap">
             <div class="form-group col-md-6">
               <label for="name">Ф.И.О</label>
-              <input 
+              <p class="form-control input_style">{{form.name}}</p>
+              <!-- <input 
                 type="text" 
                 class="form-control input_style" 
                 id="name" 
                 :class="isRequired(form.name) ? 'isRequired' : ''" 
                 placeholder="Ф.И.О"
                 v-model="form.name"
-            >
+            > -->
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name">Должность</label>
+              <p class="form-control input_style">{{form.name}}</p>
+              <!-- <input 
+                type="text" 
+                class="form-control input_style" 
+                id="name" 
+                :class="isRequired(form.name) ? 'isRequired' : ''" 
+                placeholder="Ф.И.О"
+                v-model="form.name"
+            > -->
             </div>
             <div class="form-group col-md-6">
               <label for="exampleInputEmail1">E-mail</label>
