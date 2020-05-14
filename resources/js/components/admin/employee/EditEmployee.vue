@@ -3,21 +3,21 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title title_user mb-0">
-          <i class="peIcon pe-7s-user"></i>Edit Employee
+          <i class="peIcon pe-7s-user"></i>Редактировать
         </h3>
-        <a href="#" class="backBtn" @click="$router.go(-1)"><span class="pe-7s-back"></span> Back</a>
+        <router-link class="btn btn-primary back_btn" to="/crm/employee"><span class="peIcon pe-7s-back"></span> Назад</router-link>
       </div>
       <form role="form" @submit.prevent.enter="sendEmployee" enctype="multipart/form-data">
         <div class="card-body d-flex flex-wrap">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="name">Fullname</label>
+              <label for="name">Ф.И.О</label>
               <input
                 type="text"
                 class="form-control input_style"
                 id="name"
                 :class="isRequired(form.name) ? 'isRequired' : ''"
-                placeholder="Fullname"
+                placeholder="Ф.И.О"
                 v-model="form.name"
               />
             </div>
@@ -29,7 +29,7 @@
                 id="position"
                 v-model="form.position_id"
               >
-                <option value selected disabled>Выберите рол</option>
+                <option value selected disabled>Выберите должность</option>
                 <option
                   :value="position.id"
                   v-for="(position,index) in getPositionList"
@@ -62,23 +62,23 @@
               <small class="redText" v-if="emailError">Email почта занят!</small>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label for="exampleInputPassword1">Пароль</label>
               <input
                 type="password"
                 class="form-control input_style"
                 id="exampleInputPassword1"
-                placeholder="Password.."
+                placeholder="Пароль.."
                 :class="isRequired(form.password) ? 'isRequired' : ''"
                 v-model="form.password"
               />
             </div>
             <div class="form-group">
-              <label for="ConfirmPassword1">Confirm Password</label>
+              <label for="ConfirmPassword1">Подтвердите пароль</label>
               <input
                 type="password"
                 class="form-control input_style"
                 id="ConfirmPassword1"
-                placeholder="Confirm Password.."
+                placeholder="Подтвердите пароль.."
                 v-model="form.passwordConfirm"
                 :class="isRequired(form.passwordConfirm) ? 'isRequired' : ''"
                 @input="confirmPassword()"
@@ -88,11 +88,11 @@
               </small>
             </div>
             <div class="form-group">
-              <label for="fortext">Text</label>
+              <label for="fortext">Текст</label>
               <textarea
                 class="form-control input_style"
                 v-model="form.text"
-                placeholder="Text.."
+                placeholder="Текст.."
                 style="height: 114px; resize: none;"
               ></textarea>
             </div>
@@ -144,7 +144,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="birthday">birthday</label>
+              <label for="birthday">Дата рождения</label>
               <date-picker
                 lang="ru"
                 v-model="form.birthday"
@@ -154,18 +154,18 @@
               ></date-picker>
             </div>
             <div class="form-group">
-              <label for="address">Address</label>
+              <label for="address">Адрес</label>
               <input
                 type="text"
                 class="form-control input_style"
                 id="address"
-                placeholder="Address.."
+                placeholder="Адрес.."
                 v-model="form.address"
               />
             </div>
             <div class="input_block_d_flex" v-if="form.role_id != 3">
               <div class="form-group col-md-6">
-                <label for="date_from">date_from</label>
+                <label for="date_from">Дата с</label>
                 <date-picker
                   lang="ru"
                   v-model="form.order_date"
@@ -175,7 +175,7 @@
                 ></date-picker>
               </div>
               <div class="form-group col-md-6">
-                <label for="date_to">date_to</label>
+                <label for="date_to">Дата по</label>
                 <date-picker
                   lang="ru"
                   v-model="form.leave_date"
@@ -185,7 +185,7 @@
                   :disabled="form.working"
                 ></date-picker>
                 <div class="input_radio">
-                  <label for="working">to this day</label>
+                  <label for="working">до настоящего времени</label>
                   <input
                     type="checkbox"
                     class="input_switch"
@@ -197,7 +197,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="phone">Phone</label>
+              <label for="phone">Телефон</label>
               <input
                 type="text"
                 class="form-control input_style"
@@ -216,33 +216,33 @@
                 class="btn btn-primary mr-3"
                 @click="removeExperience(ex, index)"
               >
-                <i class="fas fa-plus"></i> Remove experience
+                <i class="fas fa-plus"></i> удалить опыт
               </button>
             </div>
             <div class="form-group col-md-3">
-              <label for="company">Company name</label>
+              <label for="company">Название учреждения</label>
               <input
                 type="text"
                 class="form-control input_style"
                 id="company"
                 :class="isRequired(ex.company) ? 'isRequired' : ''"
-                placeholder="Company name"
+                placeholder="Название учреждения"
                 v-model="ex.company"
               />
             </div>
             <div class="form-group col-md-3">
-              <label for="position">position name</label>
+              <label for="position">Должность</label>
               <input
                 type="text"
                 class="form-control input_style"
                 id="position"
                 :class="isRequired(ex.position) ? 'isRequired' : ''"
-                placeholder="position"
+                placeholder="Должность"
                 v-model="ex.position"
               />
             </div>
             <div class="form-group col-md-3">
-              <label for="date_from">date_from</label>
+              <label for="date_from">Дата с</label>
               <input
                 type="date"
                 class="form-control input_style"
@@ -253,7 +253,7 @@
               />
             </div>
             <div class="form-group col-md-3">
-              <label for="date_to">date_to</label>
+              <label for="date_to">Дата по</label>
               <input
                 type="date"
                 class="form-control input_style"
@@ -264,22 +264,22 @@
               />
             </div>
             <div class="form-group col-md-6">
-              <label for="address">address</label>
+              <label for="address">>Адрес учреждения</label>
               <input
                 type="text"
                 class="form-control input_style"
                 id="address"
-                placeholder="address"
+                placeholder=">Адрес учреждения"
                 v-model="ex.address"
               />
             </div>
             <div class="form-group col-md-6">
-              <label for="description">description</label>
+              <label for="description">Описание</label>
               <input
                 type="text"
                 class="form-control input_style"
                 id="description"
-                placeholder="description"
+                placeholder="Описание"
                 v-model="ex.description"
               />
             </div>
@@ -287,7 +287,7 @@
           </div>
           <div class="col-12 d-flex justify-content-end">
             <button type="button" class="btn btn-primary mr-3" @click="addExperience()">
-              <i class="fas fa-plus"></i> Add experience
+              <i class="fas fa-plus"></i> Добавить опыт
             </button>
             <button type="submit" class="btn btn-primary">
               <i class="fas fa-save"></i> Сохранить
@@ -330,7 +330,7 @@ export default {
       requiredInput: false,
       checkPassword: false,
       emailError: false,
-      fileFormat: "no-file"
+      fileFormat: "нет-файла"
     };
   },
   async mounted() {
@@ -373,7 +373,7 @@ export default {
           return img;
         }
       }else{
-                  return "/img/user.jpg";
+        return "/img/user.jpg";
       }
 
     },
@@ -453,7 +453,7 @@ export default {
       await this.actionCheckEmail({ email: this.form.email });
       if (
         this.getMassage.error &&
-        this.getMassage.message.email == "The email has already been taken."
+        this.getMassage.message.email == "Почта уже занята."
       ) {
         this.emailError = true;
       } else {
