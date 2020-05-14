@@ -5,6 +5,7 @@
         <h3 class="card-title title_user mb-0">
           <i class="peIcon pe-7s-user"></i>Add Employee
         </h3>
+                <a href="#" class="backBtn" @click="$router.go(-1)"><span class="pe-7s-back"></span> Back</a>
       </div>
       <form role="form" @submit.prevent.enter="sendEmployee" enctype="multipart/form-data">
         <div class="card-body d-flex flex-wrap">
