@@ -19,13 +19,13 @@
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
   					  		<div class="form-group col-lg-3">
-	  							<label for="fio">Ф.И.О</label>
+	  							<label for="name">Ф.И.О</label>
 	  							<input 
 	  								type="text" 
 	  								class="form-control" 
-	  								id="fio" 
+	  								id="name" 
 	  								placeholder="Ф.И.О..."
-	  								v-model="filter.fio"
+	  								v-model="filter.name"
   								>
 				  			</div>
   					  		<div class="form-group col-lg-3">
@@ -78,8 +78,8 @@
 							<td scope="row">{{index+1}}</td>
 							<td>{{item.name}}</td>
 							<td>{{item.position ? item.position.name : ''}}</td>
-							<td>{{item.role.name}}</td>
-							<td>category</td>
+							<td>{{item.role ? item.role.name : ''}}</td>
+							<td>{{item.category ? item.category.name : ''}}</td>
 							<td>{{item.email}}</td>
 							<td>{{item.phone}}</td>
 							<td>
@@ -105,7 +105,7 @@
 		data(){
 			return{
 				filter:{
-					fio:'',
+					name:'',
 					category_id:'',
 					position_id:'',
 				},
@@ -132,6 +132,22 @@
 			},
 			toggleFilter(){
 				this.filterShow = !this.filterShow
+			},
+			async search(){
+				let page = 1
+				if(this.filter.name || this.filter.category_id || this.filter.position_id){
+					await this.actionEmployees({page: page,items:this.filter})
+				}
+			},
+			async clear(){
+				if(this.filter.name || this.filter.category_id || this.filter.position_id){
+					this.filter.name = ''
+					this.filter.category_id = ''
+					this.filter.position_id = ''
+					let page  = 1
+					await this.actionEmployees({page: page,items:this.filter})
+				}
+
 			},
 			deleteEmployee(id){
 
