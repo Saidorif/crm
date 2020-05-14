@@ -365,7 +365,6 @@ export default {
       }
     },
     photoImg(img) {
-      console.log(img)
       if(img){
         if (img.length < 100) {
           return "/img/user.jpg";
