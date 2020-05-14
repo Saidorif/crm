@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-drawer"></i>
-				    Edit Question
+				    Редактировать вопрос
 				</h4>
 				<router-link class="btn btn-primary back_btn" to="/crm/question"><span class="peIcon pe-7s-back"></span> Назад</router-link>
 		  	</div>
@@ -12,7 +12,7 @@
 		  		<form @submit.prevent.enter="saveQuestion" >
 					<div class="row">
 					  <div class="form-group col-md-12">
-					    <label for="categoryName">Category Name</label>
+					    <label for="categoryName">Управление</label>
 					    <select 
 					    	class="form-control" 
 					    	:class="isRequired(form.category_id) ? 'isRequired' : '' " 
@@ -23,11 +23,11 @@
 					    </select>
 					  </div>
 					  <div class="form-group col-md-12">
-					    <label for="questionName">Question</label>
+					    <label for="questionName">Вопрос</label>
 					    <textarea 
 					    	class="form-control input_style" 
 					    	id="questionName" 
-					    	placeholder="Question..."
+					    	placeholder="Вопрос..."
 					    	v-model="form.title"
 					    	:class="isRequired(form.title) ? 'isRequired' : ''"
 				    	></textarea>
@@ -46,19 +46,19 @@
 					  </div>
 				  	</div>
 				  	<div class="answer_head mb-2">
-				  		<h3>Answers</h3>
+				  		<h3>Ответы</h3>
 			  		 	<button type="button" class="btn btn-primary" @click="addAnswer">
-			  		 		<i class="fas fa-plus"></i> Add answer
+			  		 		<i class="fas fa-plus"></i> Добавить ответ
 				  		 </button>
 				  	</div>
 			  		<div class="row align-items-end" v-for="(answer,index) in form.variants">
 					  <div class="form-group col-md-6">
-					    <label for="categoryName">{{index + 1}} ) Answer Name</label>
+					    <label for="categoryName">{{index + 1}} ) Ответ</label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
 					    	id="answer" 
-					    	placeholder="Answer..."
+					    	placeholder="Ответ..."
 					    	v-model="form.variants[index].title"
 					    	:class="isRequired(form.variants[index].title) ? 'isRequired' : ''"
 					    >
@@ -66,13 +66,13 @@
 					  <div class="form-group col-md-2 radio_style_block">
 					  	<template v-if="form.variants[index].title != ''">
 						    <input type="radio" class="form-control input_style radio_style_input" :id="'is_true'+index" 
-						    	placeholder="Answer..."
+						    	placeholder="Ответ..."
 						    	name="is_true"
 						    	v-model="form.variants[index].is_true"
 						    	value="1"
 						    	@change="selectAnswer(form.variants[index])"
 						    >
-						    <label :for="'is_true'+index" class="radio_style_label" >Right Answer</label>
+						    <label :for="'is_true'+index" class="radio_style_label" >Правильный ответ</label>
 					  	</template>
 					  </div>
 					  <div class="form-group col-md-2" v-if="form.variants.length > 1">

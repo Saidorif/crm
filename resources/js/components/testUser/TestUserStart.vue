@@ -38,7 +38,7 @@
 			<button 
 				class="btn_prev" 
 				@click.prevent="prevBtn">
-				<span class="pe-7s-angle-left-circle"></span>  prev 
+				<span class="pe-7s-angle-left-circle"></span> предыдущий 
 			</button>
 			<button 
 				class="btn_next" 
@@ -46,14 +46,14 @@
 				:disabled="disabledTrue"
 				v-if="tests.length != myAnswers.length"
 			>
-				next <span class="pe-7s-angle-right-circle"></span> 
+				следующий <span class="pe-7s-angle-right-circle"></span> 
 			</button>
 			<button 
 				v-if="tests.length == myAnswers.length"
 				class="btn_finish" 
 				@click.prevent="completeTest">
 				<span class="pe-7s-display1"></span>
-				complete test
+				завершить тест!
 			</button>
 		</div>
 		<div class="base-timer">

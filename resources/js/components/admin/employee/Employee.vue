@@ -5,14 +5,14 @@
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i  class="peIcon pe-7s-users"></i>
-					    Employee 
+					    Сотрудники 
 					</h4>
 					<div class="add_user_btn">
 			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
 						    <i class="fas fa-filter"></i>
 			            	Филтр
 						</button>
-						<router-link class="btn btn-primary" to="/crm/employee/add"><i class="fas fa-plus"></i> Add</router-link>
+						<router-link class="btn btn-primary" to="/crm/employee/add"><i class="fas fa-plus"></i> Добавить</router-link>
 		            </div>
 		  		</div>
 		    	<transition name="slide">
@@ -68,8 +68,8 @@
 							<th scope="col">Должность</th>
 							<th scope="col">Рол</th>
 							<th scope="col">Управления</th>
-							<th scope="col">Email</th>
-							<th scope="col">Phone</th>
+							<th scope="col">E-mail</th>
+							<th scope="col">Телефон</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>

@@ -4,9 +4,9 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i data-v-956a9a24="" class="peIcon pe-7s-note"></i>
-				    Question 
+				    Вопросы
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/question/add"><i class="fas fa-plus"></i> Add</router-link>
+				<router-link class="btn btn-primary" to="/crm/question/add"><i class="fas fa-plus"></i> Добавить</router-link>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
@@ -15,7 +15,7 @@
 						<tr>
 							<th scope="col">№</th>
 							<th scope="col">Заголовок</th>
-							<th scope="col">Категория</th>
+							<th scope="col">Управление</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>

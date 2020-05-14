@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-drawer"></i>
-				    Add Category
+				    Добавить управление
 				</h4>
 				<router-link class="btn btn-primary back_btn" to="/crm/category"><span class="peIcon pe-7s-back"></span> Назад</router-link>
 		  	</div>
@@ -12,12 +12,12 @@
 		  		<form @submit.prevent.enter="saveCategory" >
 					<div class="row">
 					  <div class="form-group col-md-9">
-					    <label for="categoryName">Category Name</label>
+					    <label for="categoryName">Название управления</label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
 					    	id="categoryName" 
-					    	placeholder="Category Name"
+					    	placeholder="Название управления..."
 					    	v-model="form.name"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>
