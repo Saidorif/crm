@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title title_user mb-0">
-          <i class="peIcon pe-7s-user"></i>Добавить
+          <i class="peIcon pe-7s-user"></i>Добавить пользователя
         </h3>
         <router-link class="btn btn-primary back_btn" to="/crm/employee"><span class="peIcon pe-7s-back"></span> Назад</router-link>
       </div>

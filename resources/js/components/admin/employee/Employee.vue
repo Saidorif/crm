@@ -5,7 +5,7 @@
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i  class="peIcon pe-7s-users"></i>
-					    Сотрудники 
+					     Пользователи 
 					</h4>
 					<div class="add_user_btn">
 			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
@@ -125,7 +125,7 @@
 		},
 		methods:{
 			...mapActions('category',['actionCategoryList']),
-			...mapActions('employee',['actionEmployees']),
+			...mapActions('employee',['actionEmployees','actionDeleteEmployee']),
 			...mapActions('position',['actionPositionList']),
 			async getResults(page = 1){ 
 				await this.actionEmployees({page:page,items:this.filter})
@@ -149,8 +149,17 @@
 				}
 
 			},
-			deleteEmployee(id){
-
+			async deleteEmployee(id){
+				if(confirm("Вы действительно хотите удалить?")){
+					let page = 1
+					await this.actionDeleteEmployee(id)
+					await this.actionEmployees({page: page,items:this.filter})
+					toast.fire({
+				    	type: 'success',
+				    	icon: 'success',
+						title: 'Пользователь удалено!',
+				    })
+				}
 			}
 		}
 	}

@@ -104,7 +104,7 @@ const store = new Vuex.Store(
 					if(user.data.error === true){
 						await commit('loginError', user);
 					}else{
-						await commit('loginSuccess', user.data);
+						await dispatch('profileUser');
 						// let routeHistory = router.history.current.query.redirect
 						// router.push(routeHistory && routeHistory != '/' ? routeHistory : '/')
 					}

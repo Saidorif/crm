@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title title_user mb-0">
-          <i class="peIcon pe-7s-user"></i>Редактировать
+          <i class="peIcon pe-7s-user"></i>Редактировать пользователя
         </h3>
         <router-link class="btn btn-primary back_btn" to="/crm/employee"><span class="peIcon pe-7s-back"></span> Назад</router-link>
       </div>
@@ -149,7 +149,7 @@
                 <date-picker
                     lang="ru"
                     v-model="form.birthday"
-                    valuetype="format"
+                    valueType="format"
                     format="YYYY-MM-DD"
                     placeholder="YYYY-MM-DD"
                   ></date-picker>
@@ -178,7 +178,7 @@
                 <date-picker
                   lang="ru"
                   v-model="form.order_date"
-                  valuetype="format"
+                  valueType="format"
                   format="YYYY-MM-DD"
                   placeholder="YYYY-MM-DD"
                 ></date-picker>
@@ -188,7 +188,7 @@
                 <date-picker
                   lang="ru"
                   v-model="form.leave_date"
-                  valuetype="format"
+                  valueType="format"
                   format="YYYY-MM-DD"
                   placeholder="YYYY-MM-DD"
                   :disabled="form.working"
@@ -399,9 +399,7 @@ export default {
         let reader = new FileReader();
         reader.onload = e => {
           this.form.file = e.target.result;
-          this.fileFormat = event.target.files[0].name
-            .substr(event.target.files[0].name.lastIndexOf("\\") + 1)
-            .split(".")[0];
+          this.fileFormat = event.target.files[0].name.substr(event.target.files[0].name.lastIndexOf("\\") + 1).split(".")[1];
         };
         reader.readAsDataURL(file);
       }
