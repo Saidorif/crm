@@ -111,14 +111,6 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/role">
-              <i class="peIcon pe-7s-id"></i>
-              <p>
-                Role
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link" to="/crm/position">
               <i class="peIcon pe-7s-graph1"></i>
               <p>
@@ -126,14 +118,33 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/conts">
-              <i class="peIcon pe-7s-box1"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <span class="peIcon pe-7s-settings" style="font-size: 20px;"></span>
               <p>
-                Controller
+                Setting users
+                <i class="right fas fa-angle-left"></i>
               </p>
-            </router-link>
-          </li>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/role">
+                  <i class="peIcon pe-7s-id"></i>
+                  <p>
+                    Role
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/conts">
+                  <i class="peIcon pe-7s-box1"></i>
+                  <p>
+                    Controller
+                  </p>
+                </router-link>
+              </li>
+            </ul>
+          </li>  
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/action">
               <i class="peIcon pe-7s-box1"></i>
