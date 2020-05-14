@@ -218,46 +218,46 @@ const router = new Router({
 	]
 });
 
-router.beforeEach((to, from, next) => {
-	if (to.matched.some(record => record.meta.requiredAuth)){
-	  	const loggedIn = TokenService.getToken();
-	    if (!loggedIn || loggedIn == 'undefined'){
-	      next({
-	        path: '/',
-	        query: { redirect: to.fullPath }
-	      })
-	    } else {
-	      	next()
-	    }
-	} else {
-	    next() 
-	}
-})
-
-export default router;
-
 // router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiredAuth)) {
-//   	const loggedIn = TokenService.getToken();
-//     if (!loggedIn || loggedIn == 'undefined'){
-//       next({
-//         path: '/',
-//         query: { redirect: to.fullPath }
-//       })
-//     } else {
-//     	if (TokenService.getCurrentUser().role.name != 'admin') {
-// 		 	const checkPerm = to.matched.some(route => {
-// 			    return ability.can(route.meta.action, route.meta.subject)
-// 		  	})
-// 		  	if (!checkPerm) {
-// 			    return next('/notfound')
-// 		  	}
-//     	}
-//       	next()
-//     }
-//   } else {
-//     next() 
-//   }
+// 	if (to.matched.some(record => record.meta.requiredAuth)){
+// 	  	const loggedIn = TokenService.getToken();
+// 	    if (!loggedIn || loggedIn == 'undefined'){
+// 	      next({
+// 	        path: '/',
+// 	        query: { redirect: to.fullPath }
+// 	      })
+// 	    } else {
+// 	      	next()
+// 	    }
+// 	} else {
+// 	    next() 
+// 	}
 // })
 
 // export default router;
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiredAuth)) {
+  	const loggedIn = TokenService.getToken();
+    if (!loggedIn || loggedIn == 'undefined'){
+      next({
+        path: '/',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+    	if (TokenService.getCurrentUser().role.name != 'admin') {
+		 	const checkPerm = to.matched.some(route => {
+			    return ability.can(route.meta.action, route.meta.subject)
+		  	})
+		  	if (!checkPerm) {
+			    return next('/notfound')
+		  	}
+    	}
+      	next()
+    }
+  } else {
+    next() 
+  }
+})
+
+export default router;
