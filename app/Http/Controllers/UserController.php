@@ -7,12 +7,14 @@ use Validator;
 use Hash;
 use Image;
 use App\Permission;
+use App\User;
 
 class UserController extends Controller
 {
     public function profile(Request $request)
     {
         $user = $request->user();
+        $employee = User::with(['role','position','experience','category'])->find($user->id);
         $pers = [];
         $permissions = Permission::where(['role_id' => $user->role->id])->with(['controller', 'action'])->get();
         foreach($permissions as $k => $permission){
@@ -22,7 +24,7 @@ class UserController extends Controller
         $pers = array_unique($pers, SORT_REGULAR);
         $pers = array_values($pers);
         $result['permissions'] = $pers;
-        $result['user'] = $user;
+        $result['user'] = $employee;
         return response()->json(['success' => true, 'result' => $result]);
     }
 
