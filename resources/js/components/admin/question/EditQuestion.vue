@@ -33,7 +33,7 @@
 				    	></textarea>
 					  </div>
 					  <div class="form-group col-md-12">
-					    <label for="time">Время (s)</label>
+					    <label for="time">Время (в секунде)</label>
 					    <input
 					    	type="number" 
 					    	min="1"
