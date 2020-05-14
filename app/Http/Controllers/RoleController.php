@@ -26,7 +26,7 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         if(!$role){
-            return response()->json(['error' => true, 'message' => 'Role not found']);
+            return response()->json(['error' => true, 'message' => 'Роль не найдена']);
         }
         return response()->json(['succcess' => true, 'result' => $role]);
     }
@@ -46,7 +46,7 @@ class RoleController extends Controller
 
         $inputs = $request->all();
         $role = Role::create($inputs);
-        return response()->json(['success' => true, 'message' => 'Role created']);
+        return response()->json(['success' => true, 'message' => 'Роль создана']);
     }
 
 
@@ -54,7 +54,7 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         if(!$role){
-            return response()->json(['error' => true, 'message' => 'Role not found']);
+            return response()->json(['error' => true, 'message' => 'Роль не найдена']);
         }
         $validator = Validator::make($request->all(),[
             'label' => 'required',
@@ -67,17 +67,17 @@ class RoleController extends Controller
 
         $inputs = $request->all();
         $role->update($inputs);
-        return response()->json(['success' => true, 'message' => 'Role updated']);
+        return response()->json(['success' => true, 'message' => 'Роль обновлена']);
     }
 
     public function destroy(Request $request, $id)
     {
         $role = Role::find($id);
         if(!$role){
-            return response()->json(['error' => true, 'message' => 'Role not found']);
+            return response()->json(['error' => true, 'message' => 'Роль не найдена']);
         }
 
         $role->delete();
-        return response()->json(['success' => true, 'message' => 'Role deleted']);
+        return response()->json(['success' => true, 'message' => 'Роль удалена']);
     }
 }

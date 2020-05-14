@@ -33,7 +33,7 @@ class ActionController extends Controller
         }
         $inputs = $request->all();
         $controller = Action::create($inputs);
-        return response()->json(['success' => true, 'message' => 'Action created']);
+        return response()->json(['success' => true, 'message' => 'Действие создано']);
     }
 
 
@@ -47,7 +47,7 @@ class ActionController extends Controller
     {
         $action = Action::where(['id' => $id])->with('controller')->first();
         if(!$action){
-            return response()->json(['error' => true, 'message' => 'Action not found']);
+            return response()->json(['error' => true, 'message' => 'Действие не найдено']);
         }
         return response()->json(['success' => true, 'result' => $action]);
     }
@@ -57,7 +57,7 @@ class ActionController extends Controller
     {
         $action = Action::find($id);
         if(!$action){
-            return response()->json(['error' => true, 'message' => 'Action not found']);
+            return response()->json(['error' => true, 'message' => 'Действие не найдено']);
         }
         $validator = Validator::make($request->all(),[
             'conts_id' => 'required|integer',
@@ -68,7 +68,7 @@ class ActionController extends Controller
         }
         $inputs = $request->all();
         $action->update($inputs);
-        return response()->json(['success' => true, 'message' => 'Action updated']);
+        return response()->json(['success' => true, 'message' => 'Действие обновлено']);
     }
 
 

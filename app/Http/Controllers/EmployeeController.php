@@ -8,6 +8,7 @@ use Hash;
 use Image;
 use App\User;
 use App\UserExperience;
+use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
@@ -48,7 +49,7 @@ class EmployeeController extends Controller
         if($validator->fails()){
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
-        return response()->json(['success' => true, 'message' => 'Email is free to use']);
+        return response()->json(['success' => true, 'message' => 'Электронная почта свободно для использования']);
     }
 
     public function edit($id)
@@ -56,7 +57,7 @@ class EmployeeController extends Controller
         // $user = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
         $user = User::with(['role','position','experience'])->find($id);
         if(!$user){
-            return response()->json(['error' => true, 'message' => 'User not found']);
+            return response()->json(['error' => true, 'message' => 'Пользователь не найден']);
         }
         return response()->json(['success' => true, 'result' => $user]);
     }
@@ -65,6 +66,7 @@ class EmployeeController extends Controller
     {
         $user = $request->user();
         $validator = Validator::make($request->all(), [
+            'status'                    => ['required',Rule::in(['active', 'inactive']),],
             'name'                      => 'required|string',
             'email'                     => 'required|email|unique:users,email',
             'password'                  => 'required|string|min:6',
@@ -100,7 +102,7 @@ class EmployeeController extends Controller
         }
         $inputs = $request->all();
         if($inputs['password'] !== $inputs['confirm_password']){
-            return response()->json(['error' => true,'message' => 'Passwords are not same']);
+            return response()->json(['error' => true,'message' => 'Пароли не совпадают']);
         }
         $inputs['password'] = Hash::make($inputs['password']);
         //Upload file and image
@@ -137,7 +139,7 @@ class EmployeeController extends Controller
             }
         }
 
-        return response()->json(['success' => true, 'message' => 'Employee created successfuly']);
+        return response()->json(['success' => true, 'message' => 'Пользователь создан успешно']);
     }
 
     public function update(Request $request, $id)
@@ -147,9 +149,10 @@ class EmployeeController extends Controller
         $employee = User::where(['id' => $id])->first();
         $employee = User::findOrFail($id);
         if(!$employee){
-            return response()->json(['error' => true, 'message' => 'Employee not found']);
+            return response()->json(['error' => true, 'message' => 'Пользователь не найден']);
         }
         $validator = Validator::make($request->all(), [
+            'status'                    => ['required',Rule::in(['active', 'inactive']),],
             'name'                      => 'required|string',
             'email'                     => 'required|email|unique:users,email,'.$employee->id,
             'password'                  => 'nullable|string|min:6',
@@ -179,7 +182,7 @@ class EmployeeController extends Controller
         if($request->has('password') && $request->has('confirm_password')){
             if($inputs['password'] != '' || strlen($inputs['password']) >= 6){
                 if($inputs['password'] !== $inputs['confirm_password']){
-                    return response()->json(['error' => true,'message' => 'Passwords are not same']);
+                    return response()->json(['error' => true,'message' => 'Пароли не совпадают']);
                 }
                 $inputs['password'] = Hash::make($inputs['password']);
             }else{
@@ -238,7 +241,7 @@ class EmployeeController extends Controller
             }
         }
 
-        return response()->json(['success' => true, 'message' => 'Employee updated successfuly']);
+        return response()->json(['success' => true, 'message' => 'Пользователь успешно обновлен']);
     }
 
     public function destroy(Request $request, $id)
@@ -246,7 +249,7 @@ class EmployeeController extends Controller
         $user = $request->user();
         $employee = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
         if(!$employee){
-            return response()->json(['error' => true, 'message' => 'Employee not found']);
+            return response()->json(['error' => true, 'message' => 'Пользователь не найден']);
         }
 
         $exps = $employee->experience;
@@ -256,6 +259,6 @@ class EmployeeController extends Controller
         foreach ($exps as $key => $value) {
             $value->delete();
         }
-        return response()->json(['error' => true, 'message' => 'Employee deleted']);
+        return response()->json(['error' => true, 'message' => 'Пользователь удален']);
     }
 }

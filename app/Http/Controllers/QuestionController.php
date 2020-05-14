@@ -19,7 +19,7 @@ class QuestionController extends Controller
     {
         $question = Question::with('variants')->find($id);
         if(!$question){
-            return response()->json(['error' => true, 'message' => 'Question not found']);
+            return response()->json(['error' => true, 'message' => 'Вопрос не найден']);
         }
 
         return response()->json(['success' => true, 'result' => $question]);
@@ -69,7 +69,7 @@ class QuestionController extends Controller
 
         $question = Question::with('variants')->find($id);
         if(!$question){
-            return response()->json(['error' => true, 'message' => 'Question not found']);
+            return response()->json(['error' => true, 'message' => 'Вопрос не найден']);
         }
         $question->update($request->all());
         //delete old variants
@@ -93,12 +93,12 @@ class QuestionController extends Controller
     {
         $question = Question::find($id);
         if(!$question){
-            return response()->json(['error' => true, 'message' => 'Question not found']);
+            return response()->json(['error' => true, 'message' => 'Вопрос не найден']);
         }
 
         $question->delete();
 
-        return response()->json(['error' => true, 'message' => 'Question deleted successfuly']);
+        return response()->json(['error' => true, 'message' => 'Вопрос успешно удален']);
     }
 
 

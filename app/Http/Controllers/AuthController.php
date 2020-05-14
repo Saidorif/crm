@@ -41,18 +41,18 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         $user = User::where(['email' => $credentials['email']])->first();
         if(!$user){
-            return response()->json(['error' => true, 'message' => 'Invalid login details']);
+            return response()->json(['error' => true, 'message' => 'Неверные учетные данные']);
         }
         if(Hash::check($credentials['password'], $user->password)){
             $payloads = ['role' => $user->role_id];
-            $token = JWTAuth::attempt($credentials, $payloads);
-            return response()->json(['success' => true, 'token' => $token]);
-            // if($user->status == 'active'){
-            // }else{
-            //     return response()->json(['error' => true, 'message' => 'You are inactive']);
-            // }
+            if($user->status == 'active'){
+                $token = JWTAuth::attempt($credentials, $payloads);
+                return response()->json(['success' => true, 'token' => $token]);
+            }else{
+                return response()->json(['error' => true, 'message' => 'Вы неактивен']);
+            }
         }else{
-            return response()->json(['error' => true, 'message' => 'Invalid login details']);
+            return response()->json(['error' => true, 'message' => 'Неверные учетные данные']);
         }
     }
 
@@ -75,7 +75,7 @@ class AuthController extends Controller
     {
         $this->guard()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Успешно вышел']);
     }
 
     /**

@@ -18,7 +18,7 @@ class TestCategoryController extends Controller
     {
         $category = TestCategory::find($id);
         if(!$category){
-            return response()->json(['error' => true, 'message' => 'Category not found']);
+            return response()->json(['error' => true, 'message' => 'Категория не найдена']);
         }
         return response()->json(['success' => true, 'result' => $category]);
     }
@@ -48,7 +48,7 @@ class TestCategoryController extends Controller
     {
         $category = TestCategory::find($id);
         if(!$category){
-            return response()->json(['error' => true, 'message' => 'Category not found']);
+            return response()->json(['error' => true, 'message' => 'Категория не найдена']);
         }
 
         $validator = Validator::make($request->all(), [
@@ -67,11 +67,11 @@ class TestCategoryController extends Controller
     {
         $category = TestCategory::find($id);
         if(!$category){
-            return response()->json(['error' => true, 'message' => 'Category not found']);
+            return response()->json(['error' => true, 'message' => 'Категория не найдена']);
         }
 
         $category->delete();
-        return response()->json(['success' => true,'message' => 'Category deleted']);
+        return response()->json(['success' => true,'message' => 'Категория удалена']);
     }
 
 
