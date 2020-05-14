@@ -84,12 +84,12 @@ class EmployeeController extends Controller
             'text'                      => 'string|nullable',
             'category_id'               => 'integer|nullable',
             'experience'                => 'array|nullable',
-            'experience.*.date_from'    => 'required|date|nullable',
-            'experience.*.date_to'      => 'required|date|nullable',
-            'experience.*.company'      => 'required|string|nullable',
-            'experience.*.address'      => 'required|string|nullable',
-            'experience.*.position'     => 'required|string|nullable',
-            'experience.*.description'  => 'required|string|nullable',
+            'experience.*.date_from'    => 'date|nullable',
+            'experience.*.date_to'      => 'date|nullable',
+            'experience.*.company'      => 'string|nullable',
+            'experience.*.address'      => 'string|nullable',
+            'experience.*.position'     => 'string|nullable',
+            'experience.*.description'  => 'string|nullable',
         ]);
 
         if($validator->fails()){
@@ -158,12 +158,12 @@ class EmployeeController extends Controller
             'text'                      => 'string|nullable',
             'category_id'               => 'integer|nullable',
             'experience'                => 'array|nullable',
-            'experience.*.date_from'    => 'required|date|nullable',
-            'experience.*.date_to'      => 'required|date|nullable',
-            'experience.*.company'      => 'required|string|nullable',
-            'experience.*.address'      => 'required|string|nullable',
-            'experience.*.position'     => 'required|string|nullable',
-            'experience.*.description'  => 'required|string|nullable',
+            'experience.*.date_from'    => 'date|nullable',
+            'experience.*.date_to'      => 'date|nullable',
+            'experience.*.company'      => 'string|nullable',
+            'experience.*.address'      => 'string|nullable',
+            'experience.*.position'     => 'string|nullable',
+            'experience.*.description'  => 'string|nullable',
         ]);
 
         if($validator->fails()){

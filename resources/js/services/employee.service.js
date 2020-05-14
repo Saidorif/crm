@@ -4,8 +4,8 @@ const EmployeeService = {
 	employeeList(){
 		return ApiService.get(`/api/employee/list`)
 	},
-	employees(page){
-		return ApiService.get(`/api/employee?page=`+ page)
+	employees(data){
+		return ApiService.post(`/api/employee?page=`+ data.page,data.items)
 	},
 	addEmployee(data){
 		return ApiService.post(`/api/employee/store`,data)
