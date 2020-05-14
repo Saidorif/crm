@@ -143,16 +143,25 @@
                 >{{category.name}}</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="birthday">Дата рождения</label>
-              <date-picker
-                lang="ru"
-                v-model="form.birthday"
-                valuetype="format"
-                format="YYYY-MM-DD"
-                placeholder="YYYY-MM-DD"
-              ></date-picker>
-            </div>
+            <div class="input_block_d_flex" >
+              <div class="form-group col-md-6">
+                <label for="birthday">Дата рождения</label>
+                <date-picker
+                    lang="ru"
+                    v-model="form.birthday"
+                    valuetype="format"
+                    format="YYYY-MM-DD"
+                    placeholder="YYYY-MM-DD"
+                  ></date-picker>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="birthday">Статус</label>
+                <select v-model="form.status"  class="form-control" >
+                  <option value="active" selected>Активный</option>
+                  <option value="inactive">Неактивный</option>
+                </select>
+              </div>
+           </div>
             <div class="form-group">
               <label for="address">Адрес</label>
               <input
@@ -324,6 +333,7 @@ export default {
         order_date: "",
         birthday: "",
         leave_date: "",
+        status: 'active',
         working: false,
         experience: []
       },
