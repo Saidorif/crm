@@ -69,6 +69,7 @@ const UserService = {
 		ApiService.post('/api/logout');
 		TokenService.removeToken();
 		TokenService.removeGuestInfo()
+		TokenService.removeCurrentUser()
 		ApiService.removeHeader();
 		// // NOTE: Again, we'll cover the 401 Interceptor a bit later.
 		ApiService.unmount401Interceptor();
