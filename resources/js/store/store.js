@@ -28,10 +28,10 @@ export const ability = appAbility
 const store = new Vuex.Store(
 	{
 		plugins:[
-			// storage({
-			// 	storedKeys:['token','rules'],
-			// 	destroyOn:['logoutSuccess']
-			// }),
+			storage({
+				storedKeys:['token','rules'],
+				destroyOn:['logoutSuccess']
+			}),
 			abilityPlugin
 		],
 		modules:{
@@ -85,10 +85,11 @@ const store = new Vuex.Store(
 				state.rules = [];
 			},
 			loginSuccess(state,user){
-				TokenService.saveCurrentUser(user.result);
+				TokenService.saveCurrentUser(user.result.user);
 				state.token = user.token;
 				state.authenticationErrorCode = false
-				state.userInfo = user.result;
+				state.userInfo = user.result.user;
+				state.rules = user.result.permissions;
 			},
 			loginError(state,user){
 				state.authenticating = false
@@ -108,6 +109,15 @@ const store = new Vuex.Store(
 						// router.push(routeHistory && routeHistory != '/' ? routeHistory : '/')
 					}
 				}catch(e){}
+			},
+			async profileUser({commit}){
+				try{
+					const userInfo = await UserService.profileUser();
+					await commit('loginSuccess', userInfo.data);
+					return true
+				}catch(e){
+					return false
+				}
 			},
 			// register
 			async register({ commit,dispatch }, payload){

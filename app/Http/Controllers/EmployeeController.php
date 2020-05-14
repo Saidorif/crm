@@ -90,9 +90,9 @@ class EmployeeController extends Controller
             'experience.*.date_from'    => 'required|date|nullable',
             'experience.*.date_to'      => 'required|date|nullable',
             'experience.*.company'      => 'required|string|nullable',
-            'experience.*.address'      => 'required|string|nullable',
+            'experience.*.address'      => 'string|nullable',
             'experience.*.position'     => 'required|string|nullable',
-            'experience.*.description'  => 'required|string|nullable',
+            'experience.*.description'  => 'string|nullable',
         ]);
 
         if($validator->fails()){
@@ -167,9 +167,9 @@ class EmployeeController extends Controller
             'experience.*.date_from'    => 'required|date|nullable',
             'experience.*.date_to'      => 'required|date|nullable',
             'experience.*.company'      => 'required|string|nullable',
-            'experience.*.address'      => 'required|string|nullable',
+            'experience.*.address'      => 'string|nullable',
             'experience.*.position'     => 'required|string|nullable',
-            'experience.*.description'  => 'required|string|nullable',
+            'experience.*.description'  => 'string|nullable',
         ]);
 
         if($validator->fails()){
