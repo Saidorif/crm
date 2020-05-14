@@ -414,7 +414,12 @@ export default {
     },
     async sendEmployee() {
       if (this.form.name && this.form.email && this.form.role_id) {
-        await this.actionUpdateEmployee(this.form);
+        if(this.form.experience.length){
+          await this.actionUpdateEmployee(this.form);
+        }else{
+          delete this.form.experience;
+          await this.actionUpdateEmployee(this.form);
+        }
         if (this.getMassage.success) {
           this.$router.push("/crm/employee");
           this.requiredInput = false;

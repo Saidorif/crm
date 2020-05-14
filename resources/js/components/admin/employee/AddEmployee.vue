@@ -140,14 +140,13 @@
             </div>
             <div class="form-group">
               <label for="birthday">birthday</label>
-              <input
-                type="text"
-                class="form-control input_style"
-                id="birthday"
-                placeholder="birthday.."
-                v-model="form.birthday"
-                :class="isRequired(form.birthday) ? 'isRequired' : ''"
-              />
+              <date-picker
+                  lang="ru"
+                  v-model="form.birthday"
+                  valuetype="format"
+                  format="YYYY-MM-DD"
+                  placeholder="YYYY-MM-DD"
+                ></date-picker>
             </div>
             <div class="input_block_d_flex">
               <div class="form-group col-md-6">
@@ -168,6 +167,7 @@
                   valuetype="format"
                   format="YYYY-MM-DD"
                   placeholder="YYYY-MM-DD"
+                  :disabled="form.working"
                 ></date-picker>
                 <div class="input_radio">
                   <label for="working">to this day</label>
@@ -206,7 +206,7 @@
           </div>
           <h5 class="sub_title">Трудовая деятельность</h5>
           <div class="row col-md-12" v-for="(ex, index) in form.experience">
-            <div class="col-12 d-flex justify-content-end" v-if="index != 0">
+            <div class="col-12 d-flex justify-content-end">
               <button
                 type="button"
                 class="btn btn-primary mr-3"
@@ -223,6 +223,7 @@
                 id="company"
                 placeholder="Company name"
                 v-model="ex.company"
+                :class="isRequired(ex.company) ? 'isRequired' : ''"
               />
             </div>
             <div class="form-group col-md-3">
@@ -233,6 +234,7 @@
                 id="position"
                 placeholder="position"
                 v-model="ex.position"
+                :class="isRequired(ex.position) ? 'isRequired' : ''"
               />
             </div>
             <div class="form-group col-md-3">
@@ -243,6 +245,7 @@
                 valuetype="format"
                 placeholder="YYYY-MM-DD"
                 format="YYYY-MM-DD"
+                :class="isRequired(ex.date_from) ? 'isRequired' : ''"
               ></date-picker>
             </div>
             <div class="form-group col-md-3">
@@ -253,6 +256,7 @@
                 valuetype="format"
                 placeholder="YYYY-MM-DD"
                 format="YYYY-MM-DD"
+                                :class="isRequired(ex.date_to) ? 'isRequired' : ''"
               ></date-picker>
             </div>
             <div class="form-group col-md-6">
@@ -316,16 +320,7 @@ export default {
         order_date: "",
         leave_date: "",
         working: false,
-        experience: [
-          {
-            company: "",
-            date_from: "",
-            date_to: "",
-            address: "",
-            position: "",
-            description: ""
-          }
-        ]
+        experience: []
       },
       fileFormat: "no-file",
       requiredInput: false,
@@ -425,7 +420,12 @@ export default {
         this.form.role_id &&
         this.checkPassword == false
       ) {
-        await this.actionAddEmployee(this.form);
+        if(this.form.experience.length){
+          await this.actionAddEmployee(this.form);
+        }else{
+          delete this.form.experience;
+          await this.actionAddEmployee(this.form);
+        }
         if (this.getMassage.success) {
           this.$router.push("/crm/employee");
           this.requiredInput = false;
