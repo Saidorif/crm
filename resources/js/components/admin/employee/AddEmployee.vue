@@ -21,7 +21,7 @@
                 v-model="form.name"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" v-if="form.role_id != 3">
               <label for="positon">Должность</label>
               <select
                 class="form-control"
@@ -43,6 +43,7 @@
                 :class="isRequired(form.role_id) ? 'isRequired' : '' "
                 id="countryName"
                 v-model="form.role_id"
+                @change="selectUserRole()"
               >
                 <option value selected disabled>Выберите рол</option>
                 <option :value="role.id" v-for="(role,index) in getRoleList">{{role.name}}</option>
@@ -129,7 +130,7 @@
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" v-if="form.role_id != 3">
               <label for="category">Управления</label>
               <select class="form-control" id="category" v-model="form.category_id">
                 <option value selected disabled>Выберите управление</option>
@@ -149,7 +150,7 @@
                   placeholder="YYYY-MM-DD"
                 ></date-picker>
             </div>
-            <div class="input_block_d_flex">
+            <div class="input_block_d_flex" v-if="form.role_id != 3">
               <div class="form-group col-md-6">
                 <label for="date_from">date_from</label>
                 <date-picker
@@ -464,7 +465,7 @@ export default {
     },
     removeExperience(ex, index) {
       this.form.experience.splice(index, 1);
-    }
+    },
   }
 };
 </script>

@@ -21,7 +21,7 @@
                 v-model="form.name"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" v-if="form.role_id != 3">
               <label for="position">Должность</label>
               <select
                 class="form-control"
@@ -133,7 +133,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" v-if="form.role_id != 3">
               <label for="category">Управления</label>
               <select class="form-control" id="category" v-model="form.category_id">
                 <option value selected disabled>Выберите управление</option>
@@ -163,7 +163,7 @@
                 v-model="form.address"
               />
             </div>
-            <div class="input_block_d_flex">
+            <div class="input_block_d_flex" v-if="form.role_id != 3">
               <div class="form-group col-md-6">
                 <label for="date_from">date_from</label>
                 <date-picker
@@ -365,11 +365,17 @@ export default {
       }
     },
     photoImg(img) {
-      if (img.length < 100) {
-        return "/img/user.jpg";
-      } else {
-        return img;
+      console.log(img)
+      if(img){
+        if (img.length < 100) {
+          return "/img/user.jpg";
+        } else {
+          return img;
+        }
+      }else{
+                  return "/img/user.jpg";
       }
+
     },
     changeFile(event) {
       let file = event.target.files[0];
