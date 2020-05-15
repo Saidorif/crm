@@ -18,7 +18,7 @@
 					    	:class="isRequired(form.category_id) ? 'isRequired' : '' " 
 					    	id="countryName" 
 					    	v-model="form.category_id">
-					      <option value="" selected disabled>Выберите категорию</option>
+					      <option value="" selected disabled>Выберите управление</option>
 					      <option :value="category.id" v-for="(category,index) in getCategories">{{category.name}}</option>
 					    </select>
 					  </div>
