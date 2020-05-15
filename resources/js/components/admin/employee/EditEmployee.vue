@@ -87,6 +87,19 @@
                 <b>Пароль не совпадает</b>
               </small>
             </div>
+            <div class="form-group" v-if="form.role_id != 3">
+              <label for="gender">Пол</label>
+              <select 
+                class="form-control" 
+                id="gender" 
+                v-model="form.gender"
+                :class="isRequired(form.gender) ? 'isRequired' : ''"
+              >
+                <option value selected disabled>Выберите пол</option>
+                <option value="male">Мужчина</option>
+                <option value="female">Женщина</option>
+              </select>
+            </div>
             <div class="form-group">
               <label for="fortext">Текст</label>
               <textarea
@@ -333,6 +346,7 @@ export default {
         order_date: "",
         birthday: "",
         leave_date: "",
+        gender: "",
         status: 'active',
         working: false,
         experience: []
@@ -435,9 +449,9 @@ export default {
     isRequired(input) {
       return this.requiredInput && input === "";
     },
-    async sendEmployee() {
-      if (this.form.name && this.form.email && this.form.role_id) {
-        if (this.form.experience.length) {
+    async sendEmployee(){
+      if (this.form.name && this.form.email && this.form.role_id && this.form.gender) {
+        if (this.form.experience.length){
           await this.actionUpdateEmployee(this.form);
         } else {
           delete this.form.experience;
