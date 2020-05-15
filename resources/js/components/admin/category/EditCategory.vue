@@ -12,7 +12,7 @@
 		  		<form @submit.prevent.enter="saveCategory">
 					<div class="row">
 					  <div class="form-group col-md-9">
-					    <label for="categoryName">Название</label>
+					    <label for="categoryName">Название управления</label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
