@@ -286,12 +286,12 @@
               />
             </div>
             <div class="form-group col-md-6">
-              <label for="address">>Адрес учреждения</label>
+              <label for="address">Адрес учреждения</label>
               <input
                 type="text"
                 class="form-control input_style"
                 id="address"
-                placeholder=">Адрес учреждения"
+                placeholder="Адрес учреждения"
                 v-model="ex.address"
               />
             </div>

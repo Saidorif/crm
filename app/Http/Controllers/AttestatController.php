@@ -70,7 +70,8 @@ class AttestatController extends Controller
     	if($validator->fails()){
     		return response()->json(['error' => true, 'message' => $validator->messages()]);
     	}
-    	$inputs = $request->all();
+        $inputs = $request->all();
+        $user = request()->user();
         $status = 'progress';
         if($inputs['type'] == 'employee'){
             $status = 'start';
@@ -112,6 +113,7 @@ class AttestatController extends Controller
         $inputs['time'] = $ex_time;
         $inputs['question_ids'] = json_encode($q_ids);
         $inputs['status'] = $status;
+        $inputs['user_id'] = $user->id;
         
         if($status == 'start'){
             $employees = User::where(['category_id' => $inputs['category_id']])->get();
@@ -124,7 +126,7 @@ class AttestatController extends Controller
         }
         if($status == 'progress'){
             $attestat = Attestat::create($inputs);
-            return response()->json(['success' => true,'total_time'=> $ex_time,'start' => $start,'end' => $end, 'result' => $questions, 'attestat' => $attestat]);
+            return response()->json(['success' => true,'total_time'=> $ex_time, 'result' => $questions, 'attestat' => $attestat]);
         }
         return response()->json(['error' => true,'message' => 'Что-то пошло не так...']);
     }
