@@ -87,6 +87,19 @@
                 <b>Пароль не совпадает</b>
               </small>
             </div>
+            <div class="form-group" v-if="form.role_id != 3">
+              <label for="gender">Пол</label>
+              <select 
+                class="form-control" 
+                id="gender" 
+                v-model="form.category_id"
+                :class="isRequired(form.gender) ? 'isRequired' : ''"
+              >
+                <option value selected disabled>Выберите пол</option>
+                <option value="male">Мужчина</option>
+                <option value="female">Женщина</option>
+              </select>
+            </div>
             <div class="form-group">
               <label for="fortext">Образование (название,профессия,адрес)</label>
               <textarea class="form-control input_style" v-model="form.text" placeholder="Текст.." style="height: 114px; resize: none;"></textarea>
@@ -330,6 +343,7 @@ export default {
         order_date: "",
         leave_date: "",
         status: 'active',
+        gender: '',
         working: false,
         experience: []
       },
@@ -429,6 +443,7 @@ export default {
         this.form.password &&
         this.form.confirm_password &&
         this.form.role_id &&
+        this.form.gender &&
         this.checkPassword == false
       ) {
         if(this.form.experience && this.form.experience.length){
