@@ -57,7 +57,7 @@
 					завершить тест!
 				</button>
 			</div>
-			<div class="base-timer">
+			<div class="base-timer" v-if="getTests.total_time">
 				<svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 					<g class="base-timer__circle">
 					<circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
@@ -211,8 +211,8 @@
 			chooseAnswer(id){
 				this.chosenAnswerID = id
 			},
-			startTimer() {
-				this.timerInterval = setInterval(() => {
+			 startTimer() {
+				this.timerInterval = setInterval(async () => {
 					this.timePassed = this.timePassed += 1;
 					this.timeLeft = this.TIME_LIMIT - this.timePassed;
 					document.getElementById("base-timer-label").innerHTML = this.formatTime(
@@ -222,7 +222,20 @@
 					this.setRemainingPathColor(this.timeLeft);
 
 					if(this.timeLeft === 0){
+						let data = {
+							attestat_id:this.userInfo.id,
+							questions:this.myAnswers
+						}
+						await this.actionCompleteTest(data);
 						this.onTimesUp();
+						TokenService.removeGuestInfo();
+						if (this.getComplete.success){
+							this.showResult = true
+							this.items = this.getComplete
+							this.items['id'] = this.userInfo.id
+							this.onTimesUp();
+							this.$router.push("/crm/test/start-test");
+						}
 					}
 				}, 1000);
 			},
