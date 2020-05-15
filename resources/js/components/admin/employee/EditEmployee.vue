@@ -92,7 +92,7 @@
               <select 
                 class="form-control" 
                 id="gender" 
-                v-model="form.category_id"
+                v-model="form.gender"
                 :class="isRequired(form.gender) ? 'isRequired' : ''"
               >
                 <option value selected disabled>Выберите пол</option>
