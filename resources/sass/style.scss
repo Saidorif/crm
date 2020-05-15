@@ -246,6 +246,12 @@
     min-height: 32px;
     height: auto;
 }
+.input_style.disabled{
+    min-height: 32px;
+    height: auto;
+    background-color: #F8F8F8;
+    margin: 0px;
+}
 .form_btn{
     display: flex;
     align-items: flex-end;
