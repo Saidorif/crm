@@ -127,25 +127,25 @@
             </div>
             <div class="input_block_d_flex">
               <div class="form-group col-md-6">
-                <label for="language">Қайси чет тилларинибилади</label>
+                <label for="languages">Қайси чет тилларинибилади</label>
                 <input
                   type="text"
                   class="form-control input_style"
-                  id="language"
+                  id="languages"
                   placeholder="Қайси чет тилларинибилади.."
-                  :class="isRequired(form.language) ? 'isRequired' : ''"
-                  v-model="form.language"
+                  :class="isRequired(form.languages) ? 'isRequired' : ''"
+                  v-model="form.languages"
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="state_awards">Давлат мукофотлари б-н тақдирланганми (қанақа):</label>
+                <label for="state_award">Давлат мукофотлари б-н тақдирланганми (қанақа):</label>
                 <input
                   type="text"
                   class="form-control input_style"
                   id="state_awards"
                   placeholder="Давлат мукофотлари б-н тақдирланганми (қанақа):"
-                  v-model="form.state_awards"
-                  :class="isRequired(form.state_awards) ? 'isRequired' : ''"
+                  v-model="form.state_award"
+                  :class="isRequired(form.state_award) ? 'isRequired' : ''"
                 />
               </div>
             </div>
@@ -282,32 +282,66 @@
                 </select>
               </div>
             </div>
-                        <div class="input_block_d_flex">
+            <div class="input_block_d_flex">
               <div class="form-group col-md-6">
-                <label for="partiya">Партиявийлиги:</label>
+                <label for="partisanship">Партиявийлиги:</label>
                 <input
                   type="text"
                   class="form-control input_style"
-                  id="partiya"
+                  id="partisanship"
                   placeholder="Партиявийлиги:"
-                  v-model="form.phone"
-                  :class="isRequired(form.partiya) ? 'isRequired' : ''"
+                  v-model="form.partisanship"
+                  :class="isRequired(form.partisanship) ? 'isRequired' : ''"
                 />
               </div>
               <div class="form-group col-md-6" v-if="form.role_id != 3">
-                <label for="gender">Маълумоти бўйича мутахассислиги:</label>
+                <label for="education_spec">Маълумоти бўйича мутахассислиги:</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="education_spec"
+                  placeholder="Маълумоти бўйича мутахассислиги:"
+                  v-model="form.education_spec"
+                  :class="isRequired(form.education_spec) ? 'isRequired' : ''"
+                />
+              </div>
+            </div>
+            <div class="input_block_d_flex">
+              <div class="form-group col-md-6">
+                <label for="partiya">Илмий даражаси:</label>
                 <input
                   type="text"
                   class="form-control input_style"
                   id="partiya"
-                  placeholder="Маълумоти бўйича мутахассислиги:"
-                  v-model="form.profession"
-                  :class="isRequired(form.profession) ? 'isRequired' : ''"
+                  placeholder="Илмий даражаси:"
+                  v-model="form.academic_degree"
+                  :class="isRequired(form.academic_degree) ? 'isRequired' : ''"
+                />
+              </div>
+              <div class="form-group col-md-6" v-if="form.role_id != 3">
+                <label for="academic_sertificate">Илмий унвони:</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="academic_sertificate"
+                  placeholder="Илмий унвони:"
+                  v-model="form.academic_sertificate"
+                  :class="isRequired(form.academic_sertificate) ? 'isRequired' : ''"
                 />
               </div>
             </div>
           </div>
-
+          <div class="col-md-12">
+            <label for="deputat">Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши депутатими ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ кўрсатилиши лозим)</label>
+            <input
+              type="text"
+              class="form-control input_style"
+              id="deputat"
+              placeholder="Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши депутатими ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ кўрсатилиши лозим)"
+              v-model="form.deputat"
+              :class="isRequired(form.deputat) ? 'isRequired' : ''"
+            />
+          </div>
           <h5 class="sub_title">Трудовая деятельность</h5>
           <div class="row col-md-12" v-for="(ex, index) in form.experience">
             <div class="col-12 d-flex justify-content-end">
