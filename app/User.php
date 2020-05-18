@@ -6,6 +6,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use Carbon\Carbon;
+
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -73,5 +75,11 @@ class User extends Authenticatable implements JWTSubject
     public function experience()
     {
         return $this->hasMany(\App\UserExperience::class,'user_id');
+    }
+
+    public function getAge()
+    {
+        $date1 = Carbon::create($this->birthday);
+        return $date1->diffInYears(Carbon::now());
     }
 }
