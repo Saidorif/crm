@@ -6,6 +6,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use Carbon\Carbon;
+
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -16,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','address','role_id','phone','image','file','text','category_id','position_id','birthday','working','order_date','leave_date','status','gender'
+        'name', 'email', 'password','address','role_id','phone','image','file','text','category_id','position_id','birthday','working','order_date','leave_date','status','gender','nation','education','education_spec','academic_degree','languages','partisanship','academic_sertificate','state_award','deputat'
     ];
 
     /**
@@ -73,5 +75,25 @@ class User extends Authenticatable implements JWTSubject
     public function experience()
     {
         return $this->hasMany(\App\UserExperience::class,'user_id');
+    }
+
+    public function getAge()
+    {
+        $date1 = Carbon::create($this->birthday);
+        return $date1->diffInYears(Carbon::now());
+    }
+
+    public function getStaj()
+    {
+        $staj = 0;
+        $experience = $this->experience;
+        if(count($experience) > 0){
+            foreach ($experience as $key => $value) {
+                $date_from = Carbon::create($value->date_from);
+                $date_to = Carbon::create($value->date_to);
+                $staj = $staj + $date_from->diffInMonths($date_to);
+            }
+        }
+        return $staj;
     }
 }

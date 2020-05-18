@@ -32,6 +32,15 @@ class CreateUsersTable extends Migration
             $table->date('leave_date')->nullable();
             $table->boolean('working')->default(false)->nullable();
             $table->string('status')->default('active');
+            $table->string('nation')->nullable();//Millati
+            $table->string('education')->nullable();//Malumoti
+            $table->string('education_spec')->nullable();//Malumoti boyicha mutaxassisligi
+            $table->string('academic_degree')->nullable();//Ilmiy daraja
+            $table->string('languages')->nullable();//Chet tillari
+            $table->string('partisanship')->nullable();//Partiyaviyligi
+            $table->string('academic_sertificate')->nullable();//Ilmiy unvon
+            $table->string('state_award')->nullable();//Davlat mukofotlari
+            $table->string('deputat')->nullable();//Xalq deputatlari
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
