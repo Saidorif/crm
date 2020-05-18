@@ -3,18 +3,28 @@
 </template>
 <script>
 import { Pie } from 'vue-chartjs'
-
 export default {
   	extends: Pie,
-	props: {
-		chartdata: {
-		type: Object,
-		default: null
-		},
-		options: {
-		type: Object,
-		default: null
-		},
+	props: ['propchartdata', 'propLabel', 'propColor'],
+	data(){
+		return{
+			chartdata: {
+				labels: Object.keys(this.propchartdata),
+				datasets: [
+					{
+						label: this.propLabel,
+						backgroundColor: this.propColor,
+						data: Object.values(this.propchartdata)
+					}
+				]
+			},
+			options: {
+				responsive: true,
+				type: Object,
+				default: null,
+				maintainAspectRatio: false
+			},
+		}
 	},
 	mounted () {
 		this.renderChart(this.chartdata, this.options)
@@ -24,3 +34,4 @@ export default {
 <style scoped>
 	
 </style>
+

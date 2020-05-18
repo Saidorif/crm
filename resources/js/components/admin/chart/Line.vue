@@ -1,18 +1,30 @@
-import { Line } from 'vue-chartjs'
-
+<template>
+	<canvas ref="canvas" height="400"></canvas>
+</template>
+<script>
+import { Pie } from 'vue-chartjs'
 export default {
-  extends: Line,
-  props: {
-    chartdata: {
-      type: Object,
-      default: null
-    },
-    options: {
-      type: Object,
-      default: null
-    }
-  },
-  mounted () {
-    this.renderChart(this.chartdata, this.options)
-  }
+  extends: Pie ,
+	props: ['propchartdata', 'propLabel', 'propColor'],
+	data(){
+		return{
+			chartdata: {
+				labels: Object.keys(this.propchartdata),
+				datasets: [
+					{
+						label: this.propLabel,
+						backgroundColor: this.propColor,
+						data: Object.values(this.propchartdata)
+					}
+        ],
+			},
+			options: {
+        type: Object,
+        default: null
+			},
+		}
+	},
+	mounted () {
+		this.renderChart(this.chartdata, this.options)
+	}
 }

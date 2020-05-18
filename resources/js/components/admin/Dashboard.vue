@@ -9,8 +9,11 @@
 		  	</div>
 		  	<div class="card-body">
 	  			<div class="row">
-	  				<div class="col-md-3">
-	  					<Bar/>
+	  				<div class="col-md-3" v-if="loaded">
+	  					<Bar :propchartdata="this.getDashboard.ages" propLabel="Yoshi" propColor="#f87979"/>
+	  				</div>
+	  				<div class="col-md-3" v-if="loaded">
+	  					<Pie :propchartdata="this.getDashboard.staj" propLabel="Staj" propColor="#b87979"/>
 	  				</div>
 	  			</div>
 		  	</div>
@@ -19,14 +22,18 @@
 </template>
 <script>
 	import Bar from './chart/Bar'
+	import Line from './chart/Line'
+	import Pie from './chart/Pie'
 	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		components:{
-			Bar
+			Bar,
+			Line,
+			Pie,
 		},
 		data(){
 			return{
-				
+				loaded: false,
 			}
 		},
 		computed:{
@@ -37,6 +44,7 @@
 		},
 		async mounted(){
 			await this.actionDashboard()
+			this.loaded = true
 			console.log(this.getDashboard)
 		}
 	}
