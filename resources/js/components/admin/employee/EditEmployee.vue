@@ -36,72 +36,121 @@
                 >{{position.name}}</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="role">Рол</label>
-              <select
-                class="form-control"
-                :class="isRequired(form.role_id) ? 'isRequired' : '' "
-                id="countryName"
-                v-model="form.role_id"
-              >
-                <option value selected disabled>Выберите рол</option>
-                <option :value="role.id" v-for="(role,index) in getRoleList">{{role.name}}</option>
-              </select>
+            <div class="input_block_d_flex">
+              <div class="form-group col-md-6">
+                <label for="role">Рол</label>
+                <select
+                  class="form-control"
+                  :class="isRequired(form.role_id) ? 'isRequired' : '' "
+                  id="countryName"
+                  v-model="form.role_id"
+                >
+                  <option value selected disabled>Выберите рол</option>
+                  <option :value="role.id" v-for="(role,index) in getRoleList">{{role.name}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Email</label>
+                <input
+                  type="email"
+                  class="form-control input_style"
+                  :class="isRequired(form.email) ? 'isRequired' : ''"
+                  id="exampleInputEmail1"
+                  placeholder="Enter email"
+                  v-model="form.email"
+                  @blur="checkEmailInput"
+                />
+                <small class="redText" v-if="emailError">Email почта занят!</small>
+              </div>
+            </div>
+            <div class="input_block_d_flex">
+              <div class="form-group col-md-6">
+                <label for="exampleInputPassword1">Пароль</label>
+                <input
+                  type="password"
+                  class="form-control input_style"
+                  id="exampleInputPassword1"
+                  placeholder="Пароль.."
+                  :class="isRequired(form.password) ? 'isRequired' : ''"
+                  v-model="form.password"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ConfirmPassword1">Подтвердите пароль</label>
+                <input
+                  type="password"
+                  class="form-control input_style"
+                  id="ConfirmPassword1"
+                  placeholder="Подтвердите пароль.."
+                  v-model="form.passwordConfirm"
+                  :class="isRequired(form.passwordConfirm) ? 'isRequired' : ''"
+                  @input="confirmPassword()"
+                />
+                <small class="redText" v-if="checkPassword">
+                  <b>Пароль не совпадает</b>
+                </small>
+              </div>
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Email</label>
+              <label for="address">Адрес</label>
               <input
-                type="email"
+                type="text"
                 class="form-control input_style"
-                :class="isRequired(form.email) ? 'isRequired' : ''"
-                id="exampleInputEmail1"
-                placeholder="Enter email"
-                v-model="form.email"
-                @blur="checkEmailInput"
-              />
-              <small class="redText" v-if="emailError">Email почта занят!</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Пароль</label>
-              <input
-                type="password"
-                class="form-control input_style"
-                id="exampleInputPassword1"
-                placeholder="Пароль.."
-                :class="isRequired(form.password) ? 'isRequired' : ''"
-                v-model="form.password"
+                id="address"
+                placeholder="Адрес.."
+                v-model="form.address"
               />
             </div>
-            <div class="form-group">
-              <label for="ConfirmPassword1">Подтвердите пароль</label>
-              <input
-                type="password"
-                class="form-control input_style"
-                id="ConfirmPassword1"
-                placeholder="Подтвердите пароль.."
-                v-model="form.passwordConfirm"
-                :class="isRequired(form.passwordConfirm) ? 'isRequired' : ''"
-                @input="confirmPassword()"
-              />
-              <small class="redText" v-if="checkPassword">
-                <b>Пароль не совпадает</b>
-              </small>
+                        <div class="input_block_d_flex">
+              <div class="form-group col-md-6">
+                <label for="nation">Нация</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="nation"
+                  placeholder="Нация.."
+                  :class="isRequired(form.nation) ? 'isRequired' : ''"
+                  v-model="form.nation"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="education">Образование</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="education"
+                  placeholder="Образование"
+                  v-model="form.education"
+                  :class="isRequired(form.education) ? 'isRequired' : ''"
+                />
+              </div>
             </div>
-            <div class="form-group" v-if="form.role_id != 3">
-              <label for="gender">Пол</label>
-              <select 
-                class="form-control" 
-                id="gender" 
-                v-model="form.gender"
-                :class="isRequired(form.gender) ? 'isRequired' : ''"
-              >
-                <option value selected disabled>Выберите пол</option>
-                <option value="male">Мужчина</option>
-                <option value="female">Женщина</option>
-              </select>
+            <div class="input_block_d_flex">
+              <div class="form-group col-md-6">
+                <label for="language">Қайси чет тилларинибилади</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="language"
+                  placeholder="Қайси чет тилларинибилади.."
+                  :class="isRequired(form.language) ? 'isRequired' : ''"
+                  v-model="form.language"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="state_awards">Давлат мукофотлари б-н тақдирланганми (қанақа):</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="state_awards"
+                  placeholder="Давлат мукофотлари б-н тақдирланганми (қанақа):"
+                  v-model="form.state_awards"
+                  :class="isRequired(form.state_awards) ? 'isRequired' : ''"
+                />
+              </div>
             </div>
             <div class="form-group">
-              <label for="fortext">Текст</label>
+              <label for="fortext">Образование (название,профессия,адрес)</label>
               <textarea
                 class="form-control input_style"
                 v-model="form.text"
@@ -175,16 +224,6 @@
                 </select>
               </div>
            </div>
-            <div class="form-group">
-              <label for="address">Адрес</label>
-              <input
-                type="text"
-                class="form-control input_style"
-                id="address"
-                placeholder="Адрес.."
-                v-model="form.address"
-              />
-            </div>
             <div class="input_block_d_flex" v-if="form.role_id != 3">
               <div class="form-group col-md-6">
                 <label for="date_from">Дата с</label>
@@ -218,15 +257,54 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="phone">Телефон</label>
-              <input
-                type="text"
-                class="form-control input_style"
-                id="phone"
-                placeholder="Phone.."
-                v-model="form.phone"
-              />
+            <div class="input_block_d_flex">
+              <div class="form-group col-md-6">
+                <label for="phone">Телефон</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="phone"
+                  placeholder="Phone.."
+                  v-model="form.phone"
+                />
+              </div>
+              <div class="form-group col-md-6" v-if="form.role_id != 3">
+                <label for="gender">Пол</label>
+                <select 
+                  class="form-control" 
+                  id="gender" 
+                  v-model="form.gender"
+                  :class="isRequired(form.gender) ? 'isRequired' : ''"
+                >
+                  <option value selected disabled>Выберите пол</option>
+                  <option value="male">Мужчина</option>
+                  <option value="female">Женщина</option>
+                </select>
+              </div>
+            </div>
+                        <div class="input_block_d_flex">
+              <div class="form-group col-md-6">
+                <label for="partiya">Партиявийлиги:</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="partiya"
+                  placeholder="Партиявийлиги:"
+                  v-model="form.phone"
+                  :class="isRequired(form.partiya) ? 'isRequired' : ''"
+                />
+              </div>
+              <div class="form-group col-md-6" v-if="form.role_id != 3">
+                <label for="gender">Маълумоти бўйича мутахассислиги:</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="partiya"
+                  placeholder="Маълумоти бўйича мутахассислиги:"
+                  v-model="form.profession"
+                  :class="isRequired(form.profession) ? 'isRequired' : ''"
+                />
+              </div>
             </div>
           </div>
 

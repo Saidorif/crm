@@ -169,7 +169,7 @@ class AttestatController extends Controller
         $validator = Validator::make($request->all(),[
             'questions' => 'required|array',
             'questions.*.id' => 'required|integer',
-            'questions.*.answer_id' => 'required|integer',
+            'questions.*.answer_id' => 'required',
         ]);
 
         if($validator->fails()){
