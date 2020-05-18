@@ -82,4 +82,18 @@ class User extends Authenticatable implements JWTSubject
         $date1 = Carbon::create($this->birthday);
         return $date1->diffInYears(Carbon::now());
     }
+
+    public function getStaj()
+    {
+        $staj = 0;
+        $experience = $this->experience;
+        if(count($experience) > 0){
+            foreach ($experience as $key => $value) {
+                $date_from = Carbon::create($value->date_from);
+                $date_to = Carbon::create($value->date_to);
+                $staj = $staj + $date_from->diffInMonths($date_to);
+            }
+        }
+        return $staj;
+    }
 }
