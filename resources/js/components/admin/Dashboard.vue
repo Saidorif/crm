@@ -8,13 +8,36 @@
 				</h4>
 		  	</div>
 		  	<div class="card-body">
-		  		
+	  			<div class="row">
+	  				<div class="col-md-3">
+	  					<Bar/>
+	  				</div>
+	  			</div>
 		  	</div>
 	  	</div>
 	</div>
 </template>
 <script>
+	import Bar from './chart/Bar'
+	import {mapActions, mapGetters} from 'vuex'
 	export default{
-		
+		components:{
+			Bar
+		},
+		data(){
+			return{
+				
+			}
+		},
+		computed:{
+			...mapGetters('dashboard',['getDashboard'])
+		},
+		methods:{
+			...mapActions('dashboard',['actionDashboard'])
+		},
+		async mounted(){
+			await this.actionDashboard()
+			console.log(this.getDashboard)
+		}
 	}
 </script>

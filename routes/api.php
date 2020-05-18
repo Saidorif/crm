@@ -21,6 +21,10 @@ Route::group([
     
     Route::group(['middleware' => 'jwt.auth'], function(){
         // Route::group(['middleware' => 'permit'], function(){
+
+            //Dashboard
+            Route::get('dashboard', 'DashboardController@index');
+
             //User model
             Route::get('profile', 'UserController@profile');
             Route::post('change-password', 'UserController@changePasword');
