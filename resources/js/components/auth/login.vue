@@ -80,7 +80,8 @@
 		          // setTimeout(()=>{
 		          // 	window.location = '/crm/dashboard';
 		          // },100)
-		          this.$router.push("/crm/dashboard");
+				//   this.$router.push("/crm/dashboard");
+				  window.location.href = "/crm/dashboard";
 		        }else{
 					this.errorMsg = this.authenticationError
 				  	this.$Progress.fail();

@@ -15,7 +15,7 @@
 			</div>
 			<template v-for="(item,index) in showItem" v-if="showItem.length">
 				<template v-if="item">
-					<div class="test_question_block">
+					<div class="test_question_block 12321">
 					 	{{item.title}} ?
 					</div>
 					<ol type="A" class="test_answers_list">
@@ -57,7 +57,7 @@
 					завершить тест!
 				</button>
 			</div>
-			<div class="base-timer" v-if="getTests.total_time">
+			<div class="base-timer" >
 				<svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 					<g class="base-timer__circle">
 					<circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
@@ -83,6 +83,7 @@
 	</div>
 </template>		
 <script>
+
 	const WARNING_THRESHOLD = 10;
 	const ALERT_THRESHOLD = 5;
 	const COLOR_CODES = {
@@ -122,14 +123,21 @@
 				showResult:false
 			}
 		},
+
 		async mounted(){
+			this.onTimesUp();
 			if (TokenService.getGuestInfo()) {
 				// await this.actionStartTest(TokenService.getGuestInfo())
 				this.startTimer();
 				this.userInfo = this.getTests.attestat
 				this.tests = this.getTests.result
 				this.timeLeft = this.getTests.total_time
+				// this.timeLeft = 360
 				this.TIME_LIMIT = this.getTests.total_time
+				// this.TIME_LIMIT = 360
+				this.tests.forEach(element => {
+					this.myAnswers.push({id: element.id, answer_id: false})
+				});
 			}else{
 				this.$router.push("/crm/test/start-test");
 			}
@@ -202,11 +210,17 @@
 						}
 					}	
 				})
-				this.myAnswers.push({id:parseInt(qID),answer_id:ansID})
+				// this.myAnswers.push({id:parseInt(qID),answer_id:ansID})
+				this.myAnswers.forEach(elem =>{
+					if(elem.id == parseInt(qID)){
+						elem.answer_id = ansID
+					}
+				})
 			},
 			onTimesUp(){
 				clearInterval(this.timerInterval);
 				this.timeLeft = 0
+				this.TIME_LIMIT = 0
 			},
 			chooseAnswer(id){
 				this.chosenAnswerID = id
@@ -215,11 +229,15 @@
 				this.timerInterval = setInterval(async () => {
 					this.timePassed = this.timePassed += 1;
 					this.timeLeft = this.TIME_LIMIT - this.timePassed;
-					document.getElementById("base-timer-label").innerHTML = this.formatTime(
-					this.timeLeft
-					);
-					this.setCircleDasharray();
-					this.setRemainingPathColor(this.timeLeft);
+					if(document.getElementById("base-timer-label") != null){
+						document.getElementById("base-timer-label").innerHTML = this.formatTime(
+						this.timeLeft
+						);
+						this.setCircleDasharray();
+						this.setRemainingPathColor(this.timeLeft);
+					}else{
+						this.onTimesUp();
+					}
 
 					if(this.timeLeft === 0){
 						let data = {
@@ -229,13 +247,16 @@
 						await this.actionCompleteTest(data);
 						this.onTimesUp();
 						TokenService.removeGuestInfo();
-						if (this.getComplete.success){
-							this.showResult = true
+							toast.fire({
+								type: "error",
+								icon: "error",
+								title: 'Время окончено'
+							});
 							this.items = this.getComplete
 							this.items['id'] = this.userInfo.id
 							this.onTimesUp();
 							this.$router.push("/crm/test/start-test");
-						}
+							return
 					}
 				}, 1000);
 			},

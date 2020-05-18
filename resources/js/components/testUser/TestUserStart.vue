@@ -115,7 +115,7 @@
 		},
 		async mounted(){
 			await this.actionStartUserTest(this.$route.params.userTestId)
-			if(this.getStartUserTest.error && this.getStartUserTest.message == 'completed'){
+			if(this.getStartUserTest.error && this.getStartUserTest.message == 'завершено'){
 				this.$router.push("/crm/test/test-user");
 			}else{
 				this.startTimer();
@@ -123,6 +123,9 @@
 				this.tests = this.getStartUserTest.result
 				this.timeLeft = this.getStartUserTest.total_time
 				this.TIME_LIMIT = this.getStartUserTest.total_time
+				this.tests.forEach(element => {
+					this.myAnswers.push({id: element.id, answer_id: false})
+				});
 			}
 		},
 		computed:{
@@ -190,27 +193,52 @@
 						}
 					}	
 				})
-				this.myAnswers.push({id:parseInt(qID),answer_id:ansID})
+				// this.myAnswers.push({id:parseInt(qID),answer_id:ansID})
+				this.myAnswers.forEach(elem =>{
+					if(elem.id == parseInt(qID)){
+						elem.answer_id = ansID
+					}
+				})
 			},
 			onTimesUp(){
 				clearInterval(this.timerInterval);
 				this.timeLeft = 0
+				this.TIME_LIMIT = 0
 			},
 			chooseAnswer(id){
 				this.chosenAnswerID = id
 			},
 			startTimer() {
-				this.timerInterval = setInterval(() => {
+				this.timerInterval = setInterval( async () => {
+					console.log('kirdi')
 					this.timePassed = this.timePassed += 1;
 					this.timeLeft = this.TIME_LIMIT - this.timePassed;
-					document.getElementById("base-timer-label").innerHTML = this.formatTime(
-					this.timeLeft
+					if(document.getElementById("base-timer-label") != null){
+						document.getElementById("base-timer-label").innerHTML = this.formatTime(
+						this.timeLeft
 					);
-					this.setCircleDasharray();
-					this.setRemainingPathColor(this.timeLeft);
-
-					if(this.timeLeft === 0){
+						this.setCircleDasharray();
+						this.setRemainingPathColor(this.timeLeft);
+					}else{
 						this.onTimesUp();
+					}
+					if(this.timeLeft === 0){
+						let data = {
+							attestat_id:this.userInfo.id,
+							questions:this.myAnswers
+						}
+						await this.actionCompleteTest(data);
+						this.onTimesUp();
+						TokenService.removeGuestInfo();
+						toast.fire({
+							type: "error",
+							icon: "error",
+							title: 'Время окончено'
+						});
+						this.items = this.getComplete
+						this.items['id'] = this.userInfo.id
+						this.$router.push("/crm/test/test-user");
+						return
 					}
 				}, 1000);
 			},
