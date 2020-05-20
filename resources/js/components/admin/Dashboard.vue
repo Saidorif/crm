@@ -10,7 +10,7 @@
 		  	<div class="card-body">
 	  			<div class="row">
 	  				<div class="col-md-3" v-if="loaded">
-	  					<Bar :propchartdata="this.getDashboard.ages" propLabel="Yoshi" propColor="#f87979"/>
+	  					<Bar :propchartdata="this.getDashboard.ages" propLabel="Yoshi" :propColor="['#f87979', '#b87979', '#000', 'red']"/>
 	  				</div>
 	  				<div class="col-md-3" v-if="loaded">
 	  					<Pie :propchartdata="this.getDashboard.staj" propLabel="Staj" propColor="#b87979"/>
@@ -45,7 +45,6 @@
 		async mounted(){
 			await this.actionDashboard()
 			this.loaded = true
-			console.log(this.getDashboard)
 		}
 	}
 </script>
