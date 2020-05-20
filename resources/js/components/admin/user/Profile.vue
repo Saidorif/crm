@@ -34,7 +34,7 @@
       </li>
       <li class="nav-item">
         <a
-          class="nav-link "
+          class="nav-link"
           id="contact-tab"
           data-toggle="tab"
           href="#contact"
@@ -47,31 +47,33 @@
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <form role="form" @submit.prevent.enter="sendProfile">
-          <div class="card-body d-flex flex-wrap" v-if="form.user" >
+          <div class="card-body d-flex flex-wrap" v-if="form.user">
             <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Ф.И.О</label>
-                <p class="form-control input_style disabled">{{form.user.name}}</p>
+              <div class="input_block_d_flex">
+                <div class="form-group col-md-6">
+                  <label for="name">Ф.И.О</label>
+                  <p class="form-control input_style disabled">{{form.user.name}}</p>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">E-mail</label>
+                  <p class="form-control input_style disabled">{{ form.user.email }}</p>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="name">Должность</label>
-                <p
-                  class="form-control input_style disabled"
-                >{{ form.user.position ? form.user.position.name : '' }}</p>
-              </div>
-              <div class="form-group">
-                <label for="name">E-mail</label>
-                <p class="form-control input_style disabled">{{ form.user.email }}</p>
-              </div>
-              <div class="form-group">
-                <label for="name">Образование (название,профессия,адрес)</label>
-                <p class="form-control input_style disabled">{{ form.user.text }}</p>
-              </div>
-              <div class="form-group">
-                <label for="name">Адрес</label>
-                <p class="form-control input_style disabled">{{ form.user.address }}</p>
+              <div class="input_block_d_flex">
+                <div class="form-group col-md-6">
+                  <label for="name">Должность</label>
+                  <p
+                    class="form-control input_style disabled"
+                  >{{ form.user.position ? form.user.position.name : '' }}</p>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Управления</label>
+                  <p
+                    class="form-control input_style disabled"
+                  >{{form.user.category ? form.user.category.name : ''}}</p>
+                </div>
               </div>
               <div class="input_block_d_flex">
                 <div class="form-group col-md-6">
@@ -80,8 +82,42 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name">Статус</label>
-                  <p class="form-control input_style disabled">{{ form.user.status == 'active' ? 'Активный' : 'Неактивный' }}</p>
+                  <p
+                    class="form-control input_style disabled"
+                  >{{ form.user.status == 'active' ? 'Активный' : 'Неактивный' }}</p>
                 </div>
+              </div>
+              <div class="input_block_d_flex">
+                <div class="form-group col-md-6">
+                  <label for="name">Дата с</label>
+                  <p class="form-control input_style disabled">{{ form.user.order_date }}</p>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Дата по</label>
+                  <p
+                    class="form-control input_style disabled"
+                    v-if="form.user.working"
+                  >до настоящего времени</p>
+                  <p class="form-control input_style disabled" v-else>{{ form.user.leave_date }}</p>
+                </div>
+              </div>
+                            <div class="input_block_d_flex">
+                <div class="form-group col-md-6">
+                  <label for="name">Қайси чет тилларинибилади</label>
+                  <p class="form-control input_style disabled">{{ form.user.languages }}</p>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Маълумоти бўйича мутахассислиги:</label>
+                  <p class="form-control input_style disabled">{{ form.user.education_spec }}</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Образование (название,профессия,адрес)</label>
+                <p class="form-control input_style disabled">{{ form.user.text }}</p>
+              </div>
+              <div class="form-group">
+                <label for="name">Адрес</label>
+                <p class="form-control input_style disabled">{{ form.user.address }}</p>
               </div>
             </div>
             <div class="col-md-6">
@@ -119,74 +155,81 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="name">Управления</label>
-                <p class="form-control input_style disabled">{{form.user.category ? form.user.category.name : ''}}</p>
-              </div>
+
               <div class="input_block_d_flex">
                 <div class="form-group col-md-6">
                   <label for="name">Дата рождения</label>
-                  <p
-                    class="form-control input_style disabled"
-                  >{{ form.user.birthday  }}</p>
+                  <p class="form-control input_style disabled">{{ form.user.birthday }}</p>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name">Пол</label>
-                  <p class="form-control input_style disabled">{{ form.user.gender == 'male' ? 'Мужчина' : 'Женский' }}</p>
+                  <p
+                    class="form-control input_style disabled"
+                  >{{ form.user.gender == 'male' ? 'Мужчина' : 'Женский' }}</p>
                 </div>
               </div>
               <div class="input_block_d_flex">
                 <div class="form-group col-md-6">
-                  <label for="name">Дата с</label>
-                  <p
-                    class="form-control input_style disabled"
-                  >{{ form.user.order_date }}</p>
+                  <label for="name">Нация</label>
+                  <p class="form-control input_style disabled">{{ form.user.nation }}</p>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="name">Дата по</label>
-                  <p class="form-control input_style disabled" v-if="form.user.working">до настоящего времени</p>
-                  <p class="form-control input_style disabled" v-else>{{ form.user.leave_date }}</p>
+                  <label for="name">Образование</label>
+                  <p class="form-control input_style disabled">{{ form.user.education }}</p>
                 </div>
               </div>
+              <div class="input_block_d_flex">
+                <div class="form-group col-md-6">
+                  <label for="name">Партиявийлиги</label>
+                  <p class="form-control input_style disabled">{{ form.user.partisanship }}</p>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="name">Давлат мукофотлари б-н тақдирланганми (қанақа):</label>
+                  <p class="form-control input_style disabled">{{ form.user.state_award }}</p>
+                </div>
+              </div>
+              <div class="input_block_d_flex">
+                <div class="form-group col-md-6">
+                  <label for="name">Илмий даражаси:</label>
+                  <p class="form-control input_style disabled">{{ form.user.academic_degree }}</p>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Илмий унвони:</label>
+                  <p class="form-control input_style disabled">{{ form.user.academic_sertificate }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="name">Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши депутатими ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ кўрсатилиши лозим)</label>
+              <p class="form-control input_style disabled">{{form.user.deputat}}</p>
             </div>
             <h5 class="sub_title">Трудовая деятельность</h5>
             <template v-if="form.user.experience">
               <div class="row col-md-12" v-for="(ex, index) in form.user.experience">
                 <div class="form-group col-md-3">
-                    <label for="name">Название учреждения</label>
-                    <p
-                      class="form-control input_style disabled"
-                    >{{ ex.company  }}</p>
-                  </div>
-                <div class="form-group col-md-3">
-                    <label for="name">Должность</label>
-                    <p
-                      class="form-control input_style disabled"
-                    >{{ ex.position  }}</p>
-                  </div>
-                <div class="form-group col-md-3">
-                    <label for="name">Дата с</label>
-                    <p
-                      class="form-control input_style disabled"
-                    >{{ ex.date_from  }}</p>
+                  <label for="name">Название учреждения</label>
+                  <p class="form-control input_style disabled">{{ ex.company }}</p>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="name">Дата с</label>
-                    <p
-                      class="form-control input_style disabled"
-                    >{{ ex.date_to  }}</p>
+                  <label for="name">Должность</label>
+                  <p class="form-control input_style disabled">{{ ex.position }}</p>
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="name">Дата с</label>
+                  <p class="form-control input_style disabled">{{ ex.date_from }}</p>
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="name">Дата с</label>
+                  <p class="form-control input_style disabled">{{ ex.date_to }}</p>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="name">Адрес учреждения</label>
-                    <p
-                      class="form-control input_style disabled"
-                    >{{ ex.address  }}</p>
+                  <label for="name">Адрес учреждения</label>
+                  <p class="form-control input_style disabled">{{ ex.address }}</p>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="name">Описание</label>
-                    <p
-                      class="form-control input_style disabled"
-                    >{{ ex.description  }}</p>
+                  <label for="name">Описание</label>
+                  <p class="form-control input_style disabled">{{ ex.description }}</p>
                 </div>
               </div>
             </template>
@@ -241,12 +284,17 @@
           <h4 class="cv_title">МАЪЛУМОТНОМА</h4>
           <div class="cv_header">
             <div class="cv_user_img">
-              <img :src="photoImg(form.user.image)" :alt="form.user.title" class="cv_user_img">
+              <img :src="photoImg(form.user.image)" :alt="form.user.title" class="cv_user_img" />
             </div>
             <div class="cv_header_info">
               <h2>{{ form.user.name }}</h2>
               <p>{{ form.user.address }}</p>
-              <p><b>Тел:</b> <span style="margin-right: 30px;">{{ form.user.phone }}</span>  <b>Email</b>  {{ form.user.email }} </p>
+              <p>
+                <b>Тел:</b>
+                <span style="margin-right: 30px;">{{ form.user.phone }}</span>
+                <b>Email</b>
+                {{ form.user.email }}
+              </p>
             </div>
           </div>
           <ul class="cv_body_list">
@@ -256,53 +304,56 @@
             </li>
             <li>
               <b>Туғилган жойи:</b>
-              <span>Тошкент шахар, Яшнаобод тумани</span>
+              <span>{{ form.user.address }}</span>
             </li>
             <li>
               <b>Миллати:</b>
-              <span>Узбек</span>
+              <span>{{ form.user.nation }}</span>
             </li>
             <li>
               <b>Партиявийлиги:</b>
-              <span>йўқ</span>
+              <span>{{ form.user.partisanship }}</span>
             </li>
             <li>
               <b>Маълумоти:</b>
-              <span>олий</span>
+              <span>{{ form.user.education }}</span>
             </li>
             <li>
               <b>Тамомлаган:</b>
-              <span>2016 йил – Тошкент автомобил йўллар институти, Ер усти транспортлари эксплуатацияси факултети (бакалавриат)</span>
+              <span>{{ form.user.text }}</span>
             </li>
             <li>
               <b>Маълумоти бўйича мутахассислиги:</b>
-              <span>Инженер</span>
+              <span>{{form.user.education_spec}}</span>
             </li>
             <li>
               <b>Илмий даражаси:</b>
-              <span>йўқ</span>
+              <span>{{ form.user.academic_degree }}</span>
             </li>
             <li>
               <b>Илмий унвони:</b>
-              <span>йўқ</span>
+              <span>{{ form.user.academic_sertificate }}</span>
             </li>
             <li>
               <b>Қайси чет тилларинибилади:</b>
-              <span>Рус ва Инглиз тиллари </span>
+              <span>{{ form.user.languages }}</span>
             </li>
             <li>
               <b>Давлат мукофотлари билан тақдирланганми (қанақа):</b>
-              <span>йўқ </span>
+              <span>{{ form.user.state_award }}</span>
             </li>
             <li>
               <b>Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши депутатими ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ кўрсатилиши лозим)</b>
-              <span>йўқ </span>
+              <span>{{ form.user.deputat }}</span>
             </li>
           </ul>
           <h6 class="cv_exper_subtitle">МЕҲНАТ ФАОЛИЯТИ</h6>
           <ul class="cv_experience_list">
             <li v-for="(ex, index) in form.user.experience">
-              <div class="cv_ex_date"><b>{{ex.date_from}}</b> - <b>{{ex.date_to}}</b> </div>
+              <div class="cv_ex_date">
+                <b>{{ex.date_from}}</b> -
+                <b>{{ex.date_to}}</b>
+              </div>
               <div class="cv_ex_info">
                 <p>{{ ex.company}} {{ex.address}} {{ex.description}}</p>
                 <p>-{{ex.position}}</p>
@@ -344,7 +395,7 @@ export default {
   async mounted() {
     await this.ActionProfile();
     this.form = this.getProfile;
-    console.log(this.form)
+    console.log(this.form);
   },
   methods: {
     ...mapActions("user", [
@@ -450,37 +501,132 @@ export default {
         this.requiredPassword = true;
       }
     },
-    printCv(){
-      			 	$('.cv_block').printThis();
+    printCv() {
+      $(".cv_block").printThis();
     }
   }
 };
 </script>
 <style scoped>
-.cv_tab{
+.cv_tab {
   background: #9fc1cc40;
   padding: 30px 0px;
 }
+page {
+  background: white;
+  display: block;
+  margin: 0px auto;
+  margin-bottom: 0.5cm;
+}
+page[size="A4"] {
+  width: 21cm;
+  height: 29.7cm;
+  padding: 30px;
+}
+page[size="A4"][layout="landscape"] {
+  width: 29.7cm;
+  height: 21cm;
+}
+.cv_title {
+  text-align: center;
+  font-weight: bold;
+}
+.cv_user_img {
+  width: 130px;
+  height: 150px;
+  overflow: hidden;
+  border: 1px solid #000;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.cv_user_img img {
+  width: 100%;
+}
+.cv_header {
+  display: flex;
+  align-items: flex-start;
+}
+.cv_header_info {
+  width: calc(100% - 150px);
+}
+.cv_header_info h2 {
+  font-weight: bold;
+}
+.cv_block p {
+  font-size: 16px;
+}
+.cv_header_info p {
+  margin-bottom: 0;
+}
+.cv_body_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cv_body_list li {
+  list-style: none;
+  width: 60%;
+  margin-bottom: 10px;
+}
+.cv_body_list li:nth-child(odd) {
+  width: 40%;
+}
+.cv_body_list li {
+  display: flex;
+  flex-direction: column;
+}
+.cv_body_list li:last-child {
+  width: 100%;
+}
+.cv_exper_subtitle {
+  text-align: center;
+  font-weight: bold;
+}
+.cv_experience_list {
+}
+.cv_experience_list li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+.cv_ex_date {
+  width: 220px;
+}
+.cv_experience_list li .cv_ex_info {
+  width: calc(100% - 220px);
+}
+.cv_experience_list li .cv_ex_info p {
+  margin-bottom: 0;
+}
+.print_cv {
+  position: absolute;
+  right: 0;
+  top: 120px;
+  background: #3f6ad8;
+  color: #fff;
+  padding: 10px 30px;
+  border: none;
+}
+@media print {
   page {
     background: white;
     display: block;
     margin: 0px auto;
     margin-bottom: 0.5cm;
   }
-  page[size="A4"] {  
+  page[size="A4"] {
     width: 21cm;
-    height: 29.7cm; 
+    height: 29.7cm;
     padding: 30px;
   }
   page[size="A4"][layout="landscape"] {
     width: 29.7cm;
-    height: 21cm;  
+    height: 21cm;
   }
-  .cv_title{
+  .cv_title {
     text-align: center;
     font-weight: bold;
   }
-  .cv_user_img{
+  .cv_user_img {
     width: 130px;
     height: 150px;
     overflow: hidden;
@@ -488,161 +634,63 @@ export default {
     margin-right: 30px;
     margin-bottom: 30px;
   }
-  .cv_user_img img{
+  .cv_user_img img {
     width: 100%;
   }
-  .cv_header{
+  .cv_header {
     display: flex;
     align-items: flex-start;
   }
-  .cv_header_info{
+  .cv_header_info {
     width: calc(100% - 150px);
   }
-  .cv_header_info h2{
+  .cv_header_info h2 {
     font-weight: bold;
   }
-  .cv_block p{
+  .cv_block p {
     font-size: 16px;
   }
-  .cv_header_info p{
+  .cv_header_info p {
     margin-bottom: 0;
   }
-  .cv_body_list{
+  .cv_body_list {
     display: flex;
     flex-wrap: wrap;
   }
-  .cv_body_list li{
+  .cv_body_list li {
     list-style: none;
     width: 60%;
     margin-bottom: 10px;
   }
-  .cv_body_list li:nth-child(odd){
-        width: 40%;
+  .cv_body_list li:nth-child(odd) {
+    width: 40%;
   }
-  .cv_body_list li{
+  .cv_body_list li {
     display: flex;
     flex-direction: column;
   }
-  .cv_body_list li:last-child{
+  .cv_body_list li:last-child {
     width: 100%;
   }
-  .cv_exper_subtitle{
+  .cv_exper_subtitle {
     text-align: center;
     font-weight: bold;
   }
-  .cv_experience_list{
-    
+  .cv_experience_list {
   }
-  .cv_experience_list li{
+  .cv_experience_list li {
     list-style: none;
     display: flex;
     justify-content: space-between;
   }
-  .cv_ex_date{
+  .cv_ex_date {
     width: 220px;
   }
-  .cv_experience_list li .cv_ex_info{
+  .cv_experience_list li .cv_ex_info {
     width: calc(100% - 220px);
   }
-   .cv_experience_list li .cv_ex_info p{
-     margin-bottom: 0;
-   }
-   .print_cv{
-      position: absolute;
-      right: 0;
-      top: 120px;
-      background: #3f6ad8;
-      color: #fff;
-      padding: 10px 30px;
-      border: none;
-   }
-  @media print
-    {
-      page {
-        background: white;
-        display: block;
-        margin: 0px auto;
-        margin-bottom: 0.5cm;
-      }
-      page[size="A4"] {  
-        width: 21cm;
-        height: 29.7cm; 
-        padding: 30px;
-      }
-      page[size="A4"][layout="landscape"] {
-        width: 29.7cm;
-        height: 21cm;  
-      }
-      .cv_title{
-        text-align: center;
-        font-weight: bold;
-      }
-      .cv_user_img{
-        width: 130px;
-        height: 150px;
-        overflow: hidden;
-        border: 1px solid #000;
-        margin-right: 30px;
-        margin-bottom: 30px;
-      }
-      .cv_user_img img{
-        width: 100%;
-      }
-      .cv_header{
-        display: flex;
-        align-items: flex-start;
-      }
-      .cv_header_info{
-        width: calc(100% - 150px);
-      }
-      .cv_header_info h2{
-        font-weight: bold;
-      }
-      .cv_block p{
-        font-size: 16px;
-      }
-      .cv_header_info p{
-        margin-bottom: 0;
-      }
-      .cv_body_list{
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .cv_body_list li{
-        list-style: none;
-        width: 60%;
-        margin-bottom: 10px;
-      }
-      .cv_body_list li:nth-child(odd){
-            width: 40%;
-      }
-      .cv_body_list li{
-        display: flex;
-        flex-direction: column;
-      }
-      .cv_body_list li:last-child{
-        width: 100%;
-      }
-      .cv_exper_subtitle{
-        text-align: center;
-        font-weight: bold;
-      }
-      .cv_experience_list{
-        
-      }
-      .cv_experience_list li{
-        list-style: none;
-        display: flex;
-        justify-content: space-between;
-      }
-      .cv_ex_date{
-        width: 220px;
-      }
-      .cv_experience_list li .cv_ex_info{
-        width: calc(100% - 220px);
-      }
-      .cv_experience_list li .cv_ex_info p{
-        margin-bottom: 0;
-      }
-    }
+  .cv_experience_list li .cv_ex_info p {
+    margin-bottom: 0;
+  }
+}
 </style>

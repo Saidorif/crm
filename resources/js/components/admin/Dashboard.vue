@@ -9,11 +9,25 @@
 		  	</div>
 		  	<div class="card-body">
 	  			<div class="row">
-	  				<div class="col-md-3" v-if="loaded">
-	  					<Bar :propchartdata="this.getDashboard.ages" propLabel="Yoshi" propColor="#f87979"/>
+	  				<div class="col-md-6 chartBlock" v-if="loaded" >
+						  <div class="chartBlock_item">
+	  						<Bar :propchartdata="this.getDashboard.ages" propLabel="Yoshi" :propColor="['#f09311', '#0b9ca6', '#bc1b21', '#76cac1']"/>
+						  </div>
 	  				</div>
-	  				<div class="col-md-3" v-if="loaded">
-	  					<Pie :propchartdata="this.getDashboard.staj" propLabel="Staj" propColor="#b87979"/>
+	  				<div class="col-md-6 chartBlock" v-if="loaded">
+						  <div class="chartBlock_item">
+	  						<Pie :propchartdata="this.getDashboard.staj" propLabel="Staj" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+						  </div>
+	  				</div>
+					<div class="col-md-6 chartBlock" v-if="loaded">
+						<div class="chartBlock_item">
+	  						<Pie :propchartdata="this.usersData" propLabel="Users" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+						</div>
+	  				</div>
+					<div class="col-md-6 chartBlock" v-if="loaded">
+						<div class="chartBlock_item">
+	  						<Bar :propchartdata="this.testsData" propLabel="Test" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+						</div>
 	  				</div>
 	  			</div>
 		  	</div>
@@ -34,6 +48,8 @@
 		data(){
 			return{
 				loaded: false,
+				testsData: {},
+				usersData: {},
 			}
 		},
 		computed:{
@@ -44,8 +60,31 @@
 		},
 		async mounted(){
 			await this.actionDashboard()
-			this.loaded = true
-			console.log(this.getDashboard)
+			this.getDashboard.tests.forEach((elem, key) => {
+				this.testsData[elem.status] =parseInt(elem.total)
+			});
+			this.getDashboard.users.forEach((elem, key) => {
+				this.usersData[elem.gender] =parseInt(elem.total)
+			});
+			this.loaded = true;
 		}
 	}
 </script>
+<style  scoped>
+.card{
+	box-shadow: none;
+    background-color: #f1f4f6;
+}
+.chartBlock_item{
+	    box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+		background: #fff;
+		margin-bottom: 30px;
+		padding: 30px;
+}
+.card-body{
+	padding-bottom: 0;
+}
+.card-header{
+	background: #fff;
+}
+</style>
