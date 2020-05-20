@@ -45,12 +45,12 @@
 					class="btn_next" 
 					@click.prevent="nextBtn"
 					:disabled="disabledTrue"
-					v-if="tests.length != myAnswers.length"
+					v-if="myAnswers[myAnswers.length - 1].answer_id == false"
 				>
 					следующий <span class="pe-7s-angle-right-circle"></span> 
 				</button>
 				<button 
-					v-if="tests.length == myAnswers.length"
+					v-if="myAnswers[myAnswers.length - 1].answer_id != false"
 					class="btn_finish" 
 					@click.prevent="completeTest">
 					<span class="pe-7s-display1"></span>
@@ -203,13 +203,13 @@
 				}
 			},
 			clickAnswer(qID,ansID){	
-				this.myAnswers = this.myAnswers.filter((item,index)=>{
-					if (item) {
-						if (item.id != parseInt(qID)) {
-							return item 
-						}
-					}	
-				})
+				// this.myAnswers = this.myAnswers.filter((item,index)=>{
+				// 	if (item) {
+				// 		if (item.id != parseInt(qID)) {
+				// 			return item 
+				// 		}
+				// 	}	
+				// })
 				// this.myAnswers.push({id:parseInt(qID),answer_id:ansID})
 				this.myAnswers.forEach(elem =>{
 					if(elem.id == parseInt(qID)){
