@@ -501,7 +501,7 @@ export default {
       }
     },
     photoImg(img) {
-      if(img){
+      if(img != null){
         if (img.length < 100) {
           return "/img/user.jpg";
         } else {
