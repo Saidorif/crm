@@ -28,7 +28,7 @@ Route::group([
             //User model
             Route::get('profile', 'UserController@profile');
             Route::post('change-password', 'UserController@changePasword');
-            // Route::post('user/update', 'UserController@update');
+            Route::post('user/update', 'UserController@update');
             
 
             //Employee CRUD

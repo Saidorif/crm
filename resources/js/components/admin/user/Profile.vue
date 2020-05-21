@@ -46,7 +46,7 @@
         </a>
       </li>
     </ul>
-    <div class="tab-content" id="myTabContent">
+    <div class="tab-content" id="myTabContent" v-if="form.user">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <form role="form" @submit.prevent.enter="sendProfile">
           <div class="card-body d-flex flex-wrap" v-if="form.user">
@@ -280,7 +280,7 @@
       </div>
       <div class="tab-pane fade cv_tab" id="contact" role="tabpanel" aria-labelledby="contact-tab">
         <!-- <button class="print_cv" @click="printCv()">print Cv</button> -->
-        <page size="A4" class="cv_block">
+        <div size="A4" class="cv_block">
           <h4 class="cv_title">МАЪЛУМОТНОМА</h4>
           <div class="cv_header">
             <div class="cv_user_img">
@@ -360,7 +360,7 @@
               </div>
             </li>
           </ul>
-        </page>
+        </div>
       </div>
     </div>
   </div>
@@ -413,12 +413,14 @@ export default {
       }
     },
     photoImg(img) {
-      if (img) {
+      if(img != null){
         if (img.length < 100) {
-          return "/users/" + img;
-        } else {
+          return "/users/"+img;
+        }else{
           return img;
         }
+      }else{
+        return "/img/user.jpg";
       }
     },
     changeFile(event) {
@@ -455,7 +457,7 @@ export default {
         } else {
           let reader = new FileReader();
           reader.onload = event => {
-            this.form.image = event.target.result;
+            this.form.user.image = event.target.result;
           };
           reader.readAsDataURL(file);
         }
@@ -474,8 +476,8 @@ export default {
       return this.requiredPassword && input === "";
     },
     async sendProfile() {
-      if (this.form.name && this.form.email) {
-        await this.ActionProfileUpdate(this.form);
+      if (this.form.user.name && this.form.user.email) {
+        await this.ActionProfileUpdate(this.form.user);
         toast.fire({
           type: "success",
           icon: "success",
@@ -512,18 +514,18 @@ export default {
   background: #9fc1cc40;
   padding: 30px 0px;
 }
-page {
+.cv_block {
   background: white;
   display: block;
   margin: 0px auto;
   margin-bottom: 0.5cm;
 }
-page[size="A4"] {
+.cv_block[size="A4"] {
   width: 21cm;
   height: 29.7cm;
   padding: 30px;
 }
-page[size="A4"][layout="landscape"] {
+.cv_block[size="A4"][layout="landscape"] {
   width: 29.7cm;
   height: 21cm;
 }
