@@ -35,7 +35,7 @@
         "chart.js": "^2.9.3",
         "laravel-vue-pagination": "^2.3.1",
         "material-icons": "^0.3.1",
-        "serialize-javascript": "^3.0.0",
+        "serialize-javascript": "^3.1.0",
         "sweetalert2": "^9.10.6",
         "v-toaster": "^1.0.3",
         "vue": "^2.6.11",
