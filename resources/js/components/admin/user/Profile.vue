@@ -103,11 +103,11 @@
               </div>
                             <div class="input_block_d_flex">
                 <div class="form-group col-md-6">
-                  <label for="name">Қайси чет тилларинибилади</label>
+                  <label for="name">Знает ли иностранные языки</label>
                   <p class="form-control input_style disabled">{{ form.user.languages }}</p>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="name">Маълумоти бўйича мутахассислиги:</label>
+                  <label for="name">Справочная специализация:</label>
                   <p class="form-control input_style disabled">{{ form.user.education_spec }}</p>
                 </div>
               </div>
@@ -170,7 +170,7 @@
               </div>
               <div class="input_block_d_flex">
                 <div class="form-group col-md-6">
-                  <label for="name">Нация</label>
+                  <label for="name">Национальность</label>
                   <p class="form-control input_style disabled">{{ form.user.nation }}</p>
                 </div>
                 <div class="form-group col-md-6">
@@ -180,28 +180,28 @@
               </div>
               <div class="input_block_d_flex">
                 <div class="form-group col-md-6">
-                  <label for="name">Партиявийлиги</label>
+                  <label for="name">Партийность</label>
                   <p class="form-control input_style disabled">{{ form.user.partisanship }}</p>
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="name">Давлат мукофотлари б-н тақдирланганми (қанақа):</label>
+                  <label for="name">Получал ли государственные награды (Какие):</label>
                   <p class="form-control input_style disabled">{{ form.user.state_award }}</p>
                 </div>
               </div>
               <div class="input_block_d_flex">
                 <div class="form-group col-md-6">
-                  <label for="name">Илмий даражаси:</label>
+                  <label for="name">Ученая степень:</label>
                   <p class="form-control input_style disabled">{{ form.user.academic_degree }}</p>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="name">Илмий унвони:</label>
+                  <label for="name">Ученое звание:</label>
                   <p class="form-control input_style disabled">{{ form.user.academic_sertificate }}</p>
                 </div>
               </div>
             </div>
             <div class="col-md-12">
-              <label for="name">Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши депутатими ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ кўрсатилиши лозим)</label>
+              <label for="name">Член Совета народных депутатов республики, области, города, района или член других выборных органов (указать полностью)</label>
               <p class="form-control input_style disabled">{{form.user.deputat}}</p>
             </div>
             <h5 class="sub_title">Трудовая деятельность</h5>
@@ -233,11 +233,11 @@
                 </div>
               </div>
             </template>
-            <div class="col-12 d-flex justify-content-end">
+            <!-- <div class="col-12 d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i> Сохранить
               </button>
-            </div>
+            </div> -->
           </div>
         </form>
       </div>
@@ -250,7 +250,7 @@
                 type="password"
                 class="form-control input_style"
                 id="exampleInputPassword1"
-                placeholder="Password.."
+                placeholder="Пароль.."
                 :class="isRequiredPassword(passwords.password) ? 'isRequired' : ''"
                 v-model="passwords.password"
               />
@@ -279,9 +279,9 @@
         </form>
       </div>
       <div class="tab-pane fade cv_tab" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        <!-- <button class="print_cv" @click="printCv()">print Cv</button> -->
+        <button class="print_cv" @click="printCv()">print Cv</button>
         <div size="A4" class="cv_block">
-          <h4 class="cv_title">МАЪЛУМОТНОМА</h4>
+          <h4 class="cv_title">Резюме </h4>
           <div class="cv_header">
             <div class="cv_user_img">
               <img :src="photoImg(form.user.image)" :alt="form.user.title" class="cv_user_img" />
@@ -299,55 +299,55 @@
           </div>
           <ul class="cv_body_list">
             <li>
-              <b>Туғилган йили:</b>
+              <b>Год рождения:</b>
               <span>{{ form.user.birthday }}</span>
             </li>
             <li>
-              <b>Туғилган жойи:</b>
+              <b>Место рождения:</b>
               <span>{{ form.user.address }}</span>
             </li>
             <li>
-              <b>Миллати:</b>
+              <b>Национальность:</b>
               <span>{{ form.user.nation }}</span>
             </li>
             <li>
-              <b>Партиявийлиги:</b>
+              <b>Партийность:</b>
               <span>{{ form.user.partisanship }}</span>
             </li>
             <li>
-              <b>Маълумоти:</b>
+              <b>Образование:</b>
               <span>{{ form.user.education }}</span>
             </li>
             <li>
-              <b>Тамомлаган:</b>
+              <b>Место учебы:</b>
               <span>{{ form.user.text }}</span>
             </li>
             <li>
-              <b>Маълумоти бўйича мутахассислиги:</b>
+              <b>По специальности:</b>
               <span>{{form.user.education_spec}}</span>
             </li>
             <li>
-              <b>Илмий даражаси:</b>
+              <b>Ученая степень:</b>
               <span>{{ form.user.academic_degree }}</span>
             </li>
             <li>
-              <b>Илмий унвони:</b>
+              <b>Ученое звание:</b>
               <span>{{ form.user.academic_sertificate }}</span>
             </li>
             <li>
-              <b>Қайси чет тилларинибилади:</b>
+              <b>знает ли иностранные языки ( какие, сертификат или диплом):</b>
               <span>{{ form.user.languages }}</span>
             </li>
             <li>
-              <b>Давлат мукофотлари билан тақдирланганми (қанақа):</b>
+              <b>Получал ли государственные награды (Какие):</b>
               <span>{{ form.user.state_award }}</span>
             </li>
             <li>
-              <b>Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши депутатими ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ кўрсатилиши лозим)</b>
+              <b>Член Совета народных депутатов республики, области, города, района или член других выборных органов (указать полностью)</b>
               <span>{{ form.user.deputat }}</span>
             </li>
           </ul>
-          <h6 class="cv_exper_subtitle">МЕҲНАТ ФАОЛИЯТИ</h6>
+          <h6 class="cv_exper_subtitle">ТРУДОВАЯ ДЕЯТЕЛЬНОСТЬ</h6>
           <ul class="cv_experience_list">
             <li v-for="(ex, index) in form.user.experience">
               <div class="cv_ex_date">

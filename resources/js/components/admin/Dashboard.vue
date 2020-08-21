@@ -11,22 +11,22 @@
 	  			<div class="row">
 	  				<div class="col-md-6 chartBlock" v-if="loaded" >
 						  <div class="chartBlock_item">
-	  						<Bar :propchartdata="this.getDashboard.ages" propLabel="Yoshi" :propColor="['#f09311', '#0b9ca6', '#bc1b21', '#76cac1']"/>
+	  						<Bar :propchartdata="this.getDashboard.ages" propLabel="По возрасту" :propColor="['#f09311', '#0b9ca6', '#bc1b21', '#76cac1']"/>
 						  </div>
 	  				</div>
 	  				<div class="col-md-6 chartBlock" v-if="loaded">
 						  <div class="chartBlock_item">
-	  						<Pie :propchartdata="this.getDashboard.staj" propLabel="Staj" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+	  						<Pie :propchartdata="this.getDashboard.staj" propLabel="По опыту работы" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						  </div>
 	  				</div>
 					<div class="col-md-6 chartBlock" v-if="loaded">
 						<div class="chartBlock_item">
-	  						<Pie :propchartdata="this.usersData" propLabel="Users" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+	  						<Pie :propchartdata="this.usersData" propLabel="По полу" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						</div>
 	  				</div>
 					<div class="col-md-6 chartBlock" v-if="loaded">
 						<div class="chartBlock_item">
-	  						<Bar :propchartdata="this.testsData" propLabel="Test" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+	  						<Bar :propchartdata="this.testsData" propLabel="По тесту" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						</div>
 	  				</div>
 	  			</div>
@@ -56,16 +56,25 @@
 			...mapGetters('dashboard',['getDashboard'])
 		},
 		methods:{
-			...mapActions('dashboard',['actionDashboard'])
+			...mapActions('dashboard',['actionDashboard']),
 		},
 		async mounted(){
 			await this.actionDashboard()
 			this.getDashboard.tests.forEach((elem, key) => {
-				this.testsData[elem.status] =parseInt(elem.total)
+				if(elem.status == 'complete'){
+					this.testsData['Завершено'] = parseInt(elem.total)
+				}else if(elem.status == 'fail'){
+					this.testsData['Неудавшийся'] = parseInt(elem.total)
+				}else if(elem.status == 'progress'){
+					this.testsData['Прогресс'] = parseInt(elem.total)
+				}else if(elem.status == 'start'){
+					this.testsData['Начало'] = parseInt(elem.total)
+				}
 			});
 			this.getDashboard.users.forEach((elem, key) => {
-				this.usersData[elem.gender] =parseInt(elem.total)
+				this.usersData[elem.gender == 'male' ? 'Мужчина' : 'Женщина' ] = parseInt(elem.total)
 			});
+			console.log(this.testsData)
 			this.loaded = true;
 		}
 	}
