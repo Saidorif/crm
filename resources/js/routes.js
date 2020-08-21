@@ -8,7 +8,7 @@ import store from "./store/store";
 // Dashboard component
 import Dashboard from './components/admin/Dashboard'
 import Admin from './components/admin/layouts/Admin'
-import Login from './components/auth/Login'
+import Login from './components/auth/login'
 import Profile from './components/admin/user/Profile'
 
 // Category
