@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-browser"></i>
-				    Start Test for guest 
+				    Начать тест для кандидат
 				</h4>
 		  	</div>
 		  	<div class="card-body">
@@ -50,6 +50,7 @@
 							    min="1"
 						    	class="form-control" 
 						    	id="limit" 
+						    	placeholder="Количество вопроса" 
 						    	:class="isRequired(form.limit) ? 'isRequired' : ''"  
 						    	v-model="form.limit"
 					      	/>

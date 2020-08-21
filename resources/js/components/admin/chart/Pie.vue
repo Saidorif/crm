@@ -1,5 +1,5 @@
 <template>
-	<canvas ref="canvas" height="400"></canvas>
+	<canvas ref="canvas" height="370"></canvas>
 </template>
 <script>
 import { Pie } from 'vue-chartjs'
