@@ -39,7 +39,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
              <!-- v-if="$can('profile', 'UserController')" -->
-            <router-link to="/crm/dashboard" class="nav-link">
+            <router-link to="/crm/dashboard" class="nav-link" v-if="$can('index', 'DashboardController')">
               <span class="peIcon pe-7s-rocket" style="font-size: 20px;"></span>
               <p>
                 Админ панель
@@ -47,7 +47,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/profile">
+            <router-link class="nav-link" to="/crm/profile" v-if="$can('profile', 'UserController')">
               <i class="peIcon pe-7s-user"></i>
               <p>
                 Мои данные
@@ -55,7 +55,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/test/test-user">
+            <router-link class="nav-link" to="/crm/test/test-user"  v-if="$can('userindex', 'AttestatController')">
               <i class="peIcon pe-7s-note2"></i>
               <p>
                 Тесты <span class="badge badge-warning">user</span>
@@ -63,7 +63,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/category">
+            <router-link class="nav-link" to="/crm/category" v-if="$can('index', 'TestCategoryController')">
               <span class="peIcon pe-7s-drawer" style="font-size: 20px;"></span>
               <p>
                 Управления
@@ -71,15 +71,15 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/question">
+            <router-link class="nav-link" to="/crm/question" v-if="$can('index', 'QuestionController')">
               <span class="peIcon pe-7s-note" style="font-size: 20px;"></span>
               <p>
                 Вопросы
               </p>
             </router-link>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview"  v-if="$can('list', 'TestCategoryController')">
+            <a href="#" class="nav-link" >
               <span class="peIcon pe-7s-note2" style="font-size: 20px;"></span>
               <p>
                 Тесты
@@ -104,7 +104,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/employee">
+            <router-link class="nav-link" to="/crm/employee"  v-if="$can('index', 'EmployeeController')">
               <i class="peIcon pe-7s-users"></i>
               <p>
                 Пользователи
@@ -112,14 +112,14 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/position">
+            <router-link class="nav-link" to="/crm/position" v-if="$can('index', 'PositionController')">
               <i class="peIcon pe-7s-graph1"></i>
               <p>
                 Должность
               </p>
             </router-link>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview" v-if="$can('index', 'RoleController')">
             <a href="#" class="nav-link">
               <span class="peIcon pe-7s-settings" style="font-size: 20px;"></span>
               <p>
