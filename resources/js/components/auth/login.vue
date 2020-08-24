@@ -77,11 +77,11 @@
 		            title: "Вошли в систему!"
 		          });
 		          this.$Progress.finish();
-		          // setTimeout(()=>{
-		          // 	window.location = '/crm/dashboard';
-		          // },100)
-				//   this.$router.push("/crm/dashboard");
-				  window.location.href = "/crm/dashboard";
+				 	if (TokenService.getCurrentUser().role.name == 'admin' || TokenService.getCurrentUser().role.name == 'kadr') {
+					  	window.location.href = "/crm/dashboard";
+		          	}else{
+					  	window.location.href = "/crm/profile";
+		          	}
 		        }else{
 					this.errorMsg = this.authenticationError
 				  	this.$Progress.fail();
