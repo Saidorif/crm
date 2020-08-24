@@ -1,8 +1,8 @@
 import ApiService from './api.service'
 
 const ActionService = {
-	actions(){
-		return ApiService.get(`/api/action`)
+	actions(page){
+		return ApiService.get(`/api/action?page=`+ page,)
 	},
 	addAction(data){
 		return ApiService.post(`/api/action/store`,data)

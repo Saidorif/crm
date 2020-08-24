@@ -130,23 +130,23 @@
             </div>
             <div class="input_block_d_flex">
               <div class="form-group col-md-6">
-                <label for="languages">Қайси чет тилларинибилади</label>
+                <label for="languages">Знает ли иностранные языки</label>
                 <input
                   type="text"
                   class="form-control input_style"
                   id="languages"
-                  placeholder="Қайси чет тилларинибилади.."
+                  placeholder="Знает ли иностранные языки.."
                   :class="isRequired(form.languages) ? 'isRequired' : ''"
                   v-model="form.languages"
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="state_award">Давлат мукофотлари б-н тақдирланганми (қанақа):</label>
+                <label for="state_award">Получал ли государственные награды</label>
                 <input
                   type="text"
                   class="form-control input_style"
                   id="state_award"
-                  placeholder="Давлат мукофотлари б-н тақдирланганми (қанақа):"
+                  placeholder="Получал ли государственные награды"
                   v-model="form.state_award"
                   :class="isRequired(form.state_award) ? 'isRequired' : ''"
                 />
@@ -289,23 +289,23 @@
             </div>
             <div class="input_block_d_flex">
               <div class="form-group col-md-6">
-                <label for="partisanship">Партиявийлиги:</label>
+                <label for="partisanship">Партийность:</label>
                 <input
                   type="text"
                   class="form-control input_style"
                   id="partisanship"
-                  placeholder="Партиявийлиги:"
+                  placeholder="Партийность:"
                   v-model="form.partisanship"
                   :class="isRequired(form.partisanship) ? 'isRequired' : ''"
                 />
               </div>
               <div class="form-group col-md-6" v-if="form.role_id != 3">
-                <label for="education_spec">Маълумоти бўйича мутахассислиги:</label>
+                <label for="education_spec">По специальности:</label>
                 <input
                   type="text"
                   class="form-control input_style"
                   id="education_spec"
-                  placeholder="Маълумоти бўйича мутахассислиги:"
+                  placeholder="По специальности:"
                   v-model="form.education_spec"
                   :class="isRequired(form.education_spec) ? 'isRequired' : ''"
                 />
@@ -313,23 +313,23 @@
             </div>
             <div class="input_block_d_flex">
               <div class="form-group col-md-6">
-                <label for="partiya">Илмий даражаси:</label>
+                <label for="partiya">Ученое звание:</label>
                 <input
                   type="text"
                   class="form-control input_style"
                   id="partiya"
-                  placeholder="Илмий даражаси:"
+                  placeholder="Ученое звание:"
                   v-model="form.academic_degree"
                   :class="isRequired(form.academic_degree) ? 'isRequired' : ''"
                 />
               </div>
               <div class="form-group col-md-6" v-if="form.role_id != 3">
-                <label for="academic_sertificate">Илмий унвони:</label>
+                <label for="academic_sertificate">Ученая Степень:</label>
                 <input
                   type="text"
                   class="form-control input_style"
                   id="academic_sertificate"
-                  placeholder="Илмий унвони:"
+                  placeholder="Ученая степень:"
                   v-model="form.academic_sertificate"
                   :class="isRequired(form.academic_sertificate) ? 'isRequired' : ''"
                 />
@@ -337,12 +337,12 @@
             </div>
           </div>
           <div class="col-md-12">
-            <label for="deputat">Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши депутатими ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ кўрсатилиши лозим)</label>
+            <label for="deputat">Член Совета народных депутатов республики, области, города, района или член других выборных органов (указать полностью)</label>
             <input
               type="text"
               class="form-control input_style"
               id="deputat"
-              placeholder="Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши депутатими ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ кўрсатилиши лозим)"
+              placeholder="Член Совета народных депутатов республики, области, города, района или член других выборных органов (указать полностью)"
               v-model="form.deputat"
               :class="isRequired(form.deputat) ? 'isRequired' : ''"
             />

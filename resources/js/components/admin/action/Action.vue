@@ -24,7 +24,7 @@
 						<tr v-for="(cont,index) in getActions.data">
 							<td scope="row">{{index+1}}</td>
 							<td>{{cont.name}}</td>
-							<td>controller</td>
+							<td>{{cont.controller.name}}</td>
 							<td>{{cont.code}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/action/edit/${cont.id}`'>
@@ -52,7 +52,10 @@
 			}
 		},
 		async mounted(){
-			await this.actionActions()
+			let page = 1;
+			await this.actionActions(page)
+			console.log(this.getActions)
+
 		},
 		computed:{
 			...mapGetters('action',['getActions','getMassage'])
@@ -62,6 +65,7 @@
 			async getResults(page = 1){ 
 				await this.actionActions(page)
 			},
+
 		}
 	}
 </script>

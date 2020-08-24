@@ -78,126 +78,242 @@ const router = new Router({
 				{
 					path:'dashboard',
 					component:Dashboard,
-					// meta:{
-					// 	action:'index',
-					// 	subject:'IndexController'
-					// }
+					meta:{
+						action:'index',
+						subject:'DashboardController'
+					}
 				},
 				{
 					path:'profile',
 					component:Profile,
+					meta:{
+						action:'profile',
+						subject:'UserController'
+					}
 				},
 				{
 					path:'category',
 					component:Category,
+					meta:{
+						action:'index',
+						subject:'TestCategoryController'
+					}
 				},
 				{
 					path:'category/add',
 					component:AddCategory,
+					meta:{
+						action:'store',
+						subject:'TestCategoryController'
+					}
 				},
 				{
 					path:'category/edit/:categoryId',
 					component:EditCategory,
+					meta:{
+						action:'edit',
+						subject:'TestCategoryController'
+					}
 				},
 				{
 					path:'employee',
 					component:Employee,
+					meta:{
+						action:'index',
+						subject:'EmployeeController'
+					}
 				},
 				{
 					path:'employee/add',
 					component:AddEmployee,
+					meta:{
+						action:'store',
+						subject:'EmployeeController'
+					}
 				},
 				{
 					path:'employee/edit/:employeeId',
 					component:EditEmployee,
+					meta:{
+						action:'edit',
+						subject:'EmployeeController'
+					}
 				},
 				{
 					path:'question',
 					component:Question,
+					meta:{
+						action:'index',
+						subject:'QuestionController'
+					}
 				},
 				{
 					path:'question/add',
 					component:AddQuestion,
+					meta:{
+						action:'store',
+						subject:'QuestionController'
+					}
 				},
 				{
 					path:'question/edit/:questionId',
 					component:EditQuestion,
+					meta:{
+						action:'edit',
+						subject:'QuestionController'
+					}
 				},
 				{
 					path:'role',
 					component:Role,
+					meta:{
+						action:'index',
+						subject:'RoleController'
+					}
 				},
 				{
 					path:'role/add',
 					component:AddRole,
+					meta:{
+						action:'store',
+						subject:'RoleController'
+					}
 				},
 				{
 					path:'role/edit/:roleId',
 					component:EditRole,
+					meta:{
+						action:'store',
+						subject:'RoleController'
+					}
 				},
 				{
 					path:'role/:roleId',
 					component:Permission,
+					meta:{
+						action:'edit',
+						subject:'RoleController'
+					}
 				},
 				{
 					path:'position',
 					component:Position,
+					meta:{
+						action:'index',
+						subject:'PositionController'
+					}
 				},
 				{
 					path:'position/add',
 					component:AddPosition,
+					meta:{
+						action:'store',
+						subject:'PositionController'
+					}
 				},
 				{
 					path:'position/edit/:positionId',
 					component:EditPosition,
+					meta:{
+						action:'edit',
+						subject:'PositionController'
+					}
 				},
 				{
 					path:'test/test-for-guest',
 					component:ForGuest,
+					meta:{
+						action:'startTestUser',
+						subject:'AttestatController'
+					}
 				},
 				{
 					path:'test/start-test',
 					component:StartTest,
+					meta:{
+						action:'attestat',
+						subject:'AttestatController'
+					}
 				},
 				{
 					path:'test/list',
 					component:TestList,
+					meta:{
+						action:'list',
+						subject:'TestCategoryController'
+					}
 				},
 				{
 					path:'test/test-result/:showTestId',
 					component:ShowTestResult,
+					meta:{
+						action:'list',
+						subject:'TestCategoryController'
+					}
 				},
 				{
 					path:'test/test-user',
 					component:TestUser,
+					meta:{
+						action:'list',
+						subject:'AttestatController'
+					}
 				},
 				{
 					path:'test/test-user-start/:userTestId',
 					component:TestUserStart,
+					meta:{
+						action:'list',
+						subject:'TestCategoryController'
+					}
 				},
 				{
 					path:'conts',
 					component:Conts,
+					meta:{
+						action:'index',
+						subject:'ContsController'
+					}
 				},
 				{
 					path:'conts/add',
 					component:AddConts,
+					meta:{
+						action:'store',
+						subject:'ContsController'
+					}
 				},
 				{
 					path:'conts/edit/:contId',
 					component:EditConts,
+					meta:{
+						action:'edit',
+						subject:'ContsController'
+					}
 				},
 				{
 					path:'action',
 					component:Action,
+					meta:{
+						action:'index',
+						subject:'ActionController'
+					}
 				},
 				{
 					path:'action/add',
 					component:AddAction,
+					meta:{
+						action:'store',
+						subject:'ActionController'
+					}
 				},
 				{
 					path:'action/edit/:actionId',
 					component:EditAction,
+					meta:{
+						action:'edit',
+						subject:'ActionController'
+					}
 				},
 			]
 		},
