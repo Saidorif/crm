@@ -4,7 +4,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-drawer"></i>
-				    Управления 
+				    Направления 
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/category/add"><i class="fas fa-plus"></i> Добавить</router-link>
 		  	</div>
