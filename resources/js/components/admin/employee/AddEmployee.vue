@@ -24,19 +24,16 @@
               />
             </div>
             <div class="form-group" v-if="form.role_id != 3">
-              <label for="positon">Должность</label>
-              <select
-                class="form-control"
-                :class="isRequired(form.position_id) ? 'isRequired' : '' "
-                id="positon"
-                v-model="form.position_id"
-              >
-                <option value selected disabled>Выберите Должность</option>
-                <option
-                  :value="position.id"
-                  v-for="(position,index) in getPositionList"
-                >{{position.name}}</option>
-              </select>
+              <label for="position">Должность</label>
+              <input 
+                type="text"
+                 name="position" 
+                 placeholder="Должность..." 
+                 v-model="position" 
+                 class="form-control"
+                 :class="isRequired(form.position) ? 'isRequired' : '' "
+                 id="position"
+               >
             </div>
             <div class="input_block_d_flex">
               <div class="form-group col-md-6">
@@ -454,7 +451,7 @@ export default {
         category_id: "",
         address: "",
         role_id: "",
-        position_id: "",
+        position: "",
         phone: "",
         image: "",
         file: "",
@@ -476,19 +473,19 @@ export default {
   async mounted() {
     await this.actionRoleList();
     await this.actionCategoryList();
-    await this.actionPositionList();
+    // await this.actionPositionList();
   },
   computed: {
     ...mapGetters("employee", ["getMassage"]),
     ...mapGetters("role", ["getRoleList"]),
     ...mapGetters("category", ["getCategories"]),
-    ...mapGetters("position", ["getPositionList"])
+    // ...mapGetters("position", ["getPositionList"])
   },
   methods: {
     ...mapActions("category", ["actionCategoryList"]),
     ...mapActions("role", ["actionRoleList"]),
     ...mapActions("employee", ["actionAddEmployee", "actionCheckEmail"]),
-    ...mapActions("position", ["actionPositionList"]),
+    // ...mapActions("position", ["actionPositionList"]),
     confirmPassword() {
       if (this.form.password && this.form.confirm_password) {
         if (this.form.password != this.form.confirm_password) {
