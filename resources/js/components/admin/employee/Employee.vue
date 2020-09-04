@@ -28,7 +28,7 @@
 	  								v-model="filter.name"
   								>
 				  			</div>
-  					  		<div class="form-group col-lg-3">
+  					<!--   		<div class="form-group col-lg-3">
 	  							<label for="category_id">Должность</label>
   								<select name="" v-model="filter.position_id" class="form-control" >
   									<option value="">Выберите должность!</option>
@@ -36,7 +36,7 @@
   										{{position.name}}
   									</option>
   								</select>
-				  			</div>	
+				  			</div>	 -->
   					  		<div class="form-group col-lg-3">
 	  							<label for="category_id">Направления</label>
   								<select name="" v-model="filter.category_id" class="form-control" >
@@ -77,7 +77,7 @@
 						<tr v-for="(item,index) in getEmployees.data">
 							<td scope="row">{{index+1}}</td>
 							<td>{{item.name}}</td>
-							<td>{{item.position ? item.position.name : ''}}</td>
+							<td>position</td>
 							<td>{{item.role ? item.role.name : ''}}</td>
 							<td>{{item.category ? item.category.name : ''}}</td>
 							<td>{{item.email}}</td>
@@ -107,7 +107,7 @@
 				filter:{
 					name:'',
 					category_id:'',
-					position_id:'',
+					// position_id:'',
 				},
 				filterShow:false,
 			}
@@ -116,17 +116,17 @@
 			let page = 1;
 			await this.actionEmployees({page:page,items:this.filter})
 			await this.actionCategoryList()
-			await this.actionPositionList()
+			// await this.actionPositionList()
 		},
 		computed:{
 			...mapGetters('employee',['getEmployees']),
 			...mapGetters('category',['getCategories']),
-			...mapGetters('position',['getPositionList'])
+			// ...mapGetters('position',['getPositionList'])
 		},
 		methods:{
 			...mapActions('category',['actionCategoryList']),
 			...mapActions('employee',['actionEmployees','actionDeleteEmployee']),
-			...mapActions('position',['actionPositionList']),
+			// ...mapActions('position',['actionPositionList']),
 			async getResults(page = 1){ 
 				await this.actionEmployees({page:page,items:this.filter})
 			},

@@ -116,14 +116,14 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <router-link class="nav-link" to="/crm/position" v-if="$can('index', 'PositionController')">
               <i class="peIcon pe-7s-graph1"></i>
               <p>
                 Должность
               </p>
             </router-link>
-          </li>
+          </li> -->
           <li class="nav-item has-treeview" v-if="$can('index', 'RoleController')">
             <a href="#" class="nav-link">
               <span class="peIcon pe-7s-settings" style="font-size: 20px;"></span>
