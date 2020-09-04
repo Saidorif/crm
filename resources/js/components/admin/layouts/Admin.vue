@@ -66,7 +66,7 @@
             <router-link class="nav-link" to="/crm/category" v-if="$can('index', 'TestCategoryController')">
               <span class="peIcon pe-7s-drawer" style="font-size: 20px;"></span>
               <p>
-                Управления
+                Направления
               </p>
             </router-link>
           </li>
