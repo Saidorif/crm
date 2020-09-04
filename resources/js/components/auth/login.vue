@@ -2,10 +2,10 @@
 	<div class="card lognCard">
 	    <div class="card-body login-card-body">
 			<div class="login_alert" v-if="errorMsg"><i class="fas fa-exclamation-circle mr-2"></i> Неверный логин  или пароль </div>
-			<div class="form_content">
-				<div class="login_logo">
+			<div class="form_content pt-4">
+				<!-- <div class="login_logo">
 					<img src="/logo.png">
-				</div>
+				</div> -->
 				<p class="login_title"> Вход в персональный кабинет</p>
 				<form @submit.enter.prevent="onSubmit">
 					<div class="input-group">
@@ -35,7 +35,7 @@
 						</div> -->
 						<!-- /.col -->
 						<div class="col-12">
-							<button type="submit" class="btn btn-primary btn-block">Войти</button>
+							<button type="submit" class="btn btn-primary btn-block"> {{$t('enter')}}</button>
 						</div>
 						<!-- /.col -->
 					</div>

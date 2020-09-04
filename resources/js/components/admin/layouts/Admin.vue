@@ -13,7 +13,10 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2"></i> Выйти</a>
+        <LangSwitcher />
+      </li>
+      <li class="nav-item">
+        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2"></i>{{ $t('logout') }} </a>
       </li>
     </ul>
   </nav>
@@ -23,8 +26,9 @@
   <aside class="main-sidebar">
     <!-- Brand Logo -->
     <router-link class="brand-link" to="/crm">
-      <span class="brand-text font-weight-light">
-        <img src="/logo.png">
+      <span class="brand-text font-weight-light logoText">
+        <!-- <img src="/logo.png"> -->
+        TEST
       </span>
     </router-link>
 
@@ -42,7 +46,7 @@
             <router-link to="/crm/dashboard" class="nav-link" v-if="$can('index', 'DashboardController')">
               <span class="peIcon pe-7s-rocket" style="font-size: 20px;"></span>
               <p>
-                Админ панель
+                {{ $t('admin_menu.admin_panel') }}
               </p>
             </router-link>
           </li>
@@ -50,7 +54,8 @@
             <router-link class="nav-link" to="/crm/profile" v-if="$can('profile', 'UserController')">
               <i class="peIcon pe-7s-user"></i>
               <p>
-                Мои данные
+                
+                {{ $t('admin_menu.my_info') }}
               </p>
             </router-link>
           </li>
@@ -58,7 +63,7 @@
             <router-link class="nav-link" to="/crm/test/test-user"  v-if="$can('userindex', 'AttestatController')">
               <i class="peIcon pe-7s-note2"></i>
               <p>
-                Тесты <span class="badge badge-warning">user</span>
+                {{ $t('admin_menu.tests') }}  <span class="badge badge-warning">user</span>
               </p>
             </router-link>
           </li>
@@ -186,9 +191,11 @@
 <script>
   import { mapActions, mapGetters } from "vuex";
   import {TokenService} from './../../../services/storage.service'
+  	import LangSwitcher from '../../LangSwitcher'
 export default {
-  components: {
-  },
+		components:{
+			LangSwitcher
+		},
   data(){
     return {
       
@@ -213,5 +220,10 @@ export default {
 </script>
 
 <style scoped>
-
+  .logoText{
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+    color: #000;
+  }
 </style>

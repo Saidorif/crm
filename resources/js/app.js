@@ -40,6 +40,9 @@ import store from "./store/store"
 // Vue pagination
 Vue.component('pagination', require('laravel-vue-pagination'));
 
+// lang
+import i18n from './i18n'
+
 // Sweetalert2
 import swal from 'sweetalert2';
 window.swal = swal;
@@ -72,6 +75,7 @@ if (TokenService.getToken()) {
 const app = new Vue({
     el: '#app',
     router,
+    i18n,
     components:{
       Master,
     },
