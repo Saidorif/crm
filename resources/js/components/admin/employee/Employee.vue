@@ -12,7 +12,7 @@
 						    <i class="fas fa-filter"></i>
 			            	Филтр
 						</button>
-						<router-link class="btn btn-primary" to="/crm/employee/add"><i class="fas fa-plus"></i> Добавить</router-link>
+						<router-link class="btn btn-primary" to="/crm/employee/add"><i class="fas fa-plus"></i>Добавить</router-link>
 		            </div>
 		  		</div>
 		    	<transition name="slide">
