@@ -11,54 +11,50 @@
 			  <form @submit.prevent.enter="startTest" >
 					<div class="row">
 						<div class="form-group col-md-6">
-						    <label for="status">Типы</label>
-						    <select 
-						    	class="form-control" 
-						    	id="status" 
-						    	v-model="form.type">
-						      <option :value="type.type" v-for="(type,index) in types">	
-						      	{{type.name}}
-						      </option>
-						    </select>
+							<label class="typo__label">Tagging</label>
+							<multiselect 
+								v-model="form.category_id" 
+								placeholder="Выберите направление" 
+								label="name" 
+								track-by="name" 
+								:options="getCategories" 
+								:multiple="true" 
+								:taggable="true" 
+								selectLabel=""
+							></multiselect>
 					  	</div>
-						<div class="form-group col-md-6" v-if="form.type == 'guest'">
-						    <label for="categoryName">Ф.И.О</label>
+						<div class="form-group col-md-6">
+						    <label for="fio">Ф.И.О</label>
 						    <input 
 						    	type="text" 
 						    	class="form-control input_style" 
-						    	id="categoryName" 
+						    	id="fio" 
 						    	placeholder="Ф.И.О"
 						    	v-model="form.fio"
 						    	:class="isRequired(form.fio) ? 'isRequired' : ''"  
 					    	>
 					  	</div>
 						<div class="form-group col-md-6">
-						    <label for="category">Направления</label>
-						    <select 
-						    	class="form-control" 
-						    	id="category" 
-						    	:class="isRequired(form.category_id) ? 'isRequired' : ''"  
-						    	v-model="form.category_id">
-						      <option value="" selected disabled>Выберите направление</option>
-						      <option :value="category.id" v-for="(category,index) in getCategories">{{category.name}}</option>
-						    </select>
+						    <label for="birthday">Туғулган вақти</label>
+							<date-picker v-model="form.date_birth" valueType="format" :class="isRequired(form.date_birth) ? 'isRequired' : ''" ></date-picker>
+					  	</div>
+						<div class="form-group col-md-6 double_input">
+						    <label for="passport">Паспорт серияси, рақами </label>
+							<input type="text" class="form-control input_style"  v-model="form.pasport_seriya"  :class="isRequired(form.pasport_seriya) ? 'isRequired' : ''" >
+							<input type="text" class="form-control input_style"  v-model="form.pasport_number" :class="isRequired(form.pasport_number) ? 'isRequired' : ''"  >
 					  	</div>
 						<div class="form-group col-md-6">
-						    <label for="limit">Количество вопроса</label>
-						    <input 
-							    type="number"
-							    min="1"
-						    	class="form-control" 
-						    	id="limit" 
-						    	placeholder="Количество вопроса" 
-						    	:class="isRequired(form.limit) ? 'isRequired' : ''"  
-						    	v-model="form.limit"
-					      	/>
+						    <label for="phoneNum">Телефон рақами </label>
+							<input type="text" class="form-control input_style"  v-model="form.phone"  :class="isRequired(form.phone) ? 'isRequired' : ''" >
 					  	</div>
-				  		<div class="form-group col-lg-6 form_btn">
-						  	<button type="submit" class="btn btn-primary btn_save_category">
-						  		<i class="far fa-play-circle"></i>
-							  	начать тест
+						<div class="form-group col-md-6">
+						    <label for="position">Лавозим</label>
+							<input type="text" class="form-control input_style"  v-model="form.position"  :class="isRequired(form.position) ? 'isRequired' : ''">
+					  	</div>
+				  		<div class="form-group col-lg-12 form_btn">
+						  	<button type="submit" class="btn btn-primary btn_save_category btn_start_test">
+						  		<i class="pe-7s-play"></i>
+							  	Начать тест
 							</button>	
 				  	  	</div>
 					</div>
@@ -70,19 +66,24 @@
 <script>
 	import {mapActions, mapGetters} from 'vuex'
 	import {TokenService} from './../../services/storage.service'
+	import Multiselect from 'vue-multiselect'
+	import DatePicker from 'vue2-datepicker';
 	export default{
+		components: {
+			Multiselect,
+			DatePicker
+		},
 		data(){
 			return{
 				form:{
-					category_id:'',
+					category_id:[],
 					fio:'',
-					limit:'',
-					type:'employee',
+					date_birth: '',
+					pasport_seriya: '',
+					pasport_number: '',
+					phone: '',
+					position: '',
 				},
-				types:[
-					{'name':'Кандидат','type':'guest'},
-					{'name':'Сотрудник','type':'employee'},
-				],
 				requiredInput:false,
 			}
 		},
@@ -90,9 +91,7 @@
 			...mapGetters('test',['getTests','getMassage']),
 			...mapGetters('category',['getCategories']),
 			checkInputs(){
-				if (this.form.type == 'guest' && this.form.category_id && this.form.fio &&  this.form.limit) {
-					return true
-				}else if(this.form.type == 'employee' && this.form.category_id &&  this.form.limit){
+				if(this.form.category_id &&  this.form.fio &&  this.form.date_birth  &&  this.form.pasport_seriya  &&  this.form.pasport_number &&  this.form.phone &&  this.form.position){
 					return true
 				}else{
 					return false
@@ -107,11 +106,20 @@
 			...mapActions('test',['actionStartTest']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
-		    },
+			},
+			toggleUnSelect({ value, id }) {
+				this.form.category_id = this.form.category_id.filter(element => {
+					 return element.id != id;
+				});
+			},
+			addTag(){
+				console.log()
+			},
 		    async startTest(){
 		    	if (this.checkInputs) {
 		    		await this.actionStartTest(this.form)
-		    		TokenService.saveGuestInfo(this.form)
+					TokenService.saveGuestInfo(this.form)
+					console.log('ss')
 		    		if (this.form.type == 'employee'){
 		    			toast.fire({
 							type: "success",
@@ -146,5 +154,37 @@
 	}
 </script>
 <style scoped>
-	
+	.double_input{
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.double_input .input_style:nth-child(2){
+		width: 60px;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border-right: none;
+	}
+	.double_input .input_style:nth-child(3){
+		width: calc(100% - 60px);
+		border-top-left-radius: 0px;
+		border-bottom-left-radius: 0px;
+	}
+	.double_input label{
+		width: 100%;
+	}
+	.btn_start_test{
+		margin-left: auto;
+		font-size: 26px;
+		height: 50px;
+		margin-right: auto;
+		font-weight: bold;
+		margin-top: 20px;
+		border-width: 2px;
+		display: flex;
+    	align-items: center;
+	}
+	.btn_start_test i{
+		font-size: 30px;
+		margin-right: 10px;
+	}
 </style>
