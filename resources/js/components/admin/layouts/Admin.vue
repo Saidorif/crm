@@ -71,7 +71,7 @@
             <router-link class="nav-link" to="/crm/category" v-if="$can('index', 'TestCategoryController')">
               <span class="peIcon pe-7s-drawer" style="font-size: 20px;"></span>
               <p>
-                Направления
+                {{ $t('admin_menu.directions') }}
               </p>
             </router-link>
           </li>
@@ -79,7 +79,8 @@
             <router-link class="nav-link" to="/crm/question" v-if="$can('index', 'QuestionController')">
               <span class="peIcon pe-7s-note" style="font-size: 20px;"></span>
               <p>
-                Вопросы
+                
+                {{ $t('admin_menu.questions') }}
               </p>
             </router-link>
           </li>
@@ -87,7 +88,7 @@
             <a href="#" class="nav-link" >
               <span class="peIcon pe-7s-note2" style="font-size: 20px;"></span>
               <p>
-                Тесты
+                 {{ $t('admin_menu.tests') }}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -95,14 +96,14 @@
               <li class="nav-item">
                 <router-link class="nav-link" to="/crm/test/start-test">
                   <p>
-                    Создать тест
+                     {{ $t('admin_menu.create_test') }}
                   </p>
                 </router-link>
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" to="/crm/test/list">
                   <p>
-                    Список теста
+                    {{ $t('admin_menu.test_list') }}
                   </p>
                 </router-link>
               </li>
@@ -112,7 +113,7 @@
             <router-link class="nav-link" to="/crm/employee"  v-if="$can('index', 'EmployeeController')">
               <i class="peIcon pe-7s-users"></i>
               <p>
-                Пользователи
+                {{ $t('admin_menu.employee') }} 
               </p>
             </router-link>
           </li>
@@ -128,7 +129,7 @@
             <a href="#" class="nav-link">
               <span class="peIcon pe-7s-settings" style="font-size: 20px;"></span>
               <p>
-                Setting users
+                {{ $t('admin_menu.settings') }}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
