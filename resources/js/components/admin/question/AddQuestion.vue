@@ -85,7 +85,7 @@
 						<div class="form-group col-lg-12 d-flex justify-content-end">
 							<button type="button" class="btn btn-secondary mr-3" @click="addAnswer">
 				  		 		<i class="fas fa-plus"></i>
-				  		 		Добавить ответ
+				  		 		Добавить вопрос
 				  		 	</button>
 					  	    <button type="submit" class="btn btn-primary btn_save_category">
 						  		<i class="fas fa-save"></i>
