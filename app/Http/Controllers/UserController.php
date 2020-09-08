@@ -14,7 +14,7 @@ class UserController extends Controller
     public function profile(Request $request)
     {
         $user = $request->user();
-        $employee = User::with(['role','position','experience','category'])->find($user->id);
+        $employee = User::with(['role'])->find($user->id);
         $pers = [];
         $permissions = Permission::where(['role_id' => $user->role->id])->with(['controller', 'action'])->get();
         foreach($permissions as $k => $permission){
@@ -53,13 +53,11 @@ class UserController extends Controller
     {
         $user = $request->user();
         $validator = Validator::make($request->all(), [
-            'name'        => 'required|string',
-            'email'       => 'required|email|unique:users,email,'.$user->id,
-            'role_id'     => 'required|integer',
-            'phone'       => 'string|nullable',
-            'address'     => 'string|nullable',
-            'text'        => 'string|nullable',
-            'category_id' => 'integer|nullable',
+            'name'     => 'required|string',
+            'email'    => 'required|email|unique:users,email,'.$user->id,
+            'role_id'  => ['required',Rule::in([2, 3,4]),],
+            'position' => 'required|string',
+            'image'    => 'string|nullable',
         ]);
 
         if($validator->fails()){
@@ -83,25 +81,7 @@ class UserController extends Controller
         else{
             $name = $user->image;
         }
-
-        if ($request->file != $user->file) {
-            $strposFile = strpos($request->file,';');
-            $subFile = substr($request->file, 0,$strposFile);
-            $exFile = explode('/',$subFile)[1];
-            $nameFile = time()."file.".$exFile;
-            $imgFile = Image::make($request->file);
-            $file_path = public_path()."/users/";
-            $imgFile->save($file_path.$nameFile);
-            $imageFile = $file_path.$user->file;
-            if (file_exists($imageFile)) {
-                @unlink($imageFile);
-            }
-        }
-        else{
-            $nameFile = $user->file;
-        }
         $inputs['image'] = $name;
-        $inputs['file'] = $nameFile;
         unset($inputs['password']);
         $user->update($inputs);
         return response()->json(['success' => true, 'result' => $user]);

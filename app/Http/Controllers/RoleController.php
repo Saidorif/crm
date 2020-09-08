@@ -17,7 +17,7 @@ class RoleController extends Controller
 
     public function list()
     {
-        $roles = Role::all();
+        $roles = Role::where('name', '!=','admin')->get();
         return response()->json(['success' => true, 'result' => $roles]);
     }
 

@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','address','role_id','phone','image','file','text','category_id','position_id','birthday','working','order_date','leave_date','status','gender','nation','education','education_spec','academic_degree','languages','partisanship','academic_sertificate','state_award','deputat'
+        'name', 'email', 'password','role_id','image','position','status',
     ];
 
     /**
@@ -62,19 +62,6 @@ class User extends Authenticatable implements JWTSubject
     public function role()
     {
         return $this->belongsTo(\App\Role::class, 'role_id');
-    }
-
-    public function position(){
-        return $this->belongsTo(Position::class);
-    }
-
-    public function category(){
-        return $this->belongsTo(TestCategory::class);
-    }
-
-    public function experience()
-    {
-        return $this->hasMany(\App\UserExperience::class,'user_id');
     }
 
     public function getAge()

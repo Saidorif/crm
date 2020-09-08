@@ -33,7 +33,10 @@ class TestCategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'   => 'required|string',
-            'status' => 'string|nullable'
+            'status' => 'string|nullable',
+            'qty' => 'string|required',
+            'score' => 'string|required',
+            'time' => 'string|required',
         ]);
 
         if($validator->fails()){
@@ -52,8 +55,11 @@ class TestCategoryController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|string',
-            'status' => 'string|nullable'
+            'name'   => 'required|string',
+            'status' => 'string|nullable',
+            'qty' => 'string|required',
+            'score' => 'string|required',
+            'time' => 'string|required',
         ]);
 
         if($validator->fails()){

@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
             'name' => 'Muhammadamin',
             'email' => 'mirxan@mail.ru',
             'role_id' => 1,
-            'gender' => 'male',
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now(),
