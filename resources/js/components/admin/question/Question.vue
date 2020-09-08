@@ -3,7 +3,7 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i data-v-956a9a24="" class="peIcon pe-7s-note"></i>
+			    	<i class="peIcon pe-7s-note"></i>
 				    Вопросы
 				</h4>
 				<router-link class="btn btn-primary" to="/crm/question/add"><i class="fas fa-plus"></i> Добавить</router-link>
