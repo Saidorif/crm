@@ -8,18 +8,16 @@
     },
     "admin_menu": {
         "admin_panel": "Administrator paneli",
-        "my_requests":"So'rovnomalarim",
         "change_pass":"Parolni o'zgartirish",
-        "my_payments":"To'lovlarim",
-        "my_license":"Litsenziyalarim",
-        "license_list":"Litsenziyalar ro'yxati",
-        "requests":"So'rovnomalar",
-        "payments":"To'lovlar",
-        "employee":"Xodimlar",
+        "employee":"Foydalanuvchilar",
         "position":"Lavozim",
         "settings":"Sozlamalar",
         "setting":"Sozlama",
         "my_info":"Ma'lumotlarim",
+        "directions":"Yo'nalishlar",
+        "questions":"Savollar",
+        "create_test":"Test yaratish",
+        "test_list":"Testlar ro'yxati",
         "tests":"Testlar"
     },
     "user":{
