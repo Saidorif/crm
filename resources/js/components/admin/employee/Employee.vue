@@ -67,7 +67,7 @@
 							<th scope="col">Ф.И.О</th>
 							<th scope="col">Должность</th>
 							<th scope="col">Рол</th>
-							<th scope="col">Управления</th>
+							<th scope="col">Направления</th>
 							<th scope="col">E-mail</th>
 							<th scope="col">Телефон</th>
 							<th scope="col">Действия</th>

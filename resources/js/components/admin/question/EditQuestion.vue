@@ -49,7 +49,7 @@
 				  		<h3>Ответы</h3>
 			  		 	<button type="button" class="btn btn-primary" @click="addAnswer">
 			  		 		<i class="fas fa-plus"></i> Добавить ответ
-				  		 </button>
+			  		 	</button>
 				  	</div>
 			  		<div class="row align-items-end" v-for="(answer,index) in form.variants">
 					  <div class="form-group col-md-6">
@@ -107,7 +107,7 @@
 					variants:[
 						{
 							title:'',is_true:0
-						}
+						},
 					],
 				},
 				requiredInput:false

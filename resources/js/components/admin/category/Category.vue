@@ -15,6 +15,9 @@
 						<tr>
 							<th scope="col">№</th>
 							<th scope="col">Название</th>
+							<th scope="col">Количество</th>
+							<th scope="col">Время</th>
+							<th scope="col">Балл</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
@@ -22,6 +25,9 @@
 						<tr v-for="(item,index) in getCategoryList.data">
 							<td scope="row">{{index + 1}}</td>
 							<td>{{item.name}}</td>
+							<td>{{item.qty}}</td>
+							<td>{{item.time}}</td>
+							<td>{{item.score}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/category/edit/${item.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
@@ -43,9 +49,7 @@
 	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		data(){
-			return{
-				
-			}
+			return{}
 		},
 		computed:{
 			...mapGetters('category',['getCategoryList'])
