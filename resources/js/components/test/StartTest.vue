@@ -11,7 +11,7 @@
 			  <form @submit.prevent.enter="startTest" >
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label class="typo__label">Tagging</label>
+							<label class="typo__label">Направление</label>
 							<multiselect 
 								v-model="form.category_id" 
 								placeholder="Выберите направление" 
@@ -40,16 +40,16 @@
 					  	</div>
 						<div class="form-group col-md-6 double_input">
 						    <label for="passport">Паспорт серияси, рақами </label>
-							<input type="text" class="form-control input_style"  v-model="form.pasport_seriya"  :class="isRequired(form.pasport_seriya) ? 'isRequired' : ''" >
-							<input type="text" class="form-control input_style"  v-model="form.pasport_number" :class="isRequired(form.pasport_number) ? 'isRequired' : ''"  >
+							<input type="text" class="form-control input_style"  v-model="form.pasport_seriya"  :class="isRequired(form.pasport_seriya) ? 'isRequired' : ''" maxlength="2">
+							<input type="text" pattern="\d*" maxlength="7" class="form-control input_style"  v-model="form.pasport_number" :class="isRequired(form.pasport_number) ? 'isRequired' : ''"  >
 					  	</div>
 						<div class="form-group col-md-6">
 						    <label for="phoneNum">Телефон рақами </label>
-							<input type="text" class="form-control input_style"  v-model="form.phone"  :class="isRequired(form.phone) ? 'isRequired' : ''" >
+							<input type="text" class="form-control input_style"  v-model="form.phone"  :class="isRequired(form.phone) ? 'isRequired' : ''" placeholder="+998901234567" >
 					  	</div>
 						<div class="form-group col-md-6">
 						    <label for="position">Лавозим</label>
-							<input type="text" class="form-control input_style"  v-model="form.position"  :class="isRequired(form.position) ? 'isRequired' : ''">
+							<input type="text" class="form-control input_style"  v-model="form.position"  :class="isRequired(form.position) ? 'isRequired' : ''" placeholder="Лавозимни киритинг">
 					  	</div>
 				  		<div class="form-group col-lg-12 form_btn">
 						  	<button type="submit" class="btn btn-primary btn_save_category btn_start_test">
@@ -107,30 +107,11 @@
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 			},
-			toggleUnSelect({ value, id }) {
-				this.form.category_id = this.form.category_id.filter(element => {
-					 return element.id != id;
-				});
-			},
-			addTag(){
-				console.log()
-			},
 		    async startTest(){
 		    	if (this.checkInputs) {
 		    		await this.actionStartTest(this.form)
 					TokenService.saveGuestInfo(this.form)
-					console.log('ss')
-		    		if (this.form.type == 'employee'){
-		    			toast.fire({
-							type: "success",
-							icon: 'success',
-							title: "Тест создан!"
-						});
-						this.form.category_id = ''
-						this.form.fio = ''
-						this.form.limit = ''
-		    		}else{
-			    		if (this.getTests.success){
+			    	if (this.getTests.success){
 			    			this.$router.push("/crm/test/test-for-guest");
 			    			toast.fire({
 								type: "success",
@@ -138,14 +119,13 @@
 								title: "Тест начался!"
 							});
 			    		}
-			    		else if(this.getTests.error && this.getTests.message == 'Big limit...'){
-			    			toast.fire({
+			    	else if(this.getTests.error && this.getTests.message == 'Big limit...'){
+			    		toast.fire({
 								type: "error",
 								icon: 'error',
 								title: "Эти типы вопросов не достаточно в базе данных!"
 							});
-			    		}
-		    		}
+			    	}
 		    	}else{
 		    		this.requiredInput = true
 		    	}

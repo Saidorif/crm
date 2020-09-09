@@ -15,7 +15,7 @@
 						<tr>
 							<th scope="col">№</th>
 							<th scope="col">Вопрос</th>
-							<th scope="col">Управление</th>
+							<th scope="col">Направления</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
