@@ -12,12 +12,12 @@
 		  		<form @submit.prevent.enter="saveCategory" >
 					<div class="row">
 					  <div class="form-group col-md-6">
-					    <label for="categoryName">Название управления</label>
+					    <label for="categoryName">Название направления</label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
 					    	id="categoryName" 
-					    	placeholder="Название управления..."
+					    	placeholder="Название направления..."
 					    	v-model="form.name"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>

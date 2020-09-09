@@ -251,6 +251,4 @@ class AttestatController extends Controller
         return response()->json(['success' => true, 'result' => $result]);
     }
 
-
-
 }
