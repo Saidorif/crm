@@ -1,5 +1,5 @@
 <template>
-<div class="hold-transition sidebar-mini" @keydown.esc="alert">
+  <div class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -215,10 +215,8 @@ export default {
     logoutProfile(){
       this.logout();
     },
-    alert(){
-      alert('alert')
-    }
-  } 
+    
+  }
 };
 </script>
 
