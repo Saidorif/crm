@@ -16,8 +16,13 @@ class CreateAttestatsTable extends Migration
         Schema::create('attestats', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('fio');
+            $table->string('phone')->nullable();
+            $table->string('date_birth')->nullable();
+            $table->string('pasport_seriya')->nullable();
+            $table->string('pasport_number')->nullable();
+            $table->string('position')->nullable();
             $table->bigInteger('user_id')->nullable();
-            $table->bigInteger('category_id');
+            $table->text('category_id');
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
             $table->bigInteger('limit');

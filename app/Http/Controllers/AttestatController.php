@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Question;
 use App\Attestat;
+use App\TestCategory;
 use App\User;
 use Carbon\Carbon;
 
@@ -76,11 +77,15 @@ class AttestatController extends Controller
         $inputs = $request->all();        
         $user = request()->user();
         $status = 'progress';
-        if($inputs['type'] == 'employee'){
-            $status = 'start';
+        $limit = 0;
+        foreach ($inputs['category_id'] as $key => $category) {
+            $cat = TestCategory::find((int)$category);
+            if($cat){
+                $limit += $cat->time;
+            }
         }
-
-    	$questions = Question::with(['variants'])->whereIn('category_id', $inputs['category_id'])->limit($inputs['limit'])->get();
+    	$questions = Question::with(['variants'])->whereIn('category_id', $inputs['category_id'])->limit($limit)->get();
+        
         // return response()->json(['error' => true, 'message' => $questions]);
         // if(count($questions) < $inputs['limit']){
         //     return response()->json(['error' => true, 'message' => 'Большой лимит...']);
@@ -94,7 +99,7 @@ class AttestatController extends Controller
 		    foreach ($variants as $key => $item) {
 		    	unset($item['is_true']);
 		    }
-            $ex_time += $value->time;
+            $ex_time += (int)$value->category->time * 60;
             $q_ids[] = $value->id; 
             $q_answers[] = $value->id; 
     	}
@@ -103,24 +108,25 @@ class AttestatController extends Controller
         $startTime = $currentTime->toDateTimeString();
         $endTime = $currentTime->addSeconds($ex_time)->toDateTimeString();
 
-        $inputs['started_at'] = $startTime;
-        $inputs['ended_at'] = $endTime;
-        $inputs['time'] = $ex_time;
-        $inputs['question_ids'] = json_encode($q_ids);
-        $inputs['status'] = $status;
-        $inputs['user_id'] = $user->id;
-        
-        if($status == 'start'){
-            $employees = User::where(['category_id' => $inputs['category_id']])->get();
-            foreach ($employees as $key => $employee) {
-                $inputs['user_id'] = $employee->id;
-                $inputs['fio'] = $employee->name;
-                $attestat = Attestat::create($inputs);
-            }
-            return response()->json(['success' => true, 'message' => 'Тесты созданы для '. count($employees) .' сотрудников']);
-        }
+        $post = [];
+
+        $post['started_at'] = $startTime;
+        $post['ended_at'] = $endTime;
+        $post['time'] = $ex_time;
+        $post['question_ids'] = json_encode($q_ids);
+        $post['status'] = $status;
+        $post['user_id'] = $user->id;
+        $post['fio'] = $inputs['fio'];
+        $post['phone'] = $inputs['phone'];
+        $post['position'] = $inputs['position'];
+        $post['date_birth'] = $inputs['date_birth'];
+        $post['pasport_seriya'] = $inputs['pasport_seriya'];
+        $post['pasport_number'] = $inputs['pasport_number'];
+        $post['limit'] = $limit;
+        $post['category_id'] = json_encode($inputs['category_id']);
+
         if($status == 'progress'){
-            $attestat = Attestat::create($inputs);
+            $attestat = Attestat::create($post);
             return response()->json(['success' => true,'total_time'=> $ex_time, 'result' => $questions, 'attestat' => $attestat]);
         }
         return response()->json(['error' => true,'message' => 'Что-то пошло не так...']);
@@ -202,9 +208,9 @@ class AttestatController extends Controller
 
         $inputs = $request->all();
 
-        if(count($inputs['questions']) != $attestat->limit){
-            return response()->json(['error' => true, 'message' => 'Что-то пошло не так' ,'limit' => $attestat->limit]);
-        }
+        // if(count($inputs['questions']) != $attestat->limit){
+        //     return response()->json(['error' => true, 'message' => 'Что-то пошло не так' ,'limit' => $attestat->limit]);
+        // }
         $true_answers = 0;
         $wrong_answers = 0;
 
