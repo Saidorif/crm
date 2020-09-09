@@ -60,36 +60,31 @@ class AttestatController extends Controller
     public function attestat(Request $request)
     {
     	$validator = Validator::make($request->all(),[
-    		'category_id' => 'required|integer',
-    		'limit' => 'required|integer',
-            'fio' => 'string|nullable',
-            'user_id' => 'integer|nullable',
-            'type' => 'required|string',
+    		'category_id' => 'required|array',
+            'category_id.*' => 'required|integer',
+            'date_birth' => 'required|date',
+            'pasport_seriya' => 'required|string',
+            'pasport_number' => 'required|string',
+            'fio' => 'required|string',
+            'phone' => 'required|string',
+            'position' => 'required|string',
     	]);
 
     	if($validator->fails()){
     		return response()->json(['error' => true, 'message' => $validator->messages()]);
     	}
-        $inputs = $request->all();
+        $inputs = $request->all();        
         $user = request()->user();
         $status = 'progress';
         if($inputs['type'] == 'employee'){
             $status = 'start';
         }
-        if($inputs['type'] == 'guest'){
-            $guestvalidator = Validator::make($request->all(),[
-                'fio' => 'required|string',
-            ]);
 
-            if($guestvalidator->fails()){
-                return response()->json(['error' => true, 'message' => $guestvalidator->messages()]);
-            }
-        }
-
-    	$questions = Question::with(['variants'])->where(['category_id' => $inputs['category_id']])->limit($inputs['limit'])->get();
-        if(count($questions) < $inputs['limit']){
-            return response()->json(['error' => true, 'message' => 'Большой лимит...']);
-        }
+    	$questions = Question::with(['variants'])->whereIn('category_id', $inputs['category_id'])->limit($inputs['limit'])->get();
+        // return response()->json(['error' => true, 'message' => $questions]);
+        // if(count($questions) < $inputs['limit']){
+        //     return response()->json(['error' => true, 'message' => 'Большой лимит...']);
+        // }
         $ex_time = 0;
         //Question ids
         $q_ids = [];

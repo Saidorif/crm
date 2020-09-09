@@ -21,8 +21,8 @@ class DashboardController extends Controller
         
         //Users count by gender
         $users = Db::table('users')
-                ->select('gender', DB::raw('count(*) as total'))
-                ->groupBy('gender')
+                // ->select('gender', DB::raw('count(*) as total'))
+                // ->groupBy('gender')
                 ->get();
 
         //Users by age
