@@ -78,5 +78,8 @@
     "logout": "Chiqish",
     "enter": "Kirish",
     "start_test": "Nomzod uchun sinovni boshlang",
-    "begin_test": "Testni boshlash"
+    "begin_test": "Testni boshlash",
+    "prev": "oldingi",
+    "next": "keyingi",
+    "close_test": "Testni tugatish"
 }
