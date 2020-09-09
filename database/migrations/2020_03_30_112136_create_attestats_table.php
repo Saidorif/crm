@@ -21,6 +21,7 @@ class CreateAttestatsTable extends Migration
             $table->string('pasport_seriya')->nullable();
             $table->string('pasport_number')->nullable();
             $table->string('position')->nullable();
+            $table->text('variants')->nullable();
             $table->bigInteger('user_id')->nullable();
             $table->text('category_id');
             $table->dateTime('started_at');

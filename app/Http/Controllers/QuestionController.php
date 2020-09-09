@@ -110,6 +110,7 @@ class QuestionController extends Controller
             'category_id' => 'required|integer',
             'variants' => 'required|array',
             'variants.*.answers' => 'required|array',
+            'variants.*.title' => 'required|string',
             'variants.*.answers.*.title' => 'required|string',
             'variants.*.answers.*.is_true' => 'required',
         ]);

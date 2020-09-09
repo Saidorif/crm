@@ -226,6 +226,7 @@ class AttestatController extends Controller
         $attestat->true_answers = $true_answers;
         $attestat->wrong_answers = $wrong_answers;
         $attestat->status = 'complete';
+        $attestat->variants = json_encode($attestat->questionsWithResult());
         $attestat->save();
         
         
@@ -247,7 +248,8 @@ class AttestatController extends Controller
         }
         $result = [
             'attestat' => $attestat,
-            'questions' => $attestat->questionsWithResult(),
+            'questions' => json_decode( $attestat->variants, true),
+            // 'questions' => $attestat->questionsWithResult(),
         ];
         return response()->json(['success' => true, 'result' => $result]);
     }
