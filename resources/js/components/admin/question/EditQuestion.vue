@@ -214,12 +214,11 @@
 			await this.actionCategoryList()
 			await this.actionEditQuestion(data)
 			this.form.category_id = this.getQuestion.id
-			this.form = this.getQuestion
-			// this.form.variants = this.getQuestion.variants
+			this.form.variants = this.getQuestion.variants
 			this.getQuestion.variants.forEach((items,index)=>{
 				this.form.variants[index].answers = items.variants
 			})
-			console.log(this.form)
+			// console.log(this.form)
 		}
 	}
 </script>
