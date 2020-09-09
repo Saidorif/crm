@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use App\TestCategory;
 use App\QuestionVariant;
 use Validator;
 
@@ -11,24 +12,31 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        $questions = Question::with('category')->paginate(12);
-        return response()->json(['success' => true, 'result' => $questions]);
+        $categories = TestCategory::paginate(12);
+        if(!empty($categories)){
+            $categories->getCollection()->transform(function ($value) {
+                $question_count = $value->questions->count();
+                $value->question_count = $question_count;
+                unset($value['questions']);
+                return $value;
+            });
+        }
+        return response()->json(['success' => true, 'result' => $categories]);
     }
 
     public function edit($id)
     {
-        $question = Question::with('variants')->find($id);
-        if(!$question){
+        $category = TestCategory::with('questions')->find($id);
+        if(!$category){
             return response()->json(['error' => true, 'message' => 'Вопрос не найден']);
         }
 
-        return response()->json(['success' => true, 'result' => $question]);
+        return response()->json(['success' => true, 'result' => $category]);
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            // 'title'       => 'required|string',
             'category_id' => 'required|integer',
             'variants' => 'required|array',
             'variants.*.question_title' => 'required|string',
