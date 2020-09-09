@@ -46,8 +46,8 @@
 						    	class="form-control input_style" 
 						    	id="questionName" 
 						    	placeholder="Вопрос..."
-						    	v-model="form.variants[index].question_title"
-						    	:class="isRequired(form.variants[index].question_title) ? 'isRequired' : ''"
+						    	v-model="form.variants[index].title"
+						    	:class="isRequired(form.variants[index].title) ? 'isRequired' : ''"
 					    	></textarea>
 					  	</div>
 					  	<div class="col-md-12">
@@ -107,7 +107,7 @@
 					category_id:'',
 					variants:[
 						{
-							question_title:'',
+							title:'',
 							answers:[
 								{
 									title:'',is_true:0
@@ -162,7 +162,7 @@
 			},
 		    addAnswer(){
 		    	let value = {
-					question_title:'',
+					title:'',
 					answers:[
 						{
 							title:'',is_true:0
@@ -213,7 +213,12 @@
 			}
 			await this.actionCategoryList()
 			await this.actionEditQuestion(data)
-			this.form = this.getQuestion
+			this.form.category_id = this.getQuestion.id
+			this.form.variants = this.getQuestion.variants
+			this.getQuestion.variants.forEach((items,index)=>{
+				this.form.variants[index].answers = items.variants
+			})
+			console.log(this.form)
 		}
 	}
 </script>

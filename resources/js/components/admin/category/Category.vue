@@ -15,9 +15,9 @@
 						<tr>
 							<th scope="col">№</th>
 							<th scope="col">{{ $t('nameinfo') }}</th>
-							<th scope="col">Количество</th>
-							<th scope="col">Время</th>
-							<th scope="col">Действия</th>
+							<th scope="col">{{ $t('count') }}</th>
+							<th scope="col"> {{ $t('time') }}</th>
+							<th scope="col">{{ $t('action') }}</th>
 						</tr>
 					</thead>
 					<tbody>
