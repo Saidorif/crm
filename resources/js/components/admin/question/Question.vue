@@ -15,15 +15,17 @@
 						<tr>
 							<th scope="col">№</th>
 							<th scope="col">Направления</th>
+							<th scope="col">Количество вопроса</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(item,index) in getQuestionList.data">
 							<td scope="row">{{index+1}}</td>
-							<td>{{item.category.name}}</td>
+							<td>{{item.name}}</td>
+							<td>{{item.question_count}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.category.id}`'>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
 								<button class="btn_transparent" @click="deleteQuestion(item.id)">
