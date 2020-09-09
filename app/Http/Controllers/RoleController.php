@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Role;
 use Validator;
-
 class RoleController extends Controller
 {
     
@@ -17,7 +16,12 @@ class RoleController extends Controller
 
     public function list()
     {
-        $roles = Role::where('name', '!=','admin')->get();
+        $roles = [];
+        if(auth()->user()->role->id != 1){
+            $roles = Role::where('name', '!=','admin')->get();
+        }else{
+            $roles = Role::all();
+        }
         return response()->json(['success' => true, 'result' => $roles]);
     }
 

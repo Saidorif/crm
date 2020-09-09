@@ -67,7 +67,6 @@
 							<th scope="col">Ф.И.О</th>
 							<th scope="col">Должность</th>
 							<th scope="col">Рол</th>
-							<th scope="col">Направления</th>
 							<th scope="col">E-mail</th>
 							<th scope="col">Телефон</th>
 							<th scope="col">Действия</th>
@@ -77,9 +76,8 @@
 						<tr v-for="(item,index) in getEmployees.data">
 							<td scope="row">{{index+1}}</td>
 							<td>{{item.name}}</td>
-							<td>position</td>
+							<td>{{item.position}}</td>
 							<td>{{item.role ? item.role.name : ''}}</td>
-							<td>{{item.category ? item.category.name : ''}}</td>
 							<td>{{item.email}}</td>
 							<td>{{item.phone}}</td>
 							<td>

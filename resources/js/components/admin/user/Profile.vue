@@ -32,7 +32,7 @@
           <i class="peIcon pe-7s-unlock"></i> Изменить пароль
         </a>
       </li>
-      <li class="nav-item">
+<!--       <li class="nav-item">
         <a
           class="nav-link"
           id="contact-tab"
@@ -44,97 +44,36 @@
         >
           <i class="peIcon pe-7s-user"></i> Резюме
         </a>
-      </li>
+      </li> -->
     </ul>
     <div class="tab-content" id="myTabContent" v-if="form.user">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <form role="form" @submit.prevent.enter="sendProfile">
           <div class="card-body d-flex flex-wrap" v-if="form.user">
-            <div class="col-md-6">
-              <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Ф.И.О</label>
-                  <p class="form-control input_style disabled">{{form.user.name}}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">E-mail</label>
-                  <p class="form-control input_style disabled">{{ form.user.email }}</p>
-                </div>
+            <div class="col-md-8">
+              <div class="form-group col-md-12">
+                <label for="name">Ф.И.О</label>
+                <p class="form-control input_style disabled">{{form.user.name}}</p>
               </div>
-              <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Должность</label>
-                  <p
-                    class="form-control input_style disabled"
-                  >{{ form.user.position ? form.user.position.name : '' }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Управления</label>
-                  <p
-                    class="form-control input_style disabled"
-                  >{{form.user.category ? form.user.category.name : ''}}</p>
-                </div>
+              <div class="form-group col-md-12">
+                <label for="name">E-mail</label>
+                <p class="form-control input_style disabled">{{ form.user.email }}</p>
               </div>
-              <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Телефон</label>
-                  <p class="form-control input_style disabled">{{ form.user.phone }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Статус</label>
-                  <p
-                    class="form-control input_style disabled"
-                  >{{ form.user.status == 'active' ? 'Активный' : 'Неактивный' }}</p>
-                </div>
+              <div class="form-group col-md-12">
+                <label for="name">Должность</label>
+                <p
+                  class="form-control input_style disabled"
+                >{{ form.position }}</p>
               </div>
-              <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Дата с</label>
-                  <p class="form-control input_style disabled">{{ form.user.order_date }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Дата по</label>
-                  <p
-                    class="form-control input_style disabled"
-                    v-if="form.user.working"
-                  >до настоящего времени</p>
-                  <p class="form-control input_style disabled" v-else>{{ form.user.leave_date }}</p>
-                </div>
-              </div>
-                            <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Знает ли иностранные языки</label>
-                  <p class="form-control input_style disabled">{{ form.user.languages }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Справочная специализация:</label>
-                  <p class="form-control input_style disabled">{{ form.user.education_spec }}</p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="name">Образование (название,профессия,адрес)</label>
-                <p class="form-control input_style disabled">{{ form.user.text }}</p>
-              </div>
-              <div class="form-group">
-                <label for="name">Адрес</label>
-                <p class="form-control input_style disabled">{{ form.user.address }}</p>
+              <div class="form-group col-md-12">
+                <label for="name">Статус</label>
+                <p
+                  class="form-control input_style disabled"
+                >{{ form.user.status == 'active' ? 'Активный' : 'Неактивный' }}</p>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="form-group photoFileUploader" style="margin-bottom: 18px;">
-                <div class="avatar-upload">
-                  <div class="avatar-edit">
-                    <input type="file" id="file" @change="changeFile($event)" />
-                    <label for="file">
-                      <i class="pe-7s-pen"></i>
-                    </label>
-                  </div>
-                  <div class="avatar-preview">
-                    <div id="fileimagePreview">
-                      <span>{{fileFormat}}</span>
-                    </div>
-                  </div>
-                </div>
                 <div class="avatar-upload">
                   <div class="avatar-edit">
                     <input
@@ -155,89 +94,7 @@
                   </div>
                 </div>
               </div>
-
-              <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Дата рождения</label>
-                  <p class="form-control input_style disabled">{{ form.user.birthday }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Пол</label>
-                  <p
-                    class="form-control input_style disabled"
-                  >{{ form.user.gender == 'male' ? 'Мужчина' : 'Женский' }}</p>
-                </div>
-              </div>
-              <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Национальность</label>
-                  <p class="form-control input_style disabled">{{ form.user.nation }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Образование</label>
-                  <p class="form-control input_style disabled">{{ form.user.education }}</p>
-                </div>
-              </div>
-              <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Партийность</label>
-                  <p class="form-control input_style disabled">{{ form.user.partisanship }}</p>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="name">Получал ли государственные награды (Какие):</label>
-                  <p class="form-control input_style disabled">{{ form.user.state_award }}</p>
-                </div>
-              </div>
-              <div class="input_block_d_flex">
-                <div class="form-group col-md-6">
-                  <label for="name">Ученая степень:</label>
-                  <p class="form-control input_style disabled">{{ form.user.academic_degree }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Ученое звание:</label>
-                  <p class="form-control input_style disabled">{{ form.user.academic_sertificate }}</p>
-                </div>
-              </div>
             </div>
-            <div class="col-md-12">
-              <label for="name">Член Совета народных депутатов республики, области, города, района или член других выборных органов (указать полностью)</label>
-              <p class="form-control input_style disabled">{{form.user.deputat}}</p>
-            </div>
-            <h5 class="sub_title">Трудовая деятельность</h5>
-            <template v-if="form.user.experience">
-              <div class="row col-md-12" v-for="(ex, index) in form.user.experience">
-                <div class="form-group col-md-3">
-                  <label for="name">Название учреждения</label>
-                  <p class="form-control input_style disabled">{{ ex.company }}</p>
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="name">Должность</label>
-                  <p class="form-control input_style disabled">{{ ex.position }}</p>
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="name">Дата с</label>
-                  <p class="form-control input_style disabled">{{ ex.date_from }}</p>
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="name">Дата с</label>
-                  <p class="form-control input_style disabled">{{ ex.date_to }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Адрес учреждения</label>
-                  <p class="form-control input_style disabled">{{ ex.address }}</p>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Описание</label>
-                  <p class="form-control input_style disabled">{{ ex.description }}</p>
-                </div>
-              </div>
-            </template>
-            <!-- <div class="col-12 d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i> Сохранить
-              </button>
-            </div> -->
           </div>
         </form>
       </div>
@@ -278,7 +135,7 @@
           </div>
         </form>
       </div>
-      <div class="tab-pane fade cv_tab" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+      <!-- <div class="tab-pane fade cv_tab" id="contact" role="tabpanel" aria-labelledby="contact-tab">
         <button class="print_cv" @click="printCv()">print Cv</button>
         <div size="A4" class="cv_block">
           <h4 class="cv_title">Резюме </h4>
@@ -361,7 +218,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>	
