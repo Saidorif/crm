@@ -142,6 +142,7 @@
 		    checkRadioBtn(){
 				let counter = null
 				this.form.variants.map((items,index)=>{
+					console.log(items)
 					items.answers.map((item,key)=>{
 						if (item.is_true == 1){
 							counter = counter + parseInt(item.is_true) 
@@ -184,6 +185,7 @@
 		    	Vue.delete(this.form.variants,index)
 		    },
 			async saveQuestion(){
+				console.log(this.form)
 				if (this.form.category_id != ''){
 					if (this.checkRadioBtn()){
 						await this.actionUpdateQuestion(this.form)
