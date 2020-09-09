@@ -10,6 +10,7 @@
         "admin_panel": "Administrator paneli",
         "change_pass":"Parolni o'zgartirish",
         "employee":"Foydalanuvchilar",
+        "add_employee":"Foydalanuvchi qo'shish",
         "position":"Lavozim",
         "settings":"Sozlamalar",
         "setting":"Sozlama",
@@ -49,7 +50,12 @@
         "change_pass": "Parolni o'zgartirish",
         "password": "Parol",
         "confirm_password": "Parolni tasdiqlash",
-        "password_dnmatch": "Parol tasdiqlanmadi"
+        "password_dnmatch": "Parol tasdiqlanmadi",
+        "date_birthday": "Туғулган вақти",
+        "passport_number_seria": "Паспорт серияси, рақами",
+        "phone_number": "Телефон рақами",
+        "role": "Rol",
+        "select_role": "Ro'lni tanlang!"
     },
     "directions_name": "Yo'nalish nomi",
     "save": "Saqlash",
@@ -68,5 +74,9 @@
     "answer": "Javob",
     "true_answer": "To'g'ri javob",
     "remove_item": "Haqiqatan ham o'chirishni xohlaysizmi?",
-    "add_info": "Qo'shish"
+    "add_info": "Qo'shish",
+    "logout": "Chiqish",
+    "enter": "Kirish",
+    "start_test": "Nomzod uchun sinovni boshlang",
+    "begin_test": "Testni boshlash"
 }

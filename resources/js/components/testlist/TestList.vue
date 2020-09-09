@@ -5,12 +5,12 @@
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i class="peIcon pe-7s-browser"></i>
-					    Список теста
+						{{ $t('admin_menu.test_list') }}
 					</h4>
 					<div class="add_user_btn">
 			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
 						    <i class="fas fa-filter"></i>
-			            	Филтр
+			            	 {{ $t('filter') }}
 						</button>
 		            </div>
 		  		</div>
@@ -18,39 +18,39 @@
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
   					  		<div class="form-group col-lg-3">
-	  							<label for="fio">Ф.И.О</label>
+	  							<label for="fio">{{ $t('user_info.fio') }}</label>
 	  							<input 
 	  								type="text" 
 	  								class="form-control" 
 	  								id="fio" 
-	  								placeholder="Ф.И.О..."
+	  								:placeholder="$t('user_info.fio')"
 	  								v-model="filter.fio"
   								>
 				  			</div>
   					  		<div class="form-group col-lg-3">
-	  							<label for="status">Статус</label>
+	  							<label for="status">{{$t('user_info.status.title')}}</label>
   								<select name="" v-model="filter.status" class="form-control" >
-  									<option value="">Выберите статус</option>
-  									<option value="complete">Завершено</option>
-  									<option value="progress">Не завершено</option>
-  									<option value="start">Новый тест</option>
+  									<option value="">{{$t('user_info.status.choose')}}</option>
+  									<option value="complete">{{$t('user_info.status.complete')}}</option>
+  									<option value="progress"> {{$t('user_info.status.progress')}}</option>
+  									<option value="start">{{$t('user_info.status.start')}}</option>
   								</select>
 					  			</div>	
   					  		<div class="form-group col-lg-3">
-	  							<label for="category_id">Направления</label>
+	  							<label for="category_id"> {{$t('admin_menu.directions')}}</label>
   								<select name="" v-model="filter.category_id" class="form-control" >
-  									<option value="">Выберите направления</option>
+  									<option value="">{{$t('admin_menu.select_directions')}}</option>
   									<option :value="cat.id" v-for="(cat,index) in getCategories" :key="cat.id">{{cat.name}}</option>
   								</select>
 				  			</div>	
 						  	<div class="col-lg-3 form-group btn_search">
 							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
 							  		<i class="fas fa-search"></i>
-								  	найти
+								  	{{$t('search')}}
 							  	</button>
 							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
 							  		<i class="fas fa-times"></i>
-								  	сброс
+								  	{{$t('clean')}}
 							  	</button>
 					  	  	</div>	
 				  		</div>
@@ -63,12 +63,12 @@
 						<thead>
 							<tr>
 								<th scope="col">№</th>
-								<th scope="col">Ф.И.О</th>
-								<th scope="col">Направления</th>
-								<th scope="col">Статус</th>
-								<th scope="col">Количество вопроса</th>
-								<th scope="col">Балл</th>
-								<th scope="col">Действия</th>
+								<th scope="col">{{ $t('user_info.fio') }}</th>
+								<th scope="col">{{ $t('user_info.position') }}</th>
+								<th scope="col">{{ $t('user_info.status.title') }}</th>
+								<th scope="col">{{ $t('number_question') }} </th>
+								<th scope="col">{{ $t('score') }}</th>
+								<th scope="col">{{ $t('action') }}</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -3,32 +3,32 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title title_user mb-0">
-          <i class="peIcon pe-7s-user"></i>Добавить пользователя
+          <i class="peIcon pe-7s-user"></i>{{ $t('admin_menu.add_employee') }} 
         </h3>
         <router-link class="btn btn-primary back_btn" to="/crm/employee">
-          <span class="peIcon pe-7s-back"></span> Назад
+          <span class="peIcon pe-7s-back"></span> {{ $t('back') }} 
         </router-link>
       </div>
       <form role="form" @submit.prevent.enter="sendEmployee" enctype="multipart/form-data">
         <div class="card-body d-flex flex-wrap">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="name">Ф.И.О</label>
+              <label for="name">{{ $t('user_info.fio') }} </label>
               <input
                 type="text"
                 class="form-control input_style"
                 id="name"
                 :class="isRequired(form.name) ? 'isRequired' : ''"
-                placeholder="Ф.И.О"
+                :placeholder="$t('user_info.fio')"
                 v-model="form.name"
               />
             </div>
             <div class="form-group" v-if="form.role_id != 3">
-              <label for="position">Должность</label>
+              <label for="position">{{$t('user_info.position')}}</label>
               <input 
                 type="text"
                  name="position" 
-                 placeholder="Должность..." 
+                 :placeholder="$t('user_info.position')" 
                  v-model="form.position" 
                  class="form-control"
                  :class="isRequired(form.position) ? 'isRequired' : '' "
@@ -50,50 +50,50 @@
             </div>
             <div class="input_block_d_flex">
               <div class="form-group col-md-6">
-                <label for="role">Рол</label>
+                <label for="role">{{$t('user_info.role')}}</label>
                 <select
                   class="form-control"
                   :class="isRequired(form.role_id) ? 'isRequired' : '' "
                   id="countryName"
                   v-model="form.role_id"
                 >
-                  <option value selected disabled>Выберите рол</option>
+                  <option value selected disabled>{{$t('user_info.select_role')}}</option>
                   <option :value="role.id" v-for="(role,index) in getRoleList">{{role.name}}</option>
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="birthday">Статус</label>
+                <label for="birthday">{{$t('user_info.status.title')}}</label>
                 <select v-model="form.status" class="form-control">
-                  <option value="active" selected>Активный</option>
-                  <option value="inactive">Неактивный</option>
+                  <option value="active" selected>{{$t('user_info.status.active')}}</option>
+                  <option value="inactive">{{$t('user_info.status.inactive')}}</option>
                 </select>
               </div>
             </div>
             <div class="input_block_d_flex">
               <div class="form-group col-md-6">
-                <label for="exampleInputPassword1">Пароль</label>
+                <label for="exampleInputPassword1">{{$t('user_info.password')}}</label>
                 <input
                   type="password"
                   class="form-control input_style"
                   id="exampleInputPassword1"
-                  placeholder="Пароль.."
+                  :placeholder="$t('user_info.password')"
                   :class="isRequired(form.password) ? 'isRequired' : ''"
                   v-model="form.password"
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="ConfirmPassword1">Подтвердите пароль</label>
+                <label for="ConfirmPassword1">{{$t('user_info.confirm_password')}}</label>
                 <input
                   type="password"
                   class="form-control input_style"
                   id="ConfirmPassword1"
-                  placeholder="Подтвердите пароль.."
+                  :placeholder="$t('user_info.confirm_password')"
                   v-model="form.confirm_password"
                   :class="isRequired(form.confirm_password) ? 'isRequired' : ''"
                   @input="confirmPassword()"
                 />
                 <small class="redText" v-if="checkPassword">
-                  <b>Пароль не совпадает</b>
+                  <b>{{$t('user_info.password_dnmatch')}}</b>
                 </small>
               </div>
             </div>
@@ -124,7 +124,7 @@
           </div>
           <div class="col-12 d-flex justify-content-end">
             <button type="submit" class="btn btn-primary">
-              <i class="fas fa-save"></i> Сохранить
+              <i class="fas fa-save"></i> {{$t('save')}}
             </button>
           </div>
         </div>

@@ -68,22 +68,21 @@ class QuestionController extends Controller
         return response()->json(['success' => true, 'result' => $question]);
     }
 
-    public function update(Request $request, $id)
+    public function updateOld(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'title'       => 'required|string',
             'category_id' => 'required|integer',
-            'time' => 'required|integer',
             'variants' => 'required|array',
-            'variants.*.title' => 'required|string',
-            'variants.*.is_true' => 'required',
+            'variants.*.answers' => 'required|array',
+            'variants.*.answers.*.title' => 'required|string',
+            'variants.*.answers.*.is_true' => 'required',
         ]);
 
         if($validator->fails()){
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
 
-        $question = Question::with('variants')->find($id);
+        $question = Question::with('variants')->whereIn('category_id', [(int)$request->input('category_id')])->find($id);
         if(!$question){
             return response()->json(['error' => true, 'message' => 'Вопрос не найден']);
         }
@@ -102,6 +101,63 @@ class QuestionController extends Controller
                 'question_id' => $question->id,
             ]);
         }
+        return response()->json(['success' => true, 'result' => $question]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(),[
+            'category_id' => 'required|integer',
+            'variants' => 'required|array',
+            'variants.*.answers' => 'required|array',
+            'variants.*.answers.*.title' => 'required|string',
+            'variants.*.answers.*.is_true' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
+        }
+        $questions = $request->input('variants');
+        $category = TestCategory::find((int)$request->input('category_id'));
+        foreach ($questions as $key => $value) {
+            if(array_key_exists('id', $value)){
+                $question = Question::find($value['id']);
+                if($question){
+                    $question->update([
+                        'time' => $category->time,
+                        'category_id' => $category->id,
+                        'title' => $value['title'],
+                    ]);
+                    //delete old variants
+                    $old_variants = $question->variants;
+                    foreach ($old_variants as $key => $old) {
+                        $old->delete();
+                    }
+                    $answers = $value['answers'];
+                    foreach ($answers as $key => $ans) {
+                        $item = QuestionVariant::create([
+                            'title' => $ans['title'],
+                            'is_true' => (int)$ans['is_true'],
+                            'question_id' => $question->id,
+                        ]);
+                    }
+                }
+            }else{
+                $question = Question::create([
+                    'title' => $value['title'],
+                    'category_id' => $category->id,
+                ]);
+                $variants = $value['answers'];
+                $answers = $value['answers'];
+                foreach ($answers as $key => $ans) {
+                    $item = QuestionVariant::create([
+                        'title' => $ans['title'],
+                        'is_true' => (int)$ans['is_true'],
+                        'question_id' => $question->id,
+                    ]);
+                }
+            }
+        }        
         return response()->json(['success' => true, 'result' => $question]);
     }
 
