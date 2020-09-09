@@ -4,9 +4,9 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-drawer"></i>
-				    Направления 
+				     {{ $t('admin_menu.directions') }}
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/category/add"><i class="fas fa-plus"></i> Добавить</router-link>
+				<router-link class="btn btn-primary" to="/crm/category/add"><i class="fas fa-plus mr-2"></i>{{ $t('add_info') }}</router-link>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
@@ -14,10 +14,9 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-							<th scope="col">Название</th>
+							<th scope="col">{{ $t('nameinfo') }}</th>
 							<th scope="col">Количество</th>
 							<th scope="col">Время</th>
-							<th scope="col">Балл</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
@@ -27,7 +26,6 @@
 							<td>{{item.name}}</td>
 							<td>{{item.qty}}</td>
 							<td>{{item.time}}</td>
-							<td>{{item.score}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/category/edit/${item.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>

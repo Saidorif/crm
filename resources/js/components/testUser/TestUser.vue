@@ -5,11 +5,11 @@
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i class="peIcon pe-7s-browser"></i>
-					    Список теста (user)
+						{{ $t('admin_menu.test_list') }}(user) 
 					</h4>
 					<div class="add_user_btn">
 			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
-						    <i class="fas fa-filter"></i>Филтр
+						    <i class="fas fa-filter"></i>{{ $t('filter') }}
 						</button>
 		            </div>
 		  		</div>
@@ -17,7 +17,7 @@
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
 				  			<div class="col-lg-4 form-group">
-						  	 	<label for="date">Дата</label>
+						  	 	<label for="date">{{ $t('date') }}</label>
 							    <date-picker 
 							    	lang="ru" 
 							    	v-model="filter.date" 
@@ -26,22 +26,23 @@
 						    	></date-picker>
 			   			  	</div>
   					  		<div class="form-group col-lg-4">
-	  							<label for="status">Статус</label>
+	  							<label for="status">{{ $t('user_info.status.title') }}</label>
   								<select name="" v-model="filter.status" class="form-control" >
-  									<option value="">Выберите статус</option>
-  									<option value="complete">Завершено</option>
-  									<option value="progress">Не завершено</option>
-  									<option value="start">Новый тест</option>
+  									<option value="">{{ $t('user_info.status.choose') }}</option>
+  									<option value="complete">{{ $t('user_info.status.complete') }}</option>
+  									<option value="progress">{{ $t('user_info.status.progress') }}</option>
+  									<option value="start"> {{ $t('user_info.status.start') }}</option>
   								</select>
 					  			</div>		
 						  	<div class="col-lg-4 form-group btn_search">
 							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
 							  		<i class="fas fa-search"></i>
-								  	найти
+								  	{{ $t('search') }}
 							  	</button>
 							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
 							  		<i class="fas fa-times"></i>
-								  	сброс
+								  	
+									  {{ $t('clean') }}
 							  	</button>
 					  	  	</div>	
 				  		</div>
@@ -54,11 +55,11 @@
 						<thead>
 							<tr>
 								<th scope="col">№</th>
-								<th scope="col">Статус</th>
-								<th scope="col">Количество вопроса</th>
-								<th scope="col">Балл</th>
-								<th scope="col">Дата</th>
-								<th scope="col">Действия</th>
+								<th scope="col">{{ $t('user_info.status.title') }}</th>
+								<th scope="col"> {{$t('number_question') }}</th>
+								<th scope="col"> {{$t('score') }}</th>
+								<th scope="col">{{$t('date') }}</th>
+								<th scope="col">{{$t('action') }}</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -13,14 +13,14 @@
 						<div class="form-group col-md-6">
 							<label class="typo__label">Направление</label>
 							<multiselect 
-								v-model="form.category_id" 
+								v-model="selectedCategory" 
 								placeholder="Выберите направление" 
 								label="name" 
-								track-by="name" 
+								track-by="id"
 								:options="getCategories" 
 								:multiple="true" 
 								:taggable="true" 
-								selectLabel=""
+								:slot-scope="id"
 							></multiselect>
 					  	</div>
 						<div class="form-group col-md-6">
@@ -84,6 +84,7 @@
 					phone: '',
 					position: '',
 				},
+				selectedCategory: [],
 				requiredInput:false,
 			}
 		},
@@ -91,7 +92,7 @@
 			...mapGetters('test',['getTests','getMassage']),
 			...mapGetters('category',['getCategories']),
 			checkInputs(){
-				if(this.form.category_id &&  this.form.fio &&  this.form.date_birth  &&  this.form.pasport_seriya  &&  this.form.pasport_number &&  this.form.phone &&  this.form.position){
+				if(this.selectedCategory.length &&  this.form.fio &&  this.form.date_birth  &&  this.form.pasport_seriya  &&  this.form.pasport_number &&  this.form.phone &&  this.form.position){
 					return true
 				}else{
 					return false
@@ -109,6 +110,10 @@
 			},
 		    async startTest(){
 		    	if (this.checkInputs) {
+					this.form.category_id = []
+					this.selectedCategory.forEach(element => {
+						this.form.category_id.push(element.id)
+					});
 		    		await this.actionStartTest(this.form)
 					TokenService.saveGuestInfo(this.form)
 			    	if (this.getTests.success){
