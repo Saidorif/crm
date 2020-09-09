@@ -11,7 +11,7 @@ const QuestionService = {
 		return ApiService.get(`/api/question/edit/${data.id}`)
 	},
 	updateQuestion(data){
-		return ApiService.post(`/api/question/update/${data.id}`,data)
+		return ApiService.post(`/api/question/update/${data.category_id}`,data)
 	},
 	deleteQuestion(id){
 		return ApiService.delete(`/api/question/destroy/${id}`)

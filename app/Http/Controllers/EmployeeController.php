@@ -104,6 +104,7 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $user = $request->user();
+        $validRoles = auth()->user()->role_id == 1 ? [1,2, 3,4] : [2, 3,4];
         // $employee = User::where('role_id', '!=', 1)->where(['id' => $id])->first();
         $employee = User::where(['id' => $id])->first();
         $employee = User::findOrFail($id);
@@ -116,7 +117,7 @@ class EmployeeController extends Controller
             'email'                     => 'required|email|unique:users,email,'.$employee->id,
             'password'                  => 'nullable|string|min:6',
             'confirm_password'          => 'nullable|string|min:6',
-            'role_id'                   => ['required',Rule::in([2, 3,4]),],
+            'role_id'                   => ['required',Rule::in($validRoles),],
             'position'                  => 'required|string',
             'image'                     => 'string|nullable',
         ]);
