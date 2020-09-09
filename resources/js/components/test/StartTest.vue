@@ -20,7 +20,6 @@
 								:options="getCategories" 
 								:multiple="true" 
 								:taggable="true" 
-								:slot-scope="id"
 							></multiselect>
 					  	</div>
 						<div class="form-group col-md-6">
@@ -117,7 +116,7 @@
 		    		await this.actionStartTest(this.form)
 					TokenService.saveGuestInfo(this.form)
 			    	if (this.getTests.success){
-			    			this.$router.push("/crm/test/test-for-guest");
+			    			this.$router.push("/main/test/test-for-guest");
 			    			toast.fire({
 								type: "success",
 								icon: 'success',

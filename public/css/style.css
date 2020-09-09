@@ -646,8 +646,8 @@ button:disabled {
 
 .base-timer {
   position: absolute;
-  top: -20px;
-  right: 0px;
+  top: 10px;
+  right: 10px;
   width: 80px;
   height: 80px;
 }
