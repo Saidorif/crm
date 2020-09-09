@@ -4,9 +4,9 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-note"></i>
-				    Вопросы
+				     {{ $t('admin_menu.questions') }}
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/question/add"><i class="fas fa-plus"></i> Добавить</router-link>
+				<router-link class="btn btn-primary" to="/crm/question/add"><i class="fas fa-plus"></i>  {{ $t('add_info') }}</router-link>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
@@ -14,9 +14,9 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-							<th scope="col">Направления</th>
-							<th scope="col">Количество вопроса</th>
-							<th scope="col">Действия</th>
+							<th scope="col"> {{ $t('admin_menu.directions') }}</th>
+							<th scope="col">{{ $t('number_question') }} </th>
+							<th scope="col">{{ $t('action') }}</th>
 						</tr>
 					</thead>
 					<tbody>

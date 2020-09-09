@@ -4,42 +4,42 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-drawer"></i>
-				    Редактировать направления
+				    {{ $t('admin_menu.edit_directions') }}
 				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/category"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				<router-link class="btn btn-primary back_btn" to="/crm/category"><span class="peIcon pe-7s-back"></span> {{ $t('back') }}</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveCategory" >
 					<div class="row">
 					  <div class="form-group col-md-6">
-					    <label for="categoryName">Название направления</label>
+					    <label for="categoryName">{{ $t('directions_name') }} </label>
 					    <input 
 					    	type="text" 
 					    	class="form-control input_style" 
 					    	id="categoryName" 
-					    	placeholder="Название направления..."
+					    	:placeholder="$t('directions_name')"
 					    	v-model="form.name"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>
 					  </div>
 					  <div class="form-group col-md-6">
-					    <label for="qty">Количество</label>
+					    <label for="qty">{{$t('count')}}</label>
 					    <input 
 					    	type="number" 
 					    	class="form-control input_style" 
 					    	id="qty" 
-					    	placeholder="Количество..."
+					    	:placeholder="$t('count')"
 					    	v-model="form.qty"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>
 					  </div>
 					  <div class="form-group col-md-6">
-					    <label for="time">Время</label>
+					    <label for="time">{{$t('time')}}</label>
 					    <input 
 					    	type="number" 
 					    	class="form-control input_style" 
 					    	id="time" 
-					    	placeholder="Время..."
+					    	:placeholder="$t('time')"
 					    	v-model="form.time"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>
@@ -47,7 +47,7 @@
 					  <div class="form-group col-md-12 d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
-						  	Сохранить
+						  	{{ $t('save') }}
 						</button>	
 				  	  </div>
 					</div>
