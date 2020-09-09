@@ -13,8 +13,8 @@ class TestCategory extends Model
         return $this->hasMany(\App\Question::class, 'category_id');
     }
 
-    public function questionscount()
+    public function questionsWithVariant()
     {
-        return $questions = \App\Question::where(['category_id' => $this->id])->count();
+        return $this->hasMany(\App\Question::class, 'category_id')->with('variants');
     }
 }
