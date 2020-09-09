@@ -30,7 +30,11 @@ class DashboardController extends Controller
         ];
         $testsByMonth = [];
         foreach ($months as $key => $value) {
-            $nextM = $key + 1;
+            if($key == 12){
+                $nextM = $key;
+            }else{
+                $nextM = $key + 1;
+            }
             $date_from = date('Y-'.$key.'-01 00:00:00');
             $date_to = date('Y-'.$nextM.'-01 23:59:59');
             $test = DB::table('attestats')

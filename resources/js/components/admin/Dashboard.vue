@@ -16,10 +16,10 @@
 	  				</div>
 	  				<div class="col-md-6 chartBlock" v-if="loaded">
 						  <div class="chartBlock_item">
-	  						<Pie :propchartdata="this.getDashboard.staj" :propLabel="$t('dashboard.chart_exper')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+	  						<Pie :propchartdata="this.getDashboard.tests" :propLabel="$t('dashboard.chart_exper')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						  </div>
 	  				</div>
-					<div class="col-md-6 chartBlock" v-if="loaded">
+					<!-- <div class="col-md-6 chartBlock" v-if="loaded">
 						<div class="chartBlock_item">
 	  						<Pie :propchartdata="this.usersData" :propLabel="$t('dashboard.chart_sex')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						</div>
@@ -28,7 +28,7 @@
 						<div class="chartBlock_item">
 	  						<Bar :propchartdata="this.testsData" :propLabel="$t('dashboard.chart_test')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						</div>
-	  				</div>
+	  				</div> -->
 	  			</div>
 		  	</div>
 	  	</div>
@@ -60,7 +60,7 @@
 		},
 		async mounted(){
 			await this.actionDashboard()
-			console.log(this.getDashboard)
+			console.log(this.getDashboard.ages)
 			// this.getDashboard.tests.forEach((elem, key) => {
 			// 	if(elem.status == 'complete'){
 			// 		this.testsData['Завершено'] = parseInt(elem.total)
@@ -75,7 +75,7 @@
 			// this.getDashboard.users.forEach((elem, key) => {
 			// 	this.usersData[elem.gender == 'male' ? 'Мужчина' : 'Женщина' ] = parseInt(elem.total)
 			// });
-			// this.loaded = true;
+			this.loaded = true;
 		}
 	}
 </script>
