@@ -40,16 +40,16 @@
 					  	</div>
 						<div class="form-group col-md-6 double_input">
 						    <label for="passport">Паспорт серияси, рақами </label>
-							<input type="text" class="form-control input_style"  v-model="form.pasport_seriya"  :class="isRequired(form.pasport_seriya) ? 'isRequired' : ''" >
-							<input type="text" class="form-control input_style"  v-model="form.pasport_number" :class="isRequired(form.pasport_number) ? 'isRequired' : ''"  >
+							<input type="text" class="form-control input_style"  v-model="form.pasport_seriya"  :class="isRequired(form.pasport_seriya) ? 'isRequired' : ''" maxlength="2">
+							<input type="text" pattern="\d*" maxlength="7" class="form-control input_style"  v-model="form.pasport_number" :class="isRequired(form.pasport_number) ? 'isRequired' : ''"  >
 					  	</div>
 						<div class="form-group col-md-6">
 						    <label for="phoneNum">Телефон рақами </label>
-							<input type="text" class="form-control input_style"  v-model="form.phone"  :class="isRequired(form.phone) ? 'isRequired' : ''" >
+							<input type="text" class="form-control input_style"  v-model="form.phone"  :class="isRequired(form.phone) ? 'isRequired' : ''" placeholder="+998901234567" >
 					  	</div>
 						<div class="form-group col-md-6">
 						    <label for="position">Лавозим</label>
-							<input type="text" class="form-control input_style"  v-model="form.position"  :class="isRequired(form.position) ? 'isRequired' : ''">
+							<input type="text" class="form-control input_style"  v-model="form.position"  :class="isRequired(form.position) ? 'isRequired' : ''" placeholder="Лавозимни киритинг">
 					  	</div>
 				  		<div class="form-group col-lg-12 form_btn">
 						  	<button type="submit" class="btn btn-primary btn_save_category btn_start_test">
