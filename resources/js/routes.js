@@ -222,14 +222,6 @@ const router = new Router({
 					}
 				},
 				{
-					path:'test/test-for-guest',
-					component:ForGuest,
-					meta:{
-						action:'startTestUser',
-						subject:'AttestatController'
-					}
-				},
-				{
 					path:'test/start-test',
 					component:StartTest,
 					meta:{
@@ -345,6 +337,14 @@ const router = new Router({
 				// 		subject:'QuestionController'
 				// 	}
 				// },
+				{
+					path:'test/test-for-guest',
+					component:ForGuest,
+					meta:{
+						action:'startTestUser',
+						subject:'AttestatController'
+					}
+				},
 			]
 			
 		},

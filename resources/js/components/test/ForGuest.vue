@@ -35,14 +35,15 @@
 					</ol>
 				</template>
 			</template>
-			<div class="answers_buttons">
+			<div class="answers_buttons" v-if="myAnswers.length">
 				<button 
+					v-if="nextItemIndex >= 1"
 					class="btn_prev" 
 					@click.prevent="prevBtn">
 					<span class="pe-7s-angle-left-circle"></span>   {{ $t('prev')}}
 				</button>
 				<button 
-					class="btn_next" 
+					class="btn_next ml-avto" 
 					@click.prevent="nextBtn"
 					:disabled="disabledTrue"
 					v-if="myAnswers[myAnswers.length - 1].answer_id == false"
@@ -99,6 +100,10 @@
 			threshold: ALERT_THRESHOLD
 		}
 	};
+	window.onpopstate = function () {
+			history.go(1);
+	};
+
 	let remainingPathColor = COLOR_CODES.info.color;
 	import {mapActions, mapGetters} from 'vuex'
 	import ResultTest from './ResultTest'
@@ -125,9 +130,15 @@
 		},
 
 		async mounted(){
+			if (document.fullscreenEnabled) {
+				document.documentElement.requestFullscreen();
+				// document.addEventListener("keydown", e => {
+				// 	if(e.key == "F11" || e.keyCode  == 27 ) e.preventDefault();
+				// });
+			}
 			this.onTimesUp();
 			if (TokenService.getGuestInfo()) {
-				// await this.actionStartTest(TokenService.getGuestInfo())
+				if(this.getTests.success){
 				this.startTimer();
 				this.userInfo = this.getTests.attestat
 				this.tests = this.getTests.result
@@ -135,9 +146,28 @@
 				// this.timeLeft = 360
 				this.TIME_LIMIT = this.getTests.total_time
 				// this.TIME_LIMIT = 360
-				this.tests.forEach(element => {
-					this.myAnswers.push({id: element.id, answer_id: false})
-				});
+					if(this.tests){
+						this.tests.forEach(element => {
+						this.myAnswers.push({id: element.id, answer_id: false})
+						});
+					}
+				}else{
+					window.onbeforeunload = async () => {
+						let data = {
+							attestat_id:this.userInfo.id,
+							questions:this.myAnswers
+						}
+						await this.actionCompleteTest(data)
+						if (this.getComplete.success){
+							this.showResult = true
+							this.items = this.getComplete
+							this.items['id'] = this.userInfo.id
+							this.onTimesUp()
+							TokenService.removeGuestInfo()
+						}
+					}
+				}
+
 			}else{
 				this.$router.push("/crm/test/start-test");
 			}
@@ -305,4 +335,10 @@
 	}
 </script>
 <style scoped>
+.for_guest{
+	padding: 30px;
+}
+.ml-avto{
+	margin-left: auto;
+}
 </style>
