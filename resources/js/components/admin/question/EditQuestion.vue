@@ -32,7 +32,7 @@
 							    		<b>{{index + 1}}) Вопрос</b>
 							    	</h3>
 							    	<button 
-							    		type="submit" 
+							    		type="button" 
 							    		class="btn btn-danger btn_save_category" 
 							    		@click="removeAnswer(index)"
 							    		v-if="form.variants.length > 1"
@@ -187,7 +187,7 @@
 				if (this.form.category_id != ''){
 					if (this.checkRadioBtn()){
 						await this.actionUpdateQuestion(this.form)
-						if (this.getMassage.success) {
+						if(this.getMassage.success){
 							this.$router.push("/crm/question");
 							toast.fire({
 								type: "success",
@@ -218,7 +218,6 @@
 			this.getQuestion.variants.forEach((items,index)=>{
 				this.form.variants[index].answers = items.variants
 			})
-			console.log(this.form)
 		}
 	}
 </script>

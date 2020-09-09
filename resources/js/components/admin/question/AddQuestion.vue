@@ -180,9 +180,9 @@
 		    },
 			async saveQuestion(){
 				if (this.form.category_id != '') {
-					if (this.checkRadioBtn()) {
+					if (this.checkRadioBtn()){
 						await this.actionAddQuestion(this.form)
-						if (this.getMassage.success) {
+						if (this.getMassage.success){
 							toast.fire({
 								type: "success",
 								icon: 'success',
