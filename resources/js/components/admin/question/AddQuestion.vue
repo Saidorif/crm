@@ -181,13 +181,15 @@
 			async saveQuestion(){
 				if (this.form.category_id != '') {
 					if (this.checkRadioBtn()) {
-					await this.actionAddQuestion(this.form)
-					toast.fire({
-						type: "success",
-						icon: 'success',
-						title: "Вопрос добавлено!"
-					});
-					this.$router.push("/crm/question");
+						await this.actionAddQuestion(this.form)
+						if (this.getMassage.success) {
+							toast.fire({
+								type: "success",
+								icon: 'success',
+								title: "Вопрос добавлено!"
+							});
+							this.$router.push("/crm/question");
+						}
 					}else{
 						toast.fire({
 							type: "error",

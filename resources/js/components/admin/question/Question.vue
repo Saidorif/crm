@@ -14,7 +14,6 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-							<th scope="col">Вопрос</th>
 							<th scope="col">Направления</th>
 							<th scope="col">Действия</th>
 						</tr>
@@ -22,7 +21,6 @@
 					<tbody>
 						<tr v-for="(item,index) in getQuestionList.data">
 							<td scope="row">{{index+1}}</td>
-							<td>{{item.title}}</td>
 							<td>{{item.category.name}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>

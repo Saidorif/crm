@@ -17,7 +17,6 @@
 							<th scope="col">{{ $t('nameinfo') }}</th>
 							<th scope="col">Количество</th>
 							<th scope="col">Время</th>
-							<th scope="col">Балл</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
@@ -27,7 +26,6 @@
 							<td>{{item.name}}</td>
 							<td>{{item.qty}}</td>
 							<td>{{item.time}}</td>
-							<td>{{item.score}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/category/edit/${item.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>

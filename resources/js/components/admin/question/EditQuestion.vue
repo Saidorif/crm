@@ -187,12 +187,14 @@
 				if (this.form.category_id != ''){
 					if (this.checkRadioBtn()){
 						await this.actionUpdateQuestion(this.form)
-						this.$router.push("/crm/question");
-						toast.fire({
-							type: "success",
-							icon: 'success',
-							title: "Вопрос изменено!"
-						});
+						if (this.getMassage.success) {
+							this.$router.push("/crm/question");
+							toast.fire({
+								type: "success",
+								icon: 'success',
+								title: "Вопрос изменено!"
+							});
+						}
 					}else{
 						toast.fire({
 							type: "error",

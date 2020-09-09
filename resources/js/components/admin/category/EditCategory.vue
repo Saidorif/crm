@@ -44,17 +44,6 @@
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
 				    	>
 					  </div>
-					  <div class="form-group col-md-6">
-					    <label for="score">Балл</label>
-					    <input 
-					    	type="number" 
-					    	class="form-control input_style" 
-					    	id="score" 
-					    	placeholder="Балл..."
-					    	v-model="form.score"
-					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
-				    	>
-					  </div>
 					  <div class="form-group col-md-12 d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
@@ -77,7 +66,6 @@
 					name:'',
 					qty:'',
 					time:'',
-					score:'',
 				},
 				requiredMessage:null,
 				requiredInput:false,
@@ -100,7 +88,7 @@
 	    		return this.requiredInput && input === '';
 		    },
 			async saveCategory(){
-				if (this.form.name != '' && this.form.qty != '' && this.form.time != '' && this.form.score != ''){
+				if (this.form.name != '' && this.form.qty != '' && this.form.time != ''){
 					await this.actionUpdateCategory(this.form)
 					await this.actionCategoryPag()
 					this.$router.push("/crm/category");
