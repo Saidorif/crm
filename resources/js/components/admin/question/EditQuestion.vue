@@ -218,7 +218,7 @@
 			this.getQuestion.variants.forEach((items,index)=>{
 				this.form.variants[index].answers = items.variants
 			})
-			// console.log(this.form)
+			console.log(this.form)
 		}
 	}
 </script>
