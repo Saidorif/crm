@@ -5,6 +5,8 @@ import {TokenService} from './services/storage.service'
 import {ability} from "./store/store";
 import store from "./store/store";
 
+// Master
+import Master from './components/layouts/Master'
 // Dashboard component
 import Dashboard from './components/admin/Dashboard'
 import Admin from './components/admin/layouts/Admin'
@@ -323,6 +325,28 @@ const router = new Router({
 			components:{
 				default:Login,
 			},
+			
+		},
+		{
+			path:'/main',
+			name:'master',
+			meta:{
+				requiredAuth:true
+			},
+			components:{
+				default:Master,
+			},
+			children:[
+				// {
+				// 	path:'/',
+				// 	component:Question,
+				// 	meta:{
+				// 		action:'index',
+				// 		subject:'QuestionController'
+				// 	}
+				// },
+			]
+			
 		},
 		{
 			path:'*',

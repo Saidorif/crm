@@ -90,6 +90,20 @@
 		      }
 		    }
 	  	},
+	  	beforeRouteEnter(to, from, next){
+		    if (TokenService.getToken()){
+		      if (TokenService.getCurrentUser().role.name == 'admin' || TokenService.getCurrentUser().role.name == 'kadr') {
+		        next(vm=>{
+		          vm.$router.push('/crm/dashboard')
+		        })
+		      }else{
+		        next(vm=>{
+		          vm.$router.push('/crm/profile')
+		        })
+		      }
+		    }
+		    next()
+	  	},
 	}
 </script>
 <style scoped>
