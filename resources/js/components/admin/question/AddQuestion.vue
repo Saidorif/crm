@@ -6,7 +6,7 @@
 			    	<i class="peIcon pe-7s-drawer"></i>
 				    {{ $t('admin_menu.add_questions') }}
 				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/question"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				<router-link class="btn btn-primary back_btn" to="/crm/question"><span class="peIcon pe-7s-back"></span> {{ $t('back') }}</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveQuestion" >

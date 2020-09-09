@@ -14,14 +14,9 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-<<<<<<< HEAD
 							<th scope="col"> {{ $t('admin_menu.directions') }}</th>
+							<th scope="col">{{ $t('number_question') }} </th>
 							<th scope="col">{{ $t('action') }}</th>
-=======
-							<th scope="col">Направления</th>
-							<th scope="col">Количество вопроса</th>
-							<th scope="col">Действия</th>
->>>>>>> 354866bbbc4be7cf4a2b1251c7bf7b8175b35c8a
 						</tr>
 					</thead>
 					<tbody>
