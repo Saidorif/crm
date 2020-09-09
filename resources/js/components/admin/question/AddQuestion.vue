@@ -12,13 +12,13 @@
 		  		<form @submit.prevent.enter="saveQuestion" >
 					<div class="row">
 					  <div class="form-group col-md-12">
-					    <label for="categoryName">Управление</label>
+					    <label for="categoryName">Направления</label>
 					    <select 
 					    	class="form-control" 
 					    	:class="isRequired(form.category_id) ? 'isRequired' : '' " 
 					    	id="countryName" 
 					    	v-model="form.category_id">
-					      <option value="" selected disabled>Выберите управление</option>
+					      <option value="" selected disabled>Выберите направление</option>
 					      <option :value="category.id" v-for="(category,index) in getCategories">{{category.name}}</option>
 					    </select>
 					  </div>
