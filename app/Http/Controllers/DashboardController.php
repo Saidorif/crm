@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $result = [];
-        //Tests count by status
+        //Tests count by months
         $months = [
             1 => 'Январь',
             2 => 'Февраль',
@@ -38,70 +38,46 @@ class DashboardController extends Controller
                  ->count();
             $testsByMonth[$value] = $test;
         }
-        // $testsByMonth = DB::table('attestats')
-        //          ->select('status', DB::raw('count(*) as total'))
-        //          ->groupBy('status')
-        //          ->get();
-        
-        //Users count by gender
-        $users = Db::table('users')
-                // ->select('gender', DB::raw('count(*) as total'))
-                // ->groupBy('gender')
-                ->get();
+        //Users
+        $users = Db::table('users')->get();
 
         //Users by age
         $attestats = Attestat::all();
-        $result['ages']['18-30'] = 0;
-        $result['ages']['31-45'] = 0;
-        $result['ages']['46-60'] = 0;
-        $result['ages']['60-100'] = 0;
-
-        // $result['staj']['0-1'] = 0;
-        // $result['staj']['1-3'] = 0;
-        // $result['staj']['3-5'] = 0;
-        // $result['staj']['5-7'] = 0;
-        // $result['staj']['7-10'] = 0;
-        // $result['staj']['10-50'] = 0;
+        $result['ages']['18-30']['count'] = 0;
+        $result['ages']['18-30']['percent'] = 0;
+        $result['ages']['31-45']['count'] = 0;
+        $result['ages']['31-45']['percent'] = 0;
+        $result['ages']['46-60']['count'] = 0;
+        $result['ages']['46-60']['percent'] = 0;
+        $result['ages']['60-100']['count'] = 0;
+        $result['ages']['60-100']['percent'] = 0;
 
         foreach ($attestats as $key => $a) {
             $age = $a->getAge();
             //Sort by age
             if($age > 18 && $age <= 30){
-                $result['ages']['18-30'] = $result['ages']['18-30'] + 1;
+                $result['ages']['18-30']['count'] = $result['ages']['18-30']['count'] + 1;
+                $percent = ($a->true_answers / $a->limit) * 100;
+                $result['ages']['18-30']['percent'] = ($result['ages']['18-30']['percent'] + $percent) / $result['ages']['18-30']['count'];
             }
             if($age > 30 && $age <= 45){
-                $result['ages']['31-45'] = $result['ages']['31-45'] + 1;
+                $result['ages']['31-45']['count'] = $result['ages']['31-45']['count'] + 1;
+                $percent = ($a->true_answers / $a->limit) * 100;
+                $result['ages']['31-45']['percent'] = ($result['ages']['31-45']['percent'] + $percent) / $result['ages']['31-45']['count'];
             }
             if($age > 45 && $age <= 60){
-                $result['ages']['46-60'] = $result['ages']['46-60'] + 1;
+                $result['ages']['46-60']['count'] = $result['ages']['46-60']['count'] + 1;
+                $percent = ($a->true_answers / $a->limit) * 100;
+                $result['ages']['46-60']['percent'] = ($result['ages']['46-60']['percent'] + $percent) / $result['ages']['46-60']['count'];
             }
             if($age > 60){
-                $result['ages']['60-100'] = $result['ages']['60-100'] + 1;
+                $result['ages']['60-100']['count'] = $result['ages']['60-100']['count'] + 1;
+                $percent = ($a->true_answers / $a->limit) * 100;
+                $result['ages']['60-100']['percent'] = ($result['ages']['60-100']['percent'] + $percent) / $result['ages']['60-100']['count'];
             }
-
-            //Sort by staj
-            // if($staj <= 1){
-            //     $result['staj']['0-1'] = $result['staj']['0-1'] + 1;
-            // }
-            // if($staj > 1 && $staj <= 3){
-            //     $result['staj']['1-3'] = $result['staj']['1-3'] + 1;
-            // }
-            // if($staj > 3 && $staj <= 5){
-            //     $result['staj']['3-5'] = $result['staj']['3-5'] + 1;
-            // }
-            // if($staj > 5 && $staj <= 7){
-            //     $result['staj']['5-7'] = $result['staj']['5-7'] + 1;
-            // }
-            // if($staj > 7 && $staj <= 10){
-            //     $result['staj']['7-10'] = $result['staj']['7-10'] + 1;
-            // }
-            // if($staj > 10){
-            //     $result['staj']['10-50'] = $result['staj']['10-50'] + 1;
-            // }
         }
 
         $result['tests'] = $testsByMonth;
-        // $result['attestats'] = $attestats;
         return response()->json(['success' => true, 'result' => $result]);
     }
 }
