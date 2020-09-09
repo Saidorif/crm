@@ -68,12 +68,15 @@
 							  </div>
 							  <div class="form-group col-md-2 radio_style_block">
 							  	<template v-if="answer.title != ''">
-								    <input type="radio" class="form-control input_style radio_style_input" 
+								    <input 
+								    	type="radio" 
+								    	class="form-control input_style radio_style_input" 
 								    	:id="'is_true'+index+key" 
 								    	placeholder="Ответ..."
 								    	:name="'is_true'+index"
 								    	v-model="answer.is_true"
 								    	value="1"
+								    	@click="changeRadio(variant.id,answer.id)"
 								    >
 								    <label :for="'is_true'+index+key" class="radio_style_label" >Правильный ответ</label>
 							  	</template>
@@ -139,10 +142,24 @@
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
+		    changeRadio(variantId,answerId){
+		    	if (variantId && answerId) {
+		    		this.form.variants.forEach((variant,index)=>{
+	    				variant.answers.forEach((answer,key)=>{
+			    			if(answer.question_id == variantId){
+			    				if(answer.id == answerId){
+			    					answer.is_true = 1
+			    				}else{
+			    					answer.is_true = 0
+			    				}
+			    			}
+	    				})
+		    		})
+		    	}
+		    },
 		    checkRadioBtn(){
 				let counter = null
 				this.form.variants.map((items,index)=>{
-					console.log(items)
 					items.answers.map((item,key)=>{
 						if (item.is_true == 1){
 							counter = counter + parseInt(item.is_true) 
@@ -185,7 +202,6 @@
 		    	Vue.delete(this.form.variants,index)
 		    },
 			async saveQuestion(){
-				console.log(this.form)
 				if (this.form.category_id != ''){
 					if (this.checkRadioBtn()){
 						await this.actionUpdateQuestion(this.form)

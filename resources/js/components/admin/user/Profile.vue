@@ -83,9 +83,9 @@
                       accept=".png, .jpg, .jpeg"
                       @change="changePhoto($event)"
                     />
-                    <label for="image">
+                   <!--  <label for="image">
                       <i class="pe-7s-pen"></i>
-                    </label>
+                    </label> -->
                   </div>
                   <div class="avatar-preview">
                     <div
