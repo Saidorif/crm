@@ -35,7 +35,6 @@ class TestCategoryController extends Controller
             'name'   => 'required|string',
             'status' => 'string|nullable',
             'qty' => 'string|required',
-            'score' => 'string|required',
             'time' => 'string|required',
         ]);
 
@@ -58,7 +57,6 @@ class TestCategoryController extends Controller
             'name'   => 'required|string',
             'status' => 'string|nullable',
             'qty' => 'string|required',
-            'score' => 'string|required',
             'time' => 'string|required',
         ]);
 

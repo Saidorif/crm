@@ -17,7 +17,6 @@ class CreateTestCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('qty');
-            $table->string('score');
             $table->string('time');
             $table->string('status')->default('active');
             $table->timestamps();

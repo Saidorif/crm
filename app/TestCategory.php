@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TestCategory extends Model
 {
-    protected $fillable = ['name','status','qty','score','time'];
+    protected $fillable = ['name','status','qty','time'];
 
     public function questions()
     {
