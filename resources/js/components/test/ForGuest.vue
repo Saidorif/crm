@@ -2,7 +2,7 @@
 	<div class="for_guest">
 		<template v-if="!showResult">
 			<div class="test_header" v-if="userInfo">
-				<h1>Ф.И.О: {{userInfo.fio}}</h1>
+				<h1>{{ $t('user_info.fio')}}: {{userInfo.fio}}</h1>
 				<h1 class="pr-100" v-if="tests.length > 0" >{{nextItemIndex + 1}}/{{tests.length}}</h1>
 			</div>
 			<div class="test_pogination_responsive">
@@ -39,7 +39,7 @@
 				<button 
 					class="btn_prev" 
 					@click.prevent="prevBtn">
-					<span class="pe-7s-angle-left-circle"></span> предыдущий 
+					<span class="pe-7s-angle-left-circle"></span>   {{ $t('prev')}}
 				</button>
 				<button 
 					class="btn_next" 
@@ -47,14 +47,14 @@
 					:disabled="disabledTrue"
 					v-if="myAnswers[myAnswers.length - 1].answer_id == false"
 				>
-					следующий <span class="pe-7s-angle-right-circle"></span> 
+					{{ $t('next')}} <span class="pe-7s-angle-right-circle"></span> 
 				</button>
 				<button 
 					v-if="myAnswers[myAnswers.length - 1].answer_id != false"
 					class="btn_finish" 
 					@click.prevent="completeTest">
 					<span class="pe-7s-display1"></span>
-					завершить тест!
+					{{ $t('close_test')}}
 				</button>
 			</div>
 			<div class="base-timer" >
