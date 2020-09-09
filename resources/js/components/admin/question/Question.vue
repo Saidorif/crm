@@ -28,9 +28,9 @@
 								<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteQuestion(item.id)">
+							<!-- 	<button class="btn_transparent" @click="deleteQuestion(item.id)">
 									<i class="pe_icon pe-7s-junk trashColor"></i>
-								</button>
+								</button> -->
 							</td>
 						</tr>
 					</tbody>
