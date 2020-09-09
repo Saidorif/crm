@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Attestat extends Model
 {
@@ -58,5 +59,11 @@ class Attestat extends Model
     public function category()
     {
         return $this->belongsTo(TestCategory::class,'category_id');
+    }
+
+    public function getAge()
+    {
+        $date1 = Carbon::create($this->date_birth);
+        return $date1->diffInYears(Carbon::now());
     }
 }
