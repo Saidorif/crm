@@ -26,7 +26,7 @@ class QuestionController extends Controller
 
     public function edit($id)
     {
-        $category = TestCategory::with('questionsWithVariant')->find($id);
+        $category = TestCategory::with('variants')->find($id);
         if(!$category){
             return response()->json(['error' => true, 'message' => 'Вопрос не найден']);
         }

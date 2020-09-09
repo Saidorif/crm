@@ -13,7 +13,7 @@ class TestCategory extends Model
         return $this->hasMany(\App\Question::class, 'category_id');
     }
 
-    public function questionsWithVariant()
+    public function variants()
     {
         return $this->hasMany(\App\Question::class, 'category_id')->with('variants');
     }
