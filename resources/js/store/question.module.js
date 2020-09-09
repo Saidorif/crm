@@ -50,7 +50,7 @@ const actions = {
 	async actionUpdateQuestion({commit},payload){
 		try {
 			const questions =  await QuestionService.updateQuestion(payload);
-			await commit('setEditQuestion',questions.data.result)
+			await commit('setMessage',questions.data)
 			return true
 		} catch (error) {
 			return false
