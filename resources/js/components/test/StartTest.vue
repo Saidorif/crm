@@ -11,7 +11,7 @@
 			  <form @submit.prevent.enter="startTest" >
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label class="typo__label">Tagging</label>
+							<label class="typo__label">Направление</label>
 							<multiselect 
 								v-model="form.category_id" 
 								placeholder="Выберите направление" 
@@ -107,30 +107,11 @@
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 			},
-			toggleUnSelect({ value, id }) {
-				this.form.category_id = this.form.category_id.filter(element => {
-					 return element.id != id;
-				});
-			},
-			addTag(){
-				console.log()
-			},
 		    async startTest(){
 		    	if (this.checkInputs) {
 		    		await this.actionStartTest(this.form)
 					TokenService.saveGuestInfo(this.form)
-					console.log('ss')
-		    		if (this.form.type == 'employee'){
-		    			toast.fire({
-							type: "success",
-							icon: 'success',
-							title: "Тест создан!"
-						});
-						this.form.category_id = ''
-						this.form.fio = ''
-						this.form.limit = ''
-		    		}else{
-			    		if (this.getTests.success){
+			    	if (this.getTests.success){
 			    			this.$router.push("/crm/test/test-for-guest");
 			    			toast.fire({
 								type: "success",
@@ -138,14 +119,13 @@
 								title: "Тест начался!"
 							});
 			    		}
-			    		else if(this.getTests.error && this.getTests.message == 'Big limit...'){
-			    			toast.fire({
+			    	else if(this.getTests.error && this.getTests.message == 'Big limit...'){
+			    		toast.fire({
 								type: "error",
 								icon: 'error',
 								title: "Эти типы вопросов не достаточно в базе данных!"
 							});
-			    		}
-		    		}
+			    	}
 		    	}else{
 		    		this.requiredInput = true
 		    	}
