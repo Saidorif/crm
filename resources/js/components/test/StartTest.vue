@@ -4,17 +4,17 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-browser"></i>
-				    Начать тест для кандидат
+				    {{ $t('start_test') }}
 				</h4>
 		  	</div>
 		  	<div class="card-body">
 			  <form @submit.prevent.enter="startTest" >
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label class="typo__label">Направление</label>
+							<label class="typo__label"> {{ $t('admin_menu.directions') }}</label>
 							<multiselect 
 								v-model="selectedCategory" 
-								placeholder="Выберите направление" 
+								:placeholder="$t('admin_menu.select_directions')" 
 								label="name" 
 								track-by="id"
 								:options="getCategories" 
@@ -24,37 +24,37 @@
 							></multiselect>
 					  	</div>
 						<div class="form-group col-md-6">
-						    <label for="fio">Ф.И.О</label>
+						    <label for="fio">{{$t('user_info.fio')}}</label>
 						    <input 
 						    	type="text" 
 						    	class="form-control input_style" 
 						    	id="fio" 
-						    	placeholder="Ф.И.О"
+						    	:placeholder="$t('user_info.fio')"
 						    	v-model="form.fio"
 						    	:class="isRequired(form.fio) ? 'isRequired' : ''"  
 					    	>
 					  	</div>
 						<div class="form-group col-md-6">
-						    <label for="birthday">Туғулган вақти</label>
+						    <label for="birthday">{{ $t('user_info.date_birthday') }}</label>
 							<date-picker v-model="form.date_birth" valueType="format" :class="isRequired(form.date_birth) ? 'isRequired' : ''" ></date-picker>
 					  	</div>
 						<div class="form-group col-md-6 double_input">
-						    <label for="passport">Паспорт серияси, рақами </label>
+						    <label for="passport">  {{ $t('user_info.passport_number_seria') }}</label>
 							<input type="text" class="form-control input_style"  v-model="form.pasport_seriya"  :class="isRequired(form.pasport_seriya) ? 'isRequired' : ''" maxlength="2">
 							<input type="text" pattern="\d*" maxlength="7" class="form-control input_style"  v-model="form.pasport_number" :class="isRequired(form.pasport_number) ? 'isRequired' : ''"  >
 					  	</div>
 						<div class="form-group col-md-6">
-						    <label for="phoneNum">Телефон рақами </label>
+						    <label for="phoneNum">{{ $t('user_info.phone_number') }} </label>
 							<input type="text" class="form-control input_style"  v-model="form.phone"  :class="isRequired(form.phone) ? 'isRequired' : ''" placeholder="+998901234567" >
 					  	</div>
 						<div class="form-group col-md-6">
-						    <label for="position">Лавозим</label>
-							<input type="text" class="form-control input_style"  v-model="form.position"  :class="isRequired(form.position) ? 'isRequired' : ''" placeholder="Лавозимни киритинг">
+						    <label for="position">{{ $t('user_info.position') }}</label>
+							<input type="text" class="form-control input_style"  v-model="form.position"  :class="isRequired(form.position) ? 'isRequired' : ''" :placeholder="$t('user_info.position')">
 					  	</div>
 				  		<div class="form-group col-lg-12 form_btn">
 						  	<button type="submit" class="btn btn-primary btn_save_category btn_start_test">
 						  		<i class="pe-7s-play"></i>
-							  	Начать тест
+							  	{{ $t('begin_test') }}
 							</button>	
 				  	  	</div>
 					</div>

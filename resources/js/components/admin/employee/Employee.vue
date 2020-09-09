@@ -5,26 +5,26 @@
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i  class="peIcon pe-7s-users"></i>
-					     Пользователи 
+					     {{ $t('admin_menu.employee') }} 
 					</h4>
 					<div class="add_user_btn">
 			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
 						    <i class="fas fa-filter"></i>
-			            	Филтр
+			            	{{ $t('filter') }} 
 						</button>
-						<router-link class="btn btn-primary" to="/crm/employee/add"><i class="fas fa-plus"></i>Добавить</router-link>
+						<router-link class="btn btn-primary" to="/crm/employee/add"><i class="fas fa-plus mr-2"></i>{{ $t('add_info') }} </router-link>
 		            </div>
 		  		</div>
 		    	<transition name="slide">
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
   					  		<div class="form-group col-lg-3">
-	  							<label for="name">Ф.И.О</label>
+	  							<label for="name">{{ $t('user_info.fio') }}</label>
 	  							<input 
 	  								type="text" 
 	  								class="form-control" 
 	  								id="name" 
-	  								placeholder="Ф.И.О..."
+	  								:placeholder="$t('user_info.fio')"
 	  								v-model="filter.name"
   								>
 				  			</div>
@@ -38,20 +38,20 @@
   								</select>
 				  			</div>	 -->
   					  		<div class="form-group col-lg-3">
-	  							<label for="category_id">Направления</label>
+	  							<label for="category_id">{{$t('user_info.position')}}</label>
   								<select name="" v-model="filter.category_id" class="form-control" >
-  									<option value="">Выберите направления!</option>
+  									<option value=""> {{$t('admin_menu.select_directions')}}</option>
   									<option :value="cat.id" v-for="(cat,index) in getCategories" :key="cat.id">{{cat.name}}</option>
   								</select>
 				  			</div>	
 						  	<div class="col-lg-3 form-group btn_search">
 							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
 							  		<i class="fas fa-search"></i>
-								  	найти
+								  	{{$t('search')}}
 							  	</button>
 							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
 							  		<i class="fas fa-times"></i>
-								  	сброс
+								  	{{$t('clean')}}
 							  	</button>
 					  	  	</div>	
 				  		</div>
@@ -64,12 +64,12 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-							<th scope="col">Ф.И.О</th>
-							<th scope="col">Должность</th>
-							<th scope="col">Рол</th>
+							<th scope="col">{{ $t('user_info.fio') }}</th>
+							<th scope="col">{{ $t('user_info.position') }}</th>
+							<th scope="col">{{ $t('user_info.role') }}</th>
 							<th scope="col">E-mail</th>
-							<th scope="col">Телефон</th>
-							<th scope="col">Действия</th>
+							<th scope="col">{{ $t('user_info.phone_number') }}</th>
+							<th scope="col">{{ $t('action') }}</th>
 						</tr>
 					</thead>
 					<tbody>

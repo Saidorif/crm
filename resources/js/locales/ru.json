@@ -11,6 +11,7 @@
         "my_requests":"Мои заявки",
         "change_pass":"Изменить пароль",
         "employee":"Пользователи",
+        "add_employee":"Добавить пользователя",
         "position":"Должность",
         "settings":"Настройки",
         "setting":"Настройка",
@@ -50,7 +51,12 @@
         "change_pass": "Изменить пароль",
         "password": "Пароль",
         "confirm_password": "Подтвердите пароль",
-        "password_dnmatch": "Пароль не совпадает"
+        "password_dnmatch": "Пароль не совпадает",
+        "date_birthday": "Дата рождения",
+        "passport_number_seria": "Серия паспорта, номер",
+        "phone_number": "Телефон номер",
+        "role": "Рол",
+        "select_role": "Выберите рол"
     },
     "directions_name": "Название направления",
     "save": "Сохранить",
@@ -69,5 +75,9 @@
     "answer": "Ответ",
     "true_answer": "Правильный ответ",
     "remove_item": "Вы действительно хотите удалить?",
-    "nameinfo": "Название"
+    "nameinfo": "Название",
+    "logout": "Выход",
+    "enter": "Войти",
+    "start_test": "Начать тест для кандидат",
+    "begin_test": "Начать тест"
 }

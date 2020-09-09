@@ -16,7 +16,7 @@
         <LangSwitcher />
       </li>
       <li class="nav-item">
-        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2"></i>{{ $t('logout') }} </a>
+        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2 mr-2"></i>{{ $t('logout') }} </a>
       </li>
     </ul>
   </nav>
