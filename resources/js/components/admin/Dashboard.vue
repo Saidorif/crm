@@ -60,22 +60,22 @@
 		},
 		async mounted(){
 			await this.actionDashboard()
-			this.getDashboard.tests.forEach((elem, key) => {
-				if(elem.status == 'complete'){
-					this.testsData['Завершено'] = parseInt(elem.total)
-				}else if(elem.status == 'fail'){
-					this.testsData['Неудавшийся'] = parseInt(elem.total)
-				}else if(elem.status == 'progress'){
-					this.testsData['Прогресс'] = parseInt(elem.total)
-				}else if(elem.status == 'start'){
-					this.testsData['Начало'] = parseInt(elem.total)
-				}
-			});
-			this.getDashboard.users.forEach((elem, key) => {
-				this.usersData[elem.gender == 'male' ? 'Мужчина' : 'Женщина' ] = parseInt(elem.total)
-			});
-			console.log(this.testsData)
-			this.loaded = true;
+			console.log(this.getDashboard)
+			// this.getDashboard.tests.forEach((elem, key) => {
+			// 	if(elem.status == 'complete'){
+			// 		this.testsData['Завершено'] = parseInt(elem.total)
+			// 	}else if(elem.status == 'fail'){
+			// 		this.testsData['Неудавшийся'] = parseInt(elem.total)
+			// 	}else if(elem.status == 'progress'){
+			// 		this.testsData['Прогресс'] = parseInt(elem.total)
+			// 	}else if(elem.status == 'start'){
+			// 		this.testsData['Начало'] = parseInt(elem.total)
+			// 	}
+			// });
+			// this.getDashboard.users.forEach((elem, key) => {
+			// 	this.usersData[elem.gender == 'male' ? 'Мужчина' : 'Женщина' ] = parseInt(elem.total)
+			// });
+			// this.loaded = true;
 		}
 	}
 </script>
