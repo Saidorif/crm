@@ -60,7 +60,7 @@
 				await this.actionQuestionList(page)
 			},
 			async deleteQuestion(id){
-				if(confirm("Вы действительно хотите удалить?")){
+				if(confirm(this.$t('remove_item'))){
 					let page = 1
 					await this.actionDeleteQuestion(id)
 					await this.actionQuestionList(page)
