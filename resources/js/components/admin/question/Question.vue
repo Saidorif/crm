@@ -43,9 +43,7 @@
 	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		data(){
-			return{
-
-			}
+			return{}
 		},
 		async mounted(){
 			let page = 1
