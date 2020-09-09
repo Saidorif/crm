@@ -59,14 +59,14 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <router-link class="nav-link" to="/crm/test/test-user"  v-if="$can('userindex', 'AttestatController')">
               <i class="peIcon pe-7s-note2"></i>
               <p>
                 {{ $t('admin_menu.tests') }}  <span class="badge badge-warning">user</span>
               </p>
             </router-link>
-          </li>
+          </li> -->
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/category" v-if="$can('index', 'TestCategoryController')">
               <span class="peIcon pe-7s-drawer" style="font-size: 20px;"></span>

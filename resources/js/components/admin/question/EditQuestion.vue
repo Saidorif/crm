@@ -35,7 +35,7 @@
 							    		type="button" 
 							    		class="btn btn-danger btn_save_category" 
 							    		@click="removeAnswer(index)"
-							    		v-if="form.variants.length > 1"
+							    		v-if="hideBtn(variant.id)"
 						    		>
 								  		<i class="fas fa-trash"></i>
 								  		Удалить вопрос № <em>{{index + 1}}</em>
@@ -141,6 +141,15 @@
 			...mapActions('question',['actionQuestionList','actionUpdateQuestion','actionEditQuestion']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
+		    },
+		    hideBtn(id){
+		    	if (this.form.variants.length > 0) {
+		    		if(id){
+		    			return false
+		    		}else{
+		    			return true
+		    		}
+		    	}
 		    },
 		    changeRadio(variantId,answerId){
 		    	if (variantId && answerId) {
