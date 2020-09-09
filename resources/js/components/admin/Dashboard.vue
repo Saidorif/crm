@@ -4,29 +4,29 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-rocket"></i>
-				    Админ панель
+				    {{ $t('admin_menu.admin_panel') }}
 				</h4>
 		  	</div>
 		  	<div class="card-body">
 	  			<div class="row">
 	  				<div class="col-md-6 chartBlock" v-if="loaded" >
 						  <div class="chartBlock_item">
-	  						<Bar :propchartdata="this.getDashboard.ages" propLabel="По возрасту" :propColor="['#f09311', '#0b9ca6', '#bc1b21', '#76cac1']"/>
+	  						<Bar :propchartdata="this.getDashboard.ages" :propLabel="$t('admin_menu.chart_age')" :propColor="['#f09311', '#0b9ca6', '#bc1b21', '#76cac1']"/>
 						  </div>
 	  				</div>
 	  				<div class="col-md-6 chartBlock" v-if="loaded">
 						  <div class="chartBlock_item">
-	  						<Pie :propchartdata="this.getDashboard.staj" propLabel="По опыту работы" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+	  						<Pie :propchartdata="this.getDashboard.staj" :propLabel="$t('admin_menu.chart_exper')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						  </div>
 	  				</div>
 					<div class="col-md-6 chartBlock" v-if="loaded">
 						<div class="chartBlock_item">
-	  						<Pie :propchartdata="this.usersData" propLabel="По полу" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+	  						<Pie :propchartdata="this.usersData" :propLabel="$t('admin_menu.chart_sex')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						</div>
 	  				</div>
 					<div class="col-md-6 chartBlock" v-if="loaded">
 						<div class="chartBlock_item">
-	  						<Bar :propchartdata="this.testsData" propLabel="По тесту" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+	  						<Bar :propchartdata="this.testsData" :propLabel="$t('admin_menu.chart_test')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
 						</div>
 	  				</div>
 	  			</div>

@@ -16,11 +16,10 @@
 								v-model="form.category_id" 
 								placeholder="Выберите направление" 
 								label="name" 
-								track-by="name" 
+								track-by="id"
 								:options="getCategories" 
 								:multiple="true" 
 								:taggable="true" 
-								selectLabel=""
 							></multiselect>
 					  	</div>
 						<div class="form-group col-md-6">

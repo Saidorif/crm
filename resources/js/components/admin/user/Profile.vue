@@ -2,7 +2,8 @@
   <div class="card">
     <div class="card-header">
       <h3 class="card-title title_user mb-0">
-        <i class="peIcon pe-7s-user"></i>Мои данные
+        <i class="peIcon pe-7s-user"></i>
+        {{ $t('admin_menu.my_info') }}
       </h3>
     </div>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -16,7 +17,7 @@
           aria-controls="home"
           aria-selected="true"
         >
-          <i class="peIcon pe-7s-config"></i>Основные настройки
+          <i class="peIcon pe-7s-config"></i>{{ $t('user_info.user_settings') }}
         </a>
       </li>
       <li class="nav-item">
@@ -29,7 +30,7 @@
           aria-controls="profile"
           aria-selected="false"
         >
-          <i class="peIcon pe-7s-unlock"></i> Изменить пароль
+          <i class="peIcon pe-7s-unlock"></i> {{ $t('user_info.change_pass') }}
         </a>
       </li>
 <!--       <li class="nav-item">
@@ -52,24 +53,24 @@
           <div class="card-body d-flex flex-wrap" v-if="form.user">
             <div class="col-md-8">
               <div class="form-group col-md-12">
-                <label for="name">Ф.И.О</label>
+                <label for="name">{{ $t('user_info.fio') }}</label>
                 <p class="form-control input_style disabled">{{form.user.name}}</p>
               </div>
               <div class="form-group col-md-12">
-                <label for="name">E-mail</label>
+                <label for="name">{{ $t('user_info.email') }}</label>
                 <p class="form-control input_style disabled">{{ form.user.email }}</p>
               </div>
               <div class="form-group col-md-12">
-                <label for="name">Должность</label>
+                <label for="name">{{ $t('user_info.position') }}</label>
                 <p
                   class="form-control input_style disabled"
                 >{{ form.position }}</p>
               </div>
               <div class="form-group col-md-12">
-                <label for="name">Статус</label>
+                <label for="name">{{ $t('user_info.status.title') }}</label>
                 <p
                   class="form-control input_style disabled"
-                >{{ form.user.status == 'active' ? 'Активный' : 'Неактивный' }}</p>
+                >{{ form.user.status == 'active' ? $t('user_info.status.active') : $t('user_info.status.inactive') }}</p>
               </div>
             </div>
             <div class="col-md-4">
@@ -102,34 +103,34 @@
         <form @submit.prevent.enter="changePassword">
           <div class="card-body d-flex flex-wrap">
             <div class="form-group col-md-6">
-              <label for="exampleInputPassword1">Пароль</label>
+              <label for="exampleInputPassword1">{{$t('user_info.password')}}</label>
               <input
                 type="password"
                 class="form-control input_style"
                 id="exampleInputPassword1"
-                placeholder="Пароль.."
+                :placeholder="$t('user_info.password')"
                 :class="isRequiredPassword(passwords.password) ? 'isRequired' : ''"
                 v-model="passwords.password"
               />
             </div>
             <div class="form-group col-md-6">
-              <label for="ConfirmPassword1">Подтвердите пароль</label>
+              <label for="ConfirmPassword1">{{$t('user_info.confirm_password')}}</label>
               <input
                 type="password"
                 class="form-control input_style"
                 id="ConfirmPassword1"
-                placeholder="Подтвердите пароль.."
+                :placeholder="$t('user_info.confirm_password')"
                 v-model="passwords.confirm_password"
                 :class="isRequiredPassword(passwords.confirm_password) ? 'isRequired' : ''"
                 @input="confirmPassword()"
               />
               <small class="redText" v-if="checkPassword">
-                <b>Пароль не совпадает</b>
+                <b>{{$t('user_info.password_dnmatch')}}</b>
               </small>
             </div>
             <div class="col-12 d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i> Сохранить
+                <i class="fas fa-save"></i> {{$t('save')}}
               </button>
             </div>
           </div>
