@@ -28,26 +28,34 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'title'       => 'required|string',
+            // 'title'       => 'required|string',
             'category_id' => 'required|integer',
-            'time' => 'required|integer',
             'variants' => 'required|array',
-            'variants.*.title' => 'required|string',
-            'variants.*.is_true' => 'required',
+            'variants.*.question_title' => 'required|string',
+            'variants.*.answers' => 'required|array',
+            'variants.*.answers.*.title' => 'required|string',
+            'variants.*.answers.*.is_true' => 'required',
         ]);
 
         if($validator->fails()){
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
+        $inputs = $request->all();
 
-        $question = Question::create($request->all());
-        $variants = $request->input('variants');
-        foreach ($variants as $key => $variant) {
-            $item = QuestionVariant::create([
-                'title' => $variant['title'],
-                'is_true' => (int)$variant['is_true'],
-                'question_id' => $question->id,
+        foreach ($inputs['variants'] as $key => $value) {
+            // return response()->json(['success' => true, 'result' => $inputs]);
+            $question = Question::create([
+                'title' => $value['question_title'],
+                'category_id' => $inputs['category_id'],
             ]);
+            $variants = $value['answers'];
+            foreach ($variants as $key => $variant) {
+                $item = QuestionVariant::create([
+                    'title' => $variant['title'],
+                    'is_true' => (int)$variant['is_true'],
+                    'question_id' => $question->id,
+                ]);
+            }
         }
         return response()->json(['success' => true, 'result' => $question]);
     }
