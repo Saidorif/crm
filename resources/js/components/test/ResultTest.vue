@@ -1,16 +1,16 @@
 <template>
 	<ul class="result_test user_info_result">
-		<li><b> Все вопросы</b> {{items.wrong_answers + items.true_answers}} в процентах 100%</li>
+		<li><b> {{$t('all_questions')}}</b> {{items.wrong_answers + items.true_answers}} {{$t('in_parsentage')}} 100%</li>
 		<li>
-			<b>Неправильные ответы:</b> {{items.wrong_answers ? items.wrong_answers : 0}} в процентах
+			<b>{{$t('wrong_answers')}}</b> {{items.wrong_answers ? items.wrong_answers : 0}} {{$t('in_parsentage')}}
 			{{countPercentage(items.wrong_answers)}}
 		</li>
 		<li>
-			<b>Правильные ответы:</b> {{items.true_answers ? items.true_answers : 0}} в процентах
+			<b>{{$t('correct_answers')}}</b> {{items.true_answers ? items.true_answers : 0}} {{$t('in_parsentage')}}
 			{{countPercentage(items.true_answers)}}
 		</li>
 		<router-link tag="button" class="btn btn-primary" :to='`/crm/test/test-result/${items.id}`'>
-			Показать результат теста
+			{{$t('show_result_test')}}
 		</router-link>
 	</ul>
 </template>

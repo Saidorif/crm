@@ -1,5 +1,6 @@
 <template>
 	<div class="add_question">
+				<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
@@ -100,7 +101,11 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+			import Loader from '../../Loader'
 	export default{
+		components:{
+			Loader
+		},
 		data(){
 			return{
 				form:{
@@ -125,7 +130,8 @@
 						},
 					],
 				},
-				requiredInput:false
+				requiredInput:false,
+				loading: true,
 			}
 		},
 		computed:{
@@ -204,6 +210,7 @@
 		},
 		async mounted(){
 			await this.actionCategoryList()
+			this.loading = false
 		}
 	}
 </script>

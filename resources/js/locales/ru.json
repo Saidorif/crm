@@ -29,7 +29,7 @@
         "tests":"Тесты"
     },
     "dashboard" :{
-        "chart_age": "По возрасту",
+        "chart_age": "По возрасту в процентах (%)",
         "chart_exper": "По опыту работы",
         "chart_test": "По тесту",
         "chart_sex": "По полу"
@@ -82,6 +82,14 @@
     "begin_test": "Начать тест",
     "prev": "предыдущий",
     "next": "следующий",
-    "close_test": "завершить тест!"
+    "close_test": "завершить тест!",
+    "all_questions": "Все вопросы",
+    "wrong_answers": "Неправильные ответы:",
+    "correct_answers": " Правильные ответы:",
+    "show_result_test": " Показать результат теста",
+    "in_parsentage": "в процентах",
+    "count_test": "Количество теста",
+    "status_test": "Статус Теста",
+    "time_test": "Срок теста"
     
 }

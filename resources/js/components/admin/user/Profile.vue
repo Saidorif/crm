@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+    		<Loader v-if="loading" />
     <div class="card-header">
       <h3 class="card-title title_user mb-0">
         <i class="peIcon pe-7s-user"></i>
@@ -225,7 +226,11 @@
 </template>	
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Loader from '../../Loader'
 export default {
+  components:{
+		Loader
+	},
   data() {
     return {
       form: {
@@ -244,7 +249,8 @@ export default {
       },
       requiredInput: false,
       requiredPassword: false,
-      checkPassword: false
+      checkPassword: false,
+      loading: true,
     };
   },
   computed: {
@@ -253,6 +259,7 @@ export default {
   async mounted() {
     await this.ActionProfile();
     this.form = this.getProfile;
+    this.loading = false
     console.log(this.form);
   },
   methods: {

@@ -22,7 +22,11 @@ export default {
 				responsive: true,
 				type: Object,
 				default: null,
-				maintainAspectRatio: false
+				maintainAspectRatio: false,
+				title: {
+					display: true,
+					text: this.propLabel
+				}
 			},
 		}
 	},

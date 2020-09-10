@@ -1,5 +1,6 @@
 <template>
 	<div class="employee">
+				<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header header_filter">
 		  		<div class="header_title">
@@ -99,7 +100,11 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+	import Loader from '../../Loader'
 	export default{
+		components:{
+			Loader
+		},
 		data(){
 			return{
 				filter:{
@@ -108,12 +113,14 @@
 					// position_id:'',
 				},
 				filterShow:false,
+				loading: true,
 			}
 		},
 		async mounted(){
 			let page = 1;
 			await this.actionEmployees({page:page,items:this.filter})
 			await this.actionCategoryList()
+			this.loading = false
 			// await this.actionPositionList()
 		},
 		computed:{

@@ -1,5 +1,6 @@
 <template>
   <div class="add_employee">
+    		<Loader v-if="loading" />
     <div class="card">
       <div class="card-header">
         <h3 class="card-title title_user mb-0">
@@ -135,9 +136,11 @@
 <script>
 import DatePicker from "vue2-datepicker";
 import { mapActions, mapGetters } from "vuex";
+import Loader from '../../Loader'
 export default {
   components: {
-    DatePicker
+    DatePicker,
+    Loader
   },
   data() {
     return {
@@ -154,13 +157,15 @@ export default {
       fileFormat: "нет-файла",
       requiredInput: false,
       checkPassword: false,
-      emailError: false
+      emailError: false,
+      loading: true,
     };
   },
   async mounted() {
     await this.actionRoleList();
     await this.actionCategoryList();
     // await this.actionPositionList();
+    this.loading = false
   },
   computed: {
     ...mapGetters("employee", ["getMassage"]),

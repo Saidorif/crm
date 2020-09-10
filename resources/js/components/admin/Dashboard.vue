@@ -1,5 +1,6 @@
 <template>
 	<div class="dashboard">
+		<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
@@ -11,12 +12,12 @@
 	  			<div class="row">
 	  				<div class="col-md-6 chartBlock" v-if="loaded" >
 						  <div class="chartBlock_item">
-	  						<Bar :propchartdata="this.getDashboard.ages" :propLabel="$t('dashboard.chart_age')" :propColor="['#f09311', '#0b9ca6', '#bc1b21', '#76cac1']"/>
+	  						<Bar :propchartdata="this.agesData" :propLabel="$t('dashboard.chart_age')" :propColor="['#f09311', '#0b9ca6', '#bc1b21', '#76cac1']"/>
 						  </div>
 	  				</div>
 	  				<div class="col-md-6 chartBlock" v-if="loaded">
 						  <div class="chartBlock_item">
-	  						<Pie :propchartdata="this.getDashboard.tests" :propLabel="$t('dashboard.chart_exper')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e']"/>
+	  						<Pie :propchartdata="this.getDashboard.tests" :propLabel="$t('dashboard.chart_exper')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e', '#0A2463', '#FB3640','#605F5E','#247BA0','#E2E2E2','#FFC6D9','#FFE1C6','#FFF7AE','#48284A']"/>
 						  </div>
 	  				</div>
 					<!-- <div class="col-md-6 chartBlock" v-if="loaded">
@@ -38,18 +39,22 @@
 	import Bar from './chart/Bar'
 	import Line from './chart/Line'
 	import Pie from './chart/Pie'
+	import Loader from '../Loader'
 	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		components:{
 			Bar,
 			Line,
 			Pie,
+			Loader
 		},
 		data(){
 			return{
 				loaded: false,
+				loading: true,
 				testsData: {},
 				usersData: {},
+				agesData: {},
 			}
 		},
 		computed:{
@@ -60,7 +65,10 @@
 		},
 		async mounted(){
 			await this.actionDashboard()
-			console.log(this.getDashboard.ages)
+			Object.keys(this.getDashboard.ages).forEach(element => {
+				this.agesData[element] =  parseFloat(this.getDashboard.ages[element].percent).toFixed(2)
+			});
+			this.loading = false;
 			// this.getDashboard.tests.forEach((elem, key) => {
 			// 	if(elem.status == 'complete'){
 			// 		this.testsData['Завершено'] = parseInt(elem.total)
@@ -75,6 +83,7 @@
 			// this.getDashboard.users.forEach((elem, key) => {
 			// 	this.usersData[elem.gender == 'male' ? 'Мужчина' : 'Женщина' ] = parseInt(elem.total)
 			// });
+			
 			this.loaded = true;
 		}
 	}

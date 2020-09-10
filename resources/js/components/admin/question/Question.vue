@@ -1,5 +1,6 @@
 <template>
 	<div class="question">
+		<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
@@ -43,13 +44,20 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+		import Loader from '../../Loader'
 	export default{
+		components:{
+			Loader
+		},
 		data(){
-			return{}
+			return{
+				loading: true,
+			}
 		},
 		async mounted(){
 			let page = 1
 			await this.actionQuestionList(page)
+			this.loading = false
 		},
 		computed:{
 			...mapGetters('question',['getQuestionList']),

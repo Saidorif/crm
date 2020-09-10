@@ -28,7 +28,7 @@
         "tests":"Testlar"
     },
     "dashboard" :{
-        "chart_age": "Yoshi boyicha",
+        "chart_age": "Yoshi boyicha  foizda (%)",
         "chart_exper": "Ish tajribasi bo'yicha",
         "chart_test": "Test bo'yicha",
         "chart_sex": "Jinsi bo'yicha"
@@ -81,5 +81,13 @@
     "begin_test": "Testni boshlash",
     "prev": "oldingi",
     "next": "keyingi",
-    "close_test": "Testni tugatish"
+    "close_test": "Testni tugatish",
+    "all_questions": "Barcha savollar",
+    "wrong_answers": "Noto'g'ri javoblar:",
+    "correct_answers": "To'g'ri javoblar:",
+    "show_result_test": "Testni natijasini ko'rish",
+    "in_parsentage": "foizda",
+    "count_test": "Testning soni",
+    "status_test": "Testning holati",
+    "time_test": "Testning vaqti"
 }

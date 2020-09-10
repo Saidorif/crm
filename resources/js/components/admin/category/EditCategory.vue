@@ -1,5 +1,6 @@
 <template>
 	<div class="category">
+				<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
@@ -58,7 +59,11 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+	import Loader from '../../Loader'
 	export default{
+		components:{
+			Loader
+		},
 		data(){
 			return{
 				form:{
@@ -69,6 +74,7 @@
 				},
 				requiredMessage:null,
 				requiredInput:false,
+				loading: true
 			}
 		},
 		computed:{
@@ -81,6 +87,7 @@
 			}
 			await this.actionEditCategory(data)
 			this.form = this.getCategory
+			this.loading = false;
 		},
 		methods:{
 			...mapActions('category',['actionCategoryPag','actionEditCategory','actionUpdateCategory']),
