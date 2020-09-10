@@ -1,19 +1,20 @@
 <template>
 	<div class="show_test_result">
+				<Loader v-if="loading" />
 		<ul v-if="userInfo" class="user_info_result">
-			<li><em> Ф.И.О :</em> {{userInfo.fio}}</li>
-			<li><em>Статус Теста :</em> {{getStatus(userInfo.status)}}</li>
-			<li><em>Количество теста : </em>{{userInfo.limit}} в процентах 100%</li>
+			<li><em> {{$t('user_info.fio')}} :</em> {{userInfo.fio}}</li>
+			<li><em>{{$t('status_test')}} :</em> {{getStatus(userInfo.status)}}</li>
+			<li><em>{{$t('count_test')}} : </em>{{userInfo.limit}} {{$t('in_parsentage')}} 100%</li>
 			<li>
-				<em>Неправильные ответы:</em> {{userInfo.wrong_answers ? userInfo.wrong_answers : 0}} в процентах 
+				<em>{{$t('wrong_answers')}}:</em> {{userInfo.wrong_answers ? userInfo.wrong_answers : 0}} {{$t('in_parsentage')}} 
 				{{countPercentage(userInfo.wrong_answers)}}
 			</li>
 			<li>
-				<em>Правильные ответы:</em> {{userInfo.true_answers ? userInfo.true_answers : 0}} в процентах 
+				<em>{{$t('correct_answers')}}</em> {{userInfo.true_answers ? userInfo.true_answers : 0}} {{$t('in_parsentage')}} 
 				{{countPercentage(userInfo.true_answers)}}
 			</li>
-			<li><em>Срок теста:</em> {{getTime}}</li>
-			<li><em>Направление: </em> {{items.length > 0 ? items[0].category : ''}}</li>
+			<li><em>{{$t('time_test')}}:</em> {{getTime}}</li>
+			<li><em>{{$t('admin_menu.directions')}}: </em> {{items.length > 0 ? items[0].category : ''}}</li>
 		</ul>
 		<ul v-for="(item,index) in items" v-if="items.length > 0" class="result_test_item">
 			<li class="result_quelstion_item">{{index+1}} ) <em> {{item.title}}</em></li>
@@ -29,12 +30,17 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+			import Loader from '../Loader'
 	export default{
+		components:{
+			Loader
+		},
 		data(){
 			return{
 				userInfo:[],
 				items:[],
-				category:null
+				category:null,
+				loading: true,
 			}
 		},
 		async mounted(){
@@ -44,6 +50,7 @@
 				this.items = this.getTest.result.questions
 				this.category = this.items[0].category
 			}
+			this.loading = false
 		},
 		methods:{
 			...mapActions('test',['actionShowTest']),

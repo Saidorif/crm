@@ -19,8 +19,12 @@ export default {
         ],
 			},
 			options: {
-        type: Object,
-        default: null
+				type: Object,
+				default: null,
+				title: {
+					display: true,
+					text: this.propLabel
+				}
 			},
 		}
 	},

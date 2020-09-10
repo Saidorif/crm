@@ -1,5 +1,6 @@
 <template>
 	<div class="category">
+			<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
@@ -45,9 +46,15 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+	import Loader from '../../Loader'
 	export default{
+		components:{
+			Loader
+		},
 		data(){
-			return{}
+			return{
+				loading: true
+			}
 		},
 		computed:{
 			...mapGetters('category',['getCategoryList'])
@@ -72,6 +79,7 @@
 		},
 		async mounted(){
 			await this.actionCategoryPag()
+			this.loading = false
 		}
 	}
 </script>

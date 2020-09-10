@@ -1,5 +1,6 @@
 <template>
 	<div class="test_list">
+				<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header header_filter">
 		  		<div class="header_title">
@@ -99,7 +100,11 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+			import Loader from '../Loader'
 	export default{
+		components:{
+			Loader
+		},
 		data(){
 			return{
 				filterShow:false,
@@ -108,7 +113,8 @@
 					status:'',
 					category_id:'',
 				},
-				pageList:1
+				pageList:1,
+				loading: true,
 			}
 		},
 		computed:{
@@ -168,6 +174,7 @@
 			let page = 1
 			await this.actionTestList({page:page})
 			await this.actionCategoryList()
+			this.loading = false
 		}
 	}
 </script>

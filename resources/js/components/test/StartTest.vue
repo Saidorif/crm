@@ -1,5 +1,6 @@
  <template>
 	<div class="start_test">
+		<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
@@ -67,10 +68,12 @@
 	import {TokenService} from './../../services/storage.service'
 	import Multiselect from 'vue-multiselect'
 	import DatePicker from 'vue2-datepicker';
+	import Loader from '../Loader'
 	export default{
 		components: {
 			Multiselect,
-			DatePicker
+			DatePicker,
+			Loader
 		},
 		data(){
 			return{
@@ -85,6 +88,7 @@
 				},
 				selectedCategory: [],
 				requiredInput:false,
+				loading: true,
 			}
 		},
 		computed:{
@@ -100,6 +104,7 @@
 		},
 		async mounted(){
 			await this.actionCategoryList()
+			this.loading = false
 		},
 		methods:{
 			...mapActions('category',['actionCategoryList']),

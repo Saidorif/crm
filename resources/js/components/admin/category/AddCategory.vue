@@ -1,5 +1,6 @@
 <template>
 	<div class="category">
+		<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
@@ -59,9 +60,11 @@
 <script>
 	import DatePicker from "vue2-datepicker";
 	import {mapActions, mapGetters} from 'vuex'
+		import Loader from '../../Loader'
 	export default{
 		components: {
-		    DatePicker
+			DatePicker,
+			Loader
 	  	},
 		data(){
 			return{
@@ -72,6 +75,7 @@
 				},
 				requiredMessage:null,
 				requiredInput:false,
+				loading: true
 			}
 		},
 		computed:{
@@ -92,6 +96,9 @@
 					this.requiredInput =true
 				}
 			}
-		}
+		},
+		async mounted(){
+			this.loading = false;
+		},
 	}
 </script>

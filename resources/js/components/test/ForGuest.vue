@@ -1,5 +1,6 @@
 <template>
 	<div class="for_guest">
+				<Loader v-if="loading" />
 		<template v-if="!showResult">
 			<div class="test_header" v-if="userInfo">
 				<h1>{{ $t('user_info.fio')}}: {{userInfo.fio}}</h1>
@@ -108,9 +109,11 @@
 	import {mapActions, mapGetters} from 'vuex'
 	import ResultTest from './ResultTest'
 	import {TokenService} from './../../services/storage.service'
+	import Loader from '../Loader'
 	export default{
 		components:{
-			ResultTest
+			ResultTest,
+			Loader
 		},
 		data(){
 			return{
@@ -125,7 +128,8 @@
 				TIME_LIMIT:0,
 				timerInterval:null,
 				items:[],
-				showResult:false
+				showResult:false,
+				loading: true,
 			}
 		},
 
@@ -171,6 +175,7 @@
 			}else{
 				this.$router.push("/crm/test/start-test");
 			}
+			this.loading = false
 		},
 		computed:{
 			...mapGetters('test',['getTests','getMassage','getComplete']),
