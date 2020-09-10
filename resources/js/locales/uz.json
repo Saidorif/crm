@@ -28,8 +28,8 @@
         "tests":"Testlar"
     },
     "dashboard" :{
-        "chart_age": "Yoshi boyicha  foizda (%)",
-        "chart_exper": "Ish tajribasi bo'yicha",
+        "chart_age": "Yoshi boyicha bilim darajasi foizda (%)",
+        "chart_exper": "Oylik test topshiruvchilar boyicha",
         "chart_test": "Test bo'yicha",
         "chart_sex": "Jinsi bo'yicha"
     },
