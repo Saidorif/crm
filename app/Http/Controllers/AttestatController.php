@@ -25,7 +25,8 @@ class AttestatController extends Controller
                 $builder->where(['status' => $params['status']]);
             }
             if(!empty($params['category_id'])){
-                $builder->where(['category_id' => $params['category_id']]);
+                // $builder->where(['category_id' => $params['category_id']]);
+                $builder->whereJsonContains('category_id', [$params['category_id']]);
             }
             $attestats = $builder->orderBy('id','DESC')->paginate(12);
         }else{
@@ -246,9 +247,21 @@ class AttestatController extends Controller
             ];
             return response()->json(['success' => true, 'result' => $result]);
         }
+        $questions = json_decode( $attestat->variants, true);
+        $arrRes = [];
+        foreach ($questions as $key => $question) {
+            if(array_key_exists($question['category'], $arrRes)){
+                $arrRes[$question['category']]['trues'] = $arrRes[$question['category']]['trues'] + $question['pass_test'];
+            }else{
+                $arrRes[$question['category']]['trues'] = $question['pass_test'];
+                $arrRes[$question['category']]['all'] = 0;
+            }
+            $arrRes[$question['category']]['all'] = $arrRes[$question['category']]['all'] + 1;
+        }
         $result = [
             'attestat' => $attestat,
-            'questions' => json_decode( $attestat->variants, true),
+            'questions' => $questions,
+            'arrRes' => $arrRes,
             // 'questions' => $attestat->questionsWithResult(),
         ];
         return response()->json(['success' => true, 'result' => $result]);
