@@ -62,7 +62,7 @@
             <td>{{item.all}}</td>
 			<td> {{item.trues}}</td>
 			<td> {{ item.all  - item.trues}}</td>
-			<td>{{item.trues / item.all * 100 }}%</td>
+			<td>{{parseInt(item.trues / item.all * 100)  }}%</td>
           </tr>
         </tbody>
       </table>
