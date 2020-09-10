@@ -19,7 +19,7 @@
 		    	<transition name="slide">
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
-  					  		<div class="form-group col-lg-3">
+  					  		<div class="form-group col-lg-9">
 	  							<label for="name">{{ $t('user_info.fio') }}</label>
 	  							<input 
 	  								type="text" 
@@ -38,13 +38,6 @@
   									</option>
   								</select>
 				  			</div>	 -->
-  					  		<div class="form-group col-lg-3">
-	  							<label for="category_id">{{$t('user_info.position')}}</label>
-  								<select name="" v-model="filter.category_id" class="form-control" >
-  									<option value=""> {{$t('admin_menu.select_directions')}}</option>
-  									<option :value="cat.id" v-for="(cat,index) in getCategories" :key="cat.id">{{cat.name}}</option>
-  								</select>
-				  			</div>	
 						  	<div class="col-lg-3 form-group btn_search">
 							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
 							  		<i class="fas fa-search"></i>
@@ -109,7 +102,7 @@
 			return{
 				filter:{
 					name:'',
-					category_id:'',
+					// category_id:'',
 					// position_id:'',
 				},
 				filterShow:false,
@@ -140,15 +133,13 @@
 			},
 			async search(){
 				let page = 1
-				if(this.filter.name || this.filter.category_id || this.filter.position_id){
+				if(this.filter.name){
 					await this.actionEmployees({page: page,items:this.filter})
 				}
 			},
 			async clear(){
-				if(this.filter.name || this.filter.category_id || this.filter.position_id){
+				if(this.filter.name){
 					this.filter.name = ''
-					this.filter.category_id = ''
-					this.filter.position_id = ''
 					let page  = 1
 					await this.actionEmployees({page: page,items:this.filter})
 				}
