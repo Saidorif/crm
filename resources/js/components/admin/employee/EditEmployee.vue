@@ -24,7 +24,7 @@
                 v-model="form.name"
               />
             </div>
-            <div class="form-group" v-if="form.role_id != 3">
+            <div class="form-group">
               <label for="position">Должность</label>
               <input 
                 type="text"

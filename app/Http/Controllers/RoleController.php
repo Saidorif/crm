@@ -18,9 +18,9 @@ class RoleController extends Controller
     {
         $roles = [];
         if(auth()->user()->role->id != 1){
-            $roles = Role::where('name', '!=','admin')->get();
+            $roles = Role::where('name', '!=','admin')->where('name','!=','user')->get();
         }else{
-            $roles = Role::all();
+            $roles = Role::where('name','!=','user')->get();
         }
         return response()->json(['success' => true, 'result' => $roles]);
     }
