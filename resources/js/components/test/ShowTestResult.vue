@@ -38,8 +38,7 @@
       <table class="table table-bordered text-center table-hover table-striped" style="background: #fff;">
         <thead>
           <tr>
-            <th scope="col">№</th>
-            <th scope="col"> {{$t('fio_short')}}</th>
+            <th scope="col"> {{$t('user_info.fio_short')}}</th>
             <th scope="col">{{$t('directions')}}</th>
             <th scope="col"> {{$t('number_question')}}</th>
             <th scope="col"> {{$t('correct_answers')}}</th>
@@ -48,7 +47,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td scope="row">1</td>
             <td>{{userInfo.fio}}</td>
             <td>{{items.length > 0 ? items[0].category : ''}}</td>
@@ -56,6 +55,14 @@
 			<td> {{userInfo.true_answers}}</td>
 			<td> {{userInfo.wrong_answers}}</td>
 			<td>{{countPercentage(userInfo.true_answers)}}%</td>
+          </tr> -->
+          <tr v-for="(item,index) in testRes">
+            <td>{{userInfo.fio}}</td>
+            <td>{{index}}</td>
+            <td>{{item.all}}</td>
+			<td> {{item.trues}}</td>
+			<td> {{ item.all  - item.trues}}</td>
+			<td>{{item.trues / item.all * 100 }}%</td>
           </tr>
         </tbody>
       </table>
@@ -88,7 +95,8 @@ export default {
   data() {
     return {
       userInfo: [],
-      items: [],
+	  items: [],
+	  testRes: [],
       category: null,
       loading: true,
     };
@@ -97,11 +105,12 @@ export default {
     await this.actionShowTest(this.$route.params.showTestId);
     if (this.getTest.success) {
       this.userInfo = this.getTest.result.attestat;
+      this.testRes = this.getTest.result.arrRes;
       this.items = this.getTest.result.questions;
       this.category = this.items[0].category;
     }
     this.loading = false;
-    console.log(this.items);
+    console.log(this.testRes);
   },
   methods: {
     ...mapActions("test", ["actionShowTest"]),
