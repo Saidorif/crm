@@ -76,7 +76,7 @@
 							<tr v-for="(item,index) in getTestList.data">
 								<td scope="row">{{index+1}}</td>
 								<td>{{item.fio}}</td>
-								<td>{{item.category ? item.category.name : ''}}</td>
+								<td>{{item.position}}</td>
 								<td> 
 									<div class="badge status_f_s" :class="status_class(item.status)">
 										<b>{{word_to_russian(item.status)}}</b>
