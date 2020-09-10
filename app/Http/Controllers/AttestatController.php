@@ -82,7 +82,7 @@ class AttestatController extends Controller
         foreach ($inputs['category_id'] as $key => $category) {
             $cat = TestCategory::find((int)$category);
             if($cat){
-                $limit += $cat->time;
+                $limit += $cat->qty;
             }
         }
     	$questions = Question::with(['variants'])->whereIn('category_id', $inputs['category_id'])->limit($limit)->get();
