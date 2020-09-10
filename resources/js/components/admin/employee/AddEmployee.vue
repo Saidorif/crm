@@ -24,13 +24,8 @@
                 v-model="form.name"
               />
             </div>
-<<<<<<< HEAD
             <div class="form-group" v-if="form.role_id != 3">
               <label for="position">{{$t('user_info.positions')}}</label>
-=======
-            <div class="form-group">
-              <label for="position">{{$t('user_info.position')}}</label>
->>>>>>> 74fbaf1182091b33be1450edaffdfaecfac0cabc
               <input 
                 type="text"
                  name="position" 
