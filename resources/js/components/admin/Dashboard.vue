@@ -17,7 +17,8 @@
 	  				</div>
 	  				<div class="col-md-6 chartBlock" v-if="loaded">
 						  <div class="chartBlock_item">
-	  						<Pie :propchartdata="this.getDashboard.tests" :propLabel="$t('dashboard.chart_exper')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e', '#0A2463', '#FB3640','#605F5E','#247BA0','#E2E2E2','#FFC6D9','#FFE1C6','#FFF7AE','#48284A']"/>
+	  						<!-- <Pie :propchartdata="this.getDashboard.tests" :propLabel="$t('dashboard.chart_exper')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e', '#0A2463', '#FB3640','#605F5E','#247BA0','#E2E2E2','#FFC6D9','#FFE1C6','#FFF7AE','#48284A']"/> -->
+	  						<Line-chart :propchartdata="this.getDashboard.tests" :propLabel="$t('dashboard.chart_exper')" :propColor="['#3f6ad8', '#3fd86e', '#387324', '#d42e2e', '#0A2463', '#FB3640','#605F5E','#247BA0','#E2E2E2','#FFC6D9','#FFE1C6','#FFF7AE','#48284A']" />
 						  </div>
 	  				</div>
 					<!-- <div class="col-md-6 chartBlock" v-if="loaded">
@@ -37,14 +38,14 @@
 </template>
 <script>
 	import Bar from './chart/Bar'
-	import Line from './chart/Line'
+	import LineChart from './chart/LineChart'
 	import Pie from './chart/Pie'
 	import Loader from '../Loader'
 	import {mapActions, mapGetters} from 'vuex'
 	export default{
 		components:{
 			Bar,
-			Line,
+			LineChart,
 			Pie,
 			Loader
 		},
@@ -68,6 +69,7 @@
 			Object.keys(this.getDashboard.ages).forEach(element => {
 				this.agesData[element] =  parseFloat(this.getDashboard.ages[element].percent).toFixed(2)
 			});
+			this.testsData = {"Август": 5, "Апрель": 2, "Декабр": 3, "Июль": 5, "Июнь": 3, "Май": 10, "Март": 24, "Ноябр": 12, "Октябр": 2, "Сентябр": 6, "Февраль": 3, "Январь": 2}
 			this.loading = false;
 			// this.getDashboard.tests.forEach((elem, key) => {
 			// 	if(elem.status == 'complete'){
