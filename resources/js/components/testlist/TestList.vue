@@ -69,7 +69,7 @@
 								<th scope="col">{{ $t('user_info.status.title') }}</th>
 								<th scope="col">{{ $t('number_question') }} </th>
 								<th scope="col">{{ $t('score') }}</th>
-								<th scope="col">{{ $t('action') }}</th>
+								<th scope="col">{{ $t('result_show') }}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -83,10 +83,10 @@
 									</div> 
 								</td>
 								<td>{{item.limit}}</td>
-								<td>{{percentage(item.limit,item.true_answers)}}</td>
+								<td>{{ item.true_answers ?  parseFloat(percentage(item.limit,item.true_answers)).toFixed(1) : ''}}</td>
 								<td>
 									<router-link tag="button" class="btn_transparent" :to='`/crm/test/test-result/${item.id}`'>
-										<i class="pe_icon pe-7s-edit editColor"></i>
+										<i class="pe_icon pe-7s-pen editColor"></i>
 									</router-link>
 								</td>
 							</tr>
@@ -181,5 +181,8 @@
 <style scoped>
 	.status_f_s{
 		font-size:12px;
+	}
+	.editColor{
+		font-size: 14px;
 	}
 </style>

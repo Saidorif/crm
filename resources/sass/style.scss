@@ -29,6 +29,15 @@
 .card{
   box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03), 0 0.9375rem 1.40625rem rgba(4,9,20,0.03), 0 0.25rem 0.53125rem rgba(4,9,20,0.05), 0 0.125rem 0.1875rem rgba(4,9,20,0.03);
 }
+.nav-pills .nav-link{
+    color: #000;
+    font-weight: bold;
+    transition: 1s;
+}
+.nav-sidebar .nav-item > .nav-link:hover{
+    color: #3f6ad8;
+    background: #e0f3ff;
+}
 .peIcon{
   text-align: center;
   width: 34px;
@@ -37,6 +46,9 @@
   font-size: 22px;
   transition: color 300ms;
   color: #3f6ad8;
+}
+.sidebar{
+    overflow: hidden;
 }
 .nav-sidebar .nav-item>.nav-link{
   display: flex;

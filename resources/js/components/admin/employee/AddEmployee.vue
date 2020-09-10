@@ -24,12 +24,12 @@
                 v-model="form.name"
               />
             </div>
-            <div class="form-group">
-              <label for="position">{{$t('user_info.position')}}</label>
+            <div class="form-group" v-if="form.role_id != 3">
+              <label for="position">{{$t('user_info.positions')}}</label>
               <input 
                 type="text"
                  name="position" 
-                 :placeholder="$t('user_info.position')" 
+                 :placeholder="$t('user_info.positions')" 
                  v-model="form.position" 
                  class="form-control"
                  :class="isRequired(form.position) ? 'isRequired' : '' "
@@ -37,13 +37,13 @@
                >
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">E-mail</label>
+              <label for="exampleInputEmail1">{{$t('user_info.email')}}</label>
               <input
                 type="email"
                 class="form-control input_style"
                 :class="isRequired(form.email) ? 'isRequired' : ''"
                 id="exampleInputEmail1"
-                placeholder="E-mail"
+                :placeholder="$t('user_info.email')"
                 v-model="form.email"
                 @blur="checkEmailInput"
               />

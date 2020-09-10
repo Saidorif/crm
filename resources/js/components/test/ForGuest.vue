@@ -3,7 +3,7 @@
 				<Loader v-if="loading" />
 		<template v-if="!showResult">
 			<div class="test_header" v-if="userInfo">
-				<h1>{{ $t('user_info.fio')}}: {{userInfo.fio}}</h1>
+				<h1>{{userInfo.fio}}</h1>
 				<h1 class="pr-100" v-if="tests.length > 0" >{{nextItemIndex + 1}}/{{tests.length}}</h1>
 			</div>
 			<div class="test_pogination_responsive">

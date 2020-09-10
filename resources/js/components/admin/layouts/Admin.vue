@@ -8,6 +8,10 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="pe-7s-menu" style="font-size: 30px;line-height: 21px;"></i></a>
       </li>
+      <li class="nav-item">
+        <h5 class="site_title">{{$t('site_title_name')}} </h5>
+        <h5 class="site_title">{{$t('site_title_sub')}}</h5>
+      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -28,7 +32,7 @@
     <router-link class="brand-link" to="/crm">
       <span class="brand-text font-weight-light logoText">
         <!-- <img src="/logo.png"> -->
-        TEST
+        e-ТЕСТ
       </span>
     </router-link>
 
@@ -226,5 +230,10 @@ export default {
     font-weight: 900;
     text-align: center;
     color: #000;
+  }
+  .site_title{
+    text-align: center;
+    font-weight: bold;
+    margin-left: 30px;
   }
 </style>
