@@ -1,44 +1,34 @@
 <template>
   <div class="show_test_result">
     <Loader v-if="loading" />
-    <h2 class="test_title">{{$t('result_test')}}</h2>
-    <!-- <ul v-if="userInfo" class="user_info_result">
-      <li>
-        <em>{{$t('user_info.fio')}} :</em>
-        {{userInfo.fio}}
-      </li>
-      <li>
-        <em>{{$t('status_test')}} :</em>
-        {{getStatus(userInfo.status)}}
-      </li>
-      <li>
-        <em>{{$t('count_test')}} :</em>
-        {{userInfo.limit}} {{$t('in_parsentage')}} 100%
-      </li>
-      <li>
-        <em>{{$t('wrong_answers')}}:</em>
-        {{userInfo.wrong_answers ? userInfo.wrong_answers : 0}} {{$t('in_parsentage')}}
-        {{countPercentage(userInfo.wrong_answers)}}
-      </li>
-      <li>
-        <em>{{$t('correct_answers')}}</em>
-        {{userInfo.true_answers ? userInfo.true_answers : 0}} {{$t('in_parsentage')}}
-        {{countPercentage(userInfo.true_answers)}}
-      </li>
-      <li>
-        <em>{{$t('time_test')}}:</em>
-        {{getTime}}
-      </li>
-      <li>
-        <em>{{$t('admin_menu.directions')}}:</em>
-        {{items.length > 0 ? items[0].category : ''}}
-      </li>
-    </ul> -->
+    <h2 class="test_title">{{$t('user_info_details')}}</h2>
     <div class="table-responsive" >
       <table class="table table-bordered text-center table-hover table-striped" style="background: #fff;">
         <thead>
           <tr>
             <th scope="col"> {{$t('user_info.fio_short')}}</th>
+            <th scope="col">{{$t('user_info.date_birthday')}}</th>
+            <th scope="col"> {{$t('user_info.passport_number_seria')}}</th>
+            <th scope="col"> {{$t('user_info.phone_number')}}</th>
+            <th scope="col">{{$t('user_info.positions')}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{userInfo.fio}}</td>
+            <td>{{userInfo.date_birth}}</td>
+            <td>{{userInfo.pasport_seriya}} {{userInfo.pasport_number}}</td>
+            <td>{{userInfo.phone}}</td>
+            <td>{{userInfo.position}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2 class="test_title">{{$t('result_test')}}</h2>
+    <div class="table-responsive" >
+      <table class="table table-bordered text-center table-hover table-striped" style="background: #fff;">
+        <thead>
+          <tr>
             <th scope="col">{{$t('directions')}}</th>
             <th scope="col"> {{$t('number_question')}}</th>
             <th scope="col"> {{$t('correct_answers')}}</th>
@@ -47,17 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
-            <td scope="row">1</td>
-            <td>{{userInfo.fio}}</td>
-            <td>{{items.length > 0 ? items[0].category : ''}}</td>
-			<td>{{userInfo.limit}}</td>
-			<td> {{userInfo.true_answers}}</td>
-			<td> {{userInfo.wrong_answers}}</td>
-			<td>{{countPercentage(userInfo.true_answers)}}%</td>
-          </tr> -->
           <tr v-for="(item,index) in testRes">
-            <td>{{userInfo.fio}}</td>
             <td>{{index}}</td>
             <td>{{item.all}}</td>
 			<td> {{item.trues}}</td>
@@ -110,7 +90,6 @@ export default {
       this.category = this.items[0].category;
     }
     this.loading = false;
-    console.log(this.testRes);
   },
   methods: {
     ...mapActions("test", ["actionShowTest"]),

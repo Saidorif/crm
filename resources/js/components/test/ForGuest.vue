@@ -81,6 +81,7 @@
 		</template>
 		<template v-else>
 			<ResultTest :items="items" />
+			<!-- <ShowTestResult /> -->
 		</template>
 	</div>
 </template>		
@@ -101,17 +102,27 @@
 			threshold: ALERT_THRESHOLD
 		}
 	};
-	window.onpopstate = function () {
-			history.go(1);
-	};
+	// history.pushState(null, null, location.href);
+    // window.onpopstate = function () {
+    //     history.go(1);
+    // };
+	// window.onpopstate = function(event) {
+	// 	var stayOnPage = confirm($t('test_exit'));
+	// 	if (!stayOnPage) {
 
+	// 	}else{
+	// 		history.go(1);
+	// 	}
+	// }
 	let remainingPathColor = COLOR_CODES.info.color;
 	import {mapActions, mapGetters} from 'vuex'
 	import ResultTest from './ResultTest'
+	import ShowTestResult from './ShowTestResult'
 	import {TokenService} from './../../services/storage.service'
 	import Loader from '../Loader'
 	export default{
 		components:{
+			ShowTestResult,
 			ResultTest,
 			Loader
 		},
@@ -143,16 +154,16 @@
 			this.onTimesUp();
 			if (TokenService.getGuestInfo()) {
 				if(this.getTests.success){
-				this.startTimer();
 				this.userInfo = this.getTests.attestat
 				this.tests = this.getTests.result
 				this.timeLeft = this.getTests.total_time
 				// this.timeLeft = 360
 				this.TIME_LIMIT = this.getTests.total_time
+				this.startTimer();
 				// this.TIME_LIMIT = 360
 					if(this.tests){
 						this.tests.forEach(element => {
-						this.myAnswers.push({id: element.id, answer_id: false})
+							this.myAnswers.push({id: element.id, answer_id: false})
 						});
 					}
 				}else{
