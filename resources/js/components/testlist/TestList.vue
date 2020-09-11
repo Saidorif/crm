@@ -65,7 +65,7 @@
 							<tr>
 								<th scope="col">№</th>
 								<th scope="col">{{ $t('user_info.fio') }}</th>
-								<th scope="col">{{ $t('user_info.position') }}</th>
+								<th scope="col">{{ $t('test_position') }}</th>
 								<th scope="col">{{ $t('user_info.status.title') }}</th>
 								<th scope="col">{{ $t('number_question') }} </th>
 								<th scope="col">{{ $t('score') }}</th>
