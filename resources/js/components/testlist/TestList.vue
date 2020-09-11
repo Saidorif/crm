@@ -69,6 +69,7 @@
 								<th scope="col">{{ $t('user_info.status.title') }}</th>
 								<th scope="col">{{ $t('number_question') }} </th>
 								<th scope="col">{{ $t('score') }}</th>
+								<th scope="col">{{ $t('test_start_time') }}</th>
 								<th scope="col">{{ $t('result_show') }}</th>
 							</tr>
 						</thead>
@@ -84,6 +85,7 @@
 								</td>
 								<td>{{item.limit}}</td>
 								<td>{{ item.true_answers ?  parseFloat(percentage(item.limit,item.true_answers)).toFixed(1) : ''}}</td>
+								<td>{{ item.ended_at}}</td>
 								<td>
 									<router-link tag="button" class="btn_transparent" :to='`/crm/test/test-result/${item.id}`'>
 										<i class="pe_icon pe-7s-pen editColor"></i>

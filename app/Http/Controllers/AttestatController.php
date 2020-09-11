@@ -25,7 +25,8 @@ class AttestatController extends Controller
                 $builder->where(['status' => $params['status']]);
             }
             if(!empty($params['category_id'])){
-                $builder->where(['category_id' => $params['category_id']]);
+                // $builder->where(['category_id' => $params['category_id']]);
+                $builder->whereJsonContains('category_id', [$params['category_id']]);
             }
             $attestats = $builder->orderBy('id','DESC')->paginate(12);
         }else{
@@ -78,19 +79,29 @@ class AttestatController extends Controller
         $user = request()->user();
         $status = 'progress';
         $limit = 0;
+        $ex_time = 0;
+        // $questionsArr = [];
+        // $questions = [];
         foreach ($inputs['category_id'] as $key => $category) {
             $cat = TestCategory::find((int)$category);
             if($cat){
-                $limit += $cat->time;
+                $limit += $cat->qty;
+                $ex_time += (int)$cat->time * 60;
             }
+            // $questionsArr[] = Question::with(['variants'])->where('category_id','=', $inputs['category_id'])->limit($limit)->get();
         }
     	$questions = Question::with(['variants'])->whereIn('category_id', $inputs['category_id'])->limit($limit)->get();
+        // foreach ($questionsArr as $key => $q) {
+        //     foreach ($q as $key => $v) {
+        //         $questions[] = $v;
+        //     }
+        // }
         
-        // return response()->json(['error' => true, 'message' => $questions]);
+        // return response()->json(['error' => true, 'message' => array_values($questions)]);
         // if(count($questions) < $inputs['limit']){
         //     return response()->json(['error' => true, 'message' => 'Большой лимит...']);
         // }
-        $ex_time = 0;
+        
         //Question ids
         $q_ids = [];
         $q_answers = [];
@@ -99,7 +110,7 @@ class AttestatController extends Controller
 		    foreach ($variants as $key => $item) {
 		    	unset($item['is_true']);
 		    }
-            $ex_time += (int)$value->category->time * 60;
+            
             $q_ids[] = $value->id; 
             $q_answers[] = $value->id; 
     	}
@@ -246,9 +257,21 @@ class AttestatController extends Controller
             ];
             return response()->json(['success' => true, 'result' => $result]);
         }
+        $questions = json_decode( $attestat->variants, true);
+        $arrRes = [];
+        foreach ($questions as $key => $question) {
+            if(array_key_exists($question['category'], $arrRes)){
+                $arrRes[$question['category']]['trues'] = $arrRes[$question['category']]['trues'] + $question['pass_test'];
+            }else{
+                $arrRes[$question['category']]['trues'] = $question['pass_test'];
+                $arrRes[$question['category']]['all'] = 0;
+            }
+            $arrRes[$question['category']]['all'] = $arrRes[$question['category']]['all'] + 1;
+        }
         $result = [
             'attestat' => $attestat,
-            'questions' => json_decode( $attestat->variants, true),
+            'questions' => $questions,
+            'arrRes' => $arrRes,
             // 'questions' => $attestat->questionsWithResult(),
         ];
         return response()->json(['success' => true, 'result' => $result]);
