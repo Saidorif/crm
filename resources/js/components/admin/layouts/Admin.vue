@@ -98,7 +98,11 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link class="nav-link" to="/crm/test/start-test">
+                <router-link 
+                  class="nav-link" 
+                  to="/crm/test/start-test"
+                  v-if="$can('attestat', 'AttestatController')"
+                >
                   <p>
                      {{ $t('admin_menu.create_test') }}
                   </p>

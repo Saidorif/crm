@@ -75,10 +75,19 @@
 							<td>{{item.email}}</td>
 							<td>{{item.phone}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/employee/edit/${item.id}`'>
+								<router-link 
+									tag="button" 
+									class="btn_transparent" 
+									:to='`/crm/employee/edit/${item.id}`'
+									v-if="$can('edit', 'EmployeeController')"
+								>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteEmployee(item.id)">
+								<button 
+									class="btn_transparent" 
+									@click="deleteEmployee(item.id)"
+									v-if="$can('destroy', 'EmployeeController')"
+								>
 									<i class="pe_icon pe-7s-trash trashColor"></i>
 								</button>
 							</td>

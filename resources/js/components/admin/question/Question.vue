@@ -26,7 +26,12 @@
 							<td>{{item.name}}</td>
 							<td>{{item.question_count}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/question/edit/${item.id}`'>
+								<router-link 
+									tag="button" 
+									class="btn_transparent" 
+									:to='`/crm/question/edit/${item.id}`'
+									v-if="$can('edit', 'QuestionController')"
+								>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
 							<!-- 	<button class="btn_transparent" @click="deleteQuestion(item.id)">

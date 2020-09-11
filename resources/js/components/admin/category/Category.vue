@@ -28,10 +28,19 @@
 							<td>{{item.qty}}</td>
 							<td>{{item.time}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/category/edit/${item.id}`'>
+								<router-link 
+									tag="button" 
+									class="btn_transparent" 
+									:to='`/crm/category/edit/${item.id}`'
+									v-if="$can('edit', 'TestCategoryController')"
+								>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteCategory(item.id)">
+								<button 
+									class="btn_transparent" 
+									@click="deleteCategory(item.id)" 
+									v-if="$can('destroy', 'TestCategoryController')"
+								>
 									<i class="pe_icon pe-7s-trash trashColor"></i>
 								</button>
 							</td>
