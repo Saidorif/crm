@@ -62,7 +62,7 @@
                 <p class="form-control input_style disabled">{{ form.user.email }}</p>
               </div>
               <div class="form-group col-md-12">
-                <label for="name">{{ $t('user_info.position') }}</label>
+                <label for="name">{{ $t('admin_menu.position') }}</label>
                 <p
                   class="form-control input_style disabled"
                 >{{ form.position }}</p>

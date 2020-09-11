@@ -1,36 +1,130 @@
 <template>
-	<ul class="result_test user_info_result">
-		<li><b> {{$t('all_questions')}}</b> {{items.wrong_answers + items.true_answers}} {{$t('in_parsentage')}} 100%</li>
-		<li>
-			<b>{{$t('wrong_answers')}}</b> {{items.wrong_answers ? items.wrong_answers : 0}} {{$t('in_parsentage')}}
-			{{countPercentage(items.wrong_answers)}}
-		</li>
-		<li>
-			<b>{{$t('correct_answers')}}</b> {{items.true_answers ? items.true_answers : 0}} {{$t('in_parsentage')}}
-			{{countPercentage(items.true_answers)}}
-		</li>
-		<router-link tag="button" class="btn btn-primary" :to='`/crm/test/test-result/${items.id}`'>
+  <div class="show_test_result">
+    <Loader v-if="loading" />
+    <h2 class="test_title">{{$t('result_test')}}</h2>
+    <div class="table-responsive" >
+      <table class="table table-bordered text-center table-hover table-striped" style="background: #fff;">
+        <thead>
+          <tr>
+            <th scope="col">{{$t('directions')}}</th>
+            <th scope="col"> {{$t('number_question')}}</th>
+            <th scope="col"> {{$t('correct_answers')}}</th>
+            <th scope="col">{{$t('wrong_answers')}}</th>
+            <th scope="col">{{$t('score')}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item,index) in testRes">
+            <td>{{index}}</td>
+            <td>{{item.all}}</td>
+			<td> {{item.trues}}</td>
+			<td> {{ item.all  - item.trues}}</td>
+			<td>{{parseInt(item.trues / item.all * 100)  }}%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2 class="test_title">{{$t('test_answers')}}</h2>
+    <ul v-for="(item,index) in items" v-if="items.length > 0" class="result_test_item">
+      <li class="result_quelstion_item">
+        {{index+1}} )
+        <em>{{item.title}}</em>
+      </li>
+      <ol type="A" class="result_test_item_variants">
+        <template v-for="(q,i) in item.variants">
+          <li
+            :class="{'correctAnswer': chechAnswer(item.user_choose,q)=='true_answer', 'mistakeAnswer': chechAnswer(item.user_choose,q)=='wrong_answer'}"
+          >
+            <span>{{q.title}}</span>
+          </li>
+        </template>
+      </ol>
+    </ul>
+			<!-- <router-link tag="button" class="btn btn-primary" :to='`/crm/test/test-result/${items.id}`'>
 			{{$t('show_result_test')}}
-		</router-link>
-	</ul>
+		</router-link> -->
+  </div>
 </template>
 <script>
-	import {mapActions, mapGetters} from 'vuex'
-	export default{
-		props:['items'],
-		data(){
-			return{
-				wrongPert:null,
-				rightPert:null,
-			}
-		},
-		methods:{
-			countPercentage(number){
-				let summ = this.items.wrong_answers + this.items.true_answers
-				let result = Math.round((number*100)/summ);
-				return result ? result : 0 + ' %';
-			}
-		}
-		
-	}
+import { mapActions, mapGetters } from "vuex";
+import Loader from "../Loader";
+export default {
+	props:['items'],
+	components: {
+		Loader,
+	},
+  data() {
+    return {
+      userInfo: [],
+	  items: [],
+	  testRes: [],
+      category: null,
+      loading: true,
+    };
+  },
+  async mounted() {
+			await this.actionShowTest(this.items.id);
+    if (this.getTest.success) {
+      this.userInfo = this.getTest.result.attestat;
+      this.testRes = this.getTest.result.arrRes;
+      this.items = this.getTest.result.questions;
+      this.category = this.items[0].category;
+    }
+    this.loading = false;
+  },
+  methods: {
+    ...mapActions("test", ["actionShowTest"]),
+    countPercentage(number) {
+      let summ =
+        parseInt(this.userInfo.wrong_answers) +
+        parseInt(this.userInfo.true_answers);
+      let result = Math.round((parseInt(number) * 100) / summ);
+      return result ? result : 0 + " %";
+    },
+    chechAnswer(userChosen, item) {
+      if (
+        (userChosen == item.id && item.is_true == 1) ||
+        (userChosen != item.id && item.is_true == 1)
+      ) {
+        return "true_answer";
+      } else if (userChosen == item.id && item.is_true == 0) {
+        return "wrong_answer";
+      } else {
+        return "";
+      }
+    },
+    getStatus(status) {
+      if (status == "complete") {
+        return "завершен";
+      } else if (status == "progress") {
+        return "в процессе";
+      } else if (status == "start") {
+        return "новый";
+      }
+    },
+  },
+  computed: {
+    ...mapGetters("test", ["getTest"]),
+    getTime() {
+      // return parseFloat(parseInt(this.userInfo.time)/60) + ' минут'
+      return this.userInfo.time + " секунд";
+    },
+  },
+};
 </script>
+<style scoped>
+.true_answer {
+  color: green;
+}
+.wrong_answer {
+  color: red;
+}
+.test_title {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+</style>
+
+

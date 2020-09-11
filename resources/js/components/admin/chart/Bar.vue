@@ -26,6 +26,9 @@ export default {
 				title: {
 					display: true,
 					text: this.propLabel
+				},
+				legend:{
+					display: false,
 				}
 			},
 		}

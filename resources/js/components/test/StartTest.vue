@@ -36,7 +36,7 @@
 					  	</div>
 						<div class="form-group col-md-6">
 						    <label for="birthday">{{ $t('user_info.date_birthday') }}</label>
-							<date-picker v-model="form.date_birth" format="DD.MM.YYYY" :class="isRequired(form.date_birth) ? 'isRequired' : ''" ></date-picker>
+							<date-picker v-model="form.date_birth" format="DD.MM.YYYY" valueType="format" val :class="isRequired(form.date_birth) ? 'isRequired' : ''" ></date-picker>
 					  	</div>
 						<div class="form-group col-md-6 double_input">
 						    <label for="passport">  {{ $t('user_info.passport_number_seria') }}</label>
