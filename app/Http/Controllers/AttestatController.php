@@ -80,22 +80,23 @@ class AttestatController extends Controller
         $status = 'progress';
         $limit = 0;
         $ex_time = 0;
-        // $questionsArr = [];
-        // $questions = [];
+        $questionsArr = [];
+        $questions = [];
         foreach ($inputs['category_id'] as $key => $category) {
             $cat = TestCategory::find((int)$category);
             if($cat){
                 $limit += $cat->qty;
                 $ex_time += (int)$cat->time * 60;
             }
-            // $questionsArr[] = Question::with(['variants'])->where('category_id','=', $inputs['category_id'])->limit($limit)->get();
+            $questionsArr[] = Question::with(['variants'])->where('category_id','=', $category)->limit($cat->qty)->get();
         }
-    	$questions = Question::with(['variants'])->whereIn('category_id', $inputs['category_id'])->limit($limit)->get();
-        // foreach ($questionsArr as $key => $q) {
-        //     foreach ($q as $key => $v) {
-        //         $questions[] = $v;
-        //     }
-        // }
+    	// $questions = Question::with(['variants'])->whereIn('category_id', $inputs['category_id'])->limit($limit)->get();
+
+        foreach ($questionsArr as $key => $q) {
+            foreach ($q as $key => $v) {
+                $questions[] = $v;
+            }
+        }
         
         // return response()->json(['error' => true, 'message' => array_values($questions)]);
         // if(count($questions) < $inputs['limit']){
